@@ -1,0 +1,58 @@
+#feeds {
+
+	#sideBar {
+		width: 120px;
+
+		#categories {
+			list-style-type: none;
+			margin-left: 0px;
+			padding-left: 0px;
+			padding-top: 50px; 
+
+			#allFeeds {
+				background: url('/rssReader/Content/images/rss.png') no-repeat left;
+				padding-left: 32px;
+				background-size: 35px;
+			}
+
+			.feeds {
+				list-style-type: none;
+				padding-left: 20px;
+
+				.feed {
+					max-width: 150px;
+					display: inline-block;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+			}
+		}
+	}
+
+	#main-content {
+		width: 1220px;
+
+		#feed-list {
+			list-style-type: none;
+
+			.feed-item {
+				border-bottom: 1px solid $PRIMARY_COLOUR;
+
+				.feedSource {
+					width: 200px;
+					max-width: 200px;
+					display: inline-block;
+					white-space: nowrap;
+		  			overflow: hidden;
+		  			text-overflow: ellipsis;
+				}
+
+				.feedTitle {
+					width: 800px;
+					display: inline-block;
+				}
+			}
+		}
+	}
+}

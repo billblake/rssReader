@@ -1,0 +1,25 @@
+#loginPanel {
+	width: 300px;
+	margin: 120px auto 0 auto;
+	padding: 15px;
+
+	input {
+		width: 100%;
+	}
+
+
+ 	#logo {
+		wwidth: 220px;
+		margin-bottom: 10px;
+	}
+
+	#login {
+		float: right;
+	}
+
+	#signUp {
+		background-color: lightgrey;
+		border-radius: 5px;
+		margin-top: 20px;
+	}	
+}

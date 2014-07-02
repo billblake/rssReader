@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html data-ng-app="viewApp">
+<head>
+    <title>Rss Reader</title>
+    <link href="Content/main.css" rel="stylesheet" />
+</head>
+<body>
+
+    
+    <!-- Note that AngularJS 1.1.4 now has a built-in ng-animation direction. Left in animated-view to show a 
+         custom directive -->
+    <div ng-view></div>
+
+
+    
+
+    <!-- Vendor Libs: jQuery only used for Bootstrap functionality -->
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="Scripts/angular-resource.min.js"></script>
+    <script src="Scripts/jquery.min.js"></script>
+
+    <!-- UI Libs -->
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/moment.min.js"></script>
+
+
+    <!-- App libs -->
+    <script src="Scripts/main.js"></script>
+</body>
+</html>

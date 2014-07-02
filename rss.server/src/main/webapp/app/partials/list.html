@@ -1,0 +1,58 @@
+<!-- BEGIN: Sticky Header -->
+<div id="header_container">
+    <div id="header">
+        <img id="mini-logo" src="Content/images/header-logo.png" />
+        <div id="header-nav">
+            <span id="refresh" ng-click="refresh()">Refresh</span>
+            <span id="name">{{name}}</span>
+            <img id="settings" src="Content/images/settings.png" />
+        </div>
+    </div>
+</div>
+<!-- END: Sticky Header -->
+ 
+<div id="feeds" class="container-fluid">
+    <div class="row-fluid">
+        <div id="sideBar" class="span2">
+            <!--Sidebar content-->
+            <ul id="categories">
+                <li id="allFeeds" ng-click="displayFeedsForAllCategory()">All</li>
+                <li ng-repeat="feedCategory in feedCategories">
+                    <span ng-click="show_$index = ! show_$index">
+                        <img src="/Content/images/selector-right-arrow.png" ng-show="! show_$index"/>
+                        <img src="/Content/images/selector-down-arrow.png" ng-show="show_$index"/>
+                    </span>
+                    <span ng-click="displayFeedsForCategory(feedCategory.categoryId)">
+                        {{ feedCategory.name }}
+                    </span>
+                    <ul id="feedContents_$index" class="feeds" ng-show="show_$index">
+                        <li class="feed" ng-repeat="feed in feedCategory.feeds"  ng-click="displayFeedsForFeed(feed.feedId)">
+                            {{feed.name}}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id="main-content" class="span10">
+            <!--Body content-->
+            <ul id="feed-list">
+                <li class="feed-item" ng-repeat="feed in feeds">
+                    <span ng-click="showStory_$index = ! showStory_$index">
+                        <span class="feedSource" title="{{feed.source}}">{{feed.source}}</span>
+                        <span class="feedTitle">{{ feed.title }}</span>
+                        <span class="feedPubDate">{{feed.pubDate | formatDate }}</span>
+                    </span>
+                    <div ng-show="showStory_$index">{{ feed.description | reverse | reverse}} <a href="{{feed.link}}" target="new">Read More</a></div>
+                </li>
+            </ul>
+        </div> 
+    </div>
+</div>
+
+
+<div id="footer_container">
+    <div id="footer">
+        Footer Content
+    </div>
+</div>
+
