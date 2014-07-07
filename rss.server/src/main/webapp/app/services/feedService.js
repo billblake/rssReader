@@ -5,7 +5,7 @@ app.service('feedService', function ($http, $resource) {
         if (typeof _categoryId === "undefined") {
             _categoryId = "@id";
         }
-        var categories = $resource('/categories/:categoryId',
+        var categories = $resource(readerConstants.appContextPath + '/categories/:categoryId',
             {categoryId:'@id'}
         );
         return categories.query();
@@ -30,7 +30,7 @@ app.service('feedService', function ($http, $resource) {
         if (typeof _categoryId === "undefined") {
             _categoryId = "@id";
         }
-        var feedResource = $resource('/category/:categoryId/feeds/:feedId',
+        var feedResource = $resource(readerConstants.appContextPath + '/category/:categoryId/feeds/:feedId',
             {
                 feedId : _feedId,
                 categoryId : _categoryId

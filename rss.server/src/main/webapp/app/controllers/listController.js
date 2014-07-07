@@ -2,7 +2,9 @@ app.controller('ListController', function ($scope, feedService) {
 
   	$scope.feedCategories = feedService.getCategories();
   	$scope.feeds = feedService.getFeeds();
-  	$scope.name = "Bill Blake"
+  	$scope.name = "Bill Blake";
+  	$scope.rightArrow = readerConstants.appContextPath + "/Content/images/selector-right-arrow.png";
+  	$scope.downArrow = readerConstants.appContextPath + "/Content/images/selector-down-arrow.png";
 
   	$scope.displayFeedsForCategory = function(categoryId){
   		  $scope.feeds = feedService.getFeeds(categoryId);

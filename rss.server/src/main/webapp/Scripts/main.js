@@ -67,7 +67,9 @@ app.controller('ListController', function ($scope, feedService) {
 
   	$scope.feedCategories = feedService.getCategories();
   	$scope.feeds = feedService.getFeeds();
-  	$scope.name = "Bill Blake"
+  	$scope.name = "Bill Blake";
+  	$scope.rightArrow = readerConstants.appContextPath + "/Content/images/selector-right-arrow.png";
+  	$scope.downArrow = readerConstants.appContextPath + "/Content/images/selector-down-arrow.png";
 
   	$scope.displayFeedsForCategory = function(categoryId){
   		  $scope.feeds = feedService.getFeeds(categoryId);
@@ -185,7 +187,7 @@ app.service('feedService', function ($http, $resource) {
         if (typeof _categoryId === "undefined") {
             _categoryId = "@id";
         }
-        var categories = $resource('/categories/:categoryId',
+        var categories = $resource(readerConstants.appContextPath + '/categories/:categoryId',
             {categoryId:'@id'}
         );
         return categories.query();
@@ -210,7 +212,7 @@ app.service('feedService', function ($http, $resource) {
         if (typeof _categoryId === "undefined") {
             _categoryId = "@id";
         }
-        var feedResource = $resource('/category/:categoryId/feeds/:feedId',
+        var feedResource = $resource(readerConstants.appContextPath + '/category/:categoryId/feeds/:feedId',
             {
                 feedId : _feedId,
                 categoryId : _categoryId
