@@ -3,3 +3,4 @@ target
 **/.settings
 rss.domain/.settings
 rss.server/src/main/webapp/node_modules
+rss.server/src/main/webapp/.sass-cache
