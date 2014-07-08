@@ -6010,7 +6010,7 @@ button.close {
     padding-left: 0px;
     padding-top: 50px; }
     #feeds #sideBar #categories #allFeeds {
-      background: url("/rssReader/Content/images/rss.png") no-repeat left;
+      background: url("images/rss.png") no-repeat left;
       padding-left: 32px;
       background-size: 35px; }
     #feeds #sideBar #categories .feeds {
@@ -6023,7 +6023,7 @@ button.close {
         overflow: hidden;
         text-overflow: ellipsis; }
 #feeds #main-content {
-  width: 1020px; }
+  width: 1220px; }
   #feeds #main-content #feed-list {
     list-style-type: none; }
     #feeds #main-content #feed-list .feed-item {
@@ -6036,7 +6036,7 @@ button.close {
         overflow: hidden;
         text-overflow: ellipsis; }
       #feeds #main-content #feed-list .feed-item .feedTitle {
-        width: 700px;
+        width: 800px;
         display: inline-block; }
 
 #main-content {
