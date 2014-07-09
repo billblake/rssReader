@@ -1,7 +1,6 @@
 #feeds {
 
 	#sideBar {
-		width: 120px;
 
 		#categories {
 			list-style-type: none;
@@ -31,13 +30,13 @@
 	}
 
 	#main-content {
-		width: 1220px;
 
 		#feed-list {
 			list-style-type: none;
 
 			.feed-item {
 				border-bottom: 1px solid $PRIMARY_COLOUR;
+				padding: 5px 0px 5px 20px;
 
 				.feedSource {
 					width: 200px;
@@ -52,6 +51,23 @@
 					width: 800px;
 					display: inline-block;
 				}
+				
+				article {
+					margin-left: 120px;
+					width: 900px;
+					
+					h3 {
+						font-size: 22px;
+					}
+					
+					span {
+						color: rgb(177, 188, 197);
+					}
+				}
+			}
+			
+			.feed-item.even {
+				background-color: rgb(251, 251, 251);
 			}
 		}
 	}

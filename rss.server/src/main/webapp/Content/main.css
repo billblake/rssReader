@@ -6002,42 +6002,48 @@ button.close {
     border-radius: 5px;
     margin-top: 20px; }
 
-#feeds #sideBar {
-  width: 120px; }
-  #feeds #sideBar #categories {
+#feeds #sideBar #categories {
+  list-style-type: none;
+  margin-left: 0px;
+  padding-left: 0px;
+  padding-top: 50px; }
+  #feeds #sideBar #categories #allFeeds {
+    background: url("images/rss.png") no-repeat left;
+    padding-left: 32px;
+    background-size: 35px; }
+  #feeds #sideBar #categories .feeds {
     list-style-type: none;
-    margin-left: 0px;
-    padding-left: 0px;
-    padding-top: 50px; }
-    #feeds #sideBar #categories #allFeeds {
-      background: url("images/rss.png") no-repeat left;
-      padding-left: 32px;
-      background-size: 35px; }
-    #feeds #sideBar #categories .feeds {
-      list-style-type: none;
-      padding-left: 20px; }
-      #feeds #sideBar #categories .feeds .feed {
-        max-width: 150px;
-        display: inline-block;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis; }
-#feeds #main-content {
-  width: 1220px; }
-  #feeds #main-content #feed-list {
-    list-style-type: none; }
-    #feeds #main-content #feed-list .feed-item {
-      border-bottom: 1px solid whitesmoke; }
-      #feeds #main-content #feed-list .feed-item .feedSource {
-        width: 200px;
-        max-width: 200px;
-        display: inline-block;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis; }
-      #feeds #main-content #feed-list .feed-item .feedTitle {
-        width: 800px;
-        display: inline-block; }
+    padding-left: 20px; }
+    #feeds #sideBar #categories .feeds .feed {
+      max-width: 150px;
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+#feeds #main-content #feed-list {
+  list-style-type: none; }
+  #feeds #main-content #feed-list .feed-item {
+    border-bottom: 1px solid whitesmoke;
+    padding: 5px 0px 5px 20px; }
+    #feeds #main-content #feed-list .feed-item .feedSource {
+      width: 200px;
+      max-width: 200px;
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+    #feeds #main-content #feed-list .feed-item .feedTitle {
+      width: 800px;
+      display: inline-block; }
+    #feeds #main-content #feed-list .feed-item article {
+      margin-left: 120px;
+      width: 900px; }
+      #feeds #main-content #feed-list .feed-item article h3 {
+        font-size: 22px; }
+      #feeds #main-content #feed-list .feed-item article span {
+        color: #b1bcc5; }
+  #feeds #main-content #feed-list .feed-item.even {
+    background-color: #fbfbfb; }
 
 #main-content {
   padding-top: 50px; }

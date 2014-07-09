@@ -13,7 +13,7 @@
  
 <div id="feeds" class="container-fluid">
     <div class="row-fluid">
-        <div id="sideBar" class="span2">
+        <div id="sideBar" class="span1">
             <!--Sidebar content-->
             <ul id="categories">
                 <li id="allFeeds" ng-click="displayFeedsForAllCategory()">All</li>
@@ -33,16 +33,23 @@
                 </li>
             </ul>
         </div>
-        <div id="main-content" class="span10">
+        <div id="main-content" class="span11">
             <!--Body content-->
             <ul id="feed-list">
-                <li class="feed-item" ng-repeat="feed in feeds">
+                <li class="feed-item" ng-repeat="feed in feeds" ng-class-odd="'odd'" ng-class-even="'even'">
                     <span ng-click="showStory_$index = ! showStory_$index">
                         <span class="feedSource" title="{{feed.source}}">{{feed.source}}</span>
                         <span class="feedTitle">{{ feed.title }}</span>
                         <span class="feedPubDate">{{feed.pubDate | formatDate }}</span>
                     </span>
-                    <div ng-show="showStory_$index">{{ feed.description | reverse | reverse}} <a href="{{feed.link}}" target="new">Read More</a></div>
+                    <article ng-show="showStory_$index">
+	                    <!-- contrived reverse example--> 
+	                    <h3>{{feed.title}}</h3>
+	                    <span>{{feed.source}} {{feed.pubDate | formatDate }}</span>
+	                    <div id="contents">
+							{{ feed.description | reverse | reverse}} <a href="{{feed.link}}" target="new">Read More</a>
+						</div>
+                    </article>
                 </li>
             </ul>
         </div> 
