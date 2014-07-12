@@ -10,6 +10,7 @@
   <div class="panel-body">
     <form role="form">
     	<img id="logo" src="Content/images/logo1.png"/>
+    	<div ng-show="errorMessage != ''" class="alert alert-danger">{{errorMessage}}</div>
     	<div class="form-group">
 	    	<label for="email">Email address</label>
 	    	<input type="text" name="email" id="email" placeholder="name@domain.com" ng-model="email"/>

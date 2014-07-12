@@ -19,7 +19,7 @@
 
   #######################################################################*/
 
-var app = angular.module('viewApp', ['ngResource', 'ngRoute']);
+var app = angular.module('viewApp', ['ngResource', 'ngRoute', 'ngCookies']);
 
 //This configures the routes and associates each route with a view and a controller
 app.config(function ($routeProvider) {
@@ -51,23 +51,43 @@ app.config(function ($routeProvider) {
 
 
 
-app.controller('LoginController', function ($scope) {
 
-    $scope.login = function () {
-      alert($scope.email + " " + $scope.password);
-    };
-});
 
 
 app.controller('FeedManagerController', function ($scope) {
 
     
 });
-app.controller('ListController', function ($scope, feedService) {
+app.controller('LoginController', function($scope, $http, $location, $rootScope) {
 
+    $scope.errorMessage = "";
+    
+    $scope.login = function() {
+        var data = {
+            userName : $scope.email,
+            password : $scope.password
+        };
+        var responsePromise = $http.post(readerConstants.appContextPath + "/login", data);
+
+        responsePromise.success(function(data, status, headers, config) {
+            $rootScope.loggedIn = true;
+            $location.path('/list');
+        });
+        responsePromise.error(function(errorMessageResponse, status, headers, config) {
+            $scope.errorMessage = errorMessageResponse;
+        });
+    };
+});
+app.controller('ListController', function ($scope, feedService, $cookieStore, $location, $rootScope) {
+
+	var loggedInValue = $cookieStore.get("loggedIn");
+	if (!loggedInValue && !$rootScope.loggedIn) {
+		$location.path('/login');
+	}
+	
   	$scope.feedCategories = feedService.getCategories();
   	$scope.feeds = feedService.getFeeds();
-  	$scope.name = "Bill Blake";
+  	$scope.name = $cookieStore.get("user");
   	$scope.rightArrow = readerConstants.appContextPath + "/Content/images/selector-right-arrow.png";
   	$scope.downArrow = readerConstants.appContextPath + "/Content/images/selector-down-arrow.png";
 
@@ -229,7 +249,7 @@ app.service('feedService', function ($http, $resource) {
 app.service('userService', function ($http, $resource) {
 
 	this.createUser = function (user, successCallback, failureCallback) {
-        var userObject = $resource('/users');
+        var userObject = $resource(readerConstants.appContextPath + '/users');
 
         var newUser = new userObject({
         	firstName : user.firstName,

@@ -1,8 +1,13 @@
-app.controller('ListController', function ($scope, feedService) {
+app.controller('ListController', function ($scope, feedService, $cookieStore, $location, $rootScope) {
 
+	var loggedInValue = $cookieStore.get("loggedIn");
+	if (!loggedInValue && !$rootScope.loggedIn) {
+		$location.path('/login');
+	}
+	
   	$scope.feedCategories = feedService.getCategories();
   	$scope.feeds = feedService.getFeeds();
-  	$scope.name = "Bill Blake";
+  	$scope.name = $cookieStore.get("user");
   	$scope.rightArrow = readerConstants.appContextPath + "/Content/images/selector-right-arrow.png";
   	$scope.downArrow = readerConstants.appContextPath + "/Content/images/selector-down-arrow.png";
 
