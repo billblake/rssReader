@@ -10,7 +10,7 @@ import com.bill.rss.dataProvider.CategoryProvider;
 import com.bill.rss.domain.Category;
 import com.bill.rss.mongodb.CategoriesRetriever;
 
-public class CategoriesRoute extends Route {
+public class CategoriesRoute extends BaseRoute {
 
 	private CategoryProvider categoryProvider;
 
@@ -21,9 +21,9 @@ public class CategoriesRoute extends Route {
 
 	@Override
 	public Object handle(Request request, Response response) {
+		verifyUserLoggedIn(request);
 		response.type(ViewConstants.JSON_RESPONSE_TYPE);
 		List<Category> categories = categoryProvider.retrieveCategories();
 		return JsonUtils.convertObjectToJson(categories);
 	}
-
 }

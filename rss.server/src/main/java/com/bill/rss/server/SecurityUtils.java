@@ -3,7 +3,13 @@ package com.bill.rss.server;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class EncryptionUtils {
+import org.apache.commons.lang3.StringUtils;
+
+import com.bill.rss.domain.User;
+
+import spark.Request;
+
+public class SecurityUtils {
 
 	public static String encrypt(String string) {
 		try {

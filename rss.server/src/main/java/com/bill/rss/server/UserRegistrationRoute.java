@@ -4,13 +4,12 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import spark.Request;
 import spark.Response;
-import spark.Route;
 
 import com.bill.rss.dataProvider.UserProvider;
 import com.bill.rss.domain.User;
 import com.bill.rss.mongodb.UserRetriever;
 
-public class UserRegistrationRoute extends Route {
+public class UserRegistrationRoute extends BaseRoute {
 	
 	private UserProvider userProvider = new UserRetriever();
 	
