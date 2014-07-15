@@ -6044,6 +6044,8 @@ button.close {
         color: #b1bcc5; }
   #feeds #main-content #feed-list .feed-item.even {
     background-color: #fbfbfb; }
+  #feeds #main-content #feed-list .feed-item:hover {
+    background-color: #f0f0f0; }
 
 #main-content {
   padding-top: 50px; }
