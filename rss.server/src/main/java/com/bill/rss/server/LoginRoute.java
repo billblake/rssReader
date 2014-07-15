@@ -2,7 +2,6 @@ package com.bill.rss.server;
 
 import static com.bill.rss.server.ViewConstants.LOGGED_IN_COOKIE_NAME;
 import static com.bill.rss.server.ViewConstants.LOGGED_IN_COOKIE_VALUE;
-import static com.bill.rss.server.ViewConstants.USER_COOKIE_NAME;
 import static com.bill.rss.server.ViewConstants.USER_SESSION_KEY;
 
 import org.apache.commons.lang3.StringUtils;
@@ -33,7 +32,7 @@ public class LoginRoute extends BaseRoute {
         user = validateUser(user);
         createCookies(response, user);
         addUserDetailsToSession(request, user);
-        return "{}";
+        return JsonUtils.convertObjectToJson(user);
     }
 
 
@@ -72,7 +71,6 @@ public class LoginRoute extends BaseRoute {
 
     private void createCookies(Response response, User user) {
         response.cookie(LOGGED_IN_COOKIE_NAME, LOGGED_IN_COOKIE_VALUE, 10800);
-        response.cookie(USER_COOKIE_NAME, user.getFullName(), 10800);
     }
 
 

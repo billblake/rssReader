@@ -61,7 +61,7 @@ app.controller('FeedManagerController', function ($scope) {
 app.controller('LoginController', function($scope, $http, $location, $rootScope) {
 
     $scope.errorMessage = "";
-    
+
     $scope.login = function() {
         var data = {
             userName : $scope.email,
@@ -69,8 +69,9 @@ app.controller('LoginController', function($scope, $http, $location, $rootScope)
         };
         var responsePromise = $http.post(readerConstants.appContextPath + "/login", data);
 
-        responsePromise.success(function(data, status, headers, config) {
+        responsePromise.success(function(user, status, headers, config) {
             $rootScope.loggedIn = true;
+            $rootScope.user = user;
             $location.path('/list');
         });
         responsePromise.error(function(errorMessageResponse, status, headers, config) {
@@ -87,7 +88,7 @@ app.controller('ListController', function ($scope, feedService, $cookies, $locat
 
   	$scope.feedCategories = feedService.getCategories();
   	$scope.feeds = feedService.getFeeds();
-  	$scope.name = $cookies.user.replace(/"/g, '');
+  	$scope.name = $rootScope.user.firstName + " " + $rootScope.user.lastName;
   	$scope.rightArrow = readerConstants.appContextPath + "/Content/images/selector-right-arrow.png";
   	$scope.downArrow = readerConstants.appContextPath + "/Content/images/selector-down-arrow.png";
 

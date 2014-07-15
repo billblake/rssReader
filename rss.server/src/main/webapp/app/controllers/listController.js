@@ -7,7 +7,7 @@ app.controller('ListController', function ($scope, feedService, $cookies, $locat
 
   	$scope.feedCategories = feedService.getCategories();
   	$scope.feeds = feedService.getFeeds();
-  	$scope.name = $cookies.user.replace(/"/g, '');
+  	$scope.name = $rootScope.user.firstName + " " + $rootScope.user.lastName;
   	$scope.rightArrow = readerConstants.appContextPath + "/Content/images/selector-right-arrow.png";
   	$scope.downArrow = readerConstants.appContextPath + "/Content/images/selector-down-arrow.png";
 
