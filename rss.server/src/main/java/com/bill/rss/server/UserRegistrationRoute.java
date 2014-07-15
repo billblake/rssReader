@@ -1,5 +1,7 @@
 package com.bill.rss.server;
 
+import static com.bill.rss.server.ViewConstants.JSON_RESPONSE_TYPE;
+
 import org.codehaus.jackson.map.ObjectMapper;
 
 import spark.Request;
@@ -10,10 +12,10 @@ import com.bill.rss.domain.User;
 import com.bill.rss.mongodb.UserRetriever;
 
 public class UserRegistrationRoute extends BaseRoute {
-	
-	private UserProvider userProvider = new UserRetriever();
-	
-	private ObjectMapper mapper = new ObjectMapper();
+
+	private final UserProvider userProvider = new UserRetriever();
+
+	private final ObjectMapper mapper = new ObjectMapper();
 
 	protected UserRegistrationRoute(String path) {
 		super(path);
@@ -24,10 +26,10 @@ public class UserRegistrationRoute extends BaseRoute {
 		User user = parseInput(request);
 		checkIfUserNameExists(user);
 		createNewUser(user);
-		response.type(ViewConstants.JSON_RESPONSE_TYPE);
+		response.type(JSON_RESPONSE_TYPE);
 		return "{}";
 	}
-	
+
 	private User parseInput(Request request) {
 		User user = new User();
 		try {
@@ -43,7 +45,7 @@ public class UserRegistrationRoute extends BaseRoute {
 			halt(403, "Username already exists");
 		}
 	}
-	
+
 	private void createNewUser(User user) {
 		try {
 			userProvider.createNewUser(user);

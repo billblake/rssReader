@@ -78,16 +78,16 @@ app.controller('LoginController', function($scope, $http, $location, $rootScope)
         });
     };
 });
-app.controller('ListController', function ($scope, feedService, $cookieStore, $location, $rootScope) {
+app.controller('ListController', function ($scope, feedService, $cookies, $location, $rootScope) {
 
-	var loggedInValue = $cookieStore.get("loggedIn");
+	var loggedInValue = $cookies.loggedIn;
 	if (!loggedInValue && !$rootScope.loggedIn) {
 		$location.path('/login');
 	}
-	
+
   	$scope.feedCategories = feedService.getCategories();
   	$scope.feeds = feedService.getFeeds();
-  	$scope.name = $cookieStore.get("user");
+  	$scope.name = $cookies.user.replace(/"/g, '');
   	$scope.rightArrow = readerConstants.appContextPath + "/Content/images/selector-right-arrow.png";
   	$scope.downArrow = readerConstants.appContextPath + "/Content/images/selector-down-arrow.png";
 
@@ -105,7 +105,7 @@ app.controller('ListController', function ($scope, feedService, $cookieStore, $l
   	};
 
   	$scope.refresh = function(){
-  		  feedService.refreshFeeds(showRefreshedFeeds);	
+  		  feedService.refreshFeeds(showRefreshedFeeds);
   	};
 
     function showRefreshedFeeds() {
