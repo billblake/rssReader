@@ -55,6 +55,7 @@
 				article {
 					margin-left: 120px;
 					width: 900px;
+					display: none;
 					
 					h3 {
 						font-size: 22px;
@@ -68,6 +69,10 @@
 			
 			.feed-item.even {
 				background-color: rgb(251, 251, 251);
+			}
+			
+			.feed-item:hover {
+				background-color: rgb(240, 240, 240);
 			}
 		}
 	}

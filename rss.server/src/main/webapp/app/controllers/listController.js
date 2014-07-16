@@ -20,8 +20,17 @@ app.controller('ListController', function ($scope, feedService) {
   	};
 
   	$scope.refresh = function(){
-  		  feedService.refreshFeeds(showRefreshedFeeds);	
+  		  feedService.refreshFeeds(showRefreshedFeeds);
   	};
+
+
+  	$scope.articleClass = function (index) {
+        return "article-" + index;
+    };
+
+    $scope.toggleArticle = function (index) {
+        $(".article-" + index + ":first").toggle();
+    };
 
     function showRefreshedFeeds() {
         $scope.feeds = feedService.getFeeds();
