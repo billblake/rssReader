@@ -1,7 +1,7 @@
 ﻿/// <reference path="../Scripts/angular-1.1.4.js" />
 
 /*#######################################################################
-  
+
   Dan Wahlin
   http://twitter.com/DanWahlin
   http://weblogs.asp.net/dwahlin
@@ -11,10 +11,10 @@
   at a minimum:
 
   /app
-      /controllers      
+      /controllers
       /directives
       /services
-      /partials 
+      /partials
       /views
 
   #######################################################################*/
@@ -43,6 +43,10 @@ app.config(function ($routeProvider) {
             {
                 controller: 'FeedManagerController',
                 templateUrl: 'app/partials/manage.html'
+            })
+        .when('/logout',
+            {
+                templateUrl: 'app/partials/logout.html'
             })
         .otherwise({ redirectTo: '/list' });
 });

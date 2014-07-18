@@ -1,7 +1,7 @@
 /// <reference path="../Scripts/angular-1.1.4.js" />
 
 /*#######################################################################
-  
+
   Dan Wahlin
   http://twitter.com/DanWahlin
   http://weblogs.asp.net/dwahlin
@@ -11,10 +11,10 @@
   at a minimum:
 
   /app
-      /controllers      
+      /controllers
       /directives
       /services
-      /partials 
+      /partials
       /views
 
   #######################################################################*/
@@ -43,6 +43,10 @@ app.config(function ($routeProvider) {
             {
                 controller: 'FeedManagerController',
                 templateUrl: 'app/partials/manage.html'
+            })
+        .when('/logout',
+            {
+                templateUrl: 'app/partials/logout.html'
             })
         .otherwise({ redirectTo: '/list' });
 });
@@ -79,11 +83,12 @@ app.controller('LoginController', function($scope, $http, $location, $rootScope)
         });
     };
 });
-app.controller('ListController', function ($scope, feedService, $cookies, $location, $rootScope) {
+app.controller('ListController', function ($scope, feedService, $cookies, $cookieStore, $location, $rootScope, $http) {
 
 	var loggedInValue = $cookies.loggedIn;
-	if (!loggedInValue && !$rootScope.loggedIn) {
+	if (loggedInValue !== "logged-in" && !$rootScope.loggedIn) {
 		$location.path('/login');
+		return;
 	}
 
   	$scope.feedCategories = feedService.getCategories();
@@ -109,9 +114,20 @@ app.controller('ListController', function ($scope, feedService, $cookies, $locat
   		  feedService.refreshFeeds(showRefreshedFeeds);
   	};
 
+  	$scope.logout = function() {
+  	  var responsePromise = $http.get(readerConstants.appContextPath + "/logout");
+
+      responsePromise.success(function(user, status, headers, config) {
+          $location.path('/logout');
+          $cookies.loggedIn = "logged-out";
+          $rootScope.loggedIn = false;
+          $cookieStore.remove("user");
+      });
+  	};
+
   	function getFullName() {
   	  var fullName = $cookies.user;
-      if (typeof fullName === "undefinded") {
+      if (typeof fullName === "undefined") {
           fullName = $rootScope.user.firstName + " " + $rootScope.user.lastName;
       }
       return fullName.replace(/"/g, '');
