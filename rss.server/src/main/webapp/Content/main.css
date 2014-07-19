@@ -6002,6 +6002,14 @@ button.close {
     border-radius: 5px;
     margin-top: 20px; }
 
+#loggedOutPanel {
+  width: 300px;
+  margin: 120px auto 0 auto;
+  padding: 15px; }
+  #loggedOutPanel #logo {
+    wwidth: 220px;
+    margin-bottom: 10px; }
+
 #feeds #sideBar #categories {
   list-style-type: none;
   margin-left: 0px;
