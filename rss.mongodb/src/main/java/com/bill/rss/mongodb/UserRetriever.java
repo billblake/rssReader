@@ -1,7 +1,5 @@
 package com.bill.rss.mongodb;
 
-import org.bson.types.ObjectId;
-
 import com.bill.rss.dataProvider.UserProvider;
 import com.bill.rss.domain.User;
 import com.mongodb.BasicDBObject;
@@ -9,7 +7,6 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.MongoException;
 import com.mongodb.WriteConcern;
 
 public class UserRetriever implements UserProvider {

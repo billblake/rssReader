@@ -1,5 +1,16 @@
 package com.bill.rss.mongodb;
 
+import static com.bill.rss.mongodb.FeedConstants.CATEGORY_ID;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ID;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEMS;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_DESCRIPTION;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_ID;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_LINK;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_PUB_DATE;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_SOURCE;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_TITLE;
+import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,15 +27,14 @@ import com.mongodb.DBObject;
 
 public class FeedItemRetriever implements FeedItemProvider {
 
-	
 
-	public List<FeedItem> retrieveFeedItems(String categoryId, String feedId) {
+	public List<FeedItem> retrieveFeedItems(String categoryId, String feedId, String username) {
 		DB rssDb = MongoDBConnection.getDbConnection();
-	    DBCollection coll = rssDb.getCollection(FeedConstants.FEED_ITEMS);
+	    DBCollection coll = rssDb.getCollection(FEED_ITEMS);
 	    DBCursor feedItemsCursor;
-	    
-	    BasicDBObject query = buildFeedItemQuery(categoryId, feedId);
-	    feedItemsCursor = coll.find(query).sort(new BasicDBObject("pubDate", -1));
+
+	    BasicDBObject query = buildFeedItemQuery(categoryId, feedId, username);
+	    feedItemsCursor = coll.find(query).sort(new BasicDBObject(FEED_ITEM_PUB_DATE, -1));
 	    return parseFeadItems(feedItemsCursor);
 	}
 
@@ -36,15 +46,15 @@ public class FeedItemRetriever implements FeedItemProvider {
 	    	try {
 		    	DBObject nextFeedItem = feedItemsCursor.next();
 		        feedItem = new FeedItem();
-		        feedItem.setFeedItemId(nextFeedItem.get(FeedConstants.FEED_ITEM_ID).toString());
-		        feedItem.setCatId(nextFeedItem.get(FeedConstants.CATEGORY_ID).toString());
-		        feedItem.setDescription(nextFeedItem.get(FeedConstants.FEED_ITEM_DESCRIPTION).toString());
-		        feedItem.setFeedId(nextFeedItem.get(FeedConstants.FEED_ID).toString());
-		        feedItem.setLink(nextFeedItem.get(FeedConstants.FEED_ITEM_LINK).toString());
-		        feedItem.setSource(nextFeedItem.get(FeedConstants.FEED_ITEM_SOURCE).toString());
-		        feedItem.setTitle(nextFeedItem.get(FeedConstants.FEED_ITEM_TITLE).toString());
-		        feedItem.setUsername(nextFeedItem.get(FeedConstants.USER_NAME).toString());
-		        Date pubDate = (Date) nextFeedItem.get(FeedConstants.FEED_ITEM_PUB_DATE);
+		        feedItem.setFeedItemId(nextFeedItem.get(FEED_ITEM_ID).toString());
+		        feedItem.setCatId(nextFeedItem.get(CATEGORY_ID).toString());
+		        feedItem.setDescription(nextFeedItem.get(FEED_ITEM_DESCRIPTION).toString());
+		        feedItem.setFeedId(nextFeedItem.get(FEED_ID).toString());
+		        feedItem.setLink(nextFeedItem.get(FEED_ITEM_LINK).toString());
+		        feedItem.setSource(nextFeedItem.get(FEED_ITEM_SOURCE).toString());
+		        feedItem.setTitle(nextFeedItem.get(FEED_ITEM_TITLE).toString());
+		        feedItem.setUsername(nextFeedItem.get(USER_NAME).toString());
+		        Date pubDate = (Date) nextFeedItem.get(FEED_ITEM_PUB_DATE);
 		        feedItem.setPubDate(pubDate);
 		        feedItems.add(feedItem);
 	    	} catch (Exception e) {
@@ -55,13 +65,14 @@ public class FeedItemRetriever implements FeedItemProvider {
 	}
 
 
-	private BasicDBObject buildFeedItemQuery(String categoryId, String feedId) {
+	private BasicDBObject buildFeedItemQuery(String categoryId, String feedId, String username) {
 		BasicDBObject query = new BasicDBObject();
+		query.append(USER_NAME, username);
 	    if (categoryId != null) {
-	    	query.append(FeedConstants.CATEGORY_ID, new ObjectId(categoryId));
-	    } 
+	    	query.append(CATEGORY_ID, new ObjectId(categoryId));
+	    }
 	    if (feedId != null) {
-	    	query.append(FeedConstants.FEED_ID, new ObjectId(feedId));
+	    	query.append(FEED_ID, new ObjectId(feedId));
 	    }
 		return query;
 	}

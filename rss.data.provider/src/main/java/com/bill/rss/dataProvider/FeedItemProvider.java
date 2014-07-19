@@ -6,5 +6,5 @@ import com.bill.rss.domain.FeedItem;
 
 public interface FeedItemProvider {
 
-	List<FeedItem> retrieveFeedItems(String categoryId, String feedId);
+	List<FeedItem> retrieveFeedItems(String categoryId, String feedId, String username);
 }

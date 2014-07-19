@@ -48,10 +48,15 @@ public class UserRegistrationRoute extends BaseRoute {
 
 	private void createNewUser(User user) {
 		try {
+		    encryptPassword(user);
 			userProvider.createNewUser(user);
 		}
 		catch (Exception e) {
 			halt(500, "Internal Error");
 		}
 	}
+
+	private void encryptPassword(User user) {
+        user.setPassword(SecurityUtils.encrypt(user.getPassword()));
+    }
 }

@@ -18,7 +18,7 @@ public abstract class BaseRoute extends Route {
         super(path);
     }
 
-    public void verifyUserLoggedIn(Request request, Response response) {
+    protected void verifyUserLoggedIn(Request request, Response response) {
         Map<String, String> cookies =  request.cookies();
         String loggedInCookieValue = cookies.get(LOGGED_IN_COOKIE_NAME);
 
@@ -33,5 +33,11 @@ public abstract class BaseRoute extends Route {
         response.removeCookie(LOGGED_IN_COOKIE_NAME);
         response.removeCookie(USER_COOKIE_NAME);
         request.session().removeAttribute(USER_SESSION_KEY);
+    }
+
+
+    protected String getUsername(Request request) {
+        User user = (User) request.session().attribute(USER_SESSION_KEY);
+        return user.getUserName();
     }
 }

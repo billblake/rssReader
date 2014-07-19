@@ -24,7 +24,7 @@ public class CategoriesRoute extends BaseRoute {
 	public Object handle(Request request, Response response) {
 		verifyUserLoggedIn(request, response);
 		response.type(JSON_RESPONSE_TYPE);
-		List<Category> categories = categoryProvider.retrieveCategories();
+		List<Category> categories = categoryProvider.retrieveCategories(getUsername(request));
 		return JsonUtils.convertObjectToJson(categories);
 	}
 }
