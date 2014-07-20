@@ -5978,7 +5978,8 @@ button.close {
   #header #name, #header #refresh {
     padding: 0px 5px; }
   #header #header-nav {
-    float: right; }
+    float: right;
+    cursor: pointer; }
 
 #footer_container {
   background: whitesmoke;
@@ -6014,7 +6015,8 @@ button.close {
   list-style-type: none;
   margin-left: 0px;
   padding-left: 0px;
-  padding-top: 50px; }
+  padding-top: 50px;
+  cursor: pointer; }
   #feeds #sideBar #categories #allFeeds {
     background: url("images/rss.png") no-repeat left;
     padding-left: 32px;
@@ -6033,6 +6035,8 @@ button.close {
   #feeds #main-content #feed-list .feed-item {
     border-bottom: 1px solid whitesmoke;
     padding: 5px 0px 5px 20px; }
+    #feeds #main-content #feed-list .feed-item .feedSource, #feeds #main-content #feed-list .feed-item .feedTitle, #feeds #main-content #feed-list .feed-item .feedPubDate {
+      cursor: pointer; }
     #feeds #main-content #feed-list .feed-item .feedSource {
       width: 200px;
       max-width: 200px;

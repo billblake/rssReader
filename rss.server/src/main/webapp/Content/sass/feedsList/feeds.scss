@@ -6,7 +6,8 @@
 			list-style-type: none;
 			margin-left: 0px;
 			padding-left: 0px;
-			padding-top: 50px; 
+			padding-top: 50px;
+			cursor: pointer; 
 
 			#allFeeds {
 				background: url('images/rss.png') no-repeat left;
@@ -37,6 +38,10 @@
 			.feed-item {
 				border-bottom: 1px solid $PRIMARY_COLOUR;
 				padding: 5px 0px 5px 20px;
+				
+				.feedSource, .feedTitle, .feedPubDate {
+					cursor: pointer;
+				}
 
 				.feedSource {
 					width: 200px;
