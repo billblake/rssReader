@@ -30,8 +30,8 @@
                 <li id="allFeeds" ng-click="displayFeedsForAllCategory()">All</li>
                 <li ng-repeat="feedCategory in feedCategories">
                     <span ng-click="show_$index = ! show_$index">
-                        <img src="{{rightArrow}}" ng-show="! show_$index"/>
-                        <img src="{{downArrow}}" ng-show="show_$index"/>
+                        <img src="${pageContext.request.contextPath}/Content/images/selector-right-arrow.png" ng-show="! show_$index"/>
+                        <img src="${pageContext.request.contextPath}/Content/images/selector-down-arrow.png" ng-show="show_$index"/>
                     </span>
                     <span ng-click="displayFeedsForCategory(feedCategory.categoryId)">
                         {{ feedCategory.name }}

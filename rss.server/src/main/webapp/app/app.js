@@ -27,7 +27,7 @@ app.config(function ($routeProvider) {
         .when('/list',
             {
                 controller: 'ListController',
-                templateUrl: 'app/partials/list.html'
+                templateUrl: 'app/partials/list.jsp'
             })
         .when('/login',
             {
