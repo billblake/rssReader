@@ -113,15 +113,15 @@ app.controller('ListController', function ($scope, feedService, $cookies, $cooki
   	$scope.refresh = function(){
   		  feedService.refreshFeeds(showRefreshedFeeds);
   	};
-
-
+  	
   	$scope.articleClass = function (index) {
-        return "article-" + index;
-    };
+        	return "article-" + index;
+    	};
 
-    $scope.toggleArticle = function (index) {
-        $(".article-" + index + ":first").toggle();
-    };
+    	$scope.toggleArticle = function (index) {
+        	$(".article-" + index + ":first").toggle();
+    	};
+
 
   	$scope.logout = function() {
   	  var responsePromise = $http.get(readerConstants.appContextPath + "/logout");
