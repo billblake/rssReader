@@ -1,5 +1,7 @@
 package com.bill.rss.mongodb;
 
+import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import org.bson.types.ObjectId;
 
 import com.bill.rss.dataProvider.FeedProvider;
 import com.bill.rss.domain.Feed;
+import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -14,31 +17,32 @@ import com.mongodb.DBObject;
 import com.mongodb.QueryBuilder;
 
 public class FeedRetriever implements FeedProvider {
-	
+
 	private static final String FEED_ID = "_id";
-	
-	public List<Feed> retrieveFeeds() {
+
+	public List<Feed> retrieveFeeds(String username) {
 		QueryBuilder builder = new QueryBuilder();
 		return executeQueryAndParseResults(builder);
 	}
-	
-	public Feed retrieveFeed(String feedId) {
+
+	public Feed retrieveFeed(String feedId, String username) {
 		throw new RuntimeException("Not Implemented");
 	}
 
-	public List<Feed> retrieveFeedsIn(List<String> feedIds) {
+	public List<Feed> retrieveFeedsIn(List<String> feedIds, String username) {
 		QueryBuilder builder = new QueryBuilder();
 		List<ObjectId> dbFeedIds = new ArrayList<ObjectId>();
-		
+		builder.and(new BasicDBObject(USER_NAME, username));
+
 		for (String feedId : feedIds) {
 			dbFeedIds.add(new ObjectId(feedId));
 		}
-		
+
 		builder.put(FEED_ID).in(dbFeedIds);
 		return executeQueryAndParseResults(builder);
 	}
-	
-	
+
+
 	private List<Feed> executeQueryAndParseResults(QueryBuilder builder) {
 		List<Feed> feeds = new ArrayList<Feed>();
 		DB rssDb = MongoDBConnection.getDbConnection();
@@ -50,8 +54,8 @@ public class FeedRetriever implements FeedProvider {
 		}
 		return feeds;
 	}
-	
-	
+
+
 	private Feed createFeed(DBObject nextFeed) {
 		Feed feed = new Feed();
 		feed.setFeedId(nextFeed.get(FEED_ID).toString());

@@ -7,4 +7,6 @@ public interface UserProvider {
 	boolean checkIfUserNameExists(String username);
 	
 	void createNewUser(User user);
+	
+	User validateUser(User user);
 }

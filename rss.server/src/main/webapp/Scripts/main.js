@@ -1,7 +1,7 @@
 /// <reference path="../Scripts/angular-1.1.4.js" />
 
 /*#######################################################################
-  
+
   Dan Wahlin
   http://twitter.com/DanWahlin
   http://weblogs.asp.net/dwahlin
@@ -11,15 +11,15 @@
   at a minimum:
 
   /app
-      /controllers      
+      /controllers
       /directives
       /services
-      /partials 
+      /partials
       /views
 
   #######################################################################*/
 
-var app = angular.module('viewApp', ['ngResource', 'ngRoute']);
+var app = angular.module('viewApp', ['ngResource', 'ngRoute', 'ngCookies']);
 
 //This configures the routes and associates each route with a view and a controller
 app.config(function ($routeProvider) {
@@ -44,6 +44,10 @@ app.config(function ($routeProvider) {
                 controller: 'FeedManagerController',
                 templateUrl: 'app/partials/manage.html'
             })
+        .when('/logout',
+            {
+                templateUrl: 'app/partials/logout.html'
+            })
         .otherwise({ redirectTo: '/list' });
 });
 
@@ -51,23 +55,45 @@ app.config(function ($routeProvider) {
 
 
 
-app.controller('LoginController', function ($scope) {
 
-    $scope.login = function () {
-      alert($scope.email + " " + $scope.password);
-    };
-});
 
 
 app.controller('FeedManagerController', function ($scope) {
 
     
 });
-app.controller('ListController', function ($scope, feedService) {
+app.controller('LoginController', function($scope, $http, $location, $rootScope) {
+
+    $scope.errorMessage = "";
+
+    $scope.login = function() {
+        var data = {
+            userName : $scope.email,
+            password : $scope.password
+        };
+        var responsePromise = $http.post(readerConstants.appContextPath + "/login", data);
+
+        responsePromise.success(function(user, status, headers, config) {
+            $rootScope.loggedIn = true;
+            $rootScope.user = user;
+            $location.path('/list');
+        });
+        responsePromise.error(function(errorMessageResponse, status, headers, config) {
+            $scope.errorMessage = errorMessageResponse;
+        });
+    };
+});
+app.controller('ListController', function ($scope, feedService, $cookies, $cookieStore, $location, $rootScope, $http) {
+
+	var loggedInValue = $cookies.loggedIn;
+	if (loggedInValue !== "logged-in" && !$rootScope.loggedIn) {
+		$location.path('/login');
+		return;
+	}
 
   	$scope.feedCategories = feedService.getCategories();
   	$scope.feeds = feedService.getFeeds();
-  	$scope.name = "Bill Blake";
+  	$scope.name = getFullName();
   	$scope.rightArrow = readerConstants.appContextPath + "/Content/images/selector-right-arrow.png";
   	$scope.downArrow = readerConstants.appContextPath + "/Content/images/selector-down-arrow.png";
 
@@ -96,6 +122,25 @@ app.controller('ListController', function ($scope, feedService) {
     $scope.toggleArticle = function (index) {
         $(".article-" + index + ":first").toggle();
     };
+
+  	$scope.logout = function() {
+  	  var responsePromise = $http.get(readerConstants.appContextPath + "/logout");
+
+      responsePromise.success(function(user, status, headers, config) {
+          $location.path('/logout');
+          $cookies.loggedIn = "logged-out";
+          $rootScope.loggedIn = false;
+          $cookieStore.remove("user");
+      });
+  	};
+
+  	function getFullName() {
+  	  var fullName = $cookies.user;
+      if (typeof fullName === "undefined") {
+          fullName = $rootScope.user.firstName + " " + $rootScope.user.lastName;
+      }
+      return fullName.replace(/"/g, '');
+  	}
 
     function showRefreshedFeeds() {
         $scope.feeds = feedService.getFeeds();
@@ -238,7 +283,7 @@ app.service('feedService', function ($http, $resource) {
 app.service('userService', function ($http, $resource) {
 
 	this.createUser = function (user, successCallback, failureCallback) {
-        var userObject = $resource('/users');
+        var userObject = $resource(readerConstants.appContextPath + '/users');
 
         var newUser = new userObject({
         	firstName : user.firstName,

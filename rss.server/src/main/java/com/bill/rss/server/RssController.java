@@ -7,13 +7,13 @@ import spark.servlet.SparkApplication;
 public class RssController implements SparkApplication {
 
 	public void init() {
-		
 		get(new CategoriesRoute("/categories"));
-		
 		get(new FeedsRoute("/category/feeds"));
 		get(new FeedsRoute("/category/:categoryId/feeds"));
 		get(new FeedsRoute("/category/feeds/:feedId"));
-		
+        get(new LogoutRoute("/logout"));
+
 		post(new UserRegistrationRoute("/users"));
+		post(new LoginRoute("/login"));
 	}
 }

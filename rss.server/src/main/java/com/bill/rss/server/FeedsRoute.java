@@ -1,56 +1,50 @@
 package com.bill.rss.server;
 
+import static com.bill.rss.server.ViewConstants.JSON_RESPONSE_TYPE;
+import static com.bill.rss.server.ViewConstants.REFRESH_QUERY_PARAM;
+
 import java.util.List;
 
 import spark.Request;
 import spark.Response;
-import spark.Route;
 
 import com.bill.rss.dataProvider.FeedItemProvider;
 import com.bill.rss.dataProvider.FeedUpdater;
 import com.bill.rss.domain.FeedItem;
-import com.bill.rss.mongodb.FeedConstants;
 import com.bill.rss.mongodb.FeedItemRetriever;
-import com.bill.rss.mongodb.MongoDBConnection;
 import com.bill.rss.mongodb.MongoFeedUpdater;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
 
-public class FeedsRoute extends Route {
-	
-	private static final String CATEGORY_ID_PATH_VARIABLE = ":categoryId";
-	private static final String FEED_ID_PATH_VARIABLE = ":feedId";
+public class FeedsRoute extends BaseRoute {
 
-	private FeedItemProvider feedProvider;
-	FeedUpdater feedUpdater;
+    private static final String CATEGORY_ID_PATH_VARIABLE = ":categoryId";
+    private static final String FEED_ID_PATH_VARIABLE = ":feedId";
 
-	protected FeedsRoute(String path) {
-		super(path);
-		feedProvider = new FeedItemRetriever();
-		feedUpdater = new MongoFeedUpdater();
-	}
+    private final FeedItemProvider feedProvider;
+    FeedUpdater feedUpdater;
 
-	@Override
-	public Object handle(Request request, Response response) {
-		response.type(ViewConstants.JSON_RESPONSE_TYPE);
-		String categoryId = request.params(CATEGORY_ID_PATH_VARIABLE);
-		String feedId = request.params(FEED_ID_PATH_VARIABLE);
-		String refresh = request.queryParams("refresh");
-		
-		if (refresh != null && Boolean.parseBoolean(refresh)) {
-			refreshFeeds();
-		}
-		
-		List<FeedItem> feedItems = feedProvider.retrieveFeedItems(categoryId, feedId);
-		return JsonUtils.convertObjectToJson(feedItems);
-	}
+    protected FeedsRoute(String path) {
+        super(path);
+        feedProvider = new FeedItemRetriever();
+        feedUpdater = new MongoFeedUpdater();
+    }
 
-	private void refreshFeeds() {
-		feedUpdater.updateWithLatestFeeds();
-		
+    @Override
+    public Object handle(Request request, Response response) {
+        verifyUserLoggedIn(request, response);
+        response.type(JSON_RESPONSE_TYPE);
 
-		DB rssDb = MongoDBConnection.getDbConnection();
-	    DBCollection coll = rssDb.getCollection(FeedConstants.FEED_ITEMS);
-	}
+        refreshFeedsIfSpecified(request);
 
+        String categoryId = request.params(CATEGORY_ID_PATH_VARIABLE);
+        String feedId = request.params(FEED_ID_PATH_VARIABLE);
+        List<FeedItem> feedItems = feedProvider.retrieveFeedItems(categoryId, feedId, getUsername(request));
+        return JsonUtils.convertObjectToJson(feedItems);
+    }
+
+    private void refreshFeedsIfSpecified(Request request) {
+        String refresh = request.queryParams(REFRESH_QUERY_PARAM);
+        if (refresh != null && Boolean.parseBoolean(refresh)) {
+            feedUpdater.updateWithLatestFeeds(getUsername(request));
+        }
+    }
 }

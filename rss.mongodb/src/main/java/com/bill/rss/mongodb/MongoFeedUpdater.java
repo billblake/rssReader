@@ -1,5 +1,15 @@
 package com.bill.rss.mongodb;
 
+import static com.bill.rss.mongodb.FeedConstants.CATEGORY_ID;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ID;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEMS;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_DESCRIPTION;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_LINK;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_PUB_DATE;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_SOURCE;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_TITLE;
+import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
+
 import java.util.List;
 
 import org.bson.types.ObjectId;
@@ -18,36 +28,37 @@ import com.mongodb.DBCursor;
 
 public class MongoFeedUpdater implements FeedUpdater {
 
-	private FeedFetcher feedFetcher = new HttpClientFeedFetcher();
-	private FeedProvider feedRetriever = new FeedRetriever();
+	private final FeedFetcher feedFetcher = new HttpClientFeedFetcher();
+	private final FeedProvider feedRetriever = new FeedRetriever();
 
-	public void updateWithLatestFeeds() {
-		List<Feed> feeds = feedRetriever.retrieveFeeds();
+	public void updateWithLatestFeeds(String username) {
+		List<Feed> feeds = feedRetriever.retrieveFeeds(username);
 		for (Feed feed : feeds) {
 			List<FeedItem> fetchedFeeds = feedFetcher.fetcherFeed(feed.getUrl());
-			updateFeed(feed, fetchedFeeds);
+			updateFeed(feed, fetchedFeeds, username);
 		}
 	}
 
-	private void updateFeed(Feed feed, List<FeedItem> fetchedFeeds) {
+	private void updateFeed(Feed feed, List<FeedItem> fetchedFeeds, String username) {
 		DB rssDb = MongoDBConnection.getDbConnection();
-	    DBCollection feedItemsCollection = rssDb.getCollection(FeedConstants.FEED_ITEMS);
+	    DBCollection feedItemsCollection = rssDb.getCollection(FEED_ITEMS);
 
 	    for (FeedItem fetchedFeed : fetchedFeeds) {
 	    	BasicDBObject query = new BasicDBObject();
-	    	query.append(FeedConstants.FEED_ITEM_SOURCE, feed.getName());
-	    	query.append(FeedConstants.FEED_ITEM_LINK, fetchedFeed.getLink());
+	    	query.append(FEED_ITEM_SOURCE, feed.getName());
+	    	query.append(FEED_ITEM_LINK, fetchedFeed.getLink());
+            query.append(USER_NAME, username);
 	    	DBCursor queryResults = feedItemsCollection.find(query);
 	    	if (!queryResults.hasNext()) {
 		    	BasicDBObject feedItemDocument = new BasicDBObject();
-		    	feedItemDocument.put("source", feed.getName());
-		    	feedItemDocument.put("feedId", new ObjectId(feed.getFeedId()));
-		    	feedItemDocument.put("categoryId", new ObjectId(feed.getCategoryId()));
-		    	feedItemDocument.put("userName", "billblake01@yahoo.ie");
-		    	feedItemDocument.put("title", fetchedFeed.getTitle());
-		    	feedItemDocument.put("description", fetchedFeed.getDescription());
-		    	feedItemDocument.put("pubDate", fetchedFeed.getPubDate());
-		    	feedItemDocument.put("link", fetchedFeed.getLink());
+		    	feedItemDocument.put(FEED_ITEM_SOURCE, feed.getName());
+		    	feedItemDocument.put(FEED_ID, new ObjectId(feed.getFeedId()));
+		    	feedItemDocument.put(CATEGORY_ID, new ObjectId(feed.getCategoryId()));
+		    	feedItemDocument.put(USER_NAME, username);
+		    	feedItemDocument.put(FEED_ITEM_TITLE, fetchedFeed.getTitle());
+		    	feedItemDocument.put(FEED_ITEM_DESCRIPTION, fetchedFeed.getDescription());
+		    	feedItemDocument.put(FEED_ITEM_PUB_DATE, fetchedFeed.getPubDate());
+		    	feedItemDocument.put(FEED_ITEM_LINK, fetchedFeed.getLink());
 
 		    	feedItemsCollection.insert(feedItemDocument);
 	    	}

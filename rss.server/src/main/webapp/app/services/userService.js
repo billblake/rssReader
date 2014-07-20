@@ -1,7 +1,7 @@
 app.service('userService', function ($http, $resource) {
 
 	this.createUser = function (user, successCallback, failureCallback) {
-        var userObject = $resource('/users');
+        var userObject = $resource(readerConstants.appContextPath + '/users');
 
         var newUser = new userObject({
         	firstName : user.firstName,

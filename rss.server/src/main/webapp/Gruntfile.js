@@ -8,6 +8,7 @@ module.exports = function(grunt) {
       app: {
         src: ["app/app.js",
               "app/controllers/controllers.js",
+              "app/controllers/loginController.js",
               "app/controllers/listController.js",
               "app/controllers/signUpController.js",
               "app/services/feedService.js",
