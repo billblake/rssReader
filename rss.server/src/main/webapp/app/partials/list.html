@@ -48,18 +48,18 @@
             <!--Body content--> 
             <ul id="feed-list">
                 <li class="feed-item" ng-repeat="feed in feeds" ng-class-odd="'odd'" ng-class-even="'even'">
-                    <span ng-click="showStory_$index = ! showStory_$index">
+                    <span ng-click="toggleArticle($index)">
                         <span class="feedSource" title="{{feed.source}}">{{feed.source}}</span>
                         <span class="feedTitle">{{ feed.title }}</span>
-                        <span class="feedPubDate">{{feed.pubDate | formatDate }}</span>
+                        <span class="feedPubDate">{{feed.pubDate}}</span>
                     </span>
-                    <article ng-show="showStory_$index">
+                    <article ng-class="articleClass($index)">
 	                    <!-- contrived reverse example--> 
 	                    <h3>{{feed.title}}</h3>
-	                    <span>{{feed.source}} {{feed.pubDate | formatDate }}</span>
+	                    <span>{{feed.source}} {{feed.pubDate}}</span>
 	                    <div id="contents">
-							{{ feed.description | reverse | reverse}} <a href="{{feed.link}}" target="new">Read More</a>
-						</div>
+	                        {{ feed.description}} <a href="{{feed.link}}" target="new">Read More</a>
+	                    </div>
                     </article>
                 </li>
             </ul>

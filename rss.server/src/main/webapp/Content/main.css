@@ -6045,13 +6045,16 @@ button.close {
       display: inline-block; }
     #feeds #main-content #feed-list .feed-item article {
       margin-left: 120px;
-      width: 900px; }
+      width: 900px;
+      display: none; }
       #feeds #main-content #feed-list .feed-item article h3 {
         font-size: 22px; }
       #feeds #main-content #feed-list .feed-item article span {
         color: #b1bcc5; }
   #feeds #main-content #feed-list .feed-item.even {
     background-color: #fbfbfb; }
+  #feeds #main-content #feed-list .feed-item:hover {
+    background-color: #f0f0f0; }
 
 #main-content {
   padding-top: 50px; }
