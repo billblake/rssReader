@@ -19,11 +19,11 @@ public class MongoDBConnection {
 
 	private static DB createNewDbConnection() {
 		Mongo conn;
-//		String uriString = "mongodb://billblake:bill6551@kahana.mongohq.com:10060/reader";
-//		MongoURI uri = new MongoURI(uriString);
+		String uriString = "mongodb://billblake:bill6551@kahana.mongohq.com:10060/reader";
+		MongoURI uri = new MongoURI(uriString);
 	    try {
-//	    	conn = uri.connect();
-	      conn = new Mongo("localhost", 27017);
+	    	conn = uri.connect();
+//	      conn = new Mongo("localhost", 27017);
 	    } catch (Exception e) {
 	      throw new RuntimeException(e);
 	    }
