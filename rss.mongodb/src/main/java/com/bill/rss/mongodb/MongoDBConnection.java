@@ -7,9 +7,9 @@ import com.mongodb.WriteConcern;
 
 public class MongoDBConnection {
 
-	private static final String RSS_READER_DB = "rssReader";
+	private static final String RSS_READER_DB = "reader";
 	private static DB dbConnection;
-	
+
 	public static DB getDbConnection() {
 		if (dbConnection != null) {
 			return dbConnection;
