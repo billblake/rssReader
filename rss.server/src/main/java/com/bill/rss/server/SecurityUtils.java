@@ -3,11 +3,8 @@ package com.bill.rss.server;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import org.apache.commons.lang3.StringUtils;
-
+import com.bill.rss.domain.ReaderException;
 import com.bill.rss.domain.User;
-
-import spark.Request;
 
 public class SecurityUtils {
 
@@ -16,7 +13,7 @@ public class SecurityUtils {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 	        md.update(string.getBytes());
 	        byte byteData[] = md.digest();
-	 
+
 	        //convert the byte to hex format method 1
 	        StringBuilder stringBuilder = new StringBuilder();
 	        for (int i = 0; i < byteData.length; i++) {
@@ -24,8 +21,13 @@ public class SecurityUtils {
 	        }
 	        return stringBuilder.toString();
 		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
+			throw new ReaderException("Unable to encryt string " + string, e);
 		}
-        return string;
 	}
+
+
+	public static User clearPassword(User user) {
+        user.setPassword("");
+        return user;
+    }
 }

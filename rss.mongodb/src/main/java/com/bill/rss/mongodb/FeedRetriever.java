@@ -46,7 +46,7 @@ public class FeedRetriever implements FeedProvider {
 	private List<Feed> executeQueryAndParseResults(QueryBuilder builder) {
 		List<Feed> feeds = new ArrayList<Feed>();
 		DB rssDb = MongoDBConnection.getDbConnection();
-		DBCollection feedsCollection = rssDb.getCollection(FeedConstants.FEEDS_CATEGORY);
+		DBCollection feedsCollection = rssDb.getCollection(FeedConstants.FEEDS_COLLECTION);
 		DBCursor feedsCursor = feedsCollection.find(builder.get());
 		while (feedsCursor.hasNext()) {
 			DBObject nextFeed = feedsCursor.next();

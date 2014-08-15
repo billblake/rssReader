@@ -1,7 +1,5 @@
 package com.bill.rss.server;
 
-import static com.bill.rss.server.ViewConstants.JSON_RESPONSE_TYPE;
-
 import org.codehaus.jackson.map.ObjectMapper;
 
 import spark.Request;
@@ -11,9 +9,12 @@ import com.bill.rss.dataProvider.UserProvider;
 import com.bill.rss.domain.User;
 import com.bill.rss.mongodb.UserRetriever;
 
+import static com.bill.rss.server.SecurityUtils.clearPassword;
+import static com.bill.rss.server.ViewConstants.JSON_RESPONSE_TYPE;
+
 public class UserRegistrationRoute extends BaseRoute {
 
-	private final UserProvider userProvider = new UserRetriever();
+	private UserProvider userProvider = new UserRetriever();
 
 	private final ObjectMapper mapper = new ObjectMapper();
 
@@ -26,8 +27,9 @@ public class UserRegistrationRoute extends BaseRoute {
 		User user = parseInput(request);
 		checkIfUserNameExists(user);
 		createNewUser(user);
+		clearPassword(user);
 		response.type(JSON_RESPONSE_TYPE);
-		return "{}";
+		return JsonUtils.convertObjectToJson(user);
 	}
 
 	private User parseInput(Request request) {
@@ -59,4 +61,9 @@ public class UserRegistrationRoute extends BaseRoute {
 	private void encryptPassword(User user) {
         user.setPassword(SecurityUtils.encrypt(user.getPassword()));
     }
+
+
+	public void setUserProvider(UserProvider userProvider) {
+	    this.userProvider = userProvider;
+	}
 }

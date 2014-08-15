@@ -1,8 +1,5 @@
 package com.bill.rss.server;
 
-import static com.bill.rss.server.ViewConstants.JSON_RESPONSE_TYPE;
-import static com.bill.rss.server.ViewConstants.REFRESH_QUERY_PARAM;
-
 import java.util.List;
 
 import spark.Request;
@@ -14,13 +11,16 @@ import com.bill.rss.domain.FeedItem;
 import com.bill.rss.mongodb.FeedItemRetriever;
 import com.bill.rss.mongodb.MongoFeedUpdater;
 
+import static com.bill.rss.server.ViewConstants.JSON_RESPONSE_TYPE;
+import static com.bill.rss.server.ViewConstants.REFRESH_QUERY_PARAM;
+
 public class FeedsRoute extends BaseRoute {
 
     private static final String CATEGORY_ID_PATH_VARIABLE = ":categoryId";
     private static final String FEED_ID_PATH_VARIABLE = ":feedId";
 
-    private final FeedItemProvider feedProvider;
-    FeedUpdater feedUpdater;
+    private FeedItemProvider feedProvider;
+    private FeedUpdater feedUpdater;
 
     protected FeedsRoute(String path) {
         super(path);
@@ -41,10 +41,21 @@ public class FeedsRoute extends BaseRoute {
         return JsonUtils.convertObjectToJson(feedItems);
     }
 
+
     private void refreshFeedsIfSpecified(Request request) {
         String refresh = request.queryParams(REFRESH_QUERY_PARAM);
         if (refresh != null && Boolean.parseBoolean(refresh)) {
             feedUpdater.updateWithLatestFeeds(getUsername(request));
         }
     }
+
+
+    public void setFeedProvider(FeedItemProvider feedProvider) {
+        this.feedProvider = feedProvider;
+    }
+
+    public void setFeedUpdater(FeedUpdater feedUpdater) {
+        this.feedUpdater = feedUpdater;
+    }
+
 }

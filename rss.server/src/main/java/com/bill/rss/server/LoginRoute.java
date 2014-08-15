@@ -1,10 +1,5 @@
 package com.bill.rss.server;
 
-import static com.bill.rss.server.ViewConstants.LOGGED_IN_COOKIE_NAME;
-import static com.bill.rss.server.ViewConstants.LOGGED_IN_COOKIE_VALUE;
-import static com.bill.rss.server.ViewConstants.USER_COOKIE_NAME;
-import static com.bill.rss.server.ViewConstants.USER_SESSION_KEY;
-
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -15,11 +10,17 @@ import com.bill.rss.dataProvider.UserProvider;
 import com.bill.rss.domain.User;
 import com.bill.rss.mongodb.UserRetriever;
 
+import static com.bill.rss.server.SecurityUtils.clearPassword;
+import static com.bill.rss.server.ViewConstants.LOGGED_IN_COOKIE_NAME;
+import static com.bill.rss.server.ViewConstants.LOGGED_IN_COOKIE_VALUE;
+import static com.bill.rss.server.ViewConstants.USER_COOKIE_NAME;
+import static com.bill.rss.server.ViewConstants.USER_SESSION_KEY;
+
 public class LoginRoute extends BaseRoute {
 
     private final ObjectMapper mapper = new ObjectMapper();
 
-    private final UserProvider userProvider = new UserRetriever();
+    private UserProvider userProvider = new UserRetriever();
 
     protected LoginRoute(String path) {
         super(path);
@@ -31,6 +32,7 @@ public class LoginRoute extends BaseRoute {
         validateUserInput(user);
         encryptPassword(user);
         user = validateUser(user);
+        clearPassword(user);
         createCookies(response, user);
         addUserDetailsToSession(request, user);
         return JsonUtils.convertObjectToJson(user);
@@ -79,5 +81,10 @@ public class LoginRoute extends BaseRoute {
 
     private void addUserDetailsToSession(Request request, User user) {
         request.session().attribute(USER_SESSION_KEY, user);
+    }
+
+
+    public void setUserProvider(UserProvider userProvider) {
+        this.userProvider = userProvider;
     }
 }

@@ -1,9 +1,5 @@
 package com.bill.rss.server;
 
-import static com.bill.rss.server.ViewConstants.LOGGED_IN_COOKIE_NAME;
-import static com.bill.rss.server.ViewConstants.USER_COOKIE_NAME;
-import static com.bill.rss.server.ViewConstants.USER_SESSION_KEY;
-
 import java.util.Map;
 
 import spark.Request;
@@ -11,6 +7,11 @@ import spark.Response;
 import spark.Route;
 
 import com.bill.rss.domain.User;
+
+import static com.bill.rss.server.ViewConstants.LOGGED_IN_COOKIE_NAME;
+import static com.bill.rss.server.ViewConstants.LOGGED_IN_COOKIE_VALUE;
+import static com.bill.rss.server.ViewConstants.USER_COOKIE_NAME;
+import static com.bill.rss.server.ViewConstants.USER_SESSION_KEY;
 
 public abstract class BaseRoute extends Route {
 
@@ -23,7 +24,7 @@ public abstract class BaseRoute extends Route {
         String loggedInCookieValue = cookies.get(LOGGED_IN_COOKIE_NAME);
 
         User user = (User) request.session().attribute(USER_SESSION_KEY);
-        if (loggedInCookieValue == null || !loggedInCookieValue.equals(ViewConstants.LOGGED_IN_COOKIE_VALUE) || user == null) {
+        if (loggedInCookieValue == null || !loggedInCookieValue.equals(LOGGED_IN_COOKIE_VALUE) || user == null) {
             logout(request, response);
             halt(401, "User not authenticated");
         }

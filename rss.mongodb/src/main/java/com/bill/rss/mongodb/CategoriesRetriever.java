@@ -1,10 +1,5 @@
 package com.bill.rss.mongodb;
 
-import static com.bill.rss.mongodb.FeedConstants.CATEGORIES_COLLECTION;
-import static com.bill.rss.mongodb.FeedConstants.CATEGORY_NAME;
-import static com.bill.rss.mongodb.FeedConstants.FEED_IDS;
-import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +13,11 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+
+import static com.bill.rss.mongodb.FeedConstants.CATEGORIES_COLLECTION;
+import static com.bill.rss.mongodb.FeedConstants.CATEGORY_NAME;
+import static com.bill.rss.mongodb.FeedConstants.FEED_IDS;
+import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
 
 public class CategoriesRetriever implements CategoryProvider {
 
@@ -33,15 +33,13 @@ public class CategoriesRetriever implements CategoryProvider {
 
     private DBCollection getCategoriesCollection() {
         DB rssDb = MongoDBConnection.getDbConnection();
-        DBCollection categoriesCollection = rssDb.getCollection(CATEGORIES_COLLECTION);
-        return categoriesCollection;
+        return rssDb.getCollection(CATEGORIES_COLLECTION);
     }
 
     private DBCursor executeCategoriesQuery(String username, DBCollection categoriesCollection) {
         BasicDBObject query = new BasicDBObject();
         query.append(USER_NAME, username);
-        DBCursor categoriesCursor = categoriesCollection.find(query);
-        return categoriesCursor;
+        return categoriesCollection.find(query);
     }
 
     private List<Category> parseCategoryResults(DBCursor categoriesCursor, String username) {

@@ -1,7 +1,5 @@
 package com.bill.rss.server;
 
-import static com.bill.rss.server.ViewConstants.JSON_RESPONSE_TYPE;
-
 import java.util.List;
 
 import spark.Request;
@@ -11,9 +9,11 @@ import com.bill.rss.dataProvider.CategoryProvider;
 import com.bill.rss.domain.Category;
 import com.bill.rss.mongodb.CategoriesRetriever;
 
+import static com.bill.rss.server.ViewConstants.JSON_RESPONSE_TYPE;
+
 public class CategoriesRoute extends BaseRoute {
 
-	private final CategoryProvider categoryProvider;
+	private CategoryProvider categoryProvider;
 
 	protected CategoriesRoute(String path) {
 		super(path);
@@ -26,5 +26,10 @@ public class CategoriesRoute extends BaseRoute {
 		response.type(JSON_RESPONSE_TYPE);
 		List<Category> categories = categoryProvider.retrieveCategories(getUsername(request));
 		return JsonUtils.convertObjectToJson(categories);
+	}
+
+
+	void setCategoryProvider(CategoryProvider categoryProvider) {
+	    this.categoryProvider = categoryProvider;
 	}
 }

@@ -10,12 +10,18 @@ public class MongoDBConnection {
 	private static final String RSS_READER_DB = "reader";
 	private static DB dbConnection;
 
+
 	public static DB getDbConnection() {
 		if (dbConnection != null) {
 			return dbConnection;
 		}
 		return createNewDbConnection();
 	}
+
+
+	static void setDbConnection(DB db) {
+	    dbConnection = db;
+    }
 
 	private static DB createNewDbConnection() {
 		Mongo conn;
