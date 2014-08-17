@@ -4,7 +4,7 @@ import org.agileware.test.ConstructorsTester;
 import org.agileware.test.PropertiesTester;
 import org.junit.Test;
 
-public class PojoTester {
+public class PojoTest {
 
     @Test
     public void testProperties() throws Exception {
