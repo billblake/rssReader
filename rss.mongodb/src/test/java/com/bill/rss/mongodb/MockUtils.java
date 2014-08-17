@@ -3,6 +3,8 @@ package com.bill.rss.mongodb;
 import java.util.Date;
 import java.util.Iterator;
 
+import org.bson.types.ObjectId;
+
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -113,17 +115,32 @@ public class MockUtils {
 
 
     public static DBCollection createUsersCollectionMock(DB db) {
-
         DBCollection usersCollection = mock(DBCollection.class);
         when(db.getCollection("user")).thenReturn(usersCollection );
 
-        DBCursor usersCursor = createCursorMock(createCategoryDbObjectMock());
+        DBObject userDbObjectMock = createUserDbObjectMock();
+        DBCursor usersCursor = createCursorMock(userDbObjectMock);
         when(usersCollection.find(any(BasicDBObject.class))).thenReturn(usersCursor);
-
         when(usersCursor.hasNext()).thenReturn(true);
-
+        when(usersCollection.findOne(any(BasicDBObject.class))).thenReturn(userDbObjectMock);
         return usersCollection;
+    }
+
+    public static DBObject createUserDbObjectMock() {
+        DBObject userDbObject = mock(DBObject.class);
+        when(userDbObject.get("firstName")).thenReturn("Bill");
+        when(userDbObject.get("lastName")).thenReturn("Blake");
+        return userDbObject;
+    }
 
 
+    public static DBObject createUserDbObjectListMock() {
+        BasicDBList users = mock(BasicDBList.class);
+
+        Iterator<Object> mockIterator = mock(Iterator.class);
+        when(mockIterator.hasNext()).thenReturn(true).thenReturn(false);
+        when(mockIterator.next()).thenReturn(ObjectId.get().toString());
+        when(users.iterator()).thenReturn(mockIterator);
+        return users;
     }
 }

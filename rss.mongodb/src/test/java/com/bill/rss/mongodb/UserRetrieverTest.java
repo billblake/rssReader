@@ -35,4 +35,18 @@ public class UserRetrieverTest {
         userRetriever.createNewUser(user);
         verify(usersCollection, times(1)).insert(any(BasicDBObject.class), any(WriteConcern.class));
     }
+
+
+    @Test
+    public void validateUser() {
+        DB db = MockUtils.createDbMock();
+        DBCollection usersCollection = MockUtils.createUsersCollectionMock(db);
+
+        User user = new User();
+        user.setUserName("billblake");
+        user.setPassword("password");
+        UserRetriever userRetriever = new UserRetriever();
+        userRetriever.validateUser(user);
+
+    }
 }
