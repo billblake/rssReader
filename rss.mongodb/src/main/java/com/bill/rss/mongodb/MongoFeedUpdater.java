@@ -1,15 +1,5 @@
 package com.bill.rss.mongodb;
 
-import static com.bill.rss.mongodb.FeedConstants.CATEGORY_ID;
-import static com.bill.rss.mongodb.FeedConstants.FEED_ID;
-import static com.bill.rss.mongodb.FeedConstants.FEED_ITEMS;
-import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_DESCRIPTION;
-import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_LINK;
-import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_PUB_DATE;
-import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_SOURCE;
-import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_TITLE;
-import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
-
 import java.util.List;
 
 import org.bson.types.ObjectId;
@@ -25,6 +15,16 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
+
+import static com.bill.rss.mongodb.FeedConstants.CATEGORY_ID;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ID;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEMS;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_DESCRIPTION;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_LINK;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_PUB_DATE;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_SOURCE;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_TITLE;
+import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
 
 public class MongoFeedUpdater implements FeedUpdater {
 
