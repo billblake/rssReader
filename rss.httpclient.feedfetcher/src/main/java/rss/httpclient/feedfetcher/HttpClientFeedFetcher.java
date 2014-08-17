@@ -15,17 +15,17 @@ import rss.feedfetcher.FeedFetcher;
 import com.bill.rss.domain.FeedItem;
 
 public class HttpClientFeedFetcher implements FeedFetcher {
-	
+
 	private static final int OK_RESPONSE_TYPE = 200;
-	private String ACEEPT_HEADER_NAME = "accept";
-	private String REQUEST_TYPE_JSON = "application/json";
-	
-	private RssFeedParser rssFeedParser = new RssFeedParser();
+	private final String ACEEPT_HEADER_NAME = "accept";
+	private final String REQUEST_TYPE_JSON = "application/json";
+
+	private final RssFeedParser rssFeedParser = new RssFeedParser();
+	private DefaultHttpClient httpClient = new DefaultHttpClient();
 
 	public List<FeedItem> fetcherFeed(String feedUrl) {
 		List<FeedItem> feedItems = new ArrayList<FeedItem>();
 		try {
-			DefaultHttpClient httpClient = new DefaultHttpClient();
 			HttpGet request = new HttpGet(feedUrl);
 			request.addHeader(ACEEPT_HEADER_NAME, REQUEST_TYPE_JSON);
 
@@ -45,6 +45,11 @@ public class HttpClientFeedFetcher implements FeedFetcher {
 			e.printStackTrace();
 		}
 		return feedItems;
+	}
+
+
+	public void setHttpClient(DefaultHttpClient httpClient) {
+	    this.httpClient = httpClient;
 	}
 
 }

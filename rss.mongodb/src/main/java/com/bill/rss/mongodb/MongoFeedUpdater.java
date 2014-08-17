@@ -28,10 +28,11 @@ import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
 
 public class MongoFeedUpdater implements FeedUpdater {
 
-	private final FeedFetcher feedFetcher = new HttpClientFeedFetcher();
-	private final FeedProvider feedRetriever = new FeedRetriever();
+	private FeedFetcher feedFetcher = new HttpClientFeedFetcher();
 
-	public void updateWithLatestFeeds(String username) {
+	private FeedProvider feedRetriever = new FeedRetriever();
+
+    public void updateWithLatestFeeds(String username) {
 		List<Feed> feeds = feedRetriever.retrieveFeeds(username);
 		for (Feed feed : feeds) {
 			List<FeedItem> fetchedFeeds = feedFetcher.fetcherFeed(feed.getUrl());
@@ -47,7 +48,7 @@ public class MongoFeedUpdater implements FeedUpdater {
 	    	BasicDBObject query = new BasicDBObject();
 	    	query.append(FEED_ITEM_SOURCE, feed.getName());
 	    	query.append(FEED_ITEM_LINK, fetchedFeed.getLink());
-            query.append(USER_NAME, username);
+	    	query.append(USER_NAME, username);
 	    	DBCursor queryResults = feedItemsCollection.find(query);
 	    	if (!queryResults.hasNext()) {
 		    	BasicDBObject feedItemDocument = new BasicDBObject();
@@ -64,4 +65,12 @@ public class MongoFeedUpdater implements FeedUpdater {
 	    	}
 	    }
 	}
+
+	public void setFeedFetcher(FeedFetcher feedFetcher) {
+	    this.feedFetcher = feedFetcher;
+	}
+
+	public void setFeedRetriever(FeedProvider feedRetriever) {
+        this.feedRetriever = feedRetriever;
+    }
 }

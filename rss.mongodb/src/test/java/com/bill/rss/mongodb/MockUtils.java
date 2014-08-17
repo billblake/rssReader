@@ -110,4 +110,20 @@ public class MockUtils {
         MongoDBConnection.setDbConnection(db);
         return db;
     }
+
+
+    public static DBCollection createUsersCollectionMock(DB db) {
+
+        DBCollection usersCollection = mock(DBCollection.class);
+        when(db.getCollection("user")).thenReturn(usersCollection );
+
+        DBCursor usersCursor = createCursorMock(createCategoryDbObjectMock());
+        when(usersCollection.find(any(BasicDBObject.class))).thenReturn(usersCursor);
+
+        when(usersCursor.hasNext()).thenReturn(true);
+
+        return usersCollection;
+
+
+    }
 }
