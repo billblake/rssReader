@@ -18,6 +18,14 @@
     <module>rss.httpclient.feedfetcher</module>
   </modules>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.agileware</groupId>
+      <artifactId>smartunit</artifactId>
+      <version>0.8.0</version>
+    </dependency>
+  </dependencies>
+
   <build>
         <plugins>
             <plugin>
