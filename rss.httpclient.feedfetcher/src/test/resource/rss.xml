@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet title="XSL_formatting" type="text/xsl" href="/shared/bsp/xsl/rss/nolsol.xsl"?>
+
+<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">  
+  <channel> 
+    <title>BBC Sport - Sport</title>  
+    <link>http://www.bbc.co.uk/sport/0/</link>  
+    <description>The latest stories from the Sport section of the BBC Sport web site.</description>  
+    <language>en-gb</language>  
+    <lastBuildDate>Mon, 18 Aug 2014 22:13:40 GMT</lastBuildDate>  
+    <copyright>Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/2/hi/help/rss/4498287.stm for terms and conditions of reuse.</copyright>  
+    <image> 
+      <url>http://news.bbc.co.uk/sol/shared/img/sport_120x60.gif</url>  
+      <title>BBC Sport - Sport</title>  
+      <link>http://www.bbc.co.uk/sport/0/</link>  
+      <width>120</width>  
+      <height>60</height> 
+    </image>  
+    <ttl>15</ttl>  
+    <atom:link href="http://feeds.bbci.co.uk/sport/0/rss.xml" rel="self" type="application/rss+xml"/>  
+    <item> 
+      <title>Burnley 1-3 Chelsea</title>  
+      <description>Diego Costa scores on his Chelsea debut as the Premier League title favourites beat newly-promoted Burnley 3-1 at Turf Moor.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28735901</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28735901</guid>  
+      <pubDate>Mon, 18 Aug 2014 21:33:19 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77023000/jpg/_77023246_diego_costa.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77023000/jpg/_77023247_diego_costa.jpg"/> 
+    </item>  
+    <item> 
+      <title>England call up Hales for ODI series</title>  
+      <description></description>  
+      <link>http://www.bbc.co.uk/sport/0/cricket/28838338</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/cricket/28838338</guid>  
+      <pubDate>Mon, 18 Aug 2014 17:31:51 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77014000/jpg/_77014448_alex_hales_getty2.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77014000/jpg/_77014449_alex_hales_getty2.jpg"/> 
+    </item>  
+    <item> 
+      <title>Verstappen, 16, handed Formula 1 drive</title>  
+      <description></description>  
+      <link>http://www.bbc.co.uk/sport/0/formula1/28844722</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/formula1/28844722</guid>  
+      <pubDate>Mon, 18 Aug 2014 20:58:05 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77023000/jpg/_77023231_max_verstappen_getty.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77023000/jpg/_77023232_max_verstappen_getty.jpg"/> 
+    </item>  
+    <item> 
+      <title>BBC's James Alexander Gordon dies</title>  
+      <description>James Alexander Gordon, one of the most recognisable voices in British broadcasting, dies at the age of 78.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28844131</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28844131</guid>  
+      <pubDate>Mon, 18 Aug 2014 21:53:04 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77022000/jpg/_77022469_jag1002.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77022000/jpg/_77022470_jag1002.jpg"/> 
+    </item>  
+    <item> 
+      <title>Nadal pulls out of US Open with injury</title>  
+      <description></description>  
+      <link>http://www.bbc.co.uk/sport/0/tennis/28839815</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/tennis/28839815</guid>  
+      <pubDate>Mon, 18 Aug 2014 13:54:21 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77014000/jpg/_77014398_rafaelnadaltwo.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77014000/jpg/_77014399_rafaelnadaltwo.jpg"/> 
+    </item>  
+    <item> 
+      <title>'Back to work' for World Cup winners</title>  
+      <description></description>  
+      <link>http://www.bbc.co.uk/sport/0/rugby-union/28835311</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/rugby-union/28835311</guid>  
+      <pubDate>Mon, 18 Aug 2014 12:13:51 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77018000/jpg/_77018964_wc.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77018000/jpg/_77018965_wc.jpg"/> 
+    </item>  
+    <item> 
+      <title>Palace fined after Cardiff line-up claim</title>  
+      <description>Crystal Palace have been fined by the Premier League for their involvement in last season's so-called 'spygate' incident with Cardiff City.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28839608</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28839608</guid>  
+      <pubDate>Mon, 18 Aug 2014 14:40:08 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77020000/jpg/_77020240_tony_pulis_ole_gunnar_solskjaer.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77020000/jpg/_77020241_tony_pulis_ole_gunnar_solskjaer.jpg"/> 
+    </item>  
+    <item> 
+      <title>Lelliott and Willmott win bronzes</title>  
+      <description>Britain's Jay Lelliott and Aimee Willmott win bronze medals on day one of the European Swimming Championships in Berlin.</description>  
+      <link>http://www.bbc.co.uk/sport/0/swimming/28840965</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/swimming/28840965</guid>  
+      <pubDate>Mon, 18 Aug 2014 19:07:12 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77021000/jpg/_77021495_hi023324439.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77021000/jpg/_77021496_hi023324439.jpg"/> 
+    </item>  
+    <item> 
+      <title>Rangers 8-1 Clyde</title>  
+      <description>Kris Boyd scores a hat-trick as Rangers cruise past League Two Clyde to reach the Petrofac Training Cup third round.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28735894</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28735894</guid>  
+      <pubDate>Mon, 18 Aug 2014 20:30:20 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77024000/jpg/_77024432_boyd_hattrick_sns.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77024000/jpg/_77024543_boyd_hattrick_sns.jpg"/> 
+    </item>  
+    <item> 
+      <title>Weir out of European Championships</title>  
+      <description>British wheelchair racer David Weir pulls out of this week's IPC Athletics European Championships with tendonitis in an arm.</description>  
+      <link>http://www.bbc.co.uk/sport/0/disability-sport/28840171</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/disability-sport/28840171</guid>  
+      <pubDate>Mon, 18 Aug 2014 14:35:56 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77015000/jpg/_77015458_174709776.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77015000/jpg/_77015459_174709776.jpg"/> 
+    </item>  
+    <item> 
+      <title>We want to fight with best - Wenger</title>  
+      <description>Arsenal boss Arsene Wenger says that the prestige of the Champions League is more important than its financial riches.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28845256</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28845256</guid>  
+      <pubDate>Mon, 18 Aug 2014 21:32:36 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77024000/jpg/_77024210_453074712.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77024000/jpg/_77024211_453074712.jpg"/> 
+    </item>  
+    <item> 
+      <title>Brook could face Mayweather - Hearn</title>  
+      <description>New IBF welterweight champion Kell Brook could fight Floyd Mayweather next year, according to promoter Eddie Hearn</description>  
+      <link>http://www.bbc.co.uk/sport/0/boxing/28839275</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/boxing/28839275</guid>  
+      <pubDate>Mon, 18 Aug 2014 16:18:29 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77019000/jpg/_77019125_brook_getty.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77019000/jpg/_77019126_brook_getty.jpg"/> 
+    </item>  
+    <item> 
+      <title>Legia lose bid to overturn Uefa ruling</title>  
+      <description>The Court of Arbitration for Sport rejects Legia Warsaw's bid to be provisionally reinstated in the Champions League.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28839720</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28839720</guid>  
+      <pubDate>Mon, 18 Aug 2014 15:33:30 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77018000/jpg/_77018862_zyro-johansen.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77018000/jpg/_77018863_zyro-johansen.jpg"/> 
+    </item>  
+    <item> 
+      <title>Tiernan-Locke alcohol excuse rejected</title>  
+      <description>Britain's Jonathan Tiernan-Locke has a two-year doping ban upheld after his "binge drinking" claims are rejected.</description>  
+      <link>http://www.bbc.co.uk/sport/0/cycling/28837430</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/cycling/28837430</guid>  
+      <pubDate>Mon, 18 Aug 2014 13:46:58 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77013000/jpg/_77013195_167752156.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77013000/jpg/_77013196_167752156.jpg"/> 
+    </item>  
+    <item> 
+      <title>Lancs beat Durham in four-day thriller</title>  
+      <description>Lancashire hold their nerve to beat Durham by one wicket with just two balls left in a thrilling finish at Old Trafford.</description>  
+      <link>http://www.bbc.co.uk/sport/0/cricket/28830595</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/cricket/28830595</guid>  
+      <pubDate>Mon, 18 Aug 2014 18:08:09 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77022000/jpg/_77022209_452131086.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77022000/jpg/_77022210_452131086.jpg"/> 
+    </item>  
+    <item> 
+      <title>Australia fitness a worry - O'Brien</title>  
+      <description>Aidan O'Brien raises concerns over the fitness of double Derby winner Australia before the Juddmonte International at York.</description>  
+      <link>http://www.bbc.co.uk/sport/0/horse-racing/28840571</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/horse-racing/28840571</guid>  
+      <pubDate>Mon, 18 Aug 2014 16:48:30 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77020000/jpg/_77020439_australiatwo.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77020000/jpg/_77020440_australiatwo.jpg"/> 
+    </item>  
+    <item> 
+      <title>Yorkshire beat Sussex to stay top</title>  
+      <description>Yorkshire beat Sussex by nine wickets at Scarborough to stay top of the Championship table despite 113 by Luke Wright.</description>  
+      <link>http://www.bbc.co.uk/sport/0/cricket/28829567</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/cricket/28829567</guid>  
+      <pubDate>Mon, 18 Aug 2014 16:09:30 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77019000/jpg/_77019187_bresnan2_getty.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77019000/jpg/_77019188_bresnan2_getty.jpg"/> 
+    </item>  
+    <item> 
+      <title>Olsson banned for referee incident</title>  
+      <description>Norwich City defender Martin Olsson is banned for a further three games for putting his hand on referee Simon Cooper.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28843373</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28843373</guid>  
+      <pubDate>Mon, 18 Aug 2014 16:35:43 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77021000/jpg/_77021334_453440770.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77021000/jpg/_77021335_453440770.jpg"/> 
+    </item>  
+    <item> 
+      <title>Wales set for Ireland RWC warm-ups</title>  
+      <description>Wales and Ireland are set to meet in warm-up matches in Cardiff and Dublin next year before the 2015 World Cup in England.</description>  
+      <link>http://www.bbc.co.uk/sport/0/rugby-union/28839790</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/rugby-union/28839790</guid>  
+      <pubDate>Mon, 18 Aug 2014 14:13:26 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77015000/jpg/_77015110_467838135.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77015000/jpg/_77015111_467838135.jpg"/> 
+    </item>  
+    <item> 
+      <title>Anderson promises bowling aggression</title>  
+      <description>James Anderson says he will not curb his aggression as he closes in on Sir Ian Botham's Test wicket record for England.</description>  
+      <link>http://www.bbc.co.uk/sport/0/cricket/28838137</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/cricket/28838137</guid>  
+      <pubDate>Mon, 18 Aug 2014 12:47:33 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77012000/jpg/_77012549_james_anderson_getty5.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77012000/jpg/_77012550_james_anderson_getty5.jpg"/> 
+    </item>  
+    <item> 
+      <title>Froome leads Team Sky in Vuelta</title>  
+      <description>Britain's Chris Froome is back from injury to lead Team Sky in the Vuelta a Espana as Mark Cavendish is omitted.</description>  
+      <link>http://www.bbc.co.uk/sport/0/cycling/28833047</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/cycling/28833047</guid>  
+      <pubDate>Mon, 18 Aug 2014 18:21:13 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77008000/jpg/_77008216_451805720.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77008000/jpg/_77008217_451805720.jpg"/> 
+    </item>  
+    <item> 
+      <title>Dijkstra wins Youth Olympics gold</title>  
+      <description>Triathlete Ben Dijkstra takes Great Britain's first gold medal at the Youth Olympics despite New Zealand appeal.</description>  
+      <link>http://www.bbc.co.uk/sport/0/triathlon/28833175</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/triathlon/28833175</guid>  
+      <pubDate>Mon, 18 Aug 2014 15:35:24 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77006000/jpg/_77006541_453764104.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77006000/jpg/_77006542_453764104.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Mourinho praises 'fantastic' Chelsea</title>  
+      <description>Manager Jose Mourinho says Chelsea have "fantastic mental stability" after recovering to beat newly-promoted Burnley 3-1.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28844601</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28844601</guid>  
+      <pubDate>Mon, 18 Aug 2014 21:48:48 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77024000/jpg/_77024620_jose_mourinho.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77024000/jpg/_77024621_jose_mourinho.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Suarez will change - Barca president</title>  
+      <description>Barcelona president Josep Maria Bartomeu says the club will help new signing Luis Suarez who "will change the way he acts".</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28844598</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28844598</guid>  
+      <pubDate>Mon, 18 Aug 2014 19:15:40 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77022000/jpg/_77022774_453727682.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77022000/jpg/_77022826_453727682.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: What were the best Euro moments?</title>  
+      <description>BBC Sport's athletics pundits share their favourite moments from the European Athletics Championships in Zurich.</description>  
+      <link>http://www.bbc.co.uk/sport/0/athletics/28830742</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/athletics/28830742</guid>  
+      <pubDate>Mon, 18 Aug 2014 05:31:46 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77000000/jpg/_77000187_mmathpunditsbestmoments.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77000000/jpg/_77000188_mmathpunditsbestmoments.jpg"/> 
+    </item>  
+    <item> 
+      <title>AUDIO: Robshaw hails Women's World Cup win</title>  
+      <description>Chris Robshaw believes England's triumph at the Women's Rugby World Cup will inspire a generation of women to play the game.</description>  
+      <link>http://www.bbc.co.uk/sport/0/rugby-union/28838870</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/rugby-union/28838870</guid>  
+      <pubDate>Mon, 18 Aug 2014 16:42:57 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77020000/jpg/_77020463_450360256.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77020000/jpg/_77020464_450360256.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Cook salutes 'almost perfect' England</title>  
+      <description>England captain Alastair Cook says his side have played "almost the perfect games" in the last two Tests after completing a 3-1 series victory over India.</description>  
+      <link>http://www.bbc.co.uk/sport/0/cricket/28827794</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/cricket/28827794</guid>  
+      <pubDate>Sun, 17 Aug 2014 19:23:31 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77000000/jpg/_77000408_alastair_cook.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77000000/jpg/_77000409_alastair_cook.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: 'Strong' defence pleases Pellegrini</title>  
+      <description>Manchester City manager Manuel Pellegrini says his team's strength in defence was the best aspect of their 2-0 win away at Newcastle to open their Premier League title defence.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28827685</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28827685</guid>  
+      <pubDate>Sun, 17 Aug 2014 17:43:53 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76998000/jpg/_76998504_gettypellegrinisideline.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76998000/jpg/_76998505_gettypellegrinisideline.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Farah wins 5000m &amp; record fifth gold</title>  
+      <description>Mo Farah wins gold in the 5000m at the European Athletics Championships in Zurich, making him the most successful individual athlete in the history of the competition.</description>  
+      <link>http://www.bbc.co.uk/sport/0/athletics/28828217</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/athletics/28828217</guid>  
+      <pubDate>Sun, 17 Aug 2014 15:08:28 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76996000/jpg/_76996937_mmathfarahwins5000m.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76996000/jpg/_76996938_mmathfarahwins5000m.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Rutherford imperious in long jump gold</title>  
+      <description>Olympic long jump champion Greg Rutherford adds another title to his collection after comfortably winning gold at the European Athletics Championships in Zurich.</description>  
+      <link>http://www.bbc.co.uk/sport/0/athletics/28828219</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/athletics/28828219</guid>  
+      <pubDate>Sun, 17 Aug 2014 16:07:59 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76998000/jpg/_76998017_rutherford.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76998000/jpg/_76998018_rutherford.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Is Cooly the best mascot ever?</title>  
+      <description>Meet Cooly, the mascot at the European Athletics Championships who has been delighting the crowds with his antics, including pole vaulting and hurdling.</description>  
+      <link>http://www.bbc.co.uk/sport/0/athletics/28820918</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/athletics/28820918</guid>  
+      <pubDate>Sun, 17 Aug 2014 05:19:40 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76990000/jpg/_76990497_cooly3.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76990000/jpg/_76990498_cooly3.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Burnley will learn from defeat - Dyche</title>  
+      <description>Manager Sean Dyche believes his Burnley side will learn from their 3-1 Premier League defeat to Chelsea at Turf Moor.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28844600</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28844600</guid>  
+      <pubDate>Mon, 18 Aug 2014 21:58:59 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77024000/png/_77024315_mmftbplburchedyche.png"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77024000/png/_77024316_mmftbplburchedyche.png"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: The wisdom of James Alexander Gordon</title>  
+      <description>James Alexander Gordon reveals what it is like being the distinct voice of BBC Radio 5 live's classified football results at the start of Sports Report.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/23431480</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/23431480</guid>  
+      <pubDate>Wed, 24 Jul 2013 12:57:01 GMT</pubDate>  
+      <media:thumbnail width="66" height="49" url="http://news.bbcimg.co.uk/media/images/68919000/png/_68919713_jag.png"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/68919000/png/_68919715_jag.png"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Biggest crashes of the season so far</title>  
+      <description>BBC Sport takes a look back at some of the biggest and most spectacular crashes of the 2014 Formula 1 season so far.</description>  
+      <link>http://www.bbc.co.uk/sport/0/formula1/28805305</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/formula1/28805305</guid>  
+      <pubDate>Sun, 17 Aug 2014 18:09:13 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76963000/jpg/_76963557_483064913.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76963000/jpg/_76963558_483064913.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: GB win first gold in photo finish</title>  
+      <description>Triathlete Ben Dijkstra wins GB's first gold medal at the Youth Olympics in Nanjing, China, after beating Daniel Hoy of New Zealand in a photo finish.</description>  
+      <link>http://www.bbc.co.uk/sport/0/olympics/28838525</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/olympics/28838525</guid>  
+      <pubDate>Mon, 18 Aug 2014 17:18:35 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77021000/png/_77021688_dijkstra3_deint.png"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77021000/png/_77021689_dijkstra3_deint.png"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Warren's 'outside' Ryder Cup chance</title>  
+      <description>BBC Scotland's Kenny Crawford speaks to Marc Warren, who hopes to secure a wildcard for the Ryder Cup at Gleneagles.</description>  
+      <link>http://www.bbc.co.uk/sport/0/scotland/28844225</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/scotland/28844225</guid>  
+      <pubDate>Mon, 18 Aug 2014 18:07:47 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77022000/jpg/_77022571_453741108.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77022000/jpg/_77022572_453741108.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: England women on 'dream' World Cup win</title>  
+      <description>England players react to winning the Women's Rugby World Cup following their 21-9 victory over Canada in the final in Paris.</description>  
+      <link>http://www.bbc.co.uk/sport/0/rugby-union/28830743</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/rugby-union/28830743</guid>  
+      <pubDate>Sun, 17 Aug 2014 22:51:24 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77000000/jpg/_77000881_453746502.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77000000/jpg/_77000882_453746502.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Boos and falls in controversial 1500m</title>  
+      <description>Mahiedine Mekhissi-Benabbad of France is booed by the Zurich crowd as he celebrates in the home straight in winning the 1500m at the European Athletics Championships.</description>  
+      <link>http://www.bbc.co.uk/sport/0/athletics/28827790</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/athletics/28827790</guid>  
+      <pubDate>Sun, 17 Aug 2014 13:39:43 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76995000/jpg/_76995648_453731006.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76995000/jpg/_76995761_453731006.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Jackson's showdown with Cooly the cow</title>  
+      <description>BBC pundit and former hurdler Colin Jackson takes on the European Athletics Championships' mascot Cooly the Cow in Zurich.</description>  
+      <link>http://www.bbc.co.uk/sport/0/athletics/28825938</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/athletics/28825938</guid>  
+      <pubDate>Sun, 17 Aug 2014 10:23:52 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76993000/jpg/_76993194_jacksoncoolypic3.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76993000/jpg/_76993195_jacksoncoolypic3.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Highlights - Celtic 6-1 Dundee Utd</title>  
+      <description>Celtic hit six in their first home Scottish Premiership match of the season against Dundee United (UK Users only).</description>  
+      <link>http://www.bbc.co.uk/sport/0/scotland/28826220</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/scotland/28826220</guid>  
+      <pubDate>Sun, 17 Aug 2014 17:00:41 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76993000/jpg/_76993352_berget.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76993000/jpg/_76993353_berget.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: MOTD3: Can full-backs still defend?</title>  
+      <description>Mark Chapman is joined by Danny Murphy and Philip Neville to discuss three key talking points from the opening weekend.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28831210</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28831210</guid>  
+      <pubDate>Mon, 18 Aug 2014 05:25:13 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77002000/jpg/_77002189_mmmotd3170814.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77002000/jpg/_77002190_mmmotd3170814.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Bolt on Man Utd's 'defensive problems'</title>  
+      <description>Manchester United fan Usain Bolt feels his side had "defensive problems" in what he describes as "bad start to the season".</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28832880</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28832880</guid>  
+      <pubDate>Mon, 18 Aug 2014 11:57:55 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77010000/png/_77010495_mmbolt188.png"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77010000/png/_77010496_mmbolt188.png"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: 'Man Utd need to spend £200m'</title>  
+      <description>BBC Sport's Match of the Day experts give their thoughts on Manchester United after their 2-1 defeat by Swansea.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28838837</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28838837</guid>  
+      <pubDate>Mon, 18 Aug 2014 12:54:42 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77012000/jpg/_77012688_philnevillemotd2.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77012000/jpg/_77012689_philnevillemotd2.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Ramsey reveals rugby union dream</title>  
+      <description>Wales and Arsenal midfielder Aaron Ramsey lifts the lid on some of his favourite things when he talks to BBC Sport Wales TV.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28818367</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28818367</guid>  
+      <pubDate>Mon, 18 Aug 2014 06:32:47 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76994000/jpg/_76994085_aaronramseyq%2Ba.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76994000/jpg/_76994086_aaronramseyq%2Ba.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Hardaker scores stunning solo try</title>  
+      <description>Zak Hardaker's excellent individual run gives Leeds a 16-point half-time lead over relegated London Broncos</description>  
+      <link>http://www.bbc.co.uk/sport/0/rugby-league/28832883</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/rugby-league/28832883</guid>  
+      <pubDate>Mon, 18 Aug 2014 15:35:11 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77019000/jpg/_77019058_77017331.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77019000/jpg/_77019059_77017331.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Highlights - Hearts 2-1 Hibernian</title>  
+      <description>Hearts get the better of city rivals Hibernian in the first Edinburgh derby of the season (UK users only).</description>  
+      <link>http://www.bbc.co.uk/sport/0/scotland/28826225</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/scotland/28826225</guid>  
+      <pubDate>Sun, 17 Aug 2014 21:27:31 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76994000/jpg/_76994950_craig-king.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76994000/jpg/_76994951_craig-king.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Liverpool had desire 'in abundance'</title>  
+      <description>Liverpool manager Brendan Rodgers praises his side's will to win after they overcame Southampton 2-1, and believes the Reds will improve as the season goes on.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28827680</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28827680</guid>  
+      <pubDate>Sun, 17 Aug 2014 15:19:04 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76996000/jpg/_76996969_mmftbliverpoolrodgersintv1708.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76996000/jpg/_76996970_mmftbliverpoolrodgersintv1708.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Defeat is rough justice - Pardew</title>  
+      <description>Newcastle United manager Alan Pardew believes his side's 2-0 defeat by Manchester City is "rough justice" for the club.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28826489</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28826489</guid>  
+      <pubDate>Sun, 17 Aug 2014 17:56:27 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76999000/jpg/_76999878_alanpardew.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76999000/jpg/_76999879_alanpardew.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Pulis saga needs explaining - Millen</title>  
+      <description>Crystal Palace caretaker manager Keith Millen says the players "need an explanation" over Tony Pulis's departure from the club, after they narrowly lose 2-1 against Arsenal on the opening day of the season.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28820352</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28820352</guid>  
+      <pubDate>Sat, 16 Aug 2014 19:29:59 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76988000/jpg/_76988131_millen.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76989000/jpg/_76989636_millen.jpg"/> 
+    </item>  
+    <item> 
+      <title>'Man Utd miles off Champions League'</title>  
+      <description>Wins for Manchester City, Liverpool and Arsenal and defeat for Manchester United - BBC's pundits on the first weekend.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28830927</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28830927</guid>  
+      <pubDate>Sun, 17 Aug 2014 23:31:36 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77000000/jpg/_77000707_77000502.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77000000/jpg/_77000708_77000502.jpg"/> 
+    </item>  
+    <item> 
+      <title>Resurgent England look a team again</title>  
+      <description>England captain Alastair Cook must be very satisfied with this summer’s extraordinary turnaround, says Jonathan Agnew.</description>  
+      <link>http://www.bbc.co.uk/sport/0/cricket/28830007</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/cricket/28830007</guid>  
+      <pubDate>Sun, 17 Aug 2014 22:33:27 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77001000/jpg/_77001200_alastair_cook_getty3.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77001000/jpg/_77001201_alastair_cook_getty3.jpg"/> 
+    </item>  
+    <item> 
+      <title>Six glorious days for Great Britain</title>  
+      <description>Great Britain made history at the European Championships and their athletes can still improve, writes Tom Fordyce.</description>  
+      <link>http://www.bbc.co.uk/sport/0/athletics/28830130</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/athletics/28830130</guid>  
+      <pubDate>Sun, 17 Aug 2014 20:49:15 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76999000/jpg/_76999723_76999454.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76999000/jpg/_76999725_76999454.jpg"/> 
+    </item>  
+    <item> 
+      <title>Liverpool show there is life without Suarez</title>  
+      <description>Tougher opponents await, but there were signs of a more ruthless Liverpool against Southampton in the post-Luis Suarez era.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28829846</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28829846</guid>  
+      <pubDate>Sun, 17 Aug 2014 21:58:54 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76999000/jpg/_76999048_76998898.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76999000/jpg/_76999049_76998898.jpg"/> 
+    </item>  
+    <item> 
+      <title>Tedium and thunderclaps at Tynecastle</title>  
+      <description>The first Edinburgh league derby outside the top flight was a mix of the sublime and the ridiculous, argues Tom English.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28829381</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28829381</guid>  
+      <pubDate>Sun, 17 Aug 2014 16:47:27 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76998000/jpg/_76998590_10166722.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76998000/jpg/_76998591_10166722.jpg"/> 
+    </item>  
+    <item> 
+      <title>Garth Crooks's team of the week</title>  
+      <description>Which goalscorer's uncle texted Garth Crooks during the game? Find out in his first team of the week of 2014-15.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28828170</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28828170</guid>  
+      <pubDate>Sun, 17 Aug 2014 20:59:36 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77003000/jpg/_77003391_77003384.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77003000/jpg/_77003392_77003384.jpg"/> 
+    </item>  
+    <item> 
+      <title>What's on BBC Sport this week</title>  
+      <description>Your guide to sporting events on the BBC, including the Belgian GP, Champions League football and the Challenge Cup final.</description>  
+      <link>http://www.bbc.co.uk/sport/0/17151954</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/17151954</guid>  
+      <pubDate>Sun, 17 Aug 2014 22:26:28 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76984000/jpg/_76984927_hamilton.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76984000/jpg/_76984928_hamilton.jpg"/> 
+    </item>  
+    <item> 
+      <title>Jelly babies help win football match</title>  
+      <description>How and why did Lincoln City use jelly babies to beat league leaders Barnet?</description>  
+      <link>http://www.bbc.co.uk/news/uk-england-lincolnshire-28834445#sa-ns_mchannel=rss&amp;ns_source=PublicRSS20-sa</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/news/uk-england-lincolnshire-28834445</guid>  
+      <pubDate>Mon, 18 Aug 2014 12:02:03 GMT</pubDate>  
+      <media:thumbnail width="66" height="49" url="http://news.bbcimg.co.uk/media/images/77007000/jpg/_77007781_tpjellybabies2.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77007000/jpg/_77007782_tpjellybabies2.jpg"/> 
+    </item>  
+    <item> 
+      <title>Transfer latest - August 2014</title>  
+      <description>Track all the latest football signings day by day throughout the close season.</description>  
+      <link>http://www.bbc.co.uk/sport/0/28603044</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/28603044</guid>  
+      <pubDate>Fri, 01 Aug 2014 09:21:04 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76991000/jpg/_76991535_alberto_moreno_getty.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76991000/jpg/_76991536_alberto_moreno_getty.jpg"/> 
+    </item>  
+    <item> 
+      <title>How to follow the new season on the BBC</title>  
+      <description>The BBC will provide extensive coverage of the Premier League across TV, radio and online.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28688855</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28688855</guid>  
+      <pubDate>Sun, 17 Aug 2014 10:06:59 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76838000/jpg/_76838419_624.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76838000/jpg/_76838420_624.jpg"/> 
+    </item>  
+    <item> 
+      <title>Manager ins and outs - August 2014</title>  
+      <description>Track managerial ins and outs in the top five leagues in England and Scottish Premiership.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28731088</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28731088</guid>  
+      <pubDate>Sun, 10 Aug 2014 10:06:53 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76956000/jpg/_76956927_76956878.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76956000/jpg/_76956928_76956878.jpg"/> 
+    </item>  
+    <item> 
+      <title>GB top medal table with 12 golds</title>  
+      <description>Mo Farah, Greg Rutherford and the relay teams help Britain to a record 12 gold medals at the European Championships.</description>  
+      <link>http://www.bbc.co.uk/sport/0/athletics/28827591</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/athletics/28827591</guid>  
+      <pubDate>Sun, 17 Aug 2014 16:02:46 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76997000/jpg/_76997074_farind.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76997000/jpg/_76997075_farind.jpg"/> 
+    </item>  
+    <item> 
+      <title>Brook wants to set up Khan fight</title>  
+      <description>Kell Brook has targeted a fight against Amir Khan after becoming the IBF welterweight champion by beating Shawn Porter.</description>  
+      <link>http://www.bbc.co.uk/sport/0/boxing/28825532</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/boxing/28825532</guid>  
+      <pubDate>Sun, 17 Aug 2014 11:43:39 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76994000/jpg/_76994200_khan_brook_split.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76994000/jpg/_76994201_khan_brook_split.jpg"/> 
+    </item>  
+    <item> 
+      <title>Hales sees Notts to win at Northants</title>  
+      <description>Alex Hales scores his third Championship century of the season as Nottinghamshire beat Northants by five wickets.</description>  
+      <link>http://www.bbc.co.uk/sport/0/cricket/28830580</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/cricket/28830580</guid>  
+      <pubDate>Mon, 18 Aug 2014 14:25:43 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77015000/jpg/_77015947_495441497.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77015000/jpg/_77015948_495441497.jpg"/> 
+    </item>  
+    <item> 
+      <title>UCI boss 'positive' for women's racing</title>  
+      <description>Ironman champion Chrissie Wellington praises cycling boss Brian Cookson for helping to develop women's racing.</description>  
+      <link>http://www.bbc.co.uk/sport/0/cycling/28786521</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/cycling/28786521</guid>  
+      <pubDate>Thu, 14 Aug 2014 11:52:39 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76939000/jpg/_76939547_452782480.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76941000/jpg/_76941014_452782480.jpg"/> 
+    </item>  
+    <item> 
+      <title>Rickham &amp; Birrell chase sixth title</title>  
+      <description>Alexandra Rickham and Niki Birrell are chasing their sixth consecutive parasailing world title in Canada.</description>  
+      <link>http://www.bbc.co.uk/sport/0/disability-sport/28812035</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/disability-sport/28812035</guid>  
+      <pubDate>Fri, 15 Aug 2014 19:30:24 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76976000/jpg/_76976163_alexandrarickham_getty.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76976000/jpg/_76976164_alexandrarickham_getty.jpg"/> 
+    </item>  
+    <item> 
+      <title>Brandao headbutt breaks Motta's nose</title>  
+      <description>Paris St-Germain's Thiago Motta suffers a broken nose after Bastia striker Brandao headbutts him, his club confirm.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28838326</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28838326</guid>  
+      <pubDate>Mon, 18 Aug 2014 14:06:25 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77010000/jpg/_77010713_76989594.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77010000/jpg/_77010714_76989594.jpg"/> 
+    </item>  
+    <item> 
+      <title>Ferrari boss dismisses exit rumours</title>  
+      <description>Fernando Alonso and Kimi Raikkonen will not leave Ferrari at the end of 2014, according to team president Luca Di Montezemolo.</description>  
+      <link>http://www.bbc.co.uk/sport/0/formula1/28794070</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/formula1/28794070</guid>  
+      <pubDate>Thu, 14 Aug 2014 16:48:21 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76944000/jpg/_76944934_alonso_raikkonen_getty.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76947000/jpg/_76947263_alonso_raikkonen_getty.jpg"/> 
+    </item>  
+    <item> 
+      <title>Warren's 'outside' Ryder Cup chance</title>  
+      <description>Scotland's Marc Warren hopes the door for being a wildcard pick for next month's Ryder Cup at Gleneagles remains ajar.</description>  
+      <link>http://www.bbc.co.uk/sport/0/golf/28841369</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/golf/28841369</guid>  
+      <pubDate>Mon, 18 Aug 2014 18:21:26 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77021000/jpg/_77021853_453741108.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77021000/jpg/_77021854_453741108.jpg"/> 
+    </item>  
+    <item> 
+      <title>Eighth horse positive for morphine</title>  
+      <description>An eighth horse has tested positive for morphine as an investigation continues into possible contaminated feed.</description>  
+      <link>http://www.bbc.co.uk/sport/0/horse-racing/28741780</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/horse-racing/28741780</guid>  
+      <pubDate>Mon, 11 Aug 2014 14:57:00 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76873000/jpg/_76873537_horsesfour.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76873000/jpg/_76873538_horsesfour.jpg"/> 
+    </item>  
+    <item> 
+      <title>Youth Olympics implement Ebola ban</title>  
+      <description>Youth Olympic Games athletes from areas of Africa affected by the Ebola virus will not be allowed to compete in some events.</description>  
+      <link>http://www.bbc.co.uk/sport/0/olympics/28800849</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/olympics/28800849</guid>  
+      <pubDate>Fri, 15 Aug 2014 08:36:40 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76958000/jpg/_76958593_76957622.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76958000/jpg/_76958594_76957622.jpg"/> 
+    </item>  
+    <item> 
+      <title>London Broncos 40-36 Leeds Rhinos</title>  
+      <description>London Broncos win their first Super League match of the season at the 24th attempt, as Leeds suffer a shock defeat.</description>  
+      <link>http://www.bbc.co.uk/sport/0/rugby-league/28764616</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/rugby-league/28764616</guid>  
+      <pubDate>Sun, 17 Aug 2014 16:12:22 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76998000/jpg/_76998210_161855805.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76998000/jpg/_76998211_161855805.jpg"/> 
+    </item>  
+    <item> 
+      <title>England World Cup win 'surreal'</title>  
+      <description>Head coach Gary Street says it is a "bit like a dream" as England win their first World Cup in 20 years.</description>  
+      <link>http://www.bbc.co.uk/sport/0/rugby-union/28830848</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/rugby-union/28830848</guid>  
+      <pubDate>Mon, 18 Aug 2014 09:16:38 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77002000/jpg/_77002295_77002116.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77002000/jpg/_77002296_77002116.jpg"/> 
+    </item>  
+    <item> 
+      <title>Trump wins Australian Open final</title>  
+      <description>World number six Judd Trump beats home favourite Neil Robertson 9-5 in the final of the Australian Goldfields Open.</description>  
+      <link>http://www.bbc.co.uk/sport/0/snooker/28184475</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/snooker/28184475</guid>  
+      <pubDate>Sun, 06 Jul 2014 13:59:01 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76080000/jpg/_76080661_167310919.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76080000/jpg/_76080662_167310919.jpg"/> 
+    </item>  
+    <item> 
+      <title>Team GB 'spurred on by Glasgow 2014'</title>  
+      <description>Commonwealth champion Jazz Carlin believes Glasgow 2014 success will boost Team GB's confidence at the European Championships.</description>  
+      <link>http://www.bbc.co.uk/sport/0/swimming/28797823</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/swimming/28797823</guid>  
+      <pubDate>Fri, 15 Aug 2014 09:41:01 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76953000/jpg/_76953849_hi023328905.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76953000/jpg/_76953850_hi023328905.jpg"/> 
+    </item>  
+    <item> 
+      <title>Federer wins Cincinnati Masters</title>  
+      <description>World number three Roger Federer beats David Ferrer for a 16th successive time to win a sixth Cincinnati title.</description>  
+      <link>http://www.bbc.co.uk/sport/0/tennis/28830641</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/tennis/28830641</guid>  
+      <pubDate>Mon, 18 Aug 2014 05:49:37 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77001000/jpg/_77001240_roger_federer_cup_epa.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77001000/jpg/_77001241_roger_federer_cup_epa.jpg"/> 
+    </item>  
+    <item> 
+      <title>Double gold winner in two-year ban</title>  
+      <description>Olympic cross-country skiing champion Evi Sachenbacher-Stehle is banned for two years after a failed drugs test at Sochi 2014.</description>  
+      <link>http://www.bbc.co.uk/sport/0/winter-sports/28338337</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/winter-sports/28338337</guid>  
+      <pubDate>Wed, 16 Jul 2014 19:59:00 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/76314000/jpg/_76314584_73144702.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/76314000/jpg/_76314585_73144702.jpg"/> 
+    </item>  
+    <item> 
+      <title>Mourinho selects Courtois over Cech</title>  
+      <description>Chelsea manager Jose Mourinho has confirmed Thibaut Courtois as his new number one goalkeeper.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28844819</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28844819</guid>  
+      <pubDate>Mon, 18 Aug 2014 20:01:43 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77023000/jpg/_77023512_77023283.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77023000/jpg/_77023513_77023283.jpg"/> 
+    </item>  
+    <item> 
+      <title>Celtic chase Rubin's Wakaso on loan</title>  
+      <description>Ghana winger Mubarak Wakaso is wanted by Celtic on loan from Rubin Kazan ahead of a Champions League qualifier.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28837384</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28837384</guid>  
+      <pubDate>Mon, 18 Aug 2014 11:15:07 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77009000/jpg/_77009358_wakaso3.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77009000/jpg/_77009359_wakaso3.jpg"/> 
+    </item>  
+    <item> 
+      <title>Cardiff defender joins St Etienne</title>  
+      <description>Cardiff City's French defender Kevin Theophile-Catherine has joined St Etienne on a season-long loan.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28835337</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28835337</guid>  
+      <pubDate>Mon, 18 Aug 2014 21:33:20 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77006000/jpg/_77006090_459406993.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77006000/jpg/_77006091_459406993.jpg"/> 
+    </item>  
+    <item> 
+      <title>VIDEO: Irish League Show - Programme 2</title>  
+      <description>Joel Taggart and Chris Morgan review the second weekend of Irish Premiership fixtures.</description>  
+      <link>http://www.bbc.co.uk/sport/0/football/28835194</link>  
+      <guid isPermaLink="false">http://www.bbc.co.uk/sport/0/football/28835194</guid>  
+      <pubDate>Mon, 18 Aug 2014 17:46:12 GMT</pubDate>  
+      <media:thumbnail width="66" height="37" url="http://news.bbcimg.co.uk/media/images/77008000/jpg/_77008837_pe_00439925.jpg"/>  
+      <media:thumbnail width="144" height="81" url="http://news.bbcimg.co.uk/media/images/77008000/jpg/_77008838_pe_00439925.jpg"/> 
+    </item> 
+  </channel> 
+</rss>

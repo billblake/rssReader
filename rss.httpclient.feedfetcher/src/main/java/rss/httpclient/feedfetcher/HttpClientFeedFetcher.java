@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
@@ -20,8 +21,9 @@ public class HttpClientFeedFetcher implements FeedFetcher {
 	private final String ACEEPT_HEADER_NAME = "accept";
 	private final String REQUEST_TYPE_JSON = "application/json";
 
-	private final RssFeedParser rssFeedParser = new RssFeedParser();
-	private DefaultHttpClient httpClient = new DefaultHttpClient();
+	private RssFeedParser rssFeedParser = new RssFeedParser();
+
+	private HttpClient httpClient = new DefaultHttpClient();
 
 	public List<FeedItem> fetcherFeed(String feedUrl) {
 		List<FeedItem> feedItems = new ArrayList<FeedItem>();
@@ -48,8 +50,11 @@ public class HttpClientFeedFetcher implements FeedFetcher {
 	}
 
 
-	public void setHttpClient(DefaultHttpClient httpClient) {
+	public void setHttpClient(HttpClient httpClient) {
 	    this.httpClient = httpClient;
 	}
 
+	public void setRssFeedParser(RssFeedParser rssFeedParser) {
+	    this.rssFeedParser = rssFeedParser;
+	}
 }
