@@ -5,7 +5,7 @@ import java.util.List;
 import org.bson.types.ObjectId;
 
 import rss.feedfetcher.FeedFetcher;
-import rss.httpclient.feedfetcher.HttpClientFeedFetcherTest;
+import rss.httpclient.feedfetcher.HttpClientFeedFetcher;
 
 import com.bill.rss.dataProvider.FeedProvider;
 import com.bill.rss.dataProvider.FeedUpdater;
@@ -28,7 +28,7 @@ import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
 
 public class MongoFeedUpdater implements FeedUpdater {
 
-	private FeedFetcher feedFetcher = new HttpClientFeedFetcherTest();
+	private FeedFetcher feedFetcher = new HttpClientFeedFetcher();
 
 	private FeedProvider feedRetriever = new FeedRetriever();
 

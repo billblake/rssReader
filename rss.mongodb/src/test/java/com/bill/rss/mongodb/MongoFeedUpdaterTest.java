@@ -8,7 +8,7 @@ import org.bson.types.ObjectId;
 import org.junit.Test;
 
 import rss.feedfetcher.FeedFetcher;
-import rss.httpclient.feedfetcher.HttpClientFeedFetcherTest;
+import rss.httpclient.feedfetcher.HttpClientFeedFetcher;
 
 import com.bill.rss.dataProvider.FeedProvider;
 import com.bill.rss.domain.Feed;
@@ -47,7 +47,7 @@ public class MongoFeedUpdaterTest {
         List<FeedItem> feedItems = new ArrayList<FeedItem>();
         FeedItem feedItem = new FeedItem();
         feedItems.add(feedItem);
-        FeedFetcher feedFetcher = mock(HttpClientFeedFetcherTest.class);
+        FeedFetcher feedFetcher = mock(HttpClientFeedFetcher.class);
         when(feedFetcher.fetcherFeed(any(String.class))).thenReturn(feedItems);
 
 
