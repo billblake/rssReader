@@ -39,18 +39,49 @@ public class MongoFeedUpdaterTest {
         when(feedItemsCollection.find(any(BasicDBObject.class))).thenReturn(feedItemsQueryResults);
 
         DBCursor feedsCursor = mock(DBCursor.class);
-
         when(feedsCollection.find(any(DBObject.class))).thenReturn(feedsCursor);
 
+        MongoFeedUpdater feedUpdater = new MongoFeedUpdater();
+        feedUpdater.setFeedFetcher(createFeedFetcherMock());
+        feedUpdater.setFeedRetriever(createFeedRetrieverMock());
+
+        feedUpdater.updateWithLatestFeeds("billblake");
+        verify(feedItemsCollection, times(1)).insert(any(DBObject.class));
+    }
 
 
+    @Test
+    public void updateWithLatestFeedsNothingToUpdate() {
+        DB db = MockUtils.createDbMock();
+        DBCollection feedsCollection = MockUtils.createFeedsCollectionMock(db);
+        DBCollection feedItemsCollection = MockUtils.createFeedsItemsCollectionMock(db);
+        DBCursor feedItemsQueryResults = mock(DBCursor.class);
+        when(feedItemsQueryResults.hasNext()).thenReturn(true);
+        when(feedItemsCollection.find(any(BasicDBObject.class))).thenReturn(feedItemsQueryResults);
+
+        DBCursor feedsCursor = mock(DBCursor.class);
+        when(feedsCollection.find(any(DBObject.class))).thenReturn(feedsCursor);
+
+        MongoFeedUpdater feedUpdater = new MongoFeedUpdater();
+        feedUpdater.setFeedFetcher(createFeedFetcherMock());
+        feedUpdater.setFeedRetriever(createFeedRetrieverMock());
+
+        feedUpdater.updateWithLatestFeeds("billblake");
+        verify(feedItemsCollection, times(0)).insert(any(DBObject.class));
+    }
+
+
+    private FeedFetcher createFeedFetcherMock() {
         List<FeedItem> feedItems = new ArrayList<FeedItem>();
         FeedItem feedItem = new FeedItem();
         feedItems.add(feedItem);
         FeedFetcher feedFetcher = mock(HttpClientFeedFetcher.class);
         when(feedFetcher.fetcherFeed(any(String.class))).thenReturn(feedItems);
+        return feedFetcher;
+    }
 
 
+    private FeedProvider createFeedRetrieverMock() {
         List<Feed> feeds = new ArrayList<Feed>();
         Feed feed = new Feed();
         feed.setCategoryId(ObjectId.get().toString());
@@ -58,13 +89,6 @@ public class MongoFeedUpdaterTest {
         feeds.add(feed);
         FeedProvider feedRetriever = mock(FeedProvider.class);
         when(feedRetriever.retrieveFeeds(any(String.class))).thenReturn(feeds);
-
-        MongoFeedUpdater feedUpdater = new MongoFeedUpdater();
-        feedUpdater.setFeedFetcher(feedFetcher);
-        feedUpdater.setFeedRetriever(feedRetriever);
-
-        feedUpdater.updateWithLatestFeeds("billblake");
-
-        verify(feedItemsCollection, times(1)).insert(any(DBObject.class));
+        return feedRetriever;
     }
 }

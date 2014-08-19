@@ -5,9 +5,13 @@ import org.junit.Test;
 import spark.HaltException;
 import spark.Request;
 import spark.Response;
+import spark.Session;
 import static com.bill.rss.server.MockUtils.createRequestMock;
 import static com.bill.rss.server.MockUtils.createResponseMock;
 import static org.junit.Assert.assertEquals;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class BaseRouteTest {
 
@@ -33,18 +37,40 @@ public class BaseRouteTest {
 
         TestRoute baseRoute = new TestRoute("/test");
         baseRoute.verifyUserLoggedIn(request, response);
-
     }
 
 
     @Test(expected = HaltException.class)
-    public void testVerifyUserNotLoggedIn() {
+    public void testVerifyUserLoggedOut() {
         Request request = createRequestMock("logged-out");
         Response response = createResponseMock();
 
         TestRoute baseRoute = new TestRoute("/test");
         baseRoute.verifyUserLoggedIn(request, response);
+    }
 
+
+    @Test(expected = HaltException.class)
+    public void testVerifyUserNotLoggedIn() {
+        Request request = createRequestMock(null);
+        Response response = createResponseMock();
+
+        TestRoute baseRoute = new TestRoute("/test");
+        baseRoute.verifyUserLoggedIn(request, response);
+    }
+
+
+    @Test(expected = HaltException.class)
+    public void testVerifyUserNotLoggedInMissingFromSession() {
+        Request request = createRequestMock("logged-in");
+        Session session = mock(Session.class);
+        when(session.attribute("user")).thenReturn(null);
+        when(request.session()).thenReturn(session);
+
+        Response response = createResponseMock();
+
+        TestRoute baseRoute = new TestRoute("/test");
+        baseRoute.verifyUserLoggedIn(request, response);
     }
 
 
@@ -59,9 +85,9 @@ public class BaseRouteTest {
 
 
     @Test
-    public void testUSername() {
+    public void testUsername() {
         Request request = createRequestMock("logged-in");
-        Response response = createResponseMock();
+        createResponseMock();
 
         TestRoute baseRoute = new TestRoute("/test");
         String username = baseRoute.getUsername(request);

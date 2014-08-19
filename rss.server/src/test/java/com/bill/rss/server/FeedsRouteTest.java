@@ -45,8 +45,7 @@ public class FeedsRouteTest {
 
 
     @Test
-    public void testGetFeedItemsAndRefresh() {
-
+    public void testGetFeedItemsRefresh() {
         Request request = createRequestMock("logged-in");
         Response response = createResponseMock();
         FeedsRoute feedsRoute = new FeedsRoute("/feeds");
@@ -55,8 +54,26 @@ public class FeedsRouteTest {
 
         when(request.params(":categoryId")).thenReturn("1");
         when(request.params(":feedId")).thenReturn("2");
-        when(request.params("refresh")).thenReturn("true");
+        when(request.queryParams("refresh")).thenReturn("false");
 
+
+        String jsonResponse = (String) feedsRoute.handle(request, response);
+        String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"pubDate\":10000000}]";
+        assertEquals(expectedJson , jsonResponse);
+    }
+
+
+    @Test
+    public void testGetFeedItemsAndRefresh() {
+        Request request = createRequestMock("logged-in");
+        Response response = createResponseMock();
+        FeedsRoute feedsRoute = new FeedsRoute("/feeds");
+        feedsRoute.setFeedProvider(createFeedProviderMock());
+        feedsRoute.setFeedUpdater(createFeedUpdaterMock());
+
+        when(request.params(":categoryId")).thenReturn("1");
+        when(request.params(":feedId")).thenReturn("2");
+        when(request.queryParams("refresh")).thenReturn("true");
 
         String jsonResponse = (String) feedsRoute.handle(request, response);
         String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"pubDate\":10000000}]";
