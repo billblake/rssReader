@@ -27,8 +27,9 @@ public class HttpClientFeedFetcherTest {
     @Test
     public void fetcherFeed() throws ClientProtocolException, IOException {
         HttpClientFeedFetcher feedFetcher = new HttpClientFeedFetcher();
-        setupRssFeedParser(feedFetcher);
-        setupHttpClient(feedFetcher);
+
+        feedFetcher.setRssFeedParser(setupRssFeedParser());
+        feedFetcher.setHttpClient(setupHttpClient());
 
         List<FeedItem> fetcherFeeds = feedFetcher.fetcherFeed("http://www.bbc.co.uk/sport");
         assertEquals(1, fetcherFeeds.size());
@@ -36,17 +37,36 @@ public class HttpClientFeedFetcherTest {
     }
 
 
-    private void setupRssFeedParser(HttpClientFeedFetcher feedFetcher) {
+    @Test(expected = RuntimeException.class)
+    public void fetcherFeedErrorResponse() throws ClientProtocolException, IOException {
+        HttpClientFeedFetcher feedFetcher = new HttpClientFeedFetcher();
+        feedFetcher.setRssFeedParser(setupRssFeedParser());
+        HttpClient mockHttpClient = setupHttpClient();
+        HttpResponse response = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+        when(statusLine.getStatusCode()).thenReturn(400);
+        when(response.getStatusLine()).thenReturn(statusLine);
+        when(mockHttpClient.execute(any(HttpUriRequest.class))).thenReturn(response);
+        feedFetcher.setHttpClient(mockHttpClient);
+
+        List<FeedItem> fetcherFeeds = feedFetcher.fetcherFeed("http://www.bbc.co.uk/sport");
+        assertEquals(1, fetcherFeeds.size());
+        assertEquals("myTitle", fetcherFeeds.get(0).getTitle());
+    }
+
+
+    private RssFeedParser setupRssFeedParser() {
         RssFeedParser rssFeedParser = mock(RssFeedParser.class);
         List<FeedItem> feedItems = new ArrayList<FeedItem>();
         FeedItem feedItem = new FeedItem();
         feedItem.setTitle("myTitle");
         feedItems.add(feedItem);
         when(rssFeedParser.parse(any(InputStream.class))).thenReturn(feedItems );
-        feedFetcher.setRssFeedParser(rssFeedParser);
+        return rssFeedParser;
     }
 
-    private void setupHttpClient(HttpClientFeedFetcher feedFetcher) throws IllegalStateException, IOException {
+
+    private HttpClient setupHttpClient() throws IllegalStateException, IOException {
         HttpClient httpClient = mock(HttpClient.class);
         HttpResponse response = mock(HttpResponse.class);
         StatusLine statusLine = mock(StatusLine.class);
@@ -60,6 +80,6 @@ public class HttpClientFeedFetcherTest {
         ClientConnectionManager clientConnectionManager = mock(ClientConnectionManager.class);
         when(httpClient.getConnectionManager()).thenReturn(clientConnectionManager);
         when(httpClient.execute(any(HttpUriRequest.class))).thenReturn(response);
-        feedFetcher.setHttpClient(httpClient);
+        return httpClient;
     }
 }
