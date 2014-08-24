@@ -83,6 +83,7 @@ public class MockUtils {
         feedItem.setSource(source);
         feedItem.setTitle(title);
         feedItem.setUsername(username);
+        feedItem.setFormattedDate("Jul 28");
         return feedItem;
     }
 

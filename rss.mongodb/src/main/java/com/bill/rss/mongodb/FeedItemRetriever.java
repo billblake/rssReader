@@ -1,17 +1,8 @@
 package com.bill.rss.mongodb;
 
-import static com.bill.rss.mongodb.FeedConstants.CATEGORY_ID;
-import static com.bill.rss.mongodb.FeedConstants.FEED_ID;
-import static com.bill.rss.mongodb.FeedConstants.FEED_ITEMS;
-import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_DESCRIPTION;
-import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_ID;
-import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_LINK;
-import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_PUB_DATE;
-import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_SOURCE;
-import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_TITLE;
-import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +15,20 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+
+import static com.bill.rss.mongodb.FeedConstants.CATEGORY_ID;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ID;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEMS;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_DESCRIPTION;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_ID;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_LINK;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_PUB_DATE;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_SOURCE;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_TITLE;
+import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
+import static java.util.Calendar.DATE;
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.YEAR;
 
 public class FeedItemRetriever implements FeedItemProvider {
 
@@ -54,6 +59,7 @@ public class FeedItemRetriever implements FeedItemProvider {
                 feedItem.setUsername(nextFeedItem.get(USER_NAME).toString());
                 Date pubDate = (Date) nextFeedItem.get(FEED_ITEM_PUB_DATE);
                 feedItem.setPubDate(pubDate);
+                feedItem.setFormattedDate(formatDate(pubDate));
                 feedItems.add(feedItem);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -61,6 +67,7 @@ public class FeedItemRetriever implements FeedItemProvider {
         }
         return feedItems;
     }
+
 
     private BasicDBObject buildFeedItemQuery(String categoryId, String feedId, String username) {
         BasicDBObject query = new BasicDBObject();
@@ -72,5 +79,23 @@ public class FeedItemRetriever implements FeedItemProvider {
             query.append(FEED_ID, new ObjectId(feedId));
         }
         return query;
+    }
+
+
+    private String formatDate(Date pubDate) {
+        Calendar nowCalendar = Calendar.getInstance();
+        Calendar pubDateCalender = Calendar.getInstance();
+        pubDateCalender.setTime(pubDate);
+
+        if (nowCalendar.get(DATE) == pubDateCalender.get(DATE) &&
+            nowCalendar.get(MONTH) == pubDateCalender.get(MONTH) &&
+            nowCalendar.get(YEAR) == pubDateCalender.get(YEAR)) {
+
+            SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm a");
+            return timeFormatter.format(pubDate);
+        } else {
+            SimpleDateFormat time = new SimpleDateFormat("MMM dd");
+            return time.format(pubDate);
+        }
     }
 }

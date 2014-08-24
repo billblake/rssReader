@@ -13,6 +13,8 @@ public class FeedItem {
 	private String description;
 	private String link;
 	private Date pubDate;
+	private String formattedDate;
+
 
 	public String getFeedItemId() {
 		return feedItemId;
@@ -85,4 +87,12 @@ public class FeedItem {
 	public void setPubDate(Date pubDate) {
 		this.pubDate = pubDate;
 	}
+
+    public String getFormattedDate() {
+        return formattedDate;
+    }
+
+    public void setFormattedDate(String formattedDate) {
+        this.formattedDate = formattedDate;
+    }
 }

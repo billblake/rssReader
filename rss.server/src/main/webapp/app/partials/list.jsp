@@ -51,12 +51,12 @@
                     <span ng-click="toggleArticle($index)">
                         <span class="feedSource" title="{{feed.source}}">{{feed.source}}</span>
                         <span class="feedTitle">{{ feed.title }}</span>
-                        <span class="feedPubDate">{{feed.pubDate}}</span>
+                        <span class="feedPubDate">{{feed.formattedDate}}</span>
                     </span>
                     <article ng-class="articleClass($index)">
 	                    <!-- contrived reverse example--> 
 	                    <h3>{{feed.title}}</h3>
-	                    <span>{{feed.source}} {{feed.pubDate}}</span>
+	                    <span>{{feed.source}} {{feed.formattedDate}}</span>
 	                    <div id="contents">
 	                        {{ feed.description}} <a href="{{feed.link}}" target="new">Read More</a>
 	                    </div>
