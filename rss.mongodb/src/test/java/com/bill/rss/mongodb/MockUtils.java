@@ -64,6 +64,8 @@ public class MockUtils {
 
         DBCursor feedsItemsCursor = createCursorMock(createFeedsItemDbObjectMock());
         when(feedsItemsCursor.sort(any(DBObject.class))).thenReturn(feedsItemsCursor);
+        when(feedsItemsCursor.limit(any(Integer.class))).thenReturn(feedsItemsCursor);
+        when(feedsItemsCursor.skip(any(Integer.class))).thenReturn(feedsItemsCursor);
         when(feedsItemsCollection.find(any(BasicDBObject.class))).thenReturn(feedsItemsCursor);
 
         return feedsItemsCollection;
