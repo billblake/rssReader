@@ -10,7 +10,7 @@
 			    </span>
 			    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu1">
 				    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="refresh()">Refresh</a></li>
-				    <li role="presentation"><a role="menuitem" tabindex="-1">Manage Feeds</a></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#/manage">Manage Feeds</a></li>
 				    <li role="presentation"><a role="menuitem" tabindex="-1">Settings</a></li>
 				    <li role="presentation" class="divider"></li>
 				    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="logout()">Log out</a></li>
@@ -45,7 +45,8 @@
             </ul>
         </div>
         <div id="main-content" class="span11">
-            <!--Body content--> 
+            <!--Body content-->
+            <div id="spinner"></div>
             <ul id="feed-list">
                 <li class="feed-item" ng-repeat="feed in feeds" ng-class-odd="'odd'" ng-class-even="'even'">
                     <span ng-click="toggleArticle($index)">

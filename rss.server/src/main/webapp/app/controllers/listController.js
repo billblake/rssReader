@@ -1,4 +1,4 @@
-app.controller('ListController', function($scope, feedService, $cookies, $cookieStore, $location, $rootScope, $http) {
+app.controller('ListController', function($scope, feedService, spinnerService, $cookies, $cookieStore, $location, $rootScope, $http) {
 
     var loggedInValue = $cookies.loggedIn;
     if (loggedInValue !== "logged-in" && !$rootScope.loggedIn) {
@@ -6,21 +6,26 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
         return;
     }
 
+    spinnerService.showSpinner();
     $scope.feedCategories = feedService.getCategories();
-    $scope.feeds = feedService.getFeeds();
+    $scope.feeds = feedService.getFeeds(null, null, loadFeedsSuccessful, fail);
     $scope.name = getFullName();
 
     $scope.displayFeedsForCategory = function(categoryId) {
-        $scope.feeds = feedService.getFeeds(categoryId);
+        spinnerService.showSpinner();
+        $scope.feeds = feedService.getFeeds(categoryId, null, loadFeedsSuccessful, fail);
     };
 
     $scope.displayFeedsForAllCategory = function() {
-        $scope.feeds = feedService.getFeeds();
+        spinnerService.showSpinner();
+        $scope.feeds = {};
+        $scope.feeds = feedService.getFeeds(null, null, loadFeedsSuccessful, fail);
     };
 
     $scope.displayFeedsForFeed = function(feedId) {
+        spinnerService.showSpinner();
         var categoryId = undefined;
-        $scope.feeds = feedService.getFeeds(categoryId, feedId);
+        $scope.feeds = feedService.getFeeds(categoryId, feedId, loadFeedsSuccessful, fail);
     };
 
     $scope.refresh = function() {
@@ -46,6 +51,7 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
         });
     };
 
+
     function getFullName() {
         var fullName = $cookies.user;
         if (typeof fullName === "undefined") {
@@ -54,7 +60,17 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
         return fullName.replace(/"/g, '');
     }
 
+
     function showRefreshedFeeds() {
         $scope.feeds = feedService.getFeeds();
     }
+
+
+    function loadFeedsSuccessful(data) {
+        spinnerService.hideSpinner();
+    };
+
+
+    function fail() {
+    };
 });

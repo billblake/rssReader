@@ -5963,6 +5963,7 @@ button.close {
     height: auto !important;
     overflow: visible !important; } }
 #header {
+  z-index: 2;
   height: 35px;
   bbackground-color: whitesmoke;
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #76a0c2), color-stop(100%, #5a87ab));
@@ -6065,3 +6066,24 @@ button.close {
   #main-content #sign-up {
     width: 500px;
     margin: 50px auto; }
+
+#manageFeeds .nav-tabs a {
+  width: 120px;
+  text-align: center; }
+#manageFeeds .tab-pane {
+  padding: 100px; }
+  #manageFeeds .tab-pane ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px; }
+    #manageFeeds .tab-pane ul li {
+      margin-bottom: 10px; }
+  #manageFeeds .tab-pane .category-name, #manageFeeds .tab-pane .feed-name {
+    display: inline-block;
+    margin-right: 15px; }
+  #manageFeeds .tab-pane .category-name {
+    width: 200px; }
+  #manageFeeds .tab-pane .feed-name {
+    width: 300px; }
+#manageFeeds #feeds .category-name {
+  text-align: right; }

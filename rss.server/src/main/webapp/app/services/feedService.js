@@ -1,19 +1,41 @@
 app.service('feedService', function ($http, $resource) {
 
 
-    this.getCategories = function (categoryId) {
-        if (typeof _categoryId === "undefined") {
-            _categoryId = "@id";
-        }
-        var categories = $resource(readerConstants.appContextPath + '/categories/:categoryId',
-            {categoryId:'@id'}
-        );
-        return categories.query();
+    this.getCategories = function () {
+        var category = createCategoryResource();
+        return category.query();
     };
 
-    this.getFeeds = function (_categoryId, _feedId) {
+
+    this.saveCategory = function (_category) {
+        if (typeof _category === "undefined") {
+            return;
+        }
+
+        var Category = createCategoryResource();
+
+//  Example of retrieving the resource first then updating it.
+//
+//            Category.get({categoryId : _category.categoryId}, function(returnedCategory) {
+//                returnedCategory.name = _category.name;
+//                returnedCategory.$save();
+//            });
+
+        var category = new Category({categoryId : _category.categoryId, name : _category.name});
+        category.$save();
+    };
+
+
+    function createCategoryResource() {
+        return $resource(readerConstants.appContextPath + '/category/:categoryId',
+                {categoryId : "@id"}
+        );
+    }
+
+
+    this.getFeeds = function (_categoryId, _feedId, suc, fail) {
         var feedResource = createFeedResource(_categoryId, _feedId);
-        return feedResource.query();
+        return feedResource.query(suc, fail);
     };
 
 
@@ -24,13 +46,13 @@ app.service('feedService', function ($http, $resource) {
 
 
     function createFeedResource(_categoryId, _feedId) {
-        if (typeof _feedId === "undefined") {
+        if (_feedId === null || typeof _feedId === "undefined") {
             _feedId = "@id";
         }
-        if (typeof _categoryId === "undefined") {
+        if (_categoryId  === null || typeof _categoryId === "undefined") {
             _categoryId = "@id";
         }
-        var feedResource = $resource(readerConstants.appContextPath + '/category/:categoryId/feeds/:feedId',
+        var feedResource = $resource(readerConstants.appContextPath + '/feeds/category/:categoryId/feed/:feedId',
             {
                 feedId : _feedId,
                 categoryId : _categoryId

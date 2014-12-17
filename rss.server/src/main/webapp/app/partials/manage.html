@@ -1,1 +1,114 @@
-manage
+<!-- BEGIN: Sticky Header 2-->
+<div id="header_container">
+    <div id="header">
+        <img id="mini-logo" src="Content/images/header-logo.png" />
+        <div id="header-nav">
+            <span class="dropdown">
+			    <span class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+			        {{name}}
+			        <span class="caret"></span>
+			    </span>
+			    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu1">
+				    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="refresh()">Refresh</a></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#/manage">Manage Feeds</a></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1">Settings</a></li>
+				    <li role="presentation" class="divider"></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="logout()">Log out</a></li>
+				</ul>
+			</span>
+            <img id="settings" src="Content/images/settings.png" />
+        </div>
+    </div>
+</div>
+<!-- END: Sticky Header -->
+ 
+<div id="manageFeeds" class="container-fluid">
+<br><br><br><br><br>
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#feeds" ng-click="showTab($event)">Feeds</a></li>
+		<li><a href="#articles" ng-click="showTab($event)">Categories</a></li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane active" id="feeds">
+			<a class="addElement" ng-click="addFeed()" data-toggle="modal" data-target="#feedModal">Add Feed</a>
+			<ul ng-repeat="feedCategory in feedCategories">
+				<li ng-repeat="feed in feedCategory.feeds">
+					<span class="feed-name">{{feed.name}}</span>
+					<span class="category-name">{{feedCategory.name}}</span>
+					<span class="glyphicon glyphicon-edit" ng-click="editFeed(feed, feedCategory)" data-toggle="modal" data-target="#feedModal"></span>
+					<span class="glyphicon glyphicon-trash" ng-click="deleteFeed(feed)"></span>
+				</li>
+			</ul>
+		</div>
+	  	<div class="tab-pane" id="articles">
+	  		<a class="addElement" ng-click="addCategory()" data-toggle="modal" data-target="#categoryModal">Add Category</a>
+			<ul>
+				<li ng-repeat="feedCategory in feedCategories">
+					<span class="category-name">{{feedCategory.name}}</span>
+					<span class="glyphicon glyphicon-edit" ng-click="editCategory(feedCategory)" data-toggle="modal" data-target="#categoryModal"></span>
+					<span class="glyphicon glyphicon-trash" ng-click="deleteCategory(feedCategory)"></span>
+				</li>
+			</ul>
+	  	</div>
+	</div>
+</div>
+
+<div class="modal fade" id="feedModal" tabindex="-1" role="dialog" aria-labelledby="feedModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add new feed</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+		    <label for="feedName">Name *</label>
+		    <input type="text" class="form-control" id="feedName" placeholder="Enter feed name" ng-model="currentFeed.name" ng-change="" autocomplete="off" required>
+		</div>
+		<div class="form-group">
+		    <label for="url">URL *</label>
+		    <input type="text" class="form-control" id="url" placeholder="Enter feed url" ng-model="currentFeed.url" ng-change="" autocomplete="off" required>
+		</div>
+		<div class="form-group">
+		    <label for="category">Category</label>
+		    <select id="category" class="form-control" name="category" ng-model="currentFeed.categoryId" ng-change="" autocomplete="off">
+			  <option value="">Select category</option>
+			  <option ng-repeat="category in feedCategories" value="{{category.categoryId}}">{{category.name}}</option>
+			</select>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="saveFeed(currentFeed)">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add new category</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+		    <label for="categoryName">Name *</label>
+		    <input type="text" class="form-control" id="categoryName" placeholder="Enter category name" ng-model="currentCategory.name" ng-change="" autocomplete="off" required>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="saveCategory(currentCategory)">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer_container">
+    <div id="footer">
+        Footer Content
+    </div>
+</div>
+

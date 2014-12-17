@@ -7,12 +7,13 @@ module.exports = function(grunt) {
     concat: {
       app: {
         src: ["app/app.js",
-              "app/controllers/controllers.js",
+              "app/controllers/feedManagerController.js",
               "app/controllers/loginController.js",
               "app/controllers/listController.js",
               "app/controllers/signUpController.js",
               "app/services/feedService.js",
               "app/services/userService.js",
+              "app/services/spinnerService.js",
               "app/directives/animatedView.js",
               "app/filters/filters.js"],
         dest: 'scripts/main.js',

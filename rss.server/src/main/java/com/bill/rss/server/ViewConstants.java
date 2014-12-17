@@ -12,4 +12,6 @@ public class ViewConstants {
 	public static String USER_SESSION_KEY = "user";
 
 	public static String REFRESH_QUERY_PARAM = "refresh";
+
+	public static final String CATEGORY_ID_PATH_VARIABLE = ":categoryId";
 }

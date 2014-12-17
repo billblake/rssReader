@@ -22,7 +22,7 @@ public class CategoriesRouteTest {
         Request request = createRequestMock("logged-in");
         Response response = createResponseMock();
 
-        CategoriesRoute categoriesRoute = new CategoriesRoute("/categories");
+        GetCategoriesRoute categoriesRoute = new GetCategoriesRoute("/categories");
         categoriesRoute.setCategoryProvider(MockUtils.createCategoryProviderMock());
         String jsonResponse = (String) categoriesRoute.handle(request, response);
         String expectedJson = "[{\"categoryId\":\"1\",\"username\":\"myusername\",\"name\":\"Sport\",\"feeds\":[{\"feedId\":\"2\",\"categoryId\":\"1\",\"userName\":\"myusername\",\"name\":\"BBC\",\"url\":\"http://www.bbc.co.uk\"}]}]";

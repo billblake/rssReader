@@ -55,12 +55,52 @@ app.config(function ($routeProvider) {
 
 
 
+app.controller('FeedManagerController', function($scope, feedService) {
+
+    $scope.showTab = function($event) {
+        $event.preventDefault();
+        $($event.target).tab('show');
+    };
+
+    $scope.feedCategories = feedService.getCategories();
+
+    $scope.editFeed = function(feed, category) {
+        $scope.currentFeed = feed;
+        $scope.currentCategory = category;
+    };
+
+    $scope.deleteFeed = function(feed) {
+
+    };
 
 
+    $scope.editCategory = function(category) {
+        $scope.currentCategory = $.extend({}, category);
+    };
 
-app.controller('FeedManagerController', function ($scope) {
+    $scope.deleteCategory = function(category) {
 
-    
+    };
+
+
+    $scope.addFeed = function() {
+        $scope.currentFeed = {};
+    };
+
+    $scope.addCategory = function() {
+        $scope.currentCategory = {};
+    };
+
+    $scope.saveFeed = function(feed) {
+        console.log(feed);
+
+    };
+
+    $scope.saveCategory = function(category) {
+        console.log(category);
+        feedService.saveCategory(category);
+    };
+
 });
 app.controller('LoginController', function($scope, $http, $location, $rootScope) {
 
@@ -83,7 +123,7 @@ app.controller('LoginController', function($scope, $http, $location, $rootScope)
         });
     };
 });
-app.controller('ListController', function($scope, feedService, $cookies, $cookieStore, $location, $rootScope, $http) {
+app.controller('ListController', function($scope, feedService, spinnerService, $cookies, $cookieStore, $location, $rootScope, $http) {
 
     var loggedInValue = $cookies.loggedIn;
     if (loggedInValue !== "logged-in" && !$rootScope.loggedIn) {
@@ -91,21 +131,26 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
         return;
     }
 
+    spinnerService.showSpinner();
     $scope.feedCategories = feedService.getCategories();
-    $scope.feeds = feedService.getFeeds();
+    $scope.feeds = feedService.getFeeds(null, null, loadFeedsSuccessful, fail);
     $scope.name = getFullName();
 
     $scope.displayFeedsForCategory = function(categoryId) {
-        $scope.feeds = feedService.getFeeds(categoryId);
+        spinnerService.showSpinner();
+        $scope.feeds = feedService.getFeeds(categoryId, null, loadFeedsSuccessful, fail);
     };
 
     $scope.displayFeedsForAllCategory = function() {
-        $scope.feeds = feedService.getFeeds();
+        spinnerService.showSpinner();
+        $scope.feeds = {};
+        $scope.feeds = feedService.getFeeds(null, null, loadFeedsSuccessful, fail);
     };
 
     $scope.displayFeedsForFeed = function(feedId) {
+        spinnerService.showSpinner();
         var categoryId = undefined;
-        $scope.feeds = feedService.getFeeds(categoryId, feedId);
+        $scope.feeds = feedService.getFeeds(categoryId, feedId, loadFeedsSuccessful, fail);
     };
 
     $scope.refresh = function() {
@@ -131,6 +176,7 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
         });
     };
 
+
     function getFullName() {
         var fullName = $cookies.user;
         if (typeof fullName === "undefined") {
@@ -139,9 +185,19 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
         return fullName.replace(/"/g, '');
     }
 
+
     function showRefreshedFeeds() {
         $scope.feeds = feedService.getFeeds();
     }
+
+
+    function loadFeedsSuccessful(data) {
+        spinnerService.hideSpinner();
+    };
+
+
+    function fail() {
+    };
 });
 app.controller('SignUpController', function ($scope, userService) {
     $scope.invalidForm = true;
@@ -234,19 +290,41 @@ function getErrorClass(isError) {
 app.service('feedService', function ($http, $resource) {
 
 
-    this.getCategories = function (categoryId) {
-        if (typeof _categoryId === "undefined") {
-            _categoryId = "@id";
-        }
-        var categories = $resource(readerConstants.appContextPath + '/categories/:categoryId',
-            {categoryId:'@id'}
-        );
-        return categories.query();
+    this.getCategories = function () {
+        var category = createCategoryResource();
+        return category.query();
     };
 
-    this.getFeeds = function (_categoryId, _feedId) {
+
+    this.saveCategory = function (_category) {
+        if (typeof _category === "undefined") {
+            return;
+        }
+
+        var Category = createCategoryResource();
+
+//  Example of retrieving the resource first then updating it.
+//
+//            Category.get({categoryId : _category.categoryId}, function(returnedCategory) {
+//                returnedCategory.name = _category.name;
+//                returnedCategory.$save();
+//            });
+
+        var category = new Category({categoryId : _category.categoryId, name : _category.name});
+        category.$save();
+    };
+
+
+    function createCategoryResource() {
+        return $resource(readerConstants.appContextPath + '/category/:categoryId',
+                {categoryId : "@id"}
+        );
+    }
+
+
+    this.getFeeds = function (_categoryId, _feedId, suc, fail) {
         var feedResource = createFeedResource(_categoryId, _feedId);
-        return feedResource.query();
+        return feedResource.query(suc, fail);
     };
 
 
@@ -257,13 +335,13 @@ app.service('feedService', function ($http, $resource) {
 
 
     function createFeedResource(_categoryId, _feedId) {
-        if (typeof _feedId === "undefined") {
+        if (_feedId === null || typeof _feedId === "undefined") {
             _feedId = "@id";
         }
-        if (typeof _categoryId === "undefined") {
+        if (_categoryId  === null || typeof _categoryId === "undefined") {
             _categoryId = "@id";
         }
-        var feedResource = $resource(readerConstants.appContextPath + '/category/:categoryId/feeds/:feedId',
+        var feedResource = $resource(readerConstants.appContextPath + '/feeds/category/:categoryId/feed/:feedId',
             {
                 feedId : _feedId,
                 categoryId : _categoryId
@@ -289,6 +367,20 @@ app.service('userService', function ($http, $resource) {
         	password : user.password
         });
         return newUser.$save(successCallback, failureCallback);
+    };
+
+});
+app.service('spinnerService', function () {
+
+    this.spinner = {};
+
+    this.showSpinner = function () {
+        var target = document.getElementById('spinner');
+        this.spinner = new Spinner({}).spin(target);
+    };
+
+    this.hideSpinner = function () {
+        this.spinner.stop();
     };
 
 });

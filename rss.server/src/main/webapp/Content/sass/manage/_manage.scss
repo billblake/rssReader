@@ -1,0 +1,42 @@
+#manageFeeds {
+
+	.nav-tabs {
+		a {
+			width: 120px;
+			text-align: center;
+		}
+	}
+	
+	.tab-pane {
+		padding: 100px;
+		
+		ul {
+			list-style: none;
+			padding : 0px;
+			margin : 0px;
+			
+			li {
+				margin-bottom: 10px;
+			}
+		}
+		
+		.category-name, .feed-name {
+			display: inline-block;
+			margin-right: 15px
+		}
+		
+		.category-name {
+			width: 200px;
+		}
+		
+		.feed-name {
+			width: 300px;
+		}
+	}
+	
+	#feeds {
+		.category-name {
+			text-align: right;
+		}
+	}
+}

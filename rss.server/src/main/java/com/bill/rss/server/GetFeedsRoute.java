@@ -11,18 +11,19 @@ import com.bill.rss.domain.FeedItem;
 import com.bill.rss.mongodb.FeedItemRetriever;
 import com.bill.rss.mongodb.MongoFeedUpdater;
 
+import static com.bill.rss.server.ViewConstants.CATEGORY_ID_PATH_VARIABLE;
 import static com.bill.rss.server.ViewConstants.JSON_RESPONSE_TYPE;
 import static com.bill.rss.server.ViewConstants.REFRESH_QUERY_PARAM;
 
-public class FeedsRoute extends BaseRoute {
+public class GetFeedsRoute extends BaseRoute {
 
-    private static final String CATEGORY_ID_PATH_VARIABLE = ":categoryId";
+
     private static final String FEED_ID_PATH_VARIABLE = ":feedId";
 
     private FeedItemProvider feedProvider;
     private FeedUpdater feedUpdater;
 
-    protected FeedsRoute(String path) {
+    protected GetFeedsRoute(String path) {
         super(path);
         feedProvider = new FeedItemRetriever();
         feedUpdater = new MongoFeedUpdater();
