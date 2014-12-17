@@ -25,6 +25,7 @@ import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_LINK;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_PUB_DATE;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_SOURCE;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_TITLE;
+import static com.bill.rss.mongodb.FeedConstants.MAX_PAGE_SIZE;
 import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
 import static java.util.Calendar.DATE;
 import static java.util.Calendar.MONTH;
@@ -32,13 +33,13 @@ import static java.util.Calendar.YEAR;
 
 public class FeedItemRetriever implements FeedItemProvider {
 
-    public List<FeedItem> retrieveFeedItems(String categoryId, String feedId, String username) {
+    public List<FeedItem> retrieveFeedItems(String categoryId, String feedId, String username, int page) {
         DB rssDb = MongoDBConnection.getDbConnection();
         DBCollection coll = rssDb.getCollection(FEED_ITEMS);
         DBCursor feedItemsCursor;
 
         BasicDBObject query = buildFeedItemQuery(categoryId, feedId, username);
-        feedItemsCursor = coll.find(query).sort(new BasicDBObject(FEED_ITEM_PUB_DATE, -1));
+        feedItemsCursor = coll.find(query).sort(new BasicDBObject(FEED_ITEM_PUB_DATE, -1)).limit(MAX_PAGE_SIZE).skip((page - 1) * MAX_PAGE_SIZE);
         return parseFeadItems(feedItemsCursor);
     }
 

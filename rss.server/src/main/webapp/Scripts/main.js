@@ -125,30 +125,41 @@ app.controller('LoginController', function($scope, $http, $location, $rootScope)
 });
 app.controller('ListController', function($scope, feedService, spinnerService, $cookies, $cookieStore, $location, $rootScope, $http) {
 
+    $(window).scroll(function(){
+        if  ($(window).scrollTop() == $(document).height() - $(window).height()){
+            $scope.page++;
+            $scope.loading = true;
+            feedService.getFeeds(null, null, loadMoreFeedsSuccessful, fail, $scope.page);
+        }
+    });
+
+
     var loggedInValue = $cookies.loggedIn;
     if (loggedInValue !== "logged-in" && !$rootScope.loggedIn) {
         $location.path('/login');
         return;
     }
 
-    spinnerService.showSpinner();
+    $scope.page = 1;
+    $scope.loading = true;
+    $scope.loadingMessage = "Loading Feeds";
     $scope.feedCategories = feedService.getCategories();
     $scope.feeds = feedService.getFeeds(null, null, loadFeedsSuccessful, fail);
     $scope.name = getFullName();
 
     $scope.displayFeedsForCategory = function(categoryId) {
-        spinnerService.showSpinner();
+        $scope.loading = true;
         $scope.feeds = feedService.getFeeds(categoryId, null, loadFeedsSuccessful, fail);
     };
 
     $scope.displayFeedsForAllCategory = function() {
-        spinnerService.showSpinner();
+        $scope.loading = true;
         $scope.feeds = {};
         $scope.feeds = feedService.getFeeds(null, null, loadFeedsSuccessful, fail);
     };
 
     $scope.displayFeedsForFeed = function(feedId) {
-        spinnerService.showSpinner();
+        $scope.loading = true;
         var categoryId = undefined;
         $scope.feeds = feedService.getFeeds(categoryId, feedId, loadFeedsSuccessful, fail);
     };
@@ -192,9 +203,13 @@ app.controller('ListController', function($scope, feedService, spinnerService, $
 
 
     function loadFeedsSuccessful(data) {
-        spinnerService.hideSpinner();
+        $scope.loading = false;
     };
 
+    function loadMoreFeedsSuccessful(newlyFetchedFeeds) {
+        $scope.feeds = $scope.feeds.concat(newlyFetchedFeeds);
+        $scope.loading = false;
+    }
 
     function fail() {
     };
@@ -322,8 +337,8 @@ app.service('feedService', function ($http, $resource) {
     }
 
 
-    this.getFeeds = function (_categoryId, _feedId, suc, fail) {
-        var feedResource = createFeedResource(_categoryId, _feedId);
+    this.getFeeds = function (_categoryId, _feedId, suc, fail, _page) {
+        var feedResource = createFeedResource(_categoryId, _feedId, _page);
         return feedResource.query(suc, fail);
     };
 
@@ -334,17 +349,21 @@ app.service('feedService', function ($http, $resource) {
     };
 
 
-    function createFeedResource(_categoryId, _feedId) {
+    function createFeedResource(_categoryId, _feedId, _page) {
         if (_feedId === null || typeof _feedId === "undefined") {
             _feedId = "@id";
         }
         if (_categoryId  === null || typeof _categoryId === "undefined") {
             _categoryId = "@id";
         }
+        if (_page  === null || typeof _page === "undefined") {
+            _page = "1";
+        }
         var feedResource = $resource(readerConstants.appContextPath + '/feeds/category/:categoryId/feed/:feedId',
             {
                 feedId : _feedId,
-                categoryId : _categoryId
+                categoryId : _categoryId,
+                page : _page
             },
             {
                 refresh : {method:'GET', isArray: true, params:{refresh:true}}
@@ -367,20 +386,6 @@ app.service('userService', function ($http, $resource) {
         	password : user.password
         });
         return newUser.$save(successCallback, failureCallback);
-    };
-
-});
-app.service('spinnerService', function () {
-
-    this.spinner = {};
-
-    this.showSpinner = function () {
-        var target = document.getElementById('spinner');
-        this.spinner = new Spinner({}).spin(target);
-    };
-
-    this.hideSpinner = function () {
-        this.spinner.stop();
     };
 
 });

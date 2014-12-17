@@ -13,7 +13,6 @@ module.exports = function(grunt) {
               "app/controllers/signUpController.js",
               "app/services/feedService.js",
               "app/services/userService.js",
-              "app/services/spinnerService.js",
               "app/directives/animatedView.js",
               "app/filters/filters.js"],
         dest: 'scripts/main.js',

@@ -64,6 +64,10 @@
                     </article>
                 </li>
             </ul>
+            <div ng-show="loading">
+	            <img id="mini-logo" src="Content/images/ajax-loader.gif" style="margin: 0 auto;display:block;"/>
+            	<div style="text-align : center;margin-bottom : 30px;">{{loadingMessage}}</div>
+            </div>
         </div> 
     </div>
 </div>

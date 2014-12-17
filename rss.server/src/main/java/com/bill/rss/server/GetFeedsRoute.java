@@ -29,6 +29,7 @@ public class GetFeedsRoute extends BaseRoute {
         feedUpdater = new MongoFeedUpdater();
     }
 
+
     @Override
     public Object handle(Request request, Response response) {
         verifyUserLoggedIn(request, response);
@@ -38,8 +39,17 @@ public class GetFeedsRoute extends BaseRoute {
 
         String categoryId = request.params(CATEGORY_ID_PATH_VARIABLE);
         String feedId = request.params(FEED_ID_PATH_VARIABLE);
-        List<FeedItem> feedItems = feedProvider.retrieveFeedItems(categoryId, feedId, getUsername(request));
+        List<FeedItem> feedItems = feedProvider.retrieveFeedItems(categoryId, feedId, getUsername(request), getPage(request));
         return JsonUtils.convertObjectToJson(feedItems);
+    }
+
+
+    private int getPage(Request request) {
+        try {
+            return Integer.parseInt(request.queryParams("page"));
+        } catch(Exception ex) {
+            return 1;
+        }
     }
 
 

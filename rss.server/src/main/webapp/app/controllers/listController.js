@@ -1,29 +1,40 @@
 app.controller('ListController', function($scope, feedService, spinnerService, $cookies, $cookieStore, $location, $rootScope, $http) {
 
+    $(window).scroll(function(){
+        if  ($(window).scrollTop() == $(document).height() - $(window).height()){
+            $scope.page++;
+            $scope.loading = true;
+            feedService.getFeeds(null, null, loadMoreFeedsSuccessful, fail, $scope.page);
+        }
+    });
+
+
     var loggedInValue = $cookies.loggedIn;
     if (loggedInValue !== "logged-in" && !$rootScope.loggedIn) {
         $location.path('/login');
         return;
     }
 
-    spinnerService.showSpinner();
+    $scope.page = 1;
+    $scope.loading = true;
+    $scope.loadingMessage = "Loading Feeds";
     $scope.feedCategories = feedService.getCategories();
     $scope.feeds = feedService.getFeeds(null, null, loadFeedsSuccessful, fail);
     $scope.name = getFullName();
 
     $scope.displayFeedsForCategory = function(categoryId) {
-        spinnerService.showSpinner();
+        $scope.loading = true;
         $scope.feeds = feedService.getFeeds(categoryId, null, loadFeedsSuccessful, fail);
     };
 
     $scope.displayFeedsForAllCategory = function() {
-        spinnerService.showSpinner();
+        $scope.loading = true;
         $scope.feeds = {};
         $scope.feeds = feedService.getFeeds(null, null, loadFeedsSuccessful, fail);
     };
 
     $scope.displayFeedsForFeed = function(feedId) {
-        spinnerService.showSpinner();
+        $scope.loading = true;
         var categoryId = undefined;
         $scope.feeds = feedService.getFeeds(categoryId, feedId, loadFeedsSuccessful, fail);
     };
@@ -67,9 +78,13 @@ app.controller('ListController', function($scope, feedService, spinnerService, $
 
 
     function loadFeedsSuccessful(data) {
-        spinnerService.hideSpinner();
+        $scope.loading = false;
     };
 
+    function loadMoreFeedsSuccessful(newlyFetchedFeeds) {
+        $scope.feeds = $scope.feeds.concat(newlyFetchedFeeds);
+        $scope.loading = false;
+    }
 
     function fail() {
     };

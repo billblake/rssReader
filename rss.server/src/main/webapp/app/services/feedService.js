@@ -33,8 +33,8 @@ app.service('feedService', function ($http, $resource) {
     }
 
 
-    this.getFeeds = function (_categoryId, _feedId, suc, fail) {
-        var feedResource = createFeedResource(_categoryId, _feedId);
+    this.getFeeds = function (_categoryId, _feedId, suc, fail, _page) {
+        var feedResource = createFeedResource(_categoryId, _feedId, _page);
         return feedResource.query(suc, fail);
     };
 
@@ -45,17 +45,21 @@ app.service('feedService', function ($http, $resource) {
     };
 
 
-    function createFeedResource(_categoryId, _feedId) {
+    function createFeedResource(_categoryId, _feedId, _page) {
         if (_feedId === null || typeof _feedId === "undefined") {
             _feedId = "@id";
         }
         if (_categoryId  === null || typeof _categoryId === "undefined") {
             _categoryId = "@id";
         }
+        if (_page  === null || typeof _page === "undefined") {
+            _page = "1";
+        }
         var feedResource = $resource(readerConstants.appContextPath + '/feeds/category/:categoryId/feed/:feedId',
             {
                 feedId : _feedId,
-                categoryId : _categoryId
+                categoryId : _categoryId,
+                page : _page
             },
             {
                 refresh : {method:'GET', isArray: true, params:{refresh:true}}

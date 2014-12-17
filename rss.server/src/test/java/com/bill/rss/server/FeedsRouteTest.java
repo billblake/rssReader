@@ -86,7 +86,7 @@ public class FeedsRouteTest {
         List<FeedItem> feedItems = new ArrayList<FeedItem>();
         FeedItem feedItem = MockUtils.createFeedItemMock("1", "description", "2", "3", "link", new Date(10000000), "source", "title", "billblake");
         feedItems.add(feedItem);
-        when(feedProvider.retrieveFeedItems("1", "2", "billblake")).thenReturn(feedItems);
+        when(feedProvider.retrieveFeedItems("1", "2", "billblake", 1)).thenReturn(feedItems);
         return feedProvider;
     }
 
