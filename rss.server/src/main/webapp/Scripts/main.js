@@ -123,7 +123,7 @@ app.controller('LoginController', function($scope, $http, $location, $rootScope)
         });
     };
 });
-app.controller('ListController', function($scope, feedService, spinnerService, $cookies, $cookieStore, $location, $rootScope, $http) {
+app.controller('ListController', function($scope, feedService, $cookies, $cookieStore, $location, $rootScope, $http) {
 
     $(window).scroll(function(){
         if  ($(window).scrollTop() == $(document).height() - $(window).height()){
