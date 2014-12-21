@@ -6,5 +6,5 @@ import com.bill.rss.domain.FeedItem;
 
 public interface FeedFetcher {
 
-	List<FeedItem> fetcherFeed(String feedUrl);
+	List<FeedItem> fetchFeed(String feedUrl);
 }

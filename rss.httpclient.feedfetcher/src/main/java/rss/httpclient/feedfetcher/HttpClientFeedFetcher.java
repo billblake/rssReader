@@ -25,8 +25,14 @@ public class HttpClientFeedFetcher implements FeedFetcher {
 
 	private HttpClient httpClient = new DefaultHttpClient();
 
-	public List<FeedItem> fetcherFeed(String feedUrl) {
-		List<FeedItem> feedItems = new ArrayList<FeedItem>();
+	public List<FeedItem> fetchFeed(String feedUrl) {
+        httpClient = new DefaultHttpClient();
+		return fetchFeed(feedUrl, httpClient);
+	}
+
+
+	public List<FeedItem> fetchFeed(String feedUrl, HttpClient httpClient) {
+        List<FeedItem> feedItems = new ArrayList<FeedItem>();
 		try {
 			HttpGet request = new HttpGet(feedUrl);
 			request.addHeader(ACEEPT_HEADER_NAME, REQUEST_TYPE_JSON);
@@ -47,12 +53,8 @@ public class HttpClientFeedFetcher implements FeedFetcher {
 			e.printStackTrace();
 		}
 		return feedItems;
-	}
+    }
 
-
-	public void setHttpClient(HttpClient httpClient) {
-	    this.httpClient = httpClient;
-	}
 
 	public void setRssFeedParser(RssFeedParser rssFeedParser) {
 	    this.rssFeedParser = rssFeedParser;

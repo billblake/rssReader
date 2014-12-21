@@ -76,7 +76,7 @@ public class MongoFeedUpdaterTest {
         FeedItem feedItem = new FeedItem();
         feedItems.add(feedItem);
         FeedFetcher feedFetcher = mock(HttpClientFeedFetcher.class);
-        when(feedFetcher.fetcherFeed(any(String.class))).thenReturn(feedItems);
+        when(feedFetcher.fetchFeed(any(String.class))).thenReturn(feedItems);
         return feedFetcher;
     }
 

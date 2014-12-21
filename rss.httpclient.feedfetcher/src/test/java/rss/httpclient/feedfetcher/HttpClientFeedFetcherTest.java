@@ -27,11 +27,9 @@ public class HttpClientFeedFetcherTest {
     @Test
     public void fetcherFeed() throws ClientProtocolException, IOException {
         HttpClientFeedFetcher feedFetcher = new HttpClientFeedFetcher();
-
         feedFetcher.setRssFeedParser(setupRssFeedParser());
-        feedFetcher.setHttpClient(setupHttpClient());
 
-        List<FeedItem> fetcherFeeds = feedFetcher.fetcherFeed("http://www.bbc.co.uk/sport");
+        List<FeedItem> fetcherFeeds = feedFetcher.fetchFeed("http://www.bbc.co.uk/sport", setupHttpClient());
         assertEquals(1, fetcherFeeds.size());
         assertEquals("myTitle", fetcherFeeds.get(0).getTitle());
     }
@@ -47,9 +45,8 @@ public class HttpClientFeedFetcherTest {
         when(statusLine.getStatusCode()).thenReturn(400);
         when(response.getStatusLine()).thenReturn(statusLine);
         when(mockHttpClient.execute(any(HttpUriRequest.class))).thenReturn(response);
-        feedFetcher.setHttpClient(mockHttpClient);
 
-        List<FeedItem> fetcherFeeds = feedFetcher.fetcherFeed("http://www.bbc.co.uk/sport");
+        List<FeedItem> fetcherFeeds = feedFetcher.fetchFeed("http://www.bbc.co.uk/sport", mockHttpClient);
         assertEquals(1, fetcherFeeds.size());
         assertEquals("myTitle", fetcherFeeds.get(0).getTitle());
     }

@@ -35,7 +35,7 @@ public class MongoFeedUpdater implements FeedUpdater {
     public void updateWithLatestFeeds(String username) {
 		List<Feed> feeds = feedRetriever.retrieveFeeds(username);
 		for (Feed feed : feeds) {
-			List<FeedItem> fetchedFeeds = feedFetcher.fetcherFeed(feed.getUrl());
+			List<FeedItem> fetchedFeeds = feedFetcher.fetchFeed(feed.getUrl());
 			updateFeed(feed, fetchedFeeds, username);
 		}
 	}
