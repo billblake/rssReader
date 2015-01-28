@@ -47,7 +47,7 @@
         <div id="main-content" class="span11">
             <!--Body content-->
             <div id="spinner"></div>
-            <ul id="feed-list">
+            <ul id="feed-list" infinite-scroll='loadMore()' infinite-scroll-distance='2'>
                 <li class="feed-item" ng-repeat="feed in feeds" ng-class-odd="'odd'" ng-class-even="'even'">
                     <span ng-click="toggleArticle($index)">
                         <span class="feedSource" title="{{feed.source}}">{{feed.source}}</span>
@@ -71,7 +71,6 @@
         </div> 
     </div>
 </div>
-
 
 <div id="footer_container">
     <div id="footer">

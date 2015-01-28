@@ -1,14 +1,5 @@
 app.controller('ListController', function($scope, feedService, $cookies, $cookieStore, $location, $rootScope, $http) {
 
-    $(window).scroll(function(){
-        if  ($(window).scrollTop() == $(document).height() - $(window).height()){
-            $scope.page++;
-            $scope.loading = true;
-            feedService.getFeeds(null, null, loadMoreFeedsSuccessful, fail, $scope.page);
-        }
-    });
-
-
     var loggedInValue = $cookies.loggedIn;
     if (loggedInValue !== "logged-in" && !$rootScope.loggedIn) {
         $location.path('/login');
@@ -21,6 +12,12 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
     $scope.feedCategories = feedService.getCategories();
     $scope.feeds = feedService.getFeeds(null, null, loadFeedsSuccessful, fail);
     $scope.name = getFullName();
+
+    $scope.loadMore = function() {
+        $scope.page++;
+        $scope.loading = true;
+        feedService.getFeeds(null, null, loadMoreFeedsSuccessful, fail, $scope.page);
+    };
 
     $scope.displayFeedsForCategory = function(categoryId) {
         $scope.loading = true;
