@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.bson.types.ObjectId;
 
@@ -85,6 +86,7 @@ public class FeedItemRetriever implements FeedItemProvider {
 
     private String formatDate(Date pubDate) {
         Calendar nowCalendar = Calendar.getInstance();
+        nowCalendar.setTimeZone(TimeZone.getTimeZone("Europe/Dublin"));
         Calendar pubDateCalender = Calendar.getInstance();
         pubDateCalender.setTime(pubDate);
 
