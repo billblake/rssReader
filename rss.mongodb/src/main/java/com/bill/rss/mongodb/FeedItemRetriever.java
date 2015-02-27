@@ -88,6 +88,7 @@ public class FeedItemRetriever implements FeedItemProvider {
         Calendar nowCalendar = Calendar.getInstance();
         nowCalendar.setTimeZone(TimeZone.getTimeZone("Europe/Dublin"));
         Calendar pubDateCalender = Calendar.getInstance();
+        pubDateCalender.setTimeZone(TimeZone.getTimeZone("Europe/Dublin"));
         pubDateCalender.setTime(pubDate);
 
         if (nowCalendar.get(DATE) == pubDateCalender.get(DATE) &&
