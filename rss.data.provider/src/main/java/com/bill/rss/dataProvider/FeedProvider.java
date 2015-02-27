@@ -6,7 +6,9 @@ import com.bill.rss.domain.Feed;
 
 public interface FeedProvider {
 
-	List<Feed> retrieveFeeds(String username);
+    List<Feed> retrieveAllFeeds();
+
+    List<Feed> retrieveFeeds(String username);
 
 	Feed retrieveFeed(String feedId, String username);
 

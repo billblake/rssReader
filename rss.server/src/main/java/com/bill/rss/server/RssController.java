@@ -13,6 +13,7 @@ public class RssController implements SparkApplication {
 		get(new GetFeedsRoute("/feeds/category/:categoryId/feed"));
 		get(new GetFeedsRoute("/feeds/category/feed/:feedId"));
         get(new LogoutRoute("/logout"));
+        get(new FeedRefreshRoute("/refresh"));
 
 		post(new UserRegistrationRoute("/user"));
 		post(new LoginRoute("/login"));

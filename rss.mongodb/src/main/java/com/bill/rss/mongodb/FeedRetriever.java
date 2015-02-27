@@ -22,6 +22,7 @@ public class FeedRetriever implements FeedProvider {
 
 	public List<Feed> retrieveFeeds(String username) {
 		QueryBuilder builder = new QueryBuilder();
+		builder.is(new BasicDBObject(USER_NAME, username));
 		return executeQueryAndParseResults(builder);
 	}
 
@@ -41,6 +42,11 @@ public class FeedRetriever implements FeedProvider {
 		builder.put(FEED_ID).in(dbFeedIds);
 		return executeQueryAndParseResults(builder);
 	}
+
+
+    public List<Feed> retrieveAllFeeds() {
+        return executeQueryAndParseResults(new QueryBuilder());
+    }
 
 
 	private List<Feed> executeQueryAndParseResults(QueryBuilder builder) {
@@ -65,5 +71,4 @@ public class FeedRetriever implements FeedProvider {
 		feed.setCategoryId(nextFeed.get(FeedConstants.CATEGORY_ID).toString());
 		return feed;
 	}
-
 }

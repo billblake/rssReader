@@ -2,6 +2,7 @@ package com.bill.rss.mongodb;
 
 import java.util.List;
 
+import org.apache.commons.codec.binary.StringUtils;
 import org.bson.types.ObjectId;
 
 import rss.feedfetcher.FeedFetcher;
@@ -32,15 +33,25 @@ public class MongoFeedUpdater implements FeedUpdater {
 
 	private FeedProvider feedRetriever = new FeedRetriever();
 
-    public void updateWithLatestFeeds(String username) {
+
+	public void updateWithLatestFeeds() {
+        List<Feed> feeds = feedRetriever.retrieveAllFeeds();
+        for (Feed feed : feeds) {
+            List<FeedItem> fetchedFeeds = feedFetcher.fetchFeed(feed.getUrl());
+            updateFeed(feed, fetchedFeeds);
+        }
+    }
+
+
+	public void updateWithLatestFeeds(String username) {
 		List<Feed> feeds = feedRetriever.retrieveFeeds(username);
 		for (Feed feed : feeds) {
 			List<FeedItem> fetchedFeeds = feedFetcher.fetchFeed(feed.getUrl());
-			updateFeed(feed, fetchedFeeds, username);
+			updateFeed(feed, fetchedFeeds);
 		}
 	}
 
-	private void updateFeed(Feed feed, List<FeedItem> fetchedFeeds, String username) {
+	private void updateFeed(Feed feed, List<FeedItem> fetchedFeeds) {
 		DB rssDb = MongoDBConnection.getDbConnection();
 	    DBCollection feedItemsCollection = rssDb.getCollection(FEED_ITEMS);
 
@@ -48,14 +59,15 @@ public class MongoFeedUpdater implements FeedUpdater {
 	    	BasicDBObject query = new BasicDBObject();
 	    	query.append(FEED_ITEM_SOURCE, feed.getName());
 	    	query.append(FEED_ITEM_LINK, fetchedFeed.getLink());
-	    	query.append(USER_NAME, username);
+    	    query.append(USER_NAME, feed.getUserName());
+
 	    	DBCursor queryResults = feedItemsCollection.find(query);
 	    	if (!queryResults.hasNext()) {
 		    	BasicDBObject feedItemDocument = new BasicDBObject();
 		    	feedItemDocument.put(FEED_ITEM_SOURCE, feed.getName());
 		    	feedItemDocument.put(FEED_ID, new ObjectId(feed.getFeedId()));
 		    	feedItemDocument.put(CATEGORY_ID, new ObjectId(feed.getCategoryId()));
-		    	feedItemDocument.put(USER_NAME, username);
+		    	feedItemDocument.put(USER_NAME, feed.getUserName());
 		    	feedItemDocument.put(FEED_ITEM_TITLE, fetchedFeed.getTitle());
 		    	feedItemDocument.put(FEED_ITEM_DESCRIPTION, fetchedFeed.getDescription());
 		    	feedItemDocument.put(FEED_ITEM_PUB_DATE, fetchedFeed.getPubDate());
