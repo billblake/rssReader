@@ -30,7 +30,7 @@ public class MockUtils {
         DBObject categoryDbObject = mock(DBObject.class);
         when(categoryDbObject.get("_id")).thenReturn("12345");
         when(categoryDbObject.get("name")).thenReturn("Sport");
-        when(categoryDbObject.get("userName")).thenReturn("billblake");
+        when(categoryDbObject.get("username")).thenReturn("billblake");
         when(categoryDbObject.get("feedIds")).thenReturn(dbFeedIds);
         return categoryDbObject;
     }
@@ -81,7 +81,7 @@ public class MockUtils {
         when(feedDbObject.get("link")).thenReturn("http://www.bbc.co.uk/sport/1234");
         when(feedDbObject.get("source")).thenReturn("BBC Sport");
         when(feedDbObject.get("title")).thenReturn("My Title");
-        when(feedDbObject.get("userName")).thenReturn("billblake");
+        when(feedDbObject.get("username")).thenReturn("billblake");
         Date date = new Date(1408277117000L);
         when(feedDbObject.get("pubDate")).thenReturn(date);
         return feedDbObject;

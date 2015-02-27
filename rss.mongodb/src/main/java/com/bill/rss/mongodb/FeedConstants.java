@@ -2,7 +2,7 @@ package com.bill.rss.mongodb;
 
 public class FeedConstants {
 
-	public static final String USER_NAME = "userName";
+	public static final String USER_NAME = "username";
 	public static final String FEED_ITEM_TITLE = "title";
 	public static final String FEED_ITEM_SOURCE = "source";
 	public static final String FEED_ITEM_PUB_DATE = "pubDate";

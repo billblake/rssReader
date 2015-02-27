@@ -1,7 +1,5 @@
 package com.bill.rss.mongodb;
 
-import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +13,8 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.QueryBuilder;
+
+import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
 
 public class FeedRetriever implements FeedProvider {
 
@@ -53,7 +53,7 @@ public class FeedRetriever implements FeedProvider {
 		List<Feed> feeds = new ArrayList<Feed>();
 		DB rssDb = MongoDBConnection.getDbConnection();
 		DBCollection feedsCollection = rssDb.getCollection(FeedConstants.FEEDS_COLLECTION);
-		DBCursor feedsCursor = feedsCollection.find(builder.get());
+		DBCursor feedsCursor = feedsCollection.find(QueryBuilder.start(USER_NAME).is("billblake01@yahoo.ie").get());
 		while (feedsCursor.hasNext()) {
 			DBObject nextFeed = feedsCursor.next();
 			feeds.add(createFeed(nextFeed));

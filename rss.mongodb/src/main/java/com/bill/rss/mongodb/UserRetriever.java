@@ -13,7 +13,7 @@ public class UserRetriever implements UserProvider {
 
     private static final String USER_COLLECTION = "user";
     private static final String PASSWORD_FIELD = "password";
-    private static final String USER_NAME_FIELD = "userName";
+    private static final String USER_NAME_FIELD = "username";
     private static final String LAST_NAME_FIELD = "lastName";
     private static final String FIRST_NAME_FIELD = "firstName";
 
