@@ -96,6 +96,7 @@ public class FeedItemRetriever implements FeedItemProvider {
             nowCalendar.get(YEAR) == pubDateCalender.get(YEAR)) {
 
             SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm a");
+            timeFormatter.setTimeZone(TimeZone.getTimeZone("Europe/Dublin"));
             return timeFormatter.format(pubDate);
         } else {
             SimpleDateFormat time = new SimpleDateFormat("MMM dd");
