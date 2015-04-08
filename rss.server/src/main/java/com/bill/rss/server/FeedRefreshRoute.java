@@ -1,23 +1,24 @@
 package com.bill.rss.server;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import spark.Request;
 import spark.Response;
 
-import com.bill.rss.dataProvider.FeedUpdater;
-import com.bill.rss.mongodb.MongoFeedUpdater;
+public class FeedRefreshRoute extends BaseRoute {
 
-public class FeedRefreshRoute  extends BaseRoute {
-
-    private FeedUpdater feedUpdater;
+    private final ExecutorService executor;
 
     protected FeedRefreshRoute(String path) {
         super(path);
-        feedUpdater = new MongoFeedUpdater();
+        executor = Executors.newFixedThreadPool(5);
     }
 
     @Override
     public Object handle(Request request, Response response) {
-        feedUpdater.updateWithLatestFeeds();
+        Runnable worker = new FeedRefresherThread("Feed Refresher");
+        executor.execute(worker);
         return "ok";
     }
 }
