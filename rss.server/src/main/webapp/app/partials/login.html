@@ -1,6 +1,6 @@
 <div id="header_container">
     <div id="header">
-        <img id="mini-logo" src="Content/images/header-logo.png" />
+        <span id="mini-logo"><i class="icon-rss"></i>Old News</span>
     </div>
 </div>
 
@@ -9,7 +9,10 @@
 <div id="loginPanel" class="panel panel-default">
   <div class="panel-body">
     <form role="form">
-    	<img id="logo" src="Content/images/logo1.png"/>
+    	<div id="logo">
+    		<i class="icon-rss"></i>
+    		<span>Old News</span>
+    	</div>
     	<div ng-show="errorMessage != ''" class="alert alert-danger">{{errorMessage}}</div>
     	<div class="form-group">
 	    	<label for="email">Email address</label>

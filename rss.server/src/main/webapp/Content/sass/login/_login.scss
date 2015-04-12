@@ -1,3 +1,23 @@
+#logo {
+	margin-bottom: 10px;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #76a0c2), color-stop(100%, #5a87ab));
+	color: white;
+	padding: 60px 0 50px 0;
+	
+	.icon-rss {
+		font-size: 6em;
+		display: block;
+		text-align: center;
+	}
+	
+	span {
+		  text-align: center;
+		  display: block;
+		  font-size: 2.5em;
+		  font-weight: bold;
+	}
+}
+
 #loginPanel {
 	width: 300px;
 	margin: 120px auto 0 auto;
@@ -7,11 +27,6 @@
 		width: 100%;
 	}
 
-
- 	#logo {
-		wwidth: 220px;
-		margin-bottom: 10px;
-	}
 
 	#login {
 		float: right;

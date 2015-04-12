@@ -10,9 +10,9 @@
 			cursor: pointer; 
 
 			#allFeeds {
-				background: url('images/rss.png') no-repeat left;
-				padding-left: 32px;
-				background-size: 35px;
+				.icon-rss {
+					
+				}
 			}
 
 			.feeds {
@@ -44,7 +44,7 @@
 				}
 
 				.feedSource {
-					width: 200px;
+					width: 20%;
 					max-width: 200px;
 					display: inline-block;
 					white-space: nowrap;
@@ -53,13 +53,13 @@
 				}
 
 				.feedTitle {
-					width: 800px;
+					width: 70%;
 					display: inline-block;
 				}
 				
 				article {
 					margin-left: 120px;
-					width: 900px;
+					width: 80%;
 					display: none;
 					
 					h3 {
@@ -81,4 +81,51 @@
 			}
 		}
 	}
+}
+
+
+@media all and (max-width: 800px) {
+body {
+	padding: 0px;
+}
+
+#header {
+	wwidth: inherit;
+}
+
+	#feeds {
+
+		#sideBar {
+			display: none;	
+		}
+	
+	
+		#main-content {
+	
+			#feed-list {
+				list-style-type: none;
+	
+				.feed-item {
+	
+					.feedSource {
+						width: 100%;
+						display: block;
+					}
+	
+					.feedTitle {
+						width: 100%;
+						display: block;
+					}
+					
+					article {
+						margin-left: 0px;
+						width: 100%;
+						display: none;
+						
+					}
+				}
+			}
+		}
+	}
+
 }

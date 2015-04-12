@@ -1,8 +1,8 @@
 <!-- BEGIN: Sticky Header 2-->
 <div id="header_container">
     <div id="header">
-        <img id="mini-logo" src="Content/images/header-logo.png" />
-        <div id="header-nav">
+        <span id="mini-logo"><i class="icon-rss"></i>Old News</span>
+        <span id="header-nav">
             <span class="dropdown">
 			    <span class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
 			        {{name}}
@@ -16,8 +16,8 @@
 				    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="logout()">Log out</a></li>
 				</ul>
 			</span>
-            <img id="settings" src="Content/images/settings.png" />
-        </div>
+            <i id="settings" class="icon-cog"></i>
+        </span>
     </div>
 </div>
 <!-- END: Sticky Header -->
@@ -27,11 +27,11 @@
         <div id="sideBar" class="span1">
             <!--Sidebar content-->
             <ul id="categories">
-                <li id="allFeeds" ng-click="displayFeedsForAllCategory()">All</li>
+                <li id="allFeeds" ng-click="displayFeedsForAllCategory()"><span><i class="icon-rss"></i></span><span>All</span></li>
                 <li ng-repeat="feedCategory in feedCategories">
                     <span ng-click="show_$index = ! show_$index">
-                        <img src="${pageContext.request.contextPath}/Content/images/selector-right-arrow.png" ng-show="! show_$index"/>
-                        <img src="${pageContext.request.contextPath}/Content/images/selector-down-arrow.png" ng-show="show_$index"/>
+                        <i class="icon-right-open" ng-show="! show_$index"></i>
+                        <i class="icon-down-open" ng-show="show_$index"></i>
                     </span>
                     <span ng-click="displayFeedsForCategory(feedCategory.categoryId)">
                         {{ feedCategory.name }}
@@ -47,7 +47,7 @@
         <div id="main-content" class="span11">
             <!--Body content-->
             <div id="spinner"></div>
-            <ul id="feed-list" infinite-scroll='loadMore()' infinite-scroll-distance='2'>
+            <ul id="feed-list" infinite-scroll='loadMore()' infinite-scroll-distance='1'>
                 <li class="feed-item" ng-repeat="feed in feeds" ng-class-odd="'odd'" ng-class-even="'even'">
                     <span ng-click="toggleArticle($index)">
                         <span class="feedSource" title="{{feed.source}}">{{feed.source}}</span>

@@ -50,6 +50,9 @@
 
 @import "bootstrap/bootstrap-responsive.min";
 
+@import "fontello/fontello";
+@import "fontello/animation";
+
 @import "common/colours";
 @import "common/header";
 @import "common/footer";
@@ -58,3 +61,12 @@
 @import "feedsList/feeds";
 @import "signUp/signUp";
 @import "manage/manage";
+
+
+#categories i[class^="icon-"]:before, #categories i[class*=" icon-"]:before {
+  width: 40px;
+}
+
+#categories span {
+  float: left;
+}
