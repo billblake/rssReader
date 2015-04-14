@@ -1,6 +1,7 @@
 <!-- BEGIN: Sticky Header 2-->
 <div id="header_container">
     <div id="header">
+    	<i class="icon-menu" ng-click="toggleSideBar()" />
         <span id="mini-logo"><i class="icon-rss"></i>Old News</span>
         <span id="header-nav">
             <span class="dropdown">
@@ -24,7 +25,7 @@
  
 <div id="feeds" class="container-fluid">
     <div class="row-fluid">
-        <div id="sideBar" class="span1">
+        <div id="sideBar" class="{{sideBarClass}}">
             <!--Sidebar content-->
             <ul id="categories">
                 <li id="allFeeds" ng-click="displayFeedsForAllCategory()"><span><i class="icon-rss"></i></span><span>All</span></li>

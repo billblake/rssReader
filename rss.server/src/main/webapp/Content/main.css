@@ -5039,6 +5039,9 @@ button.close {
   position: fixed;
   width: 100%;
   color: WHITE; }
+  #header .icon-menu {
+    display: none;
+    cursor: pointer; }
   #header #mini-logo {
     margin-left: 25px;
     font-size: 1.5em;
@@ -5109,7 +5112,7 @@ button.close {
       padding-left: 20px; }
       #feeds #sideBar #categories .feeds .feed {
         max-width: 170px;
-        display: inline-block;
+        display: block;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis; }
@@ -5150,13 +5153,19 @@ button.close {
   body {
     padding: 0px; }
 
-  #header {
-    wwidth: inherit; }
+  #header .icon-menu {
+    display: inline-block; }
 
   #feeds {
     padding: 0; }
     #feeds #sideBar {
       display: none; }
+    #feeds #sideBar.display {
+      display: inline-block;
+      position: fixed;
+      background: darkgray;
+      width: 190px;
+      height: 100%; }
     #feeds #main-content {
       width: 100%; }
       #feeds #main-content #feed-list {

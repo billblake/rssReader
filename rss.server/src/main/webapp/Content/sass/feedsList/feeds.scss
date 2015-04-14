@@ -23,7 +23,7 @@
 
 				.feed {
 					max-width: 170px;
-					display: inline-block;
+					display: block;
 					white-space: nowrap;
 					overflow: hidden;
 					text-overflow: ellipsis;
@@ -94,7 +94,9 @@ body {
 }
 
 #header {
-	wwidth: inherit;
+	.icon-menu {
+		display: inline-block;
+	}
 }
 
 	#feeds {
@@ -102,6 +104,14 @@ body {
 
 		#sideBar {
 			display: none;	
+		}
+		
+		#sideBar.display {
+			display: inline-block;
+		 	position: fixed;
+			background: darkgray;
+			width: 190px;
+			height: 100%;
 		}
 	
 	

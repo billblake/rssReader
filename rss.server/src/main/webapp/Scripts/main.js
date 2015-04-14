@@ -185,6 +185,11 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
     };
 
 
+    $scope.toggleSideBar = function() {
+        $scope.sideBarClass = ($scope.sideBarClass !== "display") ? "display" : "";
+    };
+
+
     function getFullName() {
         var fullName = $cookies.user;
         if (typeof fullName === "undefined") {
