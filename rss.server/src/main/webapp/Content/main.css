@@ -5153,20 +5153,25 @@ button.close {
   #header {
     wwidth: inherit; }
 
-  #feeds #sideBar {
-    display: none; }
-  #feeds #main-content #feed-list {
-    list-style-type: none; }
-    #feeds #main-content #feed-list .feed-item .feedSource {
-      width: 100%;
-      display: block; }
-    #feeds #main-content #feed-list .feed-item .feedTitle {
-      width: 100%;
-      display: block; }
-    #feeds #main-content #feed-list .feed-item article {
-      margin-left: 0px;
-      width: 100%;
-      display: none; } }
+  #feeds {
+    padding: 0; }
+    #feeds #sideBar {
+      display: none; }
+    #feeds #main-content {
+      width: 100%; }
+      #feeds #main-content #feed-list {
+        list-style-type: none;
+        padding: 0px; }
+        #feeds #main-content #feed-list .feed-item .feedSource {
+          width: 100%;
+          display: block; }
+        #feeds #main-content #feed-list .feed-item .feedTitle {
+          width: 100%;
+          display: block; }
+        #feeds #main-content #feed-list .feed-item article {
+          margin-left: 0px;
+          width: 100%;
+          display: none; } }
 #main-content {
   padding-top: 50px; }
   #main-content #sign-up {
