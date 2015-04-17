@@ -5187,25 +5187,36 @@ button.close {
     width: 500px;
     margin: 50px auto; }
 
-#manageFeeds .nav-tabs a {
-  width: 120px;
-  text-align: center; }
-#manageFeeds .tab-pane {
-  padding: 100px; }
-  #manageFeeds .tab-pane ul {
-    list-style: none;
-    padding: 0px;
-    margin: 0px; }
-    #manageFeeds .tab-pane ul li {
-      margin-bottom: 10px; }
-  #manageFeeds .tab-pane .category-name, #manageFeeds .tab-pane .feed-name {
-    display: inline-block;
-    margin-right: 15px; }
-  #manageFeeds .tab-pane .category-name {
-    width: 200px; }
-  #manageFeeds .tab-pane .feed-name {
-    width: 300px; }
-#manageFeeds #feeds .category-name {
-  text-align: right; }
+#settings {
+  margin-top: 40px;
+  position: absolute;
+  top: 25px; }
+  #settings .nav-tabs a {
+    width: 120px;
+    text-align: center; }
+  #settings .tab-pane {
+    padding: 100px; }
+    #settings .tab-pane ul {
+      list-style: none;
+      padding: 0px;
+      margin: 0px; }
+      #settings .tab-pane ul li {
+        margin-bottom: 10px; }
+    #settings .tab-pane .category-name, #settings .tab-pane .feed-name {
+      display: inline-block;
+      margin-right: 15px; }
+    #settings .tab-pane .category-name {
+      width: 200px; }
+    #settings .tab-pane .feed-name {
+      width: 300px; }
+  #settings #manageFeeds {
+    margin-left: 25px; }
+    #settings #manageFeeds th, #settings #manageFeeds td {
+      border: 1px solid grey;
+      padding: 10px; }
+    #settings #manageFeeds #addFeed {
+      margin-top: 20px;
+      float: right;
+      cursor: pointer; }
 
 /*# sourceMappingURL=main.css.map */

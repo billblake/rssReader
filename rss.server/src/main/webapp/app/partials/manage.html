@@ -1,7 +1,7 @@
 <!-- BEGIN: Sticky Header 2-->
 <div id="header_container">
     <div id="header">
-        <img id="mini-logo" src="Content/images/header-logo.png" />
+        <span id="mini-logo"><i class="icon-rss"></i>Old News</span>
         <div id="header-nav">
             <span class="dropdown">
 			    <span class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
@@ -22,35 +22,31 @@
 </div>
 <!-- END: Sticky Header -->
  
-<div id="manageFeeds" class="container-fluid">
-<br><br><br><br><br>
-	<ul class="nav nav-tabs">
-		<li class="active"><a href="#feeds" ng-click="showTab($event)">Feeds</a></li>
-		<li><a href="#articles" ng-click="showTab($event)">Categories</a></li>
-	</ul>
-	<div class="tab-content">
-		<div class="tab-pane active" id="feeds">
-			<a class="addElement" ng-click="addFeed()" data-toggle="modal" data-target="#feedModal">Add Feed</a>
-			<ul ng-repeat="feedCategory in feedCategories">
-				<li ng-repeat="feed in feedCategory.feeds">
-					<span class="feed-name">{{feed.name}}</span>
-					<span class="category-name">{{feedCategory.name}}</span>
-					<span class="glyphicon glyphicon-edit" ng-click="editFeed(feed, feedCategory)" data-toggle="modal" data-target="#feedModal"></span>
-					<span class="glyphicon glyphicon-trash" ng-click="deleteFeed(feed)"></span>
-				</li>
-			</ul>
+<div id="settings" class="container-fluid">
+
+		<div id="manageFeeds">
+			<h2>Feeds</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Feed Name</th>
+						<th>Category</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="feed in feeds">
+						<td>{{feed.name}}</td>
+						<td>{{feed.category}}</td>
+						<td>
+							<span class="glyphicon glyphicon-edit" ng-click="editFeed(feed, feedCategory)" data-toggle="modal" data-target="#feedModal"></span>
+	 						<span class="glyphicon glyphicon-trash" ng-click="deleteFeed(feed)"></span>
+	 					</td>
+					</tr>
+				</tbody>
+			</table>
+			<a id="addFeed" ng-click="addFeed()" data-toggle="modal" data-target="#feedModal">Add Feed</a>
 		</div>
-	  	<div class="tab-pane" id="articles">
-	  		<a class="addElement" ng-click="addCategory()" data-toggle="modal" data-target="#categoryModal">Add Category</a>
-			<ul>
-				<li ng-repeat="feedCategory in feedCategories">
-					<span class="category-name">{{feedCategory.name}}</span>
-					<span class="glyphicon glyphicon-edit" ng-click="editCategory(feedCategory)" data-toggle="modal" data-target="#categoryModal"></span>
-					<span class="glyphicon glyphicon-trash" ng-click="deleteCategory(feedCategory)"></span>
-				</li>
-			</ul>
-	  	</div>
-	</div>
 </div>
 
 <div class="modal fade" id="feedModal" tabindex="-1" role="dialog" aria-labelledby="feedModal" aria-hidden="true">
