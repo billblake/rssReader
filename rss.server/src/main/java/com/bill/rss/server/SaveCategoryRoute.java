@@ -7,26 +7,31 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 
+import com.bill.rss.dataProvider.CategoryUpdater;
 import com.bill.rss.domain.Category;
+import com.bill.rss.mongodb.MongoCategoryUpdater;
 
 public class SaveCategoryRoute extends Route {
 
     private final ObjectMapper mapper = new ObjectMapper();
+    private final CategoryUpdater categoryUpdater;
 
     protected SaveCategoryRoute(String path) {
         super(path);
+        categoryUpdater = new MongoCategoryUpdater();
     }
 
     @Override
     public Object handle(Request request, Response response) {
         Category category = extractCategoryFromRequest(request);
         if (StringUtils.isBlank(category.getCategoryId())) {
-            //create new category
+            category.setUsername("bb");
+            category = categoryUpdater.addCategory(category);
         } else {
             //update existing category
         }
 
-        return null;
+        return JsonUtils.convertObjectToJson(category);
     }
 
 

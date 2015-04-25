@@ -20,5 +20,6 @@ public class RssController implements SparkApplication {
 
 		post(new SaveCategoryRoute("/category"));
 		post(new SaveCategoryRoute("/category/:categoryId"));
+		post(new SaveFeedRoute("/feeds/category/:categoryId/feed"));
 	}
 }

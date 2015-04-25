@@ -1,5 +1,7 @@
 app.controller('FeedManagerController', function($scope, feedService) {
 
+//    $scope.name = getFullName();
+
     $scope.showTab = function($event) {
         $event.preventDefault();
         $($event.target).tab('show');
@@ -34,19 +36,24 @@ app.controller('FeedManagerController', function($scope, feedService) {
         $scope.currentCategory = {};
     };
 
+
     $scope.saveFeed = function(feed) {
-        console.log(feed);
-
+        if (feed.categoryId === "new") {
+            var category = {name : feed.newCategoryName};
+            feedService.saveCategory(category, function(u, putResponseHeaders) {
+                feed.categoryId = u.categoryId;
+                feedService.saveFeed(feed);
+            });
+        } else {
+            feedService.saveFeed(feed);
+        }
     };
 
-    $scope.saveCategory = function(category) {
-        console.log(category);
-        feedService.saveCategory(category);
-    };
 
     function getFlatListOfFeeds() {
         feedService.getCategories().$then(function(response){
             var feedCategories = response.data;
+            $scope.feedCategories = feedCategories;
             var feed = {}, feeds = [], cat;
           feedCategories.forEach(function(category) {
               cat = category;

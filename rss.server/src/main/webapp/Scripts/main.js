@@ -57,6 +57,8 @@ app.config(function ($routeProvider) {
 
 app.controller('FeedManagerController', function($scope, feedService) {
 
+//    $scope.name = getFullName();
+
     $scope.showTab = function($event) {
         $event.preventDefault();
         $($event.target).tab('show');
@@ -91,19 +93,24 @@ app.controller('FeedManagerController', function($scope, feedService) {
         $scope.currentCategory = {};
     };
 
+
     $scope.saveFeed = function(feed) {
-        console.log(feed);
-
+        if (feed.categoryId === "new") {
+            var category = {name : feed.newCategoryName};
+            feedService.saveCategory(category, function(u, putResponseHeaders) {
+                feed.categoryId = u.categoryId;
+                feedService.saveFeed(feed);
+            });
+        } else {
+            feedService.saveFeed(feed);
+        }
     };
 
-    $scope.saveCategory = function(category) {
-        console.log(category);
-        feedService.saveCategory(category);
-    };
 
     function getFlatListOfFeeds() {
         feedService.getCategories().$then(function(response){
             var feedCategories = response.data;
+            $scope.feedCategories = feedCategories;
             var feed = {}, feeds = [], cat;
           feedCategories.forEach(function(category) {
               cat = category;
@@ -333,7 +340,7 @@ app.service('feedService', function ($http, $resource) {
     };
 
 
-    this.saveCategory = function (_category) {
+    this.saveCategory = function (_category, callback) {
         if (typeof _category === "undefined") {
             return;
         }
@@ -348,7 +355,7 @@ app.service('feedService', function ($http, $resource) {
 //            });
 
         var category = new Category({categoryId : _category.categoryId, name : _category.name});
-        category.$save();
+        category.$save(callback);
     };
 
 
@@ -363,6 +370,23 @@ app.service('feedService', function ($http, $resource) {
         var feedResource = createFeedResource(_categoryId, _feedId, _page);
         return feedResource.query(suc, fail);
     };
+
+
+    this.saveFeed = function(_feed) {
+        if (typeof _feed === "undefined") {
+            return;
+        }
+
+        var Feed = createFeedResource(_feed.categoryId);
+
+        var feed = new Feed({
+            categoryId : _feed.categoryId,
+            name : _feed.name,
+            url : _feed.url,
+            newCategoryName : _feed.newCategoryName
+        });
+        feed.$save();
+    }
 
 
     this.refreshFeeds = function (callback) {

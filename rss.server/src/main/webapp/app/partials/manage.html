@@ -16,7 +16,7 @@
 				    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="logout()">Log out</a></li>
 				</ul>
 			</span>
-            <i id="settings" class="icon-cog"></i>
+            <i id="settingsIcon" class="icon-cog"></i>
         </div>
     </div>
 </div>
@@ -70,33 +70,17 @@
 		    <select id="category" class="form-control" name="category" ng-model="currentFeed.categoryId" ng-change="" autocomplete="off">
 			  <option value="">Select category</option>
 			  <option ng-repeat="category in feedCategories" value="{{category.categoryId}}">{{category.name}}</option>
+			  <option id="newCategoryOption" value="new">"New Category"</option>
 			</select>
+		</div>
+		<div class="form-group" ng-show="currentFeed.categoryId == 'new'">
+		    <label for="url">New Category Name *</label>
+		    <input type="text" class="form-control" id="url" placeholder="Enter new category name" ng-model="currentFeed.newCategoryName" ng-change="" autocomplete="off" required>
 		</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" ng-click="saveFeed(currentFeed)">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModal" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add new category</h4>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-		    <label for="categoryName">Name *</label>
-		    <input type="text" class="form-control" id="categoryName" placeholder="Enter category name" ng-model="currentCategory.name" ng-change="" autocomplete="off" required>
-		</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" ng-click="saveCategory(currentCategory)">Save changes</button>
       </div>
     </div>
   </div>

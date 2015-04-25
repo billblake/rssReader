@@ -7,7 +7,7 @@ app.service('feedService', function ($http, $resource) {
     };
 
 
-    this.saveCategory = function (_category) {
+    this.saveCategory = function (_category, callback) {
         if (typeof _category === "undefined") {
             return;
         }
@@ -22,7 +22,7 @@ app.service('feedService', function ($http, $resource) {
 //            });
 
         var category = new Category({categoryId : _category.categoryId, name : _category.name});
-        category.$save();
+        category.$save(callback);
     };
 
 
@@ -37,6 +37,23 @@ app.service('feedService', function ($http, $resource) {
         var feedResource = createFeedResource(_categoryId, _feedId, _page);
         return feedResource.query(suc, fail);
     };
+
+
+    this.saveFeed = function(_feed) {
+        if (typeof _feed === "undefined") {
+            return;
+        }
+
+        var Feed = createFeedResource(_feed.categoryId);
+
+        var feed = new Feed({
+            categoryId : _feed.categoryId,
+            name : _feed.name,
+            url : _feed.url,
+            newCategoryName : _feed.newCategoryName
+        });
+        feed.$save();
+    }
 
 
     this.refreshFeeds = function (callback) {

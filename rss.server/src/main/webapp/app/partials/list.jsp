@@ -17,7 +17,7 @@
 				    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="logout()">Log out</a></li>
 				</ul>
 			</span>
-            <i id="settings" class="icon-cog"></i>
+            <i id="settingsIcon" class="icon-cog"></i>
         </span>
     </div>
 </div>
