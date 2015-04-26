@@ -13,6 +13,7 @@ import com.bill.rss.mongodb.UserRetriever;
 import static com.bill.rss.server.SecurityUtils.clearPassword;
 import static com.bill.rss.server.ViewConstants.LOGGED_IN_COOKIE_NAME;
 import static com.bill.rss.server.ViewConstants.LOGGED_IN_COOKIE_VALUE;
+import static com.bill.rss.server.ViewConstants.USERNAME_COOKIE_NAME;
 import static com.bill.rss.server.ViewConstants.USER_COOKIE_NAME;
 import static com.bill.rss.server.ViewConstants.USER_SESSION_KEY;
 
@@ -76,6 +77,7 @@ public class LoginRoute extends BaseRoute {
         String fullName = user.getFirstName() + " " + user.getLastName();
         response.cookie(LOGGED_IN_COOKIE_NAME, LOGGED_IN_COOKIE_VALUE, 10800);
         response.cookie(USER_COOKIE_NAME, fullName, 10800);
+        response.cookie(USERNAME_COOKIE_NAME, user.getUserName(), 10800);
     }
 
 

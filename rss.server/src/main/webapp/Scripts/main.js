@@ -55,16 +55,24 @@ app.config(function ($routeProvider) {
 
 
 
-app.controller('FeedManagerController', function($scope, feedService) {
+app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $location, feedService, userService) {
 
-//    $scope.name = getFullName();
+    var loggedInValue = $cookies.loggedIn;
+    if (loggedInValue !== "logged-in" && !$rootScope.loggedIn) {
+        $location.path('/login');
+        return;
+    }
+
+    $scope.name = userService.getFullName();
+    $scope.username = userService.getUserame();
+    $scope.invalidForm = false;
 
     $scope.showTab = function($event) {
         $event.preventDefault();
         $($event.target).tab('show');
     };
 
-    $scope.feeds = getFlatListOfFeeds();
+    getFlatListOfFeeds();
 
     $scope.editFeed = function(feed, category) {
         $scope.currentFeed = feed;
@@ -97,8 +105,9 @@ app.controller('FeedManagerController', function($scope, feedService) {
     $scope.saveFeed = function(feed) {
         if (feed.categoryId === "new") {
             var category = {name : feed.newCategoryName};
-            feedService.saveCategory(category, function(u, putResponseHeaders) {
-                feed.categoryId = u.categoryId;
+            category.userName = $scope.username
+            feedService.saveCategory(category, function(createdCategory, putResponseHeaders) {
+                feed.categoryId = createdCategory.categoryId;
                 feedService.saveFeed(feed);
             });
         } else {
@@ -112,8 +121,9 @@ app.controller('FeedManagerController', function($scope, feedService) {
             var feedCategories = response.data;
             $scope.feedCategories = feedCategories;
             var feed = {}, feeds = [], cat;
-          feedCategories.forEach(function(category) {
+            feedCategories.forEach(function(category) {
               cat = category;
+              $scope.username = category.username;
               category.feeds.forEach(function(feedItem) {
                   feed.categoryId = cat.categoryId;
                   feed.category = cat.name;
@@ -150,7 +160,7 @@ app.controller('LoginController', function($scope, $http, $location, $rootScope)
         });
     };
 });
-app.controller('ListController', function($scope, feedService, $cookies, $cookieStore, $location, $rootScope, $http) {
+app.controller('ListController', function($scope, feedService, $cookies, $cookieStore, $location, $rootScope, $http, userService) {
 
     var loggedInValue = $cookies.loggedIn;
     if (loggedInValue !== "logged-in" && !$rootScope.loggedIn) {
@@ -163,7 +173,7 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
     $scope.loadingMessage = "Loading Feeds";
     $scope.feedCategories = feedService.getCategories();
     $scope.feeds = feedService.getFeeds(null, null, loadFeedsSuccessful, fail);
-    $scope.name = getFullName();
+    $scope.name = userService.getFullName();
 
     $scope.loadMore = function() {
         $scope.page++;
@@ -215,15 +225,6 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
     $scope.toggleSideBar = function() {
         $scope.sideBarClass = ($scope.sideBarClass !== "display") ? "display" : "";
     };
-
-
-    function getFullName() {
-        var fullName = $cookies.user;
-        if (typeof fullName === "undefined") {
-            fullName = $rootScope.user.firstName + " " + $rootScope.user.lastName;
-        }
-        return fullName.replace(/"/g, '');
-    }
 
 
     function showRefreshedFeeds() {
@@ -383,6 +384,7 @@ app.service('feedService', function ($http, $resource) {
             categoryId : _feed.categoryId,
             name : _feed.name,
             url : _feed.url,
+            userName : _feed.userName,
             newCategoryName : _feed.newCategoryName
         });
         feed.$save();
@@ -420,7 +422,7 @@ app.service('feedService', function ($http, $resource) {
 });
 
 
-app.service('userService', function ($http, $resource) {
+app.service('userService', function ($http, $resource, $cookies, $rootScope) {
 
 	this.createUser = function (user, successCallback, failureCallback) {
         var userObject = $resource(readerConstants.appContextPath + '/users');
@@ -432,6 +434,22 @@ app.service('userService', function ($http, $resource) {
         	password : user.password
         });
         return newUser.$save(successCallback, failureCallback);
+    };
+
+    this.getFullName = function() {
+        var fullName = $cookies.user;
+        if (typeof fullName === "undefined") {
+            fullName = $rootScope.user.firstName + " " + $rootScope.user.lastName;
+        }
+        return fullName.replace(/"/g, '');
+    };
+
+    this.getUserame = function() {
+        var username = $cookies.username;
+        if (typeof username === "undefined") {
+            username = $rootScope.user.username;
+        }
+        return username.replace(/"/g, '');
     };
 
 });

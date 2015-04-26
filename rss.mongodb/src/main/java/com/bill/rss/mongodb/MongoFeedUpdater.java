@@ -109,6 +109,8 @@ public class MongoFeedUpdater implements FeedUpdater {
         DBObject category = categoriesCollection.findOne(categoryQuery);
         BasicDBList feedIds = (BasicDBList) category.get(FEED_IDS);
         feedIds.add(feedId);
+        category.put(FEED_IDS, feedIds);
+        categoriesCollection.save(category);
 
         feed.setFeedId(feedId.toString());
         return feed;

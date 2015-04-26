@@ -1,4 +1,4 @@
-app.controller('ListController', function($scope, feedService, $cookies, $cookieStore, $location, $rootScope, $http) {
+app.controller('ListController', function($scope, feedService, $cookies, $cookieStore, $location, $rootScope, $http, userService) {
 
     var loggedInValue = $cookies.loggedIn;
     if (loggedInValue !== "logged-in" && !$rootScope.loggedIn) {
@@ -11,7 +11,7 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
     $scope.loadingMessage = "Loading Feeds";
     $scope.feedCategories = feedService.getCategories();
     $scope.feeds = feedService.getFeeds(null, null, loadFeedsSuccessful, fail);
-    $scope.name = getFullName();
+    $scope.name = userService.getFullName();
 
     $scope.loadMore = function() {
         $scope.page++;
@@ -63,15 +63,6 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
     $scope.toggleSideBar = function() {
         $scope.sideBarClass = ($scope.sideBarClass !== "display") ? "display" : "";
     };
-
-
-    function getFullName() {
-        var fullName = $cookies.user;
-        if (typeof fullName === "undefined") {
-            fullName = $rootScope.user.firstName + " " + $rootScope.user.lastName;
-        }
-        return fullName.replace(/"/g, '');
-    }
 
 
     function showRefreshedFeeds() {

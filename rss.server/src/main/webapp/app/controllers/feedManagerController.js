@@ -1,13 +1,21 @@
-app.controller('FeedManagerController', function($scope, feedService) {
+app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $location, feedService, userService) {
 
-//    $scope.name = getFullName();
+    var loggedInValue = $cookies.loggedIn;
+    if (loggedInValue !== "logged-in" && !$rootScope.loggedIn) {
+        $location.path('/login');
+        return;
+    }
+
+    $scope.name = userService.getFullName();
+    $scope.username = userService.getUserame();
+    $scope.invalidForm = false;
 
     $scope.showTab = function($event) {
         $event.preventDefault();
         $($event.target).tab('show');
     };
 
-    $scope.feeds = getFlatListOfFeeds();
+    getFlatListOfFeeds();
 
     $scope.editFeed = function(feed, category) {
         $scope.currentFeed = feed;
@@ -40,8 +48,9 @@ app.controller('FeedManagerController', function($scope, feedService) {
     $scope.saveFeed = function(feed) {
         if (feed.categoryId === "new") {
             var category = {name : feed.newCategoryName};
-            feedService.saveCategory(category, function(u, putResponseHeaders) {
-                feed.categoryId = u.categoryId;
+            category.userName = $scope.username
+            feedService.saveCategory(category, function(createdCategory, putResponseHeaders) {
+                feed.categoryId = createdCategory.categoryId;
                 feedService.saveFeed(feed);
             });
         } else {
@@ -55,8 +64,9 @@ app.controller('FeedManagerController', function($scope, feedService) {
             var feedCategories = response.data;
             $scope.feedCategories = feedCategories;
             var feed = {}, feeds = [], cat;
-          feedCategories.forEach(function(category) {
+            feedCategories.forEach(function(category) {
               cat = category;
+              $scope.username = category.username;
               category.feeds.forEach(function(feedItem) {
                   feed.categoryId = cat.categoryId;
                   feed.category = cat.name;
