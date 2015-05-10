@@ -52,37 +52,40 @@
 <div class="modal fade" id="feedModal" tabindex="-1" role="dialog" aria-labelledby="feedModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add new feed</h4>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-		    <label for="feedName">Name *</label>
-		    <input type="text" class="form-control" id="feedName" placeholder="Enter feed name" ng-model="currentFeed.name" ng-change="" autocomplete="off" required>
-		</div>
-		<div class="form-group">
-		    <label for="url">URL *</label>
-		    <input type="text" class="form-control" id="url" placeholder="Enter feed url" ng-model="currentFeed.url" ng-change="" autocomplete="off" required>
-		</div>
-		<div class="form-group">
-		    <label for="category">Category</label>
-		    <select id="category" class="form-control" name="category" ng-model="currentFeed.categoryId" ng-change="" autocomplete="off">
-			  <option value="">Select category</option>
-			  <option ng-repeat="category in feedCategories" value="{{category.categoryId}}">{{category.name}}</option>
-			  <option id="newCategoryOption" value="new">"New Category"</option>
-			</select>
-		</div>
-		<div class="form-group" ng-show="currentFeed.categoryId == 'new'">
-		    <label for="url">New Category Name *</label>
-		    <input type="text" class="form-control" id="url" placeholder="Enter new category name" ng-model="currentFeed.newCategoryName" ng-change="" autocomplete="off" required>
-		</div>
-      </div>
-      <div class="modal-footer">
-      	<input type="hidden" ng-model="currentFeed.userName" value="{{username}}">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" ng-disabled="invalidForm" ng-click="saveFeed(currentFeed)">Save changes</button>
-      </div>
+      <form name="addFeedForm" role="form">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Add new feed</h4>
+	      </div>
+	      <div class="modal-body">
+	        <div class="form-group">
+			    <label for="feedName">Name *</label>
+			    <input type="text" class="form-control" id="feedName" placeholder="Enter feed name" ng-model="currentFeed.name" ng-change="validateForm(currentFeed, addFeedForm)" autocomplete="off" required>
+			</div>
+			<div class="form-group">
+			    <label for="url">URL *</label>
+			    <input type="url" class="form-control" id="url" placeholder="Enter feed url" ng-model="currentFeed.url" ng-change="validateForm(currentFeed, addFeedForm)" autocomplete="off" required>
+			</div>
+			<div class="form-group">
+			    <label for="category">Category</label>
+			    <select id="category" class="form-control" name="category" ng-model="currentFeed.categoryId" ng-change="validateForm(currentFeed, addFeedForm)" autocomplete="off" required>
+				  <option value="">Select category</option>
+				  <option ng-repeat="category in feedCategories" value="{{category.categoryId}}">{{category.name}}</option>
+				  <option id="newCategoryOption" value="new">"New Category"</option>
+				</select>
+			</div>
+			<div class="form-group" ng-show="currentFeed.categoryId == 'new'">
+			    <label for="url">New Category Name *</label>
+			    <input type="text" class="form-control" id="url" placeholder="Enter new category name" ng-model="currentFeed.newCategoryName" ng-change="validateForm(currentFeed, addFeedForm)" autocomplete="off">
+			</div>
+	      </div>
+	      <div class="modal-footer">
+	      	<input type="hidden" ng-model="currentFeed.userName" value="{{username}}">
+	      	<input type="hidden" ng-model="currentFeed.feedId" value="{{currentFeed.feedId}}">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" ng-disabled="invalidForm" ng-click="saveFeed(currentFeed)">Save changes</button>
+	      </div>
+      </form>
     </div>
   </div>
 </div>

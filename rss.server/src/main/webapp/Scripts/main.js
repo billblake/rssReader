@@ -65,7 +65,7 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
 
     $scope.name = userService.getFullName();
     $scope.username = userService.getUserame();
-    $scope.invalidForm = false;
+    $scope.invalidForm = true;
 
     $scope.showTab = function($event) {
         $event.preventDefault();
@@ -75,7 +75,7 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
     getFlatListOfFeeds();
 
     $scope.editFeed = function(feed, category) {
-        $scope.currentFeed = feed;
+        $scope.currentFeed = angular.copy(feed);
         $scope.currentCategory = category;
     };
 
@@ -114,6 +114,19 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
             feedService.saveFeed(feed);
         }
     };
+
+
+    $scope.validateForm = function(feed, addFeedForm) {
+        $scope.invalidForm = !(addFeedForm.$valid && isCategoryValid(feed));
+    };
+
+
+    function isCategoryValid(feed) {
+        if (feed.categoryId === "new") {
+            return typeof feed.newCategoryName !== "undefined" && feed.newCategoryName !== "";
+        }
+        return true;
+    }
 
 
     function getFlatListOfFeeds() {
@@ -275,7 +288,7 @@ app.controller('SignUpController', function ($scope, userService) {
 
     $scope.signUp = function(user) {
         var createdUserPromise = userService.createUser(user, userCreatedSuccessfully, userCreationFailure);
-        
+
     };
 
 
@@ -389,8 +402,8 @@ app.service('feedService', function ($http, $resource) {
             categoryId : _feed.categoryId,
             name : _feed.name,
             url : _feed.url,
-            userName : _feed.userName,
-            newCategoryName : _feed.newCategoryName
+            feedId : _feed.feedId,
+            userName : _feed.userName
         });
         feed.$save();
     }

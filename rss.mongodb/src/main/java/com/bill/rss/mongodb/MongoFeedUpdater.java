@@ -84,15 +84,35 @@ public class MongoFeedUpdater implements FeedUpdater {
 
 
     public Feed saveFeed(Feed feed) {
-        // TODO Auto-generated method stub
-        throw new RuntimeException("not implemented");
+        DB dbConnection = MongoDBConnection.getDbConnection();
+        DBCollection feedCollection = dbConnection.getCollection("feeds");
+        ObjectId feedId = new ObjectId(feed.getFeedId());
+        ObjectId newCategoryId = new ObjectId(feed.getCategoryId());
+
+        BasicDBObject feedQuery = new BasicDBObject();
+        feedQuery.put("_id", feedId);
+
+        DBObject feedDocument = feedCollection.findOne(feedQuery);
+        ObjectId oldCategoryId = (ObjectId) feedDocument.get(CATEGORY_ID);
+
+        feedDocument.put(FEED_NAME, feed.getName());
+        feedDocument.put(FEED_URL, feed.getUrl());
+        feedDocument.put(CATEGORY_ID, new ObjectId(feed.getCategoryId()));
+        feedCollection.save(feedDocument);
+
+        updateFeedItems(feed, dbConnection, feedId, newCategoryId, oldCategoryId);
+        if (!newCategoryId.equals(oldCategoryId)) {
+            updateCategories(feed, dbConnection, feedId, newCategoryId, oldCategoryId);
+        }
+
+
+        return feed;
     }
 
 
     public Feed addFeed(Feed feed) {
         DB dbConnection = MongoDBConnection.getDbConnection();
         DBCollection feedCollection = dbConnection.getCollection("feeds");
-        DBCollection categoriesCollection = dbConnection.getCollection("categories");
 
         BasicDBObject feedDocument = new BasicDBObject();
         feedDocument.put(USER_NAME, feed.getUserName());
@@ -103,17 +123,62 @@ public class MongoFeedUpdater implements FeedUpdater {
         feedCollection.save(feedDocument);
         ObjectId feedId = feedDocument.getObjectId("_id");
 
+        addFeedIdToCategoriesCollection(dbConnection, feedId, new ObjectId(feed.getCategoryId()));
+
+        feed.setFeedId(feedId.toString());
+        return feed;
+    }
+
+
+    private void updateCategories(Feed feed, DB dbConnection, ObjectId feedId, ObjectId newCategoryId, ObjectId oldCategoryId) {
+        DBCollection categoriesCollection = dbConnection.getCollection("categories");
+
+        BasicDBObject categoryQuery = new BasicDBObject();
+        categoryQuery.put("_id", oldCategoryId);
+        DBObject category = categoriesCollection.findOne(categoryQuery);
+        BasicDBList feedIds = (BasicDBList) category.get(FEED_IDS);
+        feedIds.remove(new ObjectId(feed.getFeedId()));
+        category.put(FEED_IDS, feedIds);
+        categoriesCollection.save(category);
+
+        addFeedIdToCategoriesCollection(dbConnection, feedId, newCategoryId);
+    }
+
+
+    private void updateFeedItems(Feed feed, DB dbConnection, ObjectId feedId, ObjectId newCategoryId, ObjectId oldCategoryId) {
+        BasicDBObject update = new BasicDBObject();
+        update.put("$set", new BasicDBObject()
+            .append(CATEGORY_ID, newCategoryId)
+            .append(FEED_ITEM_SOURCE, feed.getName()));
+
+        BasicDBObject feedItemQuery = new BasicDBObject();
+        feedItemQuery.put(FEED_ID, feedId);
+
+        DBCollection feedItemCollection = dbConnection.getCollection(FEED_ITEMS);
+        feedItemCollection.updateMulti(feedItemQuery, update);
+
+//
+//
+//        DBCursor feedItemToUpdate = feedItemCollection.find(feedItemQuery);
+//
+//        while (feedItemToUpdate.hasNext()) {
+//            DBObject feedItem = feedItemToUpdate.next();
+//            feedItem.put(CATEGORY_ID, newCategoryId);
+//            feedItemCollection.save(feedItem);
+//        }
+    }
+
+
+    private void addFeedIdToCategoriesCollection(DB dbConnection, ObjectId feedId, ObjectId categoryId) {
+        DBCollection categoriesCollection = dbConnection.getCollection("categories");
         DBObject categoryQuery = new BasicDBObject();
-        categoryQuery.put("_id", new ObjectId(feed.getCategoryId()));
+        categoryQuery.put("_id", categoryId);
 
         DBObject category = categoriesCollection.findOne(categoryQuery);
         BasicDBList feedIds = (BasicDBList) category.get(FEED_IDS);
         feedIds.add(feedId);
         category.put(FEED_IDS, feedIds);
         categoriesCollection.save(category);
-
-        feed.setFeedId(feedId.toString());
-        return feed;
     }
 
 

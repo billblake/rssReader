@@ -50,8 +50,8 @@ app.service('feedService', function ($http, $resource) {
             categoryId : _feed.categoryId,
             name : _feed.name,
             url : _feed.url,
-            userName : _feed.userName,
-            newCategoryName : _feed.newCategoryName
+            feedId : _feed.feedId,
+            userName : _feed.userName
         });
         feed.$save();
     }

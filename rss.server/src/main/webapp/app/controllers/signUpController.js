@@ -24,7 +24,7 @@ app.controller('SignUpController', function ($scope, userService) {
 
     $scope.signUp = function(user) {
         var createdUserPromise = userService.createUser(user, userCreatedSuccessfully, userCreationFailure);
-        
+
     };
 
 

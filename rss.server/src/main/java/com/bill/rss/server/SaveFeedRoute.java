@@ -5,13 +5,12 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import spark.Request;
 import spark.Response;
-import spark.Route;
 
 import com.bill.rss.dataProvider.FeedUpdater;
 import com.bill.rss.domain.Feed;
 import com.bill.rss.mongodb.MongoFeedUpdater;
 
-public class SaveFeedRoute extends Route {
+public class SaveFeedRoute extends BaseRoute {
 
     private final ObjectMapper mapper = new ObjectMapper();
     private final FeedUpdater feedUpdater = new MongoFeedUpdater();
@@ -28,6 +27,7 @@ public class SaveFeedRoute extends Route {
             feed = feedUpdater.addFeed(feed);
         } else {
             //update existing feed
+            feed = feedUpdater.saveFeed(feed);
         }
         return JsonUtils.convertObjectToJson(feed);
     }
@@ -37,6 +37,7 @@ public class SaveFeedRoute extends Route {
         Feed feed = null;
         try {
             feed = mapper.readValue(request.body(), Feed.class);
+            feed.setUserName(getUsername(request));
         } catch (Exception e) {
             halt(401, "Invalid Input");
         }
