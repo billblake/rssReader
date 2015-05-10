@@ -108,10 +108,10 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
             category.userName = $scope.username
             feedService.saveCategory(category, function(createdCategory, putResponseHeaders) {
                 feed.categoryId = createdCategory.categoryId;
-                feedService.saveFeed(feed);
+                feedService.saveFeed(feed, feedSaved);
             });
         } else {
-            feedService.saveFeed(feed);
+            feedService.saveFeed(feed, feedSaved);
         }
     };
 
@@ -151,6 +151,11 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
         });
     }
 
+
+    function feedSaved(response) {
+        getFlatListOfFeeds();
+        $('#feedModal').modal('hide');
+    }
 });
 app.controller('LoginController', function($scope, $http, $location, $rootScope) {
 
@@ -391,7 +396,7 @@ app.service('feedService', function ($http, $resource) {
     };
 
 
-    this.saveFeed = function(_feed) {
+    this.saveFeed = function(_feed, callback) {
         if (typeof _feed === "undefined") {
             return;
         }
@@ -405,7 +410,7 @@ app.service('feedService', function ($http, $resource) {
             feedId : _feed.feedId,
             userName : _feed.userName
         });
-        feed.$save();
+        feed.$save(callback);
     }
 
 

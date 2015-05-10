@@ -51,10 +51,10 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
             category.userName = $scope.username
             feedService.saveCategory(category, function(createdCategory, putResponseHeaders) {
                 feed.categoryId = createdCategory.categoryId;
-                feedService.saveFeed(feed);
+                feedService.saveFeed(feed, feedSaved);
             });
         } else {
-            feedService.saveFeed(feed);
+            feedService.saveFeed(feed, feedSaved);
         }
     };
 
@@ -94,4 +94,9 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
         });
     }
 
+
+    function feedSaved(response) {
+        getFlatListOfFeeds();
+        $('#feedModal').modal('hide');
+    }
 });

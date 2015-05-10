@@ -39,7 +39,7 @@ app.service('feedService', function ($http, $resource) {
     };
 
 
-    this.saveFeed = function(_feed) {
+    this.saveFeed = function(_feed, callback) {
         if (typeof _feed === "undefined") {
             return;
         }
@@ -53,7 +53,7 @@ app.service('feedService', function ($http, $resource) {
             feedId : _feed.feedId,
             userName : _feed.userName
         });
-        feed.$save();
+        feed.$save(callback);
     }
 
 
