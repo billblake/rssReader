@@ -156,16 +156,6 @@ public class MongoFeedUpdater implements FeedUpdater {
 
         DBCollection feedItemCollection = dbConnection.getCollection(FEED_ITEMS);
         feedItemCollection.updateMulti(feedItemQuery, update);
-
-//
-//
-//        DBCursor feedItemToUpdate = feedItemCollection.find(feedItemQuery);
-//
-//        while (feedItemToUpdate.hasNext()) {
-//            DBObject feedItem = feedItemToUpdate.next();
-//            feedItem.put(CATEGORY_ID, newCategoryId);
-//            feedItemCollection.save(feedItem);
-//        }
     }
 
 
