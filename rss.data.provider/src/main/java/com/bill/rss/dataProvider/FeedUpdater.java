@@ -11,4 +11,6 @@ public interface FeedUpdater {
 	Feed addFeed(Feed feed);
 
 	Feed saveFeed(Feed feed);
+
+	boolean deleteFeed(Feed feed);
 }

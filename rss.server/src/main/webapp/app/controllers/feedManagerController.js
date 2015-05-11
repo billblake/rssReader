@@ -23,7 +23,7 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
     };
 
     $scope.deleteFeed = function(feed) {
-
+        feedService.deleteFeed(feed, getFlatListOfFeeds);
     };
 
 

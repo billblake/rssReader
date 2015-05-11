@@ -54,7 +54,25 @@ app.service('feedService', function ($http, $resource) {
             userName : _feed.userName
         });
         feed.$save(callback);
-    }
+    };
+
+
+    this.deleteFeed = function(_feed, callback) {
+        if (typeof _feed === "undefined") {
+            return;
+        }
+
+        var Feed = createFeedResource(_feed.categoryId, _feed.feedId);
+
+        var feed = new Feed({
+            categoryId : _feed.categoryId,
+            name : _feed.name,
+            url : _feed.url,
+            feedId : _feed.feedId,
+            userName : _feed.userName
+        });
+        feed.$delete(callback);
+    };
 
 
     this.refreshFeeds = function (callback) {

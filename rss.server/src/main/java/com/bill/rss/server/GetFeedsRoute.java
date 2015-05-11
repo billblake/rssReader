@@ -12,13 +12,11 @@ import com.bill.rss.mongodb.FeedItemRetriever;
 import com.bill.rss.mongodb.MongoFeedUpdater;
 
 import static com.bill.rss.server.ViewConstants.CATEGORY_ID_PATH_VARIABLE;
+import static com.bill.rss.server.ViewConstants.FEED_ID_PATH_VARIABLE;
 import static com.bill.rss.server.ViewConstants.JSON_RESPONSE_TYPE;
 import static com.bill.rss.server.ViewConstants.REFRESH_QUERY_PARAM;
 
 public class GetFeedsRoute extends BaseRoute {
-
-
-    private static final String FEED_ID_PATH_VARIABLE = ":feedId";
 
     private FeedItemProvider feedProvider;
     private FeedUpdater feedUpdater;

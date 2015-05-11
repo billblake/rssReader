@@ -5132,7 +5132,8 @@ button.close {
         display: inline-block;
         white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis; }
+        text-overflow: ellipsis;
+        vertical-align: bottom; }
       #feeds #main-content #feed-list .feed-item .feedTitle {
         width: 65%;
         display: inline-block; }
@@ -5218,5 +5219,7 @@ button.close {
       margin-top: 20px;
       float: right;
       cursor: pointer; }
+  #settings .editFeed, #settings .deleteFeed {
+    cursor: pointer; }
 
 /*# sourceMappingURL=main.css.map */

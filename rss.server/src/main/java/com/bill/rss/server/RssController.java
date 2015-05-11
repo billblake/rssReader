@@ -1,6 +1,7 @@
 package com.bill.rss.server;
 
 import spark.servlet.SparkApplication;
+import static spark.Spark.delete;
 import static spark.Spark.get;
 import static spark.Spark.post;
 
@@ -21,5 +22,7 @@ public class RssController implements SparkApplication {
 		post(new SaveCategoryRoute("/category"));
 		post(new SaveCategoryRoute("/category/:categoryId"));
 		post(new SaveFeedRoute("/feeds/category/:categoryId/feed"));
+
+		delete(new DeleteFeedRoute("/feeds/category/:categoryId/feed/:feedId"));
 	}
 }

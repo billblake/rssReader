@@ -102,7 +102,7 @@ public class MongoFeedUpdater implements FeedUpdater {
 
         updateFeedItems(feed, dbConnection, feedId, newCategoryId, oldCategoryId);
         if (!newCategoryId.equals(oldCategoryId)) {
-            updateCategories(feed, dbConnection, feedId, newCategoryId, oldCategoryId);
+            updateCategories(dbConnection, feedId, newCategoryId, oldCategoryId);
         }
 
 
@@ -130,18 +130,48 @@ public class MongoFeedUpdater implements FeedUpdater {
     }
 
 
-    private void updateCategories(Feed feed, DB dbConnection, ObjectId feedId, ObjectId newCategoryId, ObjectId oldCategoryId) {
+    public boolean deleteFeed(Feed feed) {
+        DB dbConnection = MongoDBConnection.getDbConnection();
+        DBCollection feedCollection = dbConnection.getCollection("feeds");
+        ObjectId feedId = new ObjectId(feed.getFeedId());
+        ObjectId categoryId = new ObjectId(feed.getCategoryId());
+
+        BasicDBObject feedQuery = new BasicDBObject();
+        feedQuery.put("_id", feedId);
+
+        DBObject feedDocument = feedCollection.findOne(feedQuery);
+        feedCollection.remove(feedDocument);
+
+
+        // remove feedItems
+        DBCollection feedItemsCollection = dbConnection.getCollection(FEED_ITEMS);
+        DBObject feedItemsToDelete = new BasicDBObject();
+        feedItemsToDelete.put(FEED_ID, feedId);
+        feedItemsCollection.remove(feedItemsToDelete);
+
+        // remove feed id from categories
+        removeFeedIdFromCategories(dbConnection, feedId, categoryId);
+
+        return false;
+    }
+
+
+    private void updateCategories(DB dbConnection, ObjectId feedId, ObjectId newCategoryId, ObjectId oldCategoryId) {
+        removeFeedIdFromCategories(dbConnection, feedId, oldCategoryId);
+        addFeedIdToCategoriesCollection(dbConnection, feedId, newCategoryId);
+    }
+
+
+    private void removeFeedIdFromCategories(DB dbConnection, ObjectId feedId, ObjectId oldCategoryId) {
         DBCollection categoriesCollection = dbConnection.getCollection("categories");
 
         BasicDBObject categoryQuery = new BasicDBObject();
         categoryQuery.put("_id", oldCategoryId);
         DBObject category = categoriesCollection.findOne(categoryQuery);
         BasicDBList feedIds = (BasicDBList) category.get(FEED_IDS);
-        feedIds.remove(new ObjectId(feed.getFeedId()));
+        feedIds.remove(feedId);
         category.put(FEED_IDS, feedIds);
         categoriesCollection.save(category);
-
-        addFeedIdToCategoriesCollection(dbConnection, feedId, newCategoryId);
     }
 
 
