@@ -32,13 +32,23 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
     };
 
     $scope.deleteCategory = function(category) {
-
+        feedService.deleteCategory(category);
     };
 
 
     $scope.addFeed = function() {
         $scope.currentFeed = {};
     };
+
+
+    $scope.validateCategoryForm = function(addCategoryForm) {
+        $scope.invalidCategoryForm = !(addCategoryForm.$valid);
+    };
+
+
+    $scope.saveCategory = function(category) {
+        feedService.saveCategory(category, categorySaved);
+    }
 
     $scope.addCategory = function() {
         $scope.currentCategory = {};
@@ -98,5 +108,11 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
     function feedSaved(response) {
         getFlatListOfFeeds();
         $('#feedModal').modal('hide');
+    }
+
+
+    function categorySaved(response) {
+        getFlatListOfFeeds();
+        $('#categoryModal').modal('hide');
     }
 });

@@ -27,6 +27,7 @@ public class SaveCategoryRoute extends BaseRoute {
             category = categoryUpdater.addCategory(category);
         } else {
             //update existing category
+            category = categoryUpdater.saveCategory(category);
         }
 
         return JsonUtils.convertObjectToJson(category);

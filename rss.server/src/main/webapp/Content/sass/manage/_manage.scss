@@ -52,6 +52,18 @@
 			float: right;
   			cursor: pointer;
 		}
+		
+		.category {
+			background: rgb(143, 203, 252);
+			display: inline-block;
+		    width: 200px;
+			padding: 2px 5px;
+  			margin: 10px;
+  
+			.btns {
+				float: right;
+			}
+		}
 	
 	}
 	

@@ -5219,6 +5219,14 @@ button.close {
       margin-top: 20px;
       float: right;
       cursor: pointer; }
+    #settings #manageFeeds .category {
+      background: #8fcbfc;
+      display: inline-block;
+      width: 200px;
+      padding: 2px 5px;
+      margin: 10px; }
+      #settings #manageFeeds .category .btns {
+        float: right; }
   #settings .editFeed, #settings .deleteFeed {
     cursor: pointer; }
 

@@ -89,13 +89,23 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
     };
 
     $scope.deleteCategory = function(category) {
-
+        feedService.deleteCategory(category);
     };
 
 
     $scope.addFeed = function() {
         $scope.currentFeed = {};
     };
+
+
+    $scope.validateCategoryForm = function(addCategoryForm) {
+        $scope.invalidCategoryForm = !(addCategoryForm.$valid);
+    };
+
+
+    $scope.saveCategory = function(category) {
+        feedService.saveCategory(category, categorySaved);
+    }
 
     $scope.addCategory = function() {
         $scope.currentCategory = {};
@@ -155,6 +165,12 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
     function feedSaved(response) {
         getFlatListOfFeeds();
         $('#feedModal').modal('hide');
+    }
+
+
+    function categorySaved(response) {
+        getFlatListOfFeeds();
+        $('#categoryModal').modal('hide');
     }
 });
 app.controller('LoginController', function($scope, $http, $location, $rootScope) {
@@ -383,13 +399,6 @@ app.service('feedService', function ($http, $resource) {
     };
 
 
-    function createCategoryResource() {
-        return $resource(readerConstants.appContextPath + '/category/:categoryId',
-                {categoryId : "@id"}
-        );
-    }
-
-
     this.getFeeds = function (_categoryId, _feedId, suc, fail, _page) {
         var feedResource = createFeedResource(_categoryId, _feedId, _page);
         return feedResource.query(suc, fail);
@@ -459,6 +468,32 @@ app.service('feedService', function ($http, $resource) {
             }
         );
         return feedResource;
+    };
+
+    function createCategoryResource(_categoryId) {
+        if (_categoryId  === null || typeof _categoryId === "undefined") {
+            _categoryId = "@id";
+        }
+        return categoryResource = $resource(readerConstants.appContextPath + '/category/:categoryId', {categoryId : _categoryId});
+    }
+
+
+    this.deleteCategory = function(_category) {
+        if (typeof _category === "undefined") {
+            return;
+        }
+        var Category = createCategoryResource(_category.categoryId);
+        var category = new Category({
+            categoryId : _category.categoryId,
+            name : _category.name,
+            username : _category.username
+        });
+
+        if (typeof callback === "function") {
+            category.$delete(callback);
+        } else {
+            category.$delete();
+        }
     };
 });
 

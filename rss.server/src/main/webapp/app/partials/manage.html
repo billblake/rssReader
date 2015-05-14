@@ -47,6 +47,17 @@
 			</table>
 			<a id="addFeed" ng-click="addFeed()" data-toggle="modal" data-target="#feedModal">Add Feed</a>
 		</div>
+		
+		<div id="manageFeeds">
+			<h2>Categories</h2>
+			<div ng-repeat="category in feedCategories" class="category">
+				{{category.name}} ({{category.feeds.length}})
+				<span class="btns">
+					<span class="editFeed glyphicon glyphicon-edit" ng-click="editCategory(category)" data-toggle="modal" data-target="#categoryModal"></span>
+					<span class="deleteFeed glyphicon glyphicon-trash" ng-click="deleteCategory(category)"></span>
+				</span>
+			</div>
+		</div>
 </div>
 
 <div class="modal fade" id="feedModal" tabindex="-1" role="dialog" aria-labelledby="feedModal" aria-hidden="true">
@@ -84,6 +95,31 @@
 	      	<input type="hidden" ng-model="currentFeed.feedId" value="{{currentFeed.feedId}}">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        <button type="button" class="btn btn-primary" ng-disabled="invalidForm" ng-click="saveFeed(currentFeed)">Save changes</button>
+	      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form name="categoryForm" role="form">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Edit feed</h4>
+	      </div>
+	      <div class="modal-body">
+	        <div class="form-group">
+			    <label for="feedName">Name *</label>
+			    <input type="text" class="form-control" id="categoryName" placeholder="Enter Category Name" ng-model="currentCategory.name" ng-change="validateCategoryForm(categoryForm)" autocomplete="off" required>
+			</div>
+	      </div>
+	      <div class="modal-footer">
+	      	<input type="hidden" ng-model="currentCategory.userName" value="{{username}}">
+	      	<input type="hidden" ng-model="currentCategory.categoryId" value="{{currentCategory.categoryId}}">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" ng-disabled="invalidCategoryForm" ng-click="saveCategory(currentCategory)">Save changes</button>
 	      </div>
       </form>
     </div>

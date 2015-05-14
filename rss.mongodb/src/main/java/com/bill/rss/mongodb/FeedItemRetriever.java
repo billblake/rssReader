@@ -21,7 +21,7 @@ import static com.bill.rss.mongodb.FeedConstants.CATEGORY_ID;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ID;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEMS;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_DESCRIPTION;
-import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_ID;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_OBJECT_ID;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_LINK;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_PUB_DATE;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_SOURCE;
@@ -51,7 +51,7 @@ public class FeedItemRetriever implements FeedItemProvider {
             try {
                 DBObject nextFeedItem = feedItemsCursor.next();
                 feedItem = new FeedItem();
-                feedItem.setFeedItemId(nextFeedItem.get(FEED_ITEM_ID).toString());
+                feedItem.setFeedItemId(nextFeedItem.get(FEED_ITEM_OBJECT_ID).toString());
                 feedItem.setCatId(nextFeedItem.get(CATEGORY_ID).toString());
                 feedItem.setDescription(nextFeedItem.get(FEED_ITEM_DESCRIPTION).toString());
                 feedItem.setFeedId(nextFeedItem.get(FEED_ID).toString());
