@@ -28,17 +28,22 @@
         <div id="sideBar" class="{{sideBarClass}}">
             <!--Sidebar content-->
             <ul id="categories">
-                <li id="allFeeds" ng-click="displayFeedsForAllCategory()"><span><i class="icon-rss"></i></span><span>All</span></li>
+                <li id="allFeeds" ng-click="displayFeedsForAllCategory()">
+                	<span>
+                		<i class="icon-rss"></i>
+                	</span>
+               		<span>All</span>
+                </li>
                 <li ng-repeat="feedCategory in feedCategories">
                     <span ng-click="show_$index = ! show_$index">
                         <i class="icon-right-open" ng-show="! show_$index"></i>
                         <i class="icon-down-open" ng-show="show_$index"></i>
                     </span>
-                    <span ng-click="displayFeedsForCategory(feedCategory.categoryId)">
+                    <span ng-click="displayFeedsForCategory(feedCategory)">
                         {{ feedCategory.name }}
                     </span>
                     <ul id="feedContents_$index" class="feeds" ng-show="show_$index">
-                        <li class="feed" ng-repeat="feed in feedCategory.feeds"  ng-click="displayFeedsForFeed(feed.feedId)">
+                        <li class="feed" ng-repeat="feed in feedCategory.feeds"  ng-click="displayFeedsForFeed(feed)">
                             {{feed.name}}
                         </li>
                     </ul>
@@ -47,6 +52,7 @@
         </div>
         <div id="main-content" class="span11">
             <!--Body content-->
+            <h2>{{title}}</h2>
             <div id="spinner"></div>
             <ul id="feed-list" infinite-scroll='loadMore()' infinite-scroll-distance='1'>
                 <li class="feed-item" ng-repeat="feed in feeds" ng-class-odd="'odd'" ng-class-even="'even'">

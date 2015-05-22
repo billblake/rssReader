@@ -208,6 +208,7 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
     $scope.feedCategories = feedService.getCategories();
     $scope.feeds = feedService.getFeeds(null, null, loadFeedsSuccessful, fail);
     $scope.name = userService.getFullName();
+    $scope.title = "All Feeds";
 
     $scope.loadMore = function() {
         $scope.page++;
@@ -215,11 +216,12 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
         feedService.getFeeds($scope.categoryId, $scope.feedId, loadMoreFeedsSuccessful, fail, $scope.page);
     };
 
-    $scope.displayFeedsForCategory = function(categoryId) {
+    $scope.displayFeedsForCategory = function(category) {
         $scope.loading = true;
-        $scope.categoryId = categoryId;
+        $scope.categoryId = category.categoryId;
         $scope.feedId = undefined;
-        $scope.feeds = feedService.getFeeds(categoryId, $scope.feedId, loadFeedsSuccessful, fail);
+        $scope.feeds = feedService.getFeeds(category.categoryId, $scope.feedId, loadFeedsSuccessful, fail);
+        $scope.title = category.name;
     };
 
     $scope.displayFeedsForAllCategory = function() {
@@ -228,13 +230,15 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
         $scope.categoryId = undefined;
         $scope.feedId = undefined;
         $scope.feeds = feedService.getFeeds(null, null, loadFeedsSuccessful, fail);
+        $scope.title = "All Feeds";
     };
 
-    $scope.displayFeedsForFeed = function(feedId) {
+    $scope.displayFeedsForFeed = function(feed) {
         $scope.loading = true;
         $scope.categoryId = undefined;
-        $scope.feedId = feedId;
-        $scope.feeds = feedService.getFeeds($scope.categoryId, feedId, loadFeedsSuccessful, fail);
+        $scope.feedId = feed.feedId;
+        $scope.feeds = feedService.getFeeds($scope.categoryId, feed.feedId, loadFeedsSuccessful, fail);
+        $scope.title = feed.name;
     };
 
     $scope.refresh = function() {

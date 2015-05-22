@@ -5098,6 +5098,10 @@ button.close {
     wwidth: 220px;
     margin-bottom: 10px; }
 
+#feeds h2 {
+  font-size: 20px;
+  padding-left: 20px;
+  margin-top: 0px; }
 #feeds #sideBar {
   float: left;
   width: 150px; }
@@ -5120,7 +5124,8 @@ button.close {
   float: left;
   width: 80%; }
   #feeds #main-content #feed-list {
-    list-style-type: none; }
+    list-style-type: none;
+    padding-left: 0px; }
     #feeds #main-content #feed-list .feed-item {
       border-bottom: 1px solid whitesmoke;
       padding: 5px 0px 5px 20px; }
@@ -5157,31 +5162,29 @@ button.close {
   #header .icon-menu {
     display: inline-block; }
 
-  #feeds {
-    padding: 0; }
-    #feeds #sideBar {
-      display: none; }
-    #feeds #sideBar.display {
-      display: inline-block;
-      position: fixed;
-      background: darkgray;
-      width: 190px;
-      height: 100%; }
-    #feeds #main-content {
-      width: 100%; }
-      #feeds #main-content #feed-list {
-        list-style-type: none;
-        padding: 0px; }
-        #feeds #main-content #feed-list .feed-item .feedSource {
-          width: 100%;
-          display: block; }
-        #feeds #main-content #feed-list .feed-item .feedTitle {
-          width: 100%;
-          display: block; }
-        #feeds #main-content #feed-list .feed-item article {
-          margin-left: 0px;
-          width: 100%;
-          display: none; } }
+  #feeds #sideBar {
+    display: none; }
+  #feeds #sideBar.display {
+    display: inline-block;
+    position: fixed;
+    background: darkgray;
+    width: 190px;
+    height: 100%; }
+  #feeds #main-content {
+    width: 100%; }
+    #feeds #main-content #feed-list {
+      list-style-type: none;
+      padding: 0px; }
+      #feeds #main-content #feed-list .feed-item .feedSource {
+        width: 100%;
+        display: block; }
+      #feeds #main-content #feed-list .feed-item .feedTitle {
+        width: 100%;
+        display: block; }
+      #feeds #main-content #feed-list .feed-item article {
+        margin-left: 0px;
+        width: 100%;
+        display: none; } }
 #main-content {
   padding-top: 50px; }
   #main-content #sign-up {

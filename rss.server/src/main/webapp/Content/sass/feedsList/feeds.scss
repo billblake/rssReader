@@ -1,4 +1,10 @@
 #feeds {
+	
+	h2 {
+		font-size: 20px;
+		padding-left: 20px;
+		margin-top: 0px;
+	}
 
 	#sideBar {
 		float: left;
@@ -38,6 +44,7 @@
 
 		#feed-list {
 			list-style-type: none;
+			padding-left: 0px;
 
 			.feed-item {
 				border-bottom: 1px solid $PRIMARY_COLOUR;
@@ -90,18 +97,17 @@
 
 
 @media all and (max-width: 800px) {
-body {
-	padding: 0px;
-}
-
-#header {
-	.icon-menu {
-		display: inline-block;
+	body {
+		padding: 0px;
 	}
-}
+	
+	#header {
+		.icon-menu {
+			display: inline-block;
+		}
+	}
 
 	#feeds {
-	  padding: 0;
 
 		#sideBar {
 			display: none;	
@@ -145,5 +151,4 @@ body {
 			}
 		}
 	}
-
 }
