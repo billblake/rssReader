@@ -25,6 +25,7 @@ import static com.bill.rss.mongodb.FeedConstants.FEED_ITEMS;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_DESCRIPTION;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_LINK;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_PUB_DATE;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_READ;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_SOURCE;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_TITLE;
 import static com.bill.rss.mongodb.FeedConstants.FEED_NAME;
@@ -76,6 +77,7 @@ public class MongoFeedUpdater implements FeedUpdater {
 		    	feedItemDocument.put(FEED_ITEM_DESCRIPTION, fetchedFeed.getDescription());
 		    	feedItemDocument.put(FEED_ITEM_PUB_DATE, fetchedFeed.getPubDate());
 		    	feedItemDocument.put(FEED_ITEM_LINK, fetchedFeed.getLink());
+		    	feedItemDocument.put(FEED_ITEM_READ, false);
 
 		    	feedItemsCollection.insert(feedItemDocument);
 	    	}
