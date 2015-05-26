@@ -82,6 +82,7 @@ public class MockUtils {
         when(feedDbObject.get("source")).thenReturn("BBC Sport");
         when(feedDbObject.get("title")).thenReturn("My Title");
         when(feedDbObject.get("username")).thenReturn("billblake");
+        when(feedDbObject.get("read")).thenReturn(true);
         Date date = new Date(1408277117000L);
         when(feedDbObject.get("pubDate")).thenReturn(date);
         return feedDbObject;
