@@ -55,8 +55,8 @@
             <h2>{{title}}</h2>
             <div id="spinner"></div>
             <ul id="feed-list" infinite-scroll='loadMore()' infinite-scroll-distance='1'>
-                <li class="feed-item" ng-repeat="feed in feeds" ng-class-odd="'odd'" ng-class-even="'even'">
-                    <span ng-click="toggleArticle($index)">
+                <li class="feed-item" ng-repeat="feed in feeds" ng-class-odd="'odd'" ng-class-even="'even'" ng-class="readOrUnread(feed)">
+                    <span ng-click="toggleArticle($index);markAsRead(feed)">
                         <span class="feedSource" title="{{feed.source}}">{{feed.source}}</span>
                         <span class="feedTitle">{{ feed.title }}</span>
                         <span class="feedPubDate">{{feed.formattedDate}}</span>

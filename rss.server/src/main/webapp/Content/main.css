@@ -5154,6 +5154,8 @@ button.close {
       background-color: #fbfbfb; }
     #feeds #main-content #feed-list .feed-item:hover {
       background-color: #f0f0f0; }
+    #feeds #main-content #feed-list .feed-item.unread {
+      font-weight: bold; }
 
 @media all and (max-width: 800px) {
   body {

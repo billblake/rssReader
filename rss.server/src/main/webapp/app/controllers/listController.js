@@ -73,6 +73,15 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
         $scope.sideBarClass = ($scope.sideBarClass !== "display") ? "display" : "";
     };
 
+    $scope.readOrUnread = function(feed) {
+        return (feed.read) ? "read" : "unread";
+    };
+
+    $scope.markAsRead = function(feedItem) {
+        feedService.markAsRead(feedItem, function(updatedFeedItem) {
+            feedItem.read = true;
+        });
+    };
 
     function showRefreshedFeeds() {
         $scope.feeds = feedService.getFeeds();

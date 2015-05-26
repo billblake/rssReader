@@ -4,6 +4,7 @@ import spark.servlet.SparkApplication;
 import static spark.Spark.delete;
 import static spark.Spark.get;
 import static spark.Spark.post;
+import static spark.Spark.put;
 
 public class RssController implements SparkApplication {
 
@@ -25,5 +26,7 @@ public class RssController implements SparkApplication {
 
 		delete(new DeleteFeedRoute("/feeds/category/:categoryId/feed/:feedId"));
 		delete(new DeleteCategoryRoute("/category/:categoryId"));
+
+		put(new FeedItemRoute("/feeds/category/:categoryId/feed/:feedId/feedItem/:feedItemId"));
 	}
 }

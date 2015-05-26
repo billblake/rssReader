@@ -14,6 +14,7 @@ public class FeedItem {
 	private String link;
 	private Date pubDate;
 	private String formattedDate;
+	private boolean read;
 
 
 	public String getFeedItemId() {
@@ -94,5 +95,13 @@ public class FeedItem {
 
     public void setFormattedDate(String formattedDate) {
         this.formattedDate = formattedDate;
+    }
+
+    public boolean isRead() {
+        return read;
+    }
+
+    public void setRead(boolean read) {
+        this.read = read;
     }
 }
