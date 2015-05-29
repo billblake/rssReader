@@ -55,18 +55,19 @@
             <h2>{{title}}</h2>
             <div id="spinner"></div>
             <ul id="feed-list" infinite-scroll='loadMore()' infinite-scroll-distance='1'>
-                <li class="feed-item" ng-repeat="feed in feeds" ng-class-odd="'odd'" ng-class-even="'even'" ng-class="readOrUnread(feed)">
-                    <span ng-click="toggleArticle($index);markAsRead(feed)">
-                        <span class="feedSource" title="{{feed.source}}">{{feed.source}}</span>
-                        <span class="feedTitle">{{ feed.title }}</span>
-                        <span class="feedPubDate">{{feed.formattedDate}}</span>
+                <li class="feed-item" ng-repeat="feedItem in feeds" ng-class-odd="'odd'" ng-class-even="'even'" ng-class="readOrUnread(feedItem)">
+                    <span ng-click="toggleArticle($index);markAsRead(feedItem)">
+                        <span class="feedSource" title="{{feedItem.source}}">{{feedItem.source}}</span>
+                        <span class="feedTitle">{{ feedItem.title }}</span>
+                        <span class="feedPubDate">{{feedItem.formattedDate}}</span>
                     </span>
+                    <span class="feedItemBtns"><i class="deleteFeed icon-trash-empty" ng-click="deleteFeedItem(feedItem)"></i></span>
                     <article ng-class="articleClass($index)">
 	                    <!-- contrived reverse example--> 
-	                    <h3>{{feed.title}}</h3>
-	                    <span>{{feed.source}} {{feed.formattedDate}}</span>
+	                    <h3>{{feedItem.title}}</h3>
+	                    <span>{{feedItem.source}} {{feedItem.formattedDate}}</span>
 	                    <div id="contents">
-	                        {{ feed.description}} <a href="{{feed.link}}" target="new">Read More</a>
+	                        {{ feedItem.description}} <a href="{{feedItem.link}}" target="new">Read More</a>
 	                    </div>
                     </article>
                 </li>

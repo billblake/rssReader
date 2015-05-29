@@ -83,6 +83,16 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
         });
     };
 
+    $scope.deleteFeedItem = function(feedItem) {
+        feedService.deleteFeedItem(feedItem, function(updatedFeedItem) {
+            for (var i = 0; i < $scope.feeds.length; i++) {
+                if ($scope.feeds[i].feedItemId === updatedFeedItem.feedItemId) {
+                    $scope.feeds.splice(i, 1);
+                }
+            }
+        });
+    };
+
     function showRefreshedFeeds() {
         $scope.feeds = feedService.getFeeds();
     }

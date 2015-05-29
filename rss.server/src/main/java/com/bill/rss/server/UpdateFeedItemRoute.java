@@ -7,11 +7,11 @@ import com.bill.rss.dataProvider.FeedItemUpdater;
 import com.bill.rss.domain.FeedItem;
 import com.bill.rss.mongodb.FeedItemRetriever;
 
-public class FeedItemRoute extends BaseRoute {
+public class UpdateFeedItemRoute extends BaseFeedItemRoute {
 
     private final FeedItemUpdater feedItemUpdater = new FeedItemRetriever();
 
-    protected FeedItemRoute(String path) {
+    protected UpdateFeedItemRoute(String path) {
         super(path);
     }
 
@@ -22,10 +22,6 @@ public class FeedItemRoute extends BaseRoute {
             feedItem = markFeedItemAsRead(getFeedItemId(request));
         }
         return JsonUtils.convertObjectToJson(feedItem);
-    }
-
-    private String getFeedItemId(Request request) {
-        return request.params("feedItemId");
     }
 
     private boolean isMarkAsReadRequest(Request request) {

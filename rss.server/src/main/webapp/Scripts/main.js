@@ -279,6 +279,16 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
         });
     };
 
+    $scope.deleteFeedItem = function(feedItem) {
+        feedService.deleteFeedItem(feedItem, function(updatedFeedItem) {
+            for (var i = 0; i < $scope.feeds.length; i++) {
+                if ($scope.feeds[i].feedItemId === updatedFeedItem.feedItemId) {
+                    $scope.feeds.splice(i, 1);
+                }
+            }
+        });
+    };
+
     function showRefreshedFeeds() {
         $scope.feeds = feedService.getFeeds();
     }
@@ -517,6 +527,16 @@ app.service('feedService', function ($http, $resource) {
             feedItemId : _feedItem.feedItemId
         });
         feedItem.$markAsRead(callback);
+    };
+
+    this.deleteFeedItem = function(_feedItem, callback) {
+        var FeedItem = createFeedItemResource(_feedItem.catId, _feedItem.feedId, _feedItem.feedItemId);
+        var feedItem = new FeedItem({
+            catId : _feedItem.catId,
+            feedId : _feedItem.feedId,
+            feedItemId : _feedItem.feedItemId
+        });
+        feedItem.$delete(callback);
     };
 
 

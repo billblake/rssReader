@@ -5,4 +5,6 @@ import com.bill.rss.domain.FeedItem;
 public interface FeedItemUpdater {
 
     FeedItem markFeedItemAsRead(String feedItemId);
+
+    FeedItem deleteFeedItem(String feedItemId);
 }

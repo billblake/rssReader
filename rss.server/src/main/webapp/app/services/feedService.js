@@ -133,6 +133,16 @@ app.service('feedService', function ($http, $resource) {
         feedItem.$markAsRead(callback);
     };
 
+    this.deleteFeedItem = function(_feedItem, callback) {
+        var FeedItem = createFeedItemResource(_feedItem.catId, _feedItem.feedId, _feedItem.feedItemId);
+        var feedItem = new FeedItem({
+            catId : _feedItem.catId,
+            feedId : _feedItem.feedId,
+            feedItemId : _feedItem.feedItemId
+        });
+        feedItem.$delete(callback);
+    };
+
 
     function createFeedItemResource(_categoryId, _feedId, _feedItemId) {
         if (_feedItemId === null || typeof _feedItemId === "undefined") {

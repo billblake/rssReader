@@ -11,22 +11,24 @@ public class RssController implements SparkApplication {
 	public void init() {
 		get(new GetCategoriesRoute("/category"));
 		get(new GetCategoriesRoute("/category/:categoryId"));
+		post(new SaveCategoryRoute("/category"));
+		post(new SaveCategoryRoute("/category/:categoryId"));
+		delete(new DeleteCategoryRoute("/category/:categoryId"));
+
 		get(new GetFeedsRoute("/feeds/category/feed"));
 		get(new GetFeedsRoute("/feeds/category/:categoryId/feed"));
 		get(new GetFeedsRoute("/feeds/category/feed/:feedId"));
-        get(new LogoutRoute("/logout"));
-        get(new FeedRefreshRoute("/refresh"));
+		post(new SaveFeedRoute("/feeds/category/:categoryId/feed"));
+		delete(new DeleteFeedRoute("/feeds/category/:categoryId/feed/:feedId"));
 
-		post(new UserRegistrationRoute("/user"));
+		get(new LogoutRoute("/logout"));
 		post(new LoginRoute("/login"));
 
-		post(new SaveCategoryRoute("/category"));
-		post(new SaveCategoryRoute("/category/:categoryId"));
-		post(new SaveFeedRoute("/feeds/category/:categoryId/feed"));
+		get(new FeedRefreshRoute("/refresh"));
 
-		delete(new DeleteFeedRoute("/feeds/category/:categoryId/feed/:feedId"));
-		delete(new DeleteCategoryRoute("/category/:categoryId"));
+		post(new UserRegistrationRoute("/user"));
 
-		put(new FeedItemRoute("/feeds/category/:categoryId/feed/:feedId/feedItem/:feedItemId"));
+		put(new UpdateFeedItemRoute("/feeds/category/:categoryId/feed/:feedId/feedItem/:feedItemId"));
+		delete(new DeleteFeedItemRoute("/feeds/category/:categoryId/feed/:feedId/feedItem/:feedItemId"));
 	}
 }

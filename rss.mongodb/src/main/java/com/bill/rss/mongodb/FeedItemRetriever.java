@@ -35,15 +35,49 @@ import static java.util.Calendar.YEAR;
 
 public class FeedItemRetriever implements FeedItemProvider, FeedItemUpdater {
 
+
     public List<FeedItem> retrieveFeedItems(String categoryId, String feedId, String username, int page) {
-        DB rssDb = MongoDBConnection.getDbConnection();
-        DBCollection coll = rssDb.getCollection(FEED_ITEMS);
+        DBCollection coll = getFeedItemsCollection();
         DBCursor feedItemsCursor;
 
         BasicDBObject query = buildFeedItemQuery(categoryId, feedId, username);
         feedItemsCursor = coll.find(query).sort(new BasicDBObject(FEED_ITEM_PUB_DATE, -1)).limit(MAX_PAGE_SIZE).skip((page - 1) * MAX_PAGE_SIZE);
         return parseFeadItems(feedItemsCursor);
     }
+
+
+    public FeedItem markFeedItemAsRead(String feedItemId) {
+        DBCollection feedItemCollection = getFeedItemsCollection();
+        DBObject feedItem = retrieveFeedItemById(feedItemId);
+        feedItem.put(FeedConstants.FEED_ITEM_READ, true);
+        feedItemCollection.save(feedItem);
+        return buildFeedItem(feedItem);
+    }
+
+
+    public FeedItem deleteFeedItem(String feedItemId) {
+        DBObject feedItem = retrieveFeedItemById(feedItemId);
+        DBCollection feedItemCollection = getFeedItemsCollection();
+        feedItemCollection.remove(feedItem);
+        return buildFeedItem(feedItem);
+    }
+
+
+    private DBCollection getFeedItemsCollection() {
+        DB rssDb = MongoDBConnection.getDbConnection();
+        DBCollection feedItemCollection = rssDb.getCollection(FEED_ITEMS);
+        return feedItemCollection;
+    }
+
+
+    private DBObject retrieveFeedItemById(String feedItemId) {
+        DBCollection feedItemCollection = getFeedItemsCollection();
+        BasicDBObject query = new BasicDBObject();
+        query.append(FEED_ITEM_OBJECT_ID, new ObjectId(feedItemId));
+        DBObject feedItem = feedItemCollection.findOne(query);
+        return feedItem;
+    }
+
 
     private List<FeedItem> parseFeadItems(DBCursor feedItemsCursor) {
         List<FeedItem> feedItems = new ArrayList<FeedItem>();
@@ -109,16 +143,5 @@ public class FeedItemRetriever implements FeedItemProvider, FeedItemUpdater {
             SimpleDateFormat time = new SimpleDateFormat("MMM dd");
             return time.format(pubDate);
         }
-    }
-
-    public FeedItem markFeedItemAsRead(String feedItemId) {
-        DB rssDb = MongoDBConnection.getDbConnection();
-        DBCollection feedItemCollection = rssDb.getCollection(FEED_ITEMS);
-        BasicDBObject query = new BasicDBObject();
-        query.append(FEED_ITEM_OBJECT_ID, new ObjectId(feedItemId));
-        DBObject feedItem = feedItemCollection.findOne(query);
-        feedItem.put(FeedConstants.FEED_ITEM_READ, true);
-        feedItemCollection.save(feedItem);
-        return buildFeedItem(feedItem);
     }
 }
