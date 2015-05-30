@@ -5130,6 +5130,8 @@ button.close {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis; }
+    #feeds #sideBar #categories li {
+      margin: 5px 0; }
 #feeds #main-content {
   float: left;
   width: 80%;
