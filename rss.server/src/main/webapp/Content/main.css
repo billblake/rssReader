@@ -5184,8 +5184,7 @@ button.close {
       list-style-type: none;
       padding: 0px; }
       #feeds #main-content #feed-list .feed-item .feedSource {
-        width: 100%;
-        display: block; }
+        width: 100%; }
       #feeds #main-content #feed-list .feed-item .feedTitle {
         width: 100%;
         display: block; }

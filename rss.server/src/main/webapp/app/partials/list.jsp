@@ -57,8 +57,8 @@
             <ul id="feed-list" infinite-scroll='loadMore()' infinite-scroll-distance='1'>
                 <li class="feed-item" ng-repeat="feedItem in feeds" ng-class-odd="'odd'" ng-class-even="'even'" ng-class="readOrUnread(feedItem)">
                     <span ng-click="toggleArticle($index);markAsRead(feedItem)">
-                        <span class="feedSource" title="{{feedItem.source}}">{{feedItem.source}}</span>
                         <span class="feedTitle">{{ feedItem.title }}</span>
+                        <span class="feedSource" title="{{feedItem.source}}">{{feedItem.source}}</span>
                         <span class="feedPubDate">{{feedItem.formattedDate}}</span>
                     </span>
                     <span class="feedItemBtns"><i class="deleteFeed icon-trash-empty" ng-click="deleteFeedItem(feedItem)"></i></span>
