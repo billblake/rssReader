@@ -21,10 +21,12 @@ import com.mongodb.DBObject;
 import static com.bill.rss.mongodb.FeedConstants.CATEGORY_ID;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ID;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEMS;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_DELETE;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_DESCRIPTION;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_LINK;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_OBJECT_ID;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_PUB_DATE;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_READ;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_SOURCE;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_TITLE;
 import static com.bill.rss.mongodb.FeedConstants.MAX_PAGE_SIZE;
@@ -49,7 +51,7 @@ public class FeedItemRetriever implements FeedItemProvider, FeedItemUpdater {
     public FeedItem markFeedItemAsRead(String feedItemId) {
         DBCollection feedItemCollection = getFeedItemsCollection();
         DBObject feedItem = retrieveFeedItemById(feedItemId);
-        feedItem.put(FeedConstants.FEED_ITEM_READ, true);
+        feedItem.put(FEED_ITEM_READ, true);
         feedItemCollection.save(feedItem);
         return buildFeedItem(feedItem);
     }
@@ -58,7 +60,8 @@ public class FeedItemRetriever implements FeedItemProvider, FeedItemUpdater {
     public FeedItem deleteFeedItem(String feedItemId) {
         DBObject feedItem = retrieveFeedItemById(feedItemId);
         DBCollection feedItemCollection = getFeedItemsCollection();
-        feedItemCollection.remove(feedItem);
+        feedItem.put(FEED_ITEM_DELETE, true);
+        feedItemCollection.save(feedItem);
         return buildFeedItem(feedItem);
     }
 
@@ -121,6 +124,9 @@ public class FeedItemRetriever implements FeedItemProvider, FeedItemUpdater {
         if (feedId != null) {
             query.append(FEED_ID, new ObjectId(feedId));
         }
+        BasicDBObject deleteValue = new BasicDBObject();
+        deleteValue.append("$ne", true);
+        query.append(FEED_ITEM_DELETE, deleteValue);
         return query;
     }
 
