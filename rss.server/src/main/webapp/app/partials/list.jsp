@@ -68,6 +68,7 @@
 	                    <span>{{feedItem.source}} {{feedItem.formattedDate}}</span>
 	                    <div id="contents">
 	                        {{ feedItem.description}} <a href="{{feedItem.link}}" target="new">Read More</a>
+                    		<span class="feedItemBtns"><i class="deleteFeed icon-trash-empty" ng-click="deleteFeedItem(feedItem)"></i></span>
 	                    </div>
                     </article>
                 </li>

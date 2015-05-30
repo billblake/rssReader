@@ -4,11 +4,17 @@
 		font-size: 20px;
 		padding-left: 20px;
 		margin-top: 0px;
+		background-color: $BACKGROUND;
+  		position: fixed;
+  		width: 102%;
+  		padding-top: 10px;
+  		padding-bottom: 10px;
 	}
 
 	#sideBar {
 		float: left;
   		width: 150px;
+  		position: fixed;
 
 		#categories {
 			list-style-type: none;
@@ -41,10 +47,17 @@
 	#main-content {
 		float: left;
 		width: 80%;
+		margin-left: 150px;
+		padding-top: 35px;
+		
+		#spinner {
+			margin-top: 40px;
+		}
 
 		#feed-list {
 			list-style-type: none;
 			padding-left: 0px;
+			margin-top: 5px;
 
 			.feed-item {
 				border-bottom: 1px solid $PRIMARY_COLOUR;
@@ -74,7 +87,6 @@
 				}
 				
 				article {
-					margin-left: 120px;
 					width: 80%;
 					display: none;
 					
@@ -84,6 +96,11 @@
 					
 					span {
 						color: rgb(177, 188, 197);
+					}
+					
+					.feedItemBtns {
+						color: $MAIN_TEXT;
+						display: none;
 					}
 				}
 			}
@@ -124,21 +141,27 @@
 		#sideBar.display {
 			display: inline-block;
 		 	position: fixed;
-			background: darkgray;
+			background: lightgray;
 			width: 190px;
 			height: 100%;
+			margin-top: 40px;
 		}
 	
 	
 		#main-content {
 			width: 100%;
+		    margin-left: 0px;
 	
 			#feed-list {
 				list-style-type: none;
 				padding: 0px;
 	
 				.feed-item {
-	
+					
+					.feedItemBtns {
+						display: none;
+					}
+					
 					.feedSource {
 						width: 100%;
 					}
@@ -153,6 +176,9 @@
 						width: 100%;
 						display: none;
 						
+						.feedItemBtns {
+							display: inline;
+						}
 					}
 				}
 			}
