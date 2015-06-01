@@ -19,7 +19,7 @@ import static com.bill.rss.server.ViewConstants.JSON_RESPONSE_TYPE;
 public class GetCategoriesRoute extends BaseRoute {
 
 	private CategoryProvider categoryProvider;
-	private final FeedItemProvider feedItemRetriever = new FeedItemRetriever();
+	private FeedItemProvider feedItemRetriever = new FeedItemRetriever();
 
 	protected GetCategoriesRoute(String path) {
 		super(path);
@@ -55,4 +55,8 @@ public class GetCategoriesRoute extends BaseRoute {
     void setCategoryProvider(CategoryProvider categoryProvider) {
 	    this.categoryProvider = categoryProvider;
 	}
+
+    void setFeedItemRetriever(FeedItemRetriever feedItemRetriever) {
+        this.feedItemRetriever = feedItemRetriever;
+    }
 }

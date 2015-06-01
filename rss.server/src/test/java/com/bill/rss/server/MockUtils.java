@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+
 import spark.Request;
 import spark.Response;
 import spark.Session;
@@ -16,6 +20,7 @@ import com.bill.rss.domain.Category;
 import com.bill.rss.domain.Feed;
 import com.bill.rss.domain.FeedItem;
 import com.bill.rss.domain.User;
+import com.bill.rss.mongodb.FeedItemRetriever;
 import com.bill.rss.mongodb.UserRetriever;
 
 import static com.bill.rss.server.ViewConstants.LOGGED_IN_COOKIE_NAME;
@@ -103,5 +108,34 @@ public class MockUtils {
         when(userProvider.validateUser(any(User.class))).thenReturn(user);
         when(userProvider.checkIfUserNameExists(any(String.class))).thenReturn(false);
         return userProvider;
+    }
+
+    public static FeedItemRetriever createFeedItemRetrieverMock() {
+        FeedItemRetriever feedItemRetriever = mock(FeedItemRetriever.class);
+
+
+        Mockito.doAnswer(new Answer() {
+            public Object answer(InvocationOnMock invocation) {
+                Object[] args = invocation.getArguments();
+                Category category = (Category) args[0];
+                category.setUnReadCount("2");
+                category.setTotalCount("5");
+                return null;
+            }})
+        .when(feedItemRetriever).enrichCategoryWithFeedItemCount(any(Category.class));
+
+        Mockito.doAnswer(new Answer() {
+            public Object answer(InvocationOnMock invocation) {
+                Object[] args = invocation.getArguments();
+                Feed feed = (Feed) args[0];
+                feed.setUnReadCount("2");
+                feed.setTotalCount("5");
+                return null;
+            }})
+        .when(feedItemRetriever).enrichFeedWithFeedItemCount((any(Feed.class)));
+
+
+
+        return feedItemRetriever;
     }
 }
