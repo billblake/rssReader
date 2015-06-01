@@ -35,7 +35,7 @@ public class RssFeedParser {
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(inputStream);
 			doc.getDocumentElement().normalize();
-			 
+
 			NodeList feedItemNodes = doc.getElementsByTagName(RSS_ITEM);
 			for (int i = 0; i < feedItemNodes.getLength(); i++) {
 				Element feedItemNode = (Element) feedItemNodes.item(i);
@@ -61,7 +61,7 @@ public class RssFeedParser {
 		feedItem.setLink(getTagValue(feedItemNode, RSS_LINK));
 		return feedItem;
 	}
-	
+
 	private Date parseDate(String pubDateStr) {
 		Date pubDate = new Date();
 		SimpleDateFormat dateFormater = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
@@ -74,6 +74,10 @@ public class RssFeedParser {
 	}
 
 	private String getTagValue(Element feedItemNode, String childTag) {
-		return feedItemNode.getElementsByTagName(childTag).item(0).getTextContent();
+		if (feedItemNode.getElementsByTagName(childTag) != null && feedItemNode.getElementsByTagName(childTag).item(0) != null) {
+		    return feedItemNode.getElementsByTagName(childTag).item(0).getTextContent();
+		} else {
+		    return "";
+		}
 	}
 }
