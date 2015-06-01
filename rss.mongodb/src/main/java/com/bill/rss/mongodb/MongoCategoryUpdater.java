@@ -34,17 +34,36 @@ public class MongoCategoryUpdater implements CategoryUpdater {
     }
 
     public Category saveCategory(Category category) {
-        DB dbConnection = MongoDBConnection.getDbConnection();
-        DBCollection categoriesCollection = dbConnection.getCollection(CATEGORIES_COLLECTION);
+        DBObject categoryDocument = getCategoryDocument(category);
+        categoryDocument.put(CATEGORY_NAME, category.getName());
+        getCategoriesCollection().save(categoryDocument);
+        return category;
+    }
 
+    public Category deleteCategory(Category category) {
+        DBCollection categoriesCollection = getCategoriesCollection();
+        BasicDBObject categoryQuery = new BasicDBObject();
+        categoryQuery.put(USER_NAME, category.getUsername());
+        categoryQuery.put(CATEGORY_OBJECT_ID, new ObjectId(category.getCategoryId()));
+        DBObject categoryDocument = categoriesCollection.findOne(categoryQuery);
+        categoriesCollection.remove(categoryDocument);
+        return category;
+    }
+
+
+    private DBObject getCategoryDocument(Category category) {
         BasicDBObject categoryQuery = new BasicDBObject();
         categoryQuery.put(USER_NAME, category.getUsername());
         categoryQuery.put(CATEGORY_OBJECT_ID, new ObjectId(category.getCategoryId()));
 
-        DBObject categoryDocument = categoriesCollection.findOne(categoryQuery);
-        categoryDocument.put(CATEGORY_NAME, category.getName());
-        categoriesCollection.save(categoryDocument);
-        return category;
+        DBCollection categoriesCollection = getCategoriesCollection();
+        return categoriesCollection.findOne(categoryQuery);
+    }
+
+    private DBCollection getCategoriesCollection() {
+        DB dbConnection = MongoDBConnection.getDbConnection();
+        DBCollection categoriesCollection = dbConnection.getCollection(CATEGORIES_COLLECTION);
+        return categoriesCollection;
     }
 
 }
