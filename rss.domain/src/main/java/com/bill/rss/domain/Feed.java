@@ -1,12 +1,14 @@
 package com.bill.rss.domain;
 
 public class Feed {
-	
+
 	private String feedId;
 	private String categoryId;
 	private String userName;
 	private String name;
 	private String url;
+    private String totalCount;
+    private String unReadCount;
 
 	public String getFeedId() {
 		return feedId;
@@ -47,4 +49,20 @@ public class Feed {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+
+    public String getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(String totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public String getUnReadCount() {
+        return unReadCount;
+    }
+
+    public void setUnReadCount(String unReadCount) {
+        this.unReadCount = unReadCount;
+    }
 }

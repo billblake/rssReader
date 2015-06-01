@@ -39,12 +39,12 @@
                         <i class="icon-right-open" ng-show="! show_$index"></i>
                         <i class="icon-down-open" ng-show="show_$index"></i>
                     </span>
-                    <span ng-click="displayFeedsForCategory(feedCategory)">
-                        {{ feedCategory.name }}
+                    <span ng-click="displayFeedsForCategory(feedCategory)" title="{{ feedCategory.name }} ({{ feedCategory.unReadCount }}/{{ feedCategory.totalCount }})">
+                        {{ feedCategory.name }} ({{ feedCategory.unReadCount }}/{{ feedCategory.totalCount }})
                     </span>
                     <ul id="feedContents_$index" class="feeds" ng-show="show_$index">
-                        <li class="feed" ng-repeat="feed in feedCategory.feeds"  ng-click="displayFeedsForFeed(feed)">
-                            {{feed.name}}
+                        <li class="feed" ng-repeat="feed in feedCategory.feeds"  ng-click="displayFeedsForFeed(feed)" title="{{feed.name}} ({{ feed.unReadCount }}/{{ feed.totalCount }})">
+                            {{feed.name}} ({{ feed.unReadCount }}/{{ feed.totalCount }})
                         </li>
                     </ul>
                 </li>

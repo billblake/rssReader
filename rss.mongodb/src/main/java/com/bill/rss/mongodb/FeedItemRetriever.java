@@ -11,6 +11,8 @@ import org.bson.types.ObjectId;
 
 import com.bill.rss.dataProvider.FeedItemProvider;
 import com.bill.rss.dataProvider.FeedItemUpdater;
+import com.bill.rss.domain.Category;
+import com.bill.rss.domain.Feed;
 import com.bill.rss.domain.FeedItem;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -149,5 +151,44 @@ public class FeedItemRetriever implements FeedItemProvider, FeedItemUpdater {
             SimpleDateFormat time = new SimpleDateFormat("MMM dd");
             return time.format(pubDate);
         }
+    }
+
+
+    public void enrichCategoryWithFeedItemCount(Category category) {
+        category.setTotalCount(getTotalCount(CATEGORY_ID, category.getCategoryId()));
+        category.setUnReadCount(getUnRead(CATEGORY_ID, category.getCategoryId()));
+    }
+
+
+    public void enrichFeedWithFeedItemCount(Feed feed) {
+        feed.setTotalCount(getTotalCount(FEED_ID, feed.getFeedId()));
+        feed.setUnReadCount(getUnRead(FEED_ID, feed.getFeedId()));
+    }
+
+
+    private String getTotalCount(String field, String fieldValue) {
+        DBCollection feedItemCollection = getFeedItemsCollection();
+        BasicDBObject query = buildQueryForFeeds(field, fieldValue);
+        Long countOfFeedItems = feedItemCollection.count(query);
+        return countOfFeedItems.toString();
+    }
+
+
+    private String getUnRead(String field, String fieldValue) {
+        DBCollection feedItemCollection = getFeedItemsCollection();
+        BasicDBObject query = buildQueryForFeeds(field, fieldValue);
+        query.append(FEED_ITEM_READ, false);
+        Long countOfUnReadFeedItems = feedItemCollection.count(query);
+        return countOfUnReadFeedItems.toString();
+    }
+
+
+    private BasicDBObject buildQueryForFeeds(String field, String fieldValue) {
+        BasicDBObject query = new BasicDBObject();
+        query.append(field, new ObjectId(fieldValue));
+        BasicDBObject deleteValue = new BasicDBObject();
+        deleteValue.append("$ne", true);
+        query.append(FEED_ITEM_DELETE, deleteValue);
+        return query;
     }
 }

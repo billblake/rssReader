@@ -1,9 +1,9 @@
 app.service('feedService', function ($http, $resource) {
 
 
-    this.getCategories = function () {
+    this.getCategories = function (callback) {
         var category = createCategoryResource();
-        return category.query();
+        return category.query(callback);
     };
 
 
