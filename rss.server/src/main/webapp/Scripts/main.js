@@ -276,10 +276,12 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
 
 
     $scope.markAsRead = function(feedItem) {
-        feedService.markAsRead(feedItem, function(updatedFeedItem) {
-            feedItem.read = true;
-            updateCategoryCounts(updatedFeedItem.feedId, true, false);
-        });
+        if (!feedItem.read) {
+	    feedService.markAsRead(feedItem, function(updatedFeedItem) {
+	        feedItem.read = true;
+	        updateCategoryCounts(updatedFeedItem.feedId, true, false);
+	    });
+        }
     };
 
 
