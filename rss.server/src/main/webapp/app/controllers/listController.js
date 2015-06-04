@@ -81,10 +81,10 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
 
     $scope.markAsRead = function(feedItem) {
         if (!feedItem.read) {
-	        feedService.markAsRead(feedItem, function(updatedFeedItem) {
-	            feedItem.read = true;
-	            updateCategoryCounts(updatedFeedItem.feedId, true, false);
-	        });
+	   feedService.markAsRead(feedItem, function(updatedFeedItem) {
+	       feedItem.read = true;
+	       updateCategoryCounts(updatedFeedItem.feedId, true, false);
+	   });
         }
     };
 
