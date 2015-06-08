@@ -24,5 +24,5 @@ public class FeedConstants {
 	public static final String FEED_NAME = "name";
 
 
-	public static final int MAX_PAGE_SIZE = 25;
+	public static final int MAX_PAGE_SIZE = 100;
 }

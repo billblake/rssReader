@@ -202,7 +202,7 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
         return;
     }
 
-    $scope.page = 1;
+    $scope.page = 0;
     $scope.loading = true;
     $scope.loadingMessage = "Loading Feeds";
     $scope.feedCategories = feedService.getCategories();
@@ -217,6 +217,7 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
     };
 
     $scope.displayFeedsForCategory = function(category) {
+        $scope.page = 0;
         $scope.loading = true;
         $scope.categoryId = category.categoryId;
         $scope.feedId = undefined;
@@ -225,6 +226,7 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
     };
 
     $scope.displayFeedsForAllCategory = function() {
+        $scope.page = 0;
         $scope.loading = true;
         $scope.feeds = {};
         $scope.categoryId = undefined;
@@ -234,6 +236,7 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
     };
 
     $scope.displayFeedsForFeed = function(feed) {
+        $scope.page = 0;
         $scope.loading = true;
         $scope.categoryId = undefined;
         $scope.feedId = feed.feedId;
@@ -277,10 +280,10 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
 
     $scope.markAsRead = function(feedItem) {
         if (!feedItem.read) {
-	    feedService.markAsRead(feedItem, function(updatedFeedItem) {
-	        feedItem.read = true;
-	        updateCategoryCounts(updatedFeedItem.feedId, true, false);
-	    });
+	   feedService.markAsRead(feedItem, function(updatedFeedItem) {
+	       feedItem.read = true;
+	       updateCategoryCounts(updatedFeedItem.feedId, true, false);
+	   });
         }
     };
 
@@ -331,6 +334,7 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
     function fail() {
     };
 });
+
 app.controller('SignUpController', function ($scope, userService) {
     $scope.invalidForm = true;
 
