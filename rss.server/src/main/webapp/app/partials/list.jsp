@@ -10,11 +10,11 @@
 			        <span class="caret"></span>
 			    </span>
 			    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu1">
-				    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="refresh()">Refresh</a></li>
-				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#/manage">Manage Feeds</a></li>
-				    <li role="presentation"><a role="menuitem" tabindex="-1">Settings</a></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="refresh()"><i class="icon-arrows-cw"></i>Refresh</a></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#/manage"><i class="icon-edit"></i>Manage Feeds</a></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1"><i class="icon-cog"></i>Settings</a></li>
 				    <li role="presentation" class="divider"></li>
-				    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="logout()">Log out</a></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="logout()"><i class="icon-logout"></i>Log out</a></li>
 				</ul>
 			</span>
             <i id="settingsIcon" class="icon-cog"></i>
@@ -52,23 +52,49 @@
         </div>
         <div id="main-content" class="span11">
             <!--Body content-->
-            <h2>{{title}}</h2>
+            <header>
+            	<h2 class="ng-binding">All Feeds</h2>
+            	<span id="actions">
+					<a id="deleteAll"><i class="icon-trash-empty"></i>Delete All</a>
+					<a id="markAllAsRead"><i class="icon-check"></i>Mark All As Read</a>
+            		<a id="showFilter"><i class="icon-search"></i>Show Filter</a>
+            	</span>
+            	<span id="actionsDropdown" class="dropdown">
+				    <span class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+				        Actions
+				        <span class="caret"></span>
+				    </span>
+				    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu1">
+					    <li role="presentation"><a role="menuitem" tabindex="-1" id="deleteAll"><i class="icon-trash-empty"></i>Delete All</a></li>
+					    <li role="presentation"><a role="menuitem" tabindex="-1" id="markAllAsRead"><i class="icon-check"></i>Mark All As Read</a></li>
+					    <li role="presentation"><a role="menuitem" tabindex="-1" id="showFilter"><i class="icon-search"></i>Show Filter</a></li>
+					</ul>
+				</span>
+           	</header>
             <div id="spinner"></div>
             <ul id="feed-list" infinite-scroll='loadMore()' infinite-scroll-distance='1'>
                 <li class="feed-item" ng-repeat="feedItem in feeds" ng-class-odd="'odd'" ng-class-even="'even'" ng-class="readOrUnread(feedItem)">
-                    <span ng-click="toggleArticle($index);markAsRead(feedItem)">
+                    <span class="feedHeader" ng-click="toggleArticle($index);markAsRead(feedItem)">
                         <span class="feedTitle" ng-bind-html="feedItem.title"></span>
                         <span class="feedSource" title="{{feedItem.source}}">{{feedItem.source}}</span>
                         <span class="feedPubDate">{{feedItem.formattedDate}}</span>
                     </span>
-                    <span class="feedItemBtns"><i class="deleteFeed icon-trash-empty" ng-click="deleteFeedItem(feedItem)"></i></span>
+                    <span class="feedItemBtns">
+                    	<i class="icon-tag"></i>
+                    	<i class="icon-floppy"></i>
+                    	<i class="deleteFeed icon-trash-empty" ng-click="deleteFeedItem(feedItem)"></i>
+                    </span>
                     <article ng-class="articleClass($index)">
 	                    <!-- contrived reverse example--> 
 	                    <h3 ng-bind-html="feedItem.title"></h3>
 	                    <span>{{feedItem.source}} {{feedItem.formattedDate}}</span>
 	                    <div id="contents">
 	                        <span ng-bind-html="feedItem.description"></span> <a href="{{feedItem.link}}" target="new">Read More >></a>
-                    		<span class="feedItemBtns"><i class="deleteFeed icon-trash-empty" ng-click="deleteFeedItem(feedItem)"></i></span>
+                    		<span class="feedItemBtns">
+                    			<i class="icon-tag"></i>
+                    			<i class="icon-floppy"></i>
+                    			<i class="deleteFeed icon-trash-empty" ng-click="deleteFeedItem(feedItem)"></i>
+                    		</span>
 	                    </div>
                     </article>
                 </li>

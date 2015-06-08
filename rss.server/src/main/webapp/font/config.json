@@ -7,6 +7,18 @@
   "ascent": 850,
   "glyphs": [
     {
+      "uid": "3db5347bd219f3bce6025780f5d9ef45",
+      "css": "tag",
+      "code": 59407,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "a3f89e106175a5c5c4e9738870b12e55",
+      "css": "tags",
+      "code": 59406,
+      "src": "fontawesome"
+    },
+    {
       "uid": "f48ae54adfb27d8ada53d0fd9e34ee10",
       "css": "trash-empty",
       "code": 59399,
@@ -43,9 +55,45 @@
       "src": "fontawesome"
     },
     {
+      "uid": "dd6c6b221a1088ff8a9b9cd32d0b3dd5",
+      "css": "check",
+      "code": 59401,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "f4445feb55521283572ee88bc304f928",
+      "css": "floppy",
+      "code": 59408,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "4109c474ff99cad28fd5a2c38af2ec6f",
+      "css": "filter",
+      "code": 59400,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "c9b928dc82d7d77033644fcf59dca3b3",
+      "css": "flashlight",
+      "code": 59402,
+      "src": "entypo"
+    },
+    {
+      "uid": "jqzwo6i8oicjbn049sh2856d8anrqoli",
+      "css": "edit",
+      "code": 59410,
+      "src": "typicons"
+    },
+    {
       "uid": "2a3192d0f8fe0c7cf959168e68eb16d8",
       "css": "rss",
       "code": 59392,
+      "src": "zocial"
+    },
+    {
+      "uid": "a7632b6db17256019e34ec72fb236be0",
+      "css": "pocket",
+      "code": 59404,
       "src": "zocial"
     },
     {
@@ -53,6 +101,18 @@
       "css": "cog",
       "code": 59393,
       "src": "elusive"
+    },
+    {
+      "uid": "06a2fbb04dffecdb444936073cae9123",
+      "css": "thumbs-up",
+      "code": 59405,
+      "src": "linecons"
+    },
+    {
+      "uid": "221947bea81f49a11b863c686a7bd235",
+      "css": "search",
+      "code": 59403,
+      "src": "websymbols"
     }
   ]
 }

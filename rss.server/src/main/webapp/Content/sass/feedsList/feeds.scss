@@ -1,14 +1,40 @@
 #feeds {
 	
-	h2 {
-		font-size: 20px;
-		padding-left: 20px;
-		margin-top: 0px;
-		background-color: $BACKGROUND;
-  		position: fixed;
-  		width: 102%;
-  		padding-top: 10px;
-  		padding-bottom: 10px;
+	header {
+		background-color: $BACKGROUND;   
+	    position: fixed;   
+	    width: 80%;   
+	    padding-top: 10px;   
+	    padding-bottom: 10px;
+    
+		h2 {
+			font-size: 20px;
+			padding-left: 20px;
+			margin-top: 0px;
+	  		position: fixed;
+  		}
+  		
+  		#actions {
+  			float: right;
+	  		margin-right: 30px;
+	  		
+	  		a {
+				margin-left: 20px;
+				color: black;
+				cursor: pointer;
+	  		}
+	  		
+	  		a:hover {
+				text-decoration: none;
+			}
+  		}
+  		
+  		#actionsDropdown {
+  			float: right;
+	  		margin-right: 30px;
+	  		display: none;
+			cursor: pointer;
+  		}
 	}
 
 	#sideBar {
@@ -66,6 +92,11 @@
 			.feed-item {
 				border-bottom: 1px solid $PRIMARY_COLOUR;
 				padding: 5px 0px 5px 20px;
+				
+				.feedHeader {
+					width: 88%;
+					display: inline-block;
+				}
 				
 				.feedSource, .feedTitle, .feedPubDate, .deleteFeed {
 					cursor: pointer;
@@ -155,6 +186,19 @@
 		#main-content {
 			width: 100%;
 		    margin-left: 0px;
+		    
+		    header {
+		    	width: 95%;
+		    	
+		    	#actions {
+					display: none;
+		    	}
+		    	
+		    	#actionsDropdown {
+					display: inline-block;
+					margin-right: 5px;
+				}
+		    }
 	
 			#feed-list {
 				list-style-type: none;
