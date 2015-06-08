@@ -10,6 +10,7 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
     $scope.loading = true;
     $scope.loadingMessage = "Loading Feeds";
     $scope.feedCategories = feedService.getCategories();
+    $scope.feeds = [];
     $scope.name = userService.getFullName();
     $scope.title = "All Feeds";
 
