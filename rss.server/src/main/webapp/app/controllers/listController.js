@@ -135,6 +135,9 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
         $scope.loading = false;
     }
 
-    function fail() {
+    function fail(response) {
+        if (response.status === 401) {
+            $location.path('/login');
+        }
     };
 });
