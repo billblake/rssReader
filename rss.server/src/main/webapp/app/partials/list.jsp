@@ -89,7 +89,7 @@
 	                    <h3 ng-bind-html="feedItem.title"></h3>
 	                    <span>{{feedItem.source}} {{feedItem.formattedDate}}</span>
 	                    <div id="contents">
-	                        <span ng-bind-html="feedItem.description"></span> <a href="{{feedItem.link}}" target="new">Read More >></a>
+	                        <span ng-bind-html="feedItem.description"></span> <a href="{{feedItem.link}}" target="_blank">Read More >></a>
                     		<span class="feedItemBtns">
                     			<i class="icon-tag"></i>
                     			<i class="icon-floppy"></i>
