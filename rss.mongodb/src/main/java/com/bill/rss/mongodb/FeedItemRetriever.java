@@ -33,6 +33,8 @@ import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_SOURCE;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_TITLE;
 import static com.bill.rss.mongodb.FeedConstants.MAX_PAGE_SIZE;
 import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static java.util.Calendar.DATE;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
@@ -47,15 +49,6 @@ public class FeedItemRetriever implements FeedItemProvider, FeedItemUpdater {
         BasicDBObject query = buildFeedItemQuery(categoryId, feedId, username);
         feedItemsCursor = coll.find(query).sort(new BasicDBObject(FEED_ITEM_PUB_DATE, -1)).limit(MAX_PAGE_SIZE).skip((page - 1) * MAX_PAGE_SIZE);
         return parseFeadItems(feedItemsCursor);
-    }
-
-
-    public FeedItem markFeedItemAsRead(String feedItemId) {
-        DBCollection feedItemCollection = getFeedItemsCollection();
-        DBObject feedItem = retrieveFeedItemById(feedItemId);
-        feedItem.put(FEED_ITEM_READ, true);
-        feedItemCollection.save(feedItem);
-        return buildFeedItem(feedItem);
     }
 
 
@@ -190,5 +183,54 @@ public class FeedItemRetriever implements FeedItemProvider, FeedItemUpdater {
         deleteValue.append("$ne", true);
         query.append(FEED_ITEM_DELETE, deleteValue);
         return query;
+    }
+
+    public FeedItem markFeedItemAsRead(String feedItemId) {
+        DBCollection feedItemCollection = getFeedItemsCollection();
+        DBObject feedItem = retrieveFeedItemById(feedItemId);
+        feedItem.put(FEED_ITEM_READ, true);
+        feedItemCollection.save(feedItem);
+        return buildFeedItem(feedItem);
+    }
+
+    public List<FeedItem> markFeedItemsForCategoryAsRead(String categoryId) {
+        BasicDBObject searchQuery = new BasicDBObject();
+        searchQuery.append(CATEGORY_ID, new ObjectId(categoryId)).append(FEED_ITEM_READ, FALSE);
+        List<FeedItem> feedItems = getFeedItems(searchQuery);
+        markFeedsAsRead(searchQuery);
+        return feedItems;
+    }
+
+
+    public List<FeedItem> markFeedItemsForFeedAsRead(String feedId) {
+        BasicDBObject searchQuery = new BasicDBObject();
+        searchQuery.append(FEED_ID, new ObjectId(feedId)).append(FEED_ITEM_READ, FALSE);
+        List<FeedItem> feedItems = getFeedItems(searchQuery);
+        markFeedsAsRead(searchQuery);
+        return feedItems;
+    }
+
+
+    public List<FeedItem> markAllFeedItemsAsRead() {
+        BasicDBObject searchQuery = new BasicDBObject();
+        searchQuery.append(FEED_ITEM_READ, FALSE);
+        List<FeedItem> feedItems = getFeedItems(searchQuery);
+        markFeedsAsRead(searchQuery);
+        return feedItems;
+    }
+
+    private List<FeedItem> getFeedItems(BasicDBObject searchQuery) {
+        DBCollection feedItemCollection = getFeedItemsCollection();
+        DBCursor feedItemsCursor = feedItemCollection.find(searchQuery);
+        return parseFeadItems(feedItemsCursor);
+    }
+
+    private void markFeedsAsRead(BasicDBObject searchQuery) {
+        DBCollection feedItemCollection = getFeedItemsCollection();
+
+        BasicDBObject updateQuery = new BasicDBObject();
+        updateQuery.append("$set", new BasicDBObject().append(FEED_ITEM_READ, TRUE));
+
+        feedItemCollection.updateMulti(searchQuery, updateQuery);
     }
 }

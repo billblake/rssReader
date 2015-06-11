@@ -1,17 +1,14 @@
 package com.bill.rss.server;
 
-import spark.Request;
+import com.bill.rss.dataProvider.FeedItemUpdater;
+import com.bill.rss.mongodb.FeedItemRetriever;
 
 
 public abstract class BaseFeedItemRoute extends BaseRoute {
 
+    protected final FeedItemUpdater feedItemUpdater = new FeedItemRetriever();
+
     protected BaseFeedItemRoute(String path) {
         super(path);
     }
-
-
-    protected String getFeedItemId(Request request) {
-        return request.params("feedItemId");
-    }
-
 }

@@ -29,6 +29,10 @@ public class RssController implements SparkApplication {
 		post(new UserRegistrationRoute("/user"));
 
 		put(new UpdateFeedItemRoute("/feeds/category/:categoryId/feed/:feedId/feedItem/:feedItemId"));
+		put(new UpdateAllFeedItemsForCategoryRoute("/feeds/category/:categoryId/feed/feedItem"));
+		put(new UpdateAllFeedItemsForFeedRoute("/feeds/category//feed/:feedId/feedItem"));
+		put(new UpdateAllFeedItemsRoute("/feeds/category/feed/feedItem"));
+
 		delete(new DeleteFeedItemRoute("/feeds/category/:categoryId/feed/:feedId/feedItem/:feedItemId"));
 	}
 }

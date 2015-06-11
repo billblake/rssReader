@@ -167,5 +167,30 @@ app.service('feedService', function ($http, $resource) {
         return feedItemResource;
     }
 
+
+    this.markFeedFeedItemsAsRead = function(feedId, callback) {
+        var FeedItem = createFeedItemResource(undefined, feedId, undefined);
+        var feedItem = new FeedItem({
+            feedId : feedId
+        });
+        feedItem.$markAsRead(callback);
+    };
+
+
+    this.markCategoryFeedItemsAsRead = function(categoryId, callback) {
+        var FeedItem = createFeedItemResource(categoryId, undefined, undefined);
+        var feedItem = new FeedItem({
+            categoryId : categoryId
+        });
+        feedItem.$markAsRead(callback);
+    };
+
+
+    this.markAllAsRead = function(callback) {
+        var FeedItem = createFeedItemResource(undefined, undefined, undefined);
+        var feedItem = new FeedItem({});
+        feedItem.$markAsRead(callback);
+    };
+
 });
 

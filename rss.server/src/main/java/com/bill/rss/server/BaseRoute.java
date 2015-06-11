@@ -41,4 +41,19 @@ public abstract class BaseRoute extends Route {
         User user = (User) request.session().attribute(USER_SESSION_KEY);
         return user.getUserName();
     }
+
+
+    protected String getFeedItemId(Request request) {
+        return request.params("feedItemId");
+    }
+
+
+    protected String getFeedId(Request request) {
+        return request.params("feedId");
+    }
+
+
+    protected String getCategoryId(Request request) {
+        return request.params("categoryId");
+    }
 }

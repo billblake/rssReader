@@ -84,15 +84,26 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
 
     $scope.markAsRead = function(feedItem) {
         if (!feedItem.read) {
-	   feedService.markAsRead(feedItem, function(updatedFeedItem) {
-	       feedItem.read = true;
-	       updateCategoryCounts(updatedFeedItem.feedId, true, false);
-	   });
+            feedService.markAsRead(feedItem, function(updatedFeedItem) {
+                feedItem.read = true;
+                updateCategoryCounts(updatedFeedItem.feedId, true, false);
+            });
         }
     };
 
 
-    $scope.deleteFeedItem = function(feedItem) {
+    $scope.markAllAsRead = function() {
+        if ($scope.feedId) {
+            feedService.markFeedFeedItemsAsRead($scope.feedId, updateCountsAfterMarkFeedFeedItemsAsRead);
+        } else if ($scope.categoryId) {
+            feedService.markCategoryFeedItemsAsRead($scope.categoryId, updateCountsAfterMarkCategoryFeedItemsAsRead);
+        } else {
+            feedService.markAllAsRead(updateCountsAfterMarkAllFeedItemsAsRead);
+        }
+    };
+
+
+    $scope.deleteFeedItem = function() {
         feedService.deleteFeedItem(feedItem, function(updatedFeedItem) {
             for (var i = 0; i < $scope.feeds.length; i++) {
                 if ($scope.feeds[i].feedItemId === updatedFeedItem.feedItemId) {
@@ -101,6 +112,11 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
             }
             updateCategoryCounts(updatedFeedItem.feedId, !updatedFeedItem.read, true);
         });
+    };
+
+
+    $scope.deleteAllFeedItem = function() {
+
     };
 
 
@@ -140,4 +156,47 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
             $location.path('/login');
         }
     };
+
+    function updateCountsAfterMarkFeedFeedItemsAsRead(response) {
+        markAllFeedsAsRed();
+        for (var i = 0; i < $scope.feedCategories.length; i++) {
+            for (var j = 0; j < $scope.feedCategories[i].feeds.length; j++) {
+                if ($scope.feedCategories[i].feeds[j].feedId === response.feedId) {
+                    var oldNumberOfUnread = $scope.feedCategories[i].feeds[j].unReadCount;
+                    $scope.feedCategories[i].feeds[j].unReadCount = 0;
+                    $scope.feedCategories[i].unReadCount -= oldNumberOfUnread;
+                    return;
+                }
+            }
+        }
+    }
+
+    function updateCountsAfterMarkCategoryFeedItemsAsRead(response) {
+        markAllFeedsAsRed();
+        for (var i = 0; i < $scope.feedCategories.length; i++) {
+            if ($scope.feedCategories[i].categoryId === response.categoryId) {
+                $scope.feedCategories[i].unReadCount = 0;
+                for (var j = 0; j < $scope.feedCategories[i].feeds.length; j++) {
+                    $scope.feedCategories[i].feeds[j].unReadCount = 0;
+                }
+                return;
+            }
+        }
+    }
+
+    function updateCountsAfterMarkAllFeedItemsAsRead(response) {
+        markAllFeedsAsRed();
+        for (var i = 0; i < $scope.feedCategories.length; i++) {
+            $scope.feedCategories[i].unReadCount = 0;
+            for (var j = 0; j < $scope.feedCategories[i].feeds.length; j++) {
+                $scope.feedCategories[i].feeds[j].unReadCount = 0;
+            }
+        }
+    }
+
+    function markAllFeedsAsRed() {
+        for (var i = 0; i < $scope.feeds.length; i++) {
+            $scope.feeds[i].read = true;
+        }
+    }
 });
