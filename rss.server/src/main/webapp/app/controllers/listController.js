@@ -1,4 +1,4 @@
-app.controller('ListController', function($scope, feedService, $cookies, $cookieStore, $location, $rootScope, $http, userService) {
+app.controller('ListController', function($scope, feedService, feedItemService, categoryService, $cookies, $cookieStore, $location, $rootScope, $http, userService) {
 
     var loggedInValue = $cookies.loggedIn;
     if (loggedInValue !== "logged-in" && !$rootScope.loggedIn) {
@@ -9,7 +9,7 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
     $scope.page = 0;
     $scope.loading = true;
     $scope.loadingMessage = "Loading Feeds";
-    $scope.feedCategories = feedService.getCategories();
+    $scope.feedCategories = categoryService.getCategories();
     $scope.feeds = [];
     $scope.name = userService.getFullName();
     $scope.title = "All Feeds";
@@ -84,7 +84,7 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
 
     $scope.markAsRead = function(feedItem) {
         if (!feedItem.read) {
-            feedService.markAsRead(feedItem, function(updatedFeedItem) {
+            feedItemService.markAsRead(feedItem, function(updatedFeedItem) {
                 feedItem.read = true;
                 updateCategoryCounts(updatedFeedItem.feedId, true, false);
             });
@@ -94,17 +94,17 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
 
     $scope.markAllAsRead = function() {
         if ($scope.feedId) {
-            feedService.markFeedFeedItemsAsRead($scope.feedId, updateCountsAfterMarkFeedFeedItemsAsRead);
+            feedItemService.markFeedFeedItemsAsRead($scope.feedId, updateCountsAfterMarkFeedFeedItemsAsRead);
         } else if ($scope.categoryId) {
-            feedService.markCategoryFeedItemsAsRead($scope.categoryId, updateCountsAfterMarkCategoryFeedItemsAsRead);
+            feedItemService.markCategoryFeedItemsAsRead($scope.categoryId, updateCountsAfterMarkCategoryFeedItemsAsRead);
         } else {
-            feedService.markAllAsRead(updateCountsAfterMarkAllFeedItemsAsRead);
+            feedItemService.markAllAsRead(updateCountsAfterMarkAllFeedItemsAsRead);
         }
     };
 
 
     $scope.deleteFeedItem = function() {
-        feedService.deleteFeedItem(feedItem, function(updatedFeedItem) {
+        feedItemService.deleteFeedItem(feedItem, function(updatedFeedItem) {
             for (var i = 0; i < $scope.feeds.length; i++) {
                 if ($scope.feeds[i].feedItemId === updatedFeedItem.feedItemId) {
                     $scope.feeds.splice(i, 1);

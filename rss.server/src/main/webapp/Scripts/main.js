@@ -55,7 +55,7 @@ app.config(function ($routeProvider) {
 
 
 
-app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $location, feedService, userService) {
+app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $location, feedService, categoryService, userService) {
 
     var loggedInValue = $cookies.loggedIn;
     if (loggedInValue !== "logged-in" && !$rootScope.loggedIn) {
@@ -89,7 +89,7 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
     };
 
     $scope.deleteCategory = function(category) {
-        feedService.deleteCategory(category);
+        categoryService.deleteCategory(category);
     };
 
 
@@ -104,7 +104,7 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
 
 
     $scope.saveCategory = function(category) {
-        feedService.saveCategory(category, categorySaved);
+        categoryService.saveCategory(category, categorySaved);
     }
 
     $scope.addCategory = function() {
@@ -116,7 +116,7 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
         if (feed.categoryId === "new") {
             var category = {name : feed.newCategoryName};
             category.userName = $scope.username
-            feedService.saveCategory(category, function(createdCategory, putResponseHeaders) {
+            categoryService.saveCategory(category, function(createdCategory, putResponseHeaders) {
                 feed.categoryId = createdCategory.categoryId;
                 feedService.saveFeed(feed, feedSaved);
             });
@@ -140,7 +140,7 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
 
 
     function getFlatListOfFeeds() {
-        feedService.getCategories().$then(function(response){
+        categoryService.getCategories().$then(function(response){
             var feedCategories = response.data;
             $scope.feedCategories = feedCategories;
             var feed = {}, feeds = [], cat;
@@ -194,7 +194,7 @@ app.controller('LoginController', function($scope, $http, $location, $rootScope)
         });
     };
 });
-app.controller('ListController', function($scope, feedService, $cookies, $cookieStore, $location, $rootScope, $http, userService) {
+app.controller('ListController', function($scope, feedService, feedItemService, categoryService, $cookies, $cookieStore, $location, $rootScope, $http, userService) {
 
     var loggedInValue = $cookies.loggedIn;
     if (loggedInValue !== "logged-in" && !$rootScope.loggedIn) {
@@ -205,7 +205,7 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
     $scope.page = 0;
     $scope.loading = true;
     $scope.loadingMessage = "Loading Feeds";
-    $scope.feedCategories = feedService.getCategories();
+    $scope.feedCategories = categoryService.getCategories();
     $scope.feeds = [];
     $scope.name = userService.getFullName();
     $scope.title = "All Feeds";
@@ -280,7 +280,7 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
 
     $scope.markAsRead = function(feedItem) {
         if (!feedItem.read) {
-            feedService.markAsRead(feedItem, function(updatedFeedItem) {
+            feedItemService.markAsRead(feedItem, function(updatedFeedItem) {
                 feedItem.read = true;
                 updateCategoryCounts(updatedFeedItem.feedId, true, false);
             });
@@ -290,17 +290,17 @@ app.controller('ListController', function($scope, feedService, $cookies, $cookie
 
     $scope.markAllAsRead = function() {
         if ($scope.feedId) {
-            feedService.markFeedFeedItemsAsRead($scope.feedId, updateCountsAfterMarkFeedFeedItemsAsRead);
+            feedItemService.markFeedFeedItemsAsRead($scope.feedId, updateCountsAfterMarkFeedFeedItemsAsRead);
         } else if ($scope.categoryId) {
-            feedService.markCategoryFeedItemsAsRead($scope.categoryId, updateCountsAfterMarkCategoryFeedItemsAsRead);
+            feedItemService.markCategoryFeedItemsAsRead($scope.categoryId, updateCountsAfterMarkCategoryFeedItemsAsRead);
         } else {
-            feedService.markAllAsRead(updateCountsAfterMarkAllFeedItemsAsRead);
+            feedItemService.markAllAsRead(updateCountsAfterMarkAllFeedItemsAsRead);
         }
     };
 
 
     $scope.deleteFeedItem = function() {
-        feedService.deleteFeedItem(feedItem, function(updatedFeedItem) {
+        feedItemService.deleteFeedItem(feedItem, function(updatedFeedItem) {
             for (var i = 0; i < $scope.feeds.length; i++) {
                 if ($scope.feeds[i].feedItemId === updatedFeedItem.feedItemId) {
                     $scope.feeds.splice(i, 1);
@@ -487,32 +487,6 @@ function getErrorClass(isError) {
 
 app.service('feedService', function ($http, $resource) {
 
-
-    this.getCategories = function (callback) {
-        var category = createCategoryResource();
-        return category.query(callback);
-    };
-
-
-    this.saveCategory = function (_category, callback) {
-        if (typeof _category === "undefined") {
-            return;
-        }
-
-        var Category = createCategoryResource();
-
-//  Example of retrieving the resource first then updating it.
-//
-//            Category.get({categoryId : _category.categoryId}, function(returnedCategory) {
-//                returnedCategory.name = _category.name;
-//                returnedCategory.$save();
-//            });
-
-        var category = new Category({categoryId : _category.categoryId, name : _category.name});
-        category.$save(callback);
-    };
-
-
     this.getFeeds = function (_categoryId, _feedId, suc, fail, _page) {
         var feedResource = createFeedResource(_categoryId, _feedId, _page);
         return feedResource.query(suc, fail);
@@ -584,31 +558,10 @@ app.service('feedService', function ($http, $resource) {
         return feedResource;
     };
 
-    function createCategoryResource(_categoryId) {
-        if (_categoryId  === null || typeof _categoryId === "undefined") {
-            _categoryId = "@id";
-        }
-        return categoryResource = $resource(readerConstants.appContextPath + '/category/:categoryId', {categoryId : _categoryId});
-    }
+});
 
 
-    this.deleteCategory = function(_category) {
-        if (typeof _category === "undefined") {
-            return;
-        }
-        var Category = createCategoryResource(_category.categoryId);
-        var category = new Category({
-            categoryId : _category.categoryId,
-            name : _category.name,
-            username : _category.username
-        });
-
-        if (typeof callback === "function") {
-            category.$delete(callback);
-        } else {
-            category.$delete();
-        }
-    };
+app.service('feedItemService', function ($http, $resource) {
 
     this.markAsRead = function(_feedItem, callback) {
         var FeedItem = createFeedItemResource(_feedItem.catId, _feedItem.feedId, _feedItem.feedItemId);
@@ -629,30 +582,6 @@ app.service('feedService', function ($http, $resource) {
         });
         feedItem.$delete(callback);
     };
-
-
-    function createFeedItemResource(_categoryId, _feedId, _feedItemId) {
-        if (_feedItemId === null || typeof _feedItemId === "undefined") {
-            _feedItemId = "@id";
-        }
-        if (_feedId === null || typeof _feedId === "undefined") {
-            _feedId = "@id";
-        }
-        if (_categoryId  === null || typeof _categoryId === "undefined") {
-            _categoryId = "@id";
-        }
-        var feedItemResource = $resource(readerConstants.appContextPath + '/feeds/category/:categoryId/feed/:feedId/feedItem/:feedItemId',
-            {
-                feedId : _feedId,
-                categoryId : _categoryId,
-                feedItemId : _feedItemId
-            },
-            {
-                markAsRead : {method:'PUT', params:{markAsRead:true}}
-            }
-        );
-        return feedItemResource;
-    }
 
 
     this.markFeedFeedItemsAsRead = function(feedId, callback) {
@@ -679,9 +608,83 @@ app.service('feedService', function ($http, $resource) {
         feedItem.$markAsRead(callback);
     };
 
+
+    function createFeedItemResource(_categoryId, _feedId, _feedItemId) {
+        if (_feedItemId === null || typeof _feedItemId === "undefined") {
+            _feedItemId = "@id";
+        }
+        if (_feedId === null || typeof _feedId === "undefined") {
+            _feedId = "@id";
+        }
+        if (_categoryId  === null || typeof _categoryId === "undefined") {
+            _categoryId = "@id";
+        }
+        var feedItemResource = $resource(readerConstants.appContextPath + '/feeds/category/:categoryId/feed/:feedId/feedItem/:feedItemId',
+            {
+                feedId : _feedId,
+                categoryId : _categoryId,
+                feedItemId : _feedItemId
+            },
+            {
+                markAsRead : {method:'PUT', params:{markAsRead:true}}
+            }
+        );
+        return feedItemResource;
+    }
 });
+app.service('categoryService', function ($http, $resource) {
+
+    this.getCategories = function (callback) {
+        var category = createCategoryResource();
+        return category.query(callback);
+    };
 
 
+    this.saveCategory = function (_category, callback) {
+        if (typeof _category === "undefined") {
+            return;
+        }
+
+        var Category = createCategoryResource();
+
+//  Example of retrieving the resource first then updating it.
+//
+//            Category.get({categoryId : _category.categoryId}, function(returnedCategory) {
+//                returnedCategory.name = _category.name;
+//                returnedCategory.$save();
+//            });
+
+        var category = new Category({categoryId : _category.categoryId, name : _category.name});
+        category.$save(callback);
+    };
+
+
+    this.deleteCategory = function(_category) {
+        if (typeof _category === "undefined") {
+            return;
+        }
+        var Category = createCategoryResource(_category.categoryId);
+        var category = new Category({
+            categoryId : _category.categoryId,
+            name : _category.name,
+            username : _category.username
+        });
+
+        if (typeof callback === "function") {
+            category.$delete(callback);
+        } else {
+            category.$delete();
+        }
+    };
+
+
+    function createCategoryResource(_categoryId) {
+        if (_categoryId  === null || typeof _categoryId === "undefined") {
+            _categoryId = "@id";
+        }
+        return categoryResource = $resource(readerConstants.appContextPath + '/category/:categoryId', {categoryId : _categoryId});
+    }
+});
 app.service('userService', function ($http, $resource, $cookies, $rootScope) {
 
 	this.createUser = function (user, successCallback, failureCallback) {

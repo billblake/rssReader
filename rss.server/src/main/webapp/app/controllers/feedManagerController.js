@@ -1,4 +1,4 @@
-app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $location, feedService, userService) {
+app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $location, feedService, categoryService, userService) {
 
     var loggedInValue = $cookies.loggedIn;
     if (loggedInValue !== "logged-in" && !$rootScope.loggedIn) {
@@ -32,7 +32,7 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
     };
 
     $scope.deleteCategory = function(category) {
-        feedService.deleteCategory(category);
+        categoryService.deleteCategory(category);
     };
 
 
@@ -47,7 +47,7 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
 
 
     $scope.saveCategory = function(category) {
-        feedService.saveCategory(category, categorySaved);
+        categoryService.saveCategory(category, categorySaved);
     }
 
     $scope.addCategory = function() {
@@ -59,7 +59,7 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
         if (feed.categoryId === "new") {
             var category = {name : feed.newCategoryName};
             category.userName = $scope.username
-            feedService.saveCategory(category, function(createdCategory, putResponseHeaders) {
+            categoryService.saveCategory(category, function(createdCategory, putResponseHeaders) {
                 feed.categoryId = createdCategory.categoryId;
                 feedService.saveFeed(feed, feedSaved);
             });
@@ -83,7 +83,7 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
 
 
     function getFlatListOfFeeds() {
-        feedService.getCategories().$then(function(response){
+        categoryService.getCategories().$then(function(response){
             var feedCategories = response.data;
             $scope.feedCategories = feedCategories;
             var feed = {}, feeds = [], cat;

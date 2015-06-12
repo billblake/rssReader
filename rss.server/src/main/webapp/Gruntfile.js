@@ -12,6 +12,8 @@ module.exports = function(grunt) {
               "app/controllers/listController.js",
               "app/controllers/signUpController.js",
               "app/services/feedService.js",
+              "app/services/feedItemService.js",
+              "app/services/categoryService.js",
               "app/services/userService.js",
               "app/directives/animatedView.js",
               "app/filters/filters.js"],
