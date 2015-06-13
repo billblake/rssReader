@@ -300,7 +300,7 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
     };
 
 
-    $scope.deleteFeedItem = function() {
+    $scope.deleteFeedItem = function(feedItem) {
         feedItemService.deleteFeedItem(feedItem, function(updatedFeedItem) {
             for (var i = 0; i < $scope.feeds.length; i++) {
                 if ($scope.feeds[i].feedItemId === updatedFeedItem.feedItemId) {
@@ -318,7 +318,11 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
 
 
     $scope.saveFeedItem = function(feedItem) {
-        feedItemService.saveFeedItem(feedItem);
+        if (!feedItem.saved) {
+            feedItemService.saveFeedItem(feedItem, function(feedResponse) {
+                feedItem.saved = feedResponse.saved;
+            });
+        }
     };
 
 
@@ -628,14 +632,14 @@ app.service('feedItemService', function ($http, $resource) {
     };
 
 
-    this.saveFeedItem = function(_feedItem) {
+    this.saveFeedItem = function(_feedItem, callback) {
         var FeedItem = createFeedItemResource(_feedItem.catId, _feedItem.feedId, _feedItem.feedItemId);
         var feedItem = new FeedItem({
             catId : _feedItem.catId,
             feedId : _feedItem.feedId,
             feedItemId : _feedItem.feedItemId
         });
-        feedItem.$saveFeedItem();
+        feedItem.$saveFeedItem(callback);
     };
 
 

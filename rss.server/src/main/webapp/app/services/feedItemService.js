@@ -46,14 +46,14 @@ app.service('feedItemService', function ($http, $resource) {
     };
 
 
-    this.saveFeedItem = function(_feedItem) {
+    this.saveFeedItem = function(_feedItem, callback) {
         var FeedItem = createFeedItemResource(_feedItem.catId, _feedItem.feedId, _feedItem.feedItemId);
         var feedItem = new FeedItem({
             catId : _feedItem.catId,
             feedId : _feedItem.feedId,
             feedItemId : _feedItem.feedItemId
         });
-        feedItem.$saveFeedItem();
+        feedItem.$saveFeedItem(callback);
     };
 
 

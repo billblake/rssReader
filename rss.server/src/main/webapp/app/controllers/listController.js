@@ -104,7 +104,7 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
     };
 
 
-    $scope.deleteFeedItem = function() {
+    $scope.deleteFeedItem = function(feedItem) {
         feedItemService.deleteFeedItem(feedItem, function(updatedFeedItem) {
             for (var i = 0; i < $scope.feeds.length; i++) {
                 if ($scope.feeds[i].feedItemId === updatedFeedItem.feedItemId) {
@@ -122,7 +122,11 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
 
 
     $scope.saveFeedItem = function(feedItem) {
-        feedItemService.saveFeedItem(feedItem);
+        if (!feedItem.saved) {
+            feedItemService.saveFeedItem(feedItem, function(feedResponse) {
+                feedItem.saved = feedResponse.saved;
+            });
+        }
     };
 
 
