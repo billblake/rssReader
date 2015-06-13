@@ -87,7 +87,7 @@
                     </span>
                     <span class="feedItemBtns">
                     	<i class="icon-tag"></i>
-                    	<i class="icon-floppy" ng-class="isSaved(feedItem)" ng-click="saveFeedItem(feedItem)"></i>
+                    	<i ng-class="isSaved(feedItem)" ng-click="saveFeedItem(feedItem)"></i>
                     	<i class="deleteFeed icon-trash-empty" ng-click="deleteFeedItem(feedItem)"></i>
                     </span>
                     <article ng-class="articleClass($index)">
@@ -98,7 +98,7 @@
 	                        <span ng-bind-html="feedItem.description"></span> <a href="{{feedItem.link}}" target="_blank">Read More >></a>
                     		<span class="feedItemBtns">
                     			<i class="icon-tag"></i>
-                    			<i class="icon-floppy" ng-click="saveFeedItem(feedItem)" ng-class="isSaved(feedItem)"></i>
+                    			<i ng-class="isSaved(feedItem)" ng-click="saveFeedItem(feedItem)"></i>
                     			<i class="deleteFeed icon-trash-empty" ng-click="deleteFeedItem(feedItem)"></i>
                     		</span>
 	                    </div>

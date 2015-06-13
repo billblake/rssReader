@@ -275,7 +275,7 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
     };
 
     $scope.isSaved = function(feed) {
-        return (feed.saved) ? "saved" : "";
+        return (feed.saved) ? "icon-floppy" : "icon-floppy-1";
     };
 
 
