@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import spark.Request;
 import spark.Response;
@@ -39,7 +40,7 @@ public class FeedsRouteTest {
 
 
         String jsonResponse = (String) feedsRoute.handle(request, response);
-        String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"pubDate\":10000000,\"formattedDate\":\"Jul 28\",\"read\":false}]";
+        String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"pubDate\":10000000,\"formattedDate\":\"Jul 28\",\"read\":false,\"saved\":false}]";
         assertEquals(expectedJson , jsonResponse);
     }
 
@@ -58,7 +59,7 @@ public class FeedsRouteTest {
 
 
         String jsonResponse = (String) feedsRoute.handle(request, response);
-        String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"pubDate\":10000000,\"formattedDate\":\"Jul 28\",\"read\":false}]";
+        String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"pubDate\":10000000,\"formattedDate\":\"Jul 28\",\"read\":false,\"saved\":false}]";
         assertEquals(expectedJson , jsonResponse);
     }
 
@@ -76,7 +77,7 @@ public class FeedsRouteTest {
         when(request.queryParams("refresh")).thenReturn("true");
 
         String jsonResponse = (String) feedsRoute.handle(request, response);
-        String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"pubDate\":10000000,\"formattedDate\":\"Jul 28\",\"read\":false}]";
+        String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"pubDate\":10000000,\"formattedDate\":\"Jul 28\",\"read\":false,\"saved\":false}]";
         assertEquals(expectedJson , jsonResponse);
     }
 
@@ -86,7 +87,7 @@ public class FeedsRouteTest {
         List<FeedItem> feedItems = new ArrayList<FeedItem>();
         FeedItem feedItem = MockUtils.createFeedItemMock("1", "description", "2", "3", "link", new Date(10000000), "source", "title", "billblake");
         feedItems.add(feedItem);
-        when(feedProvider.retrieveFeedItems("1", "2", "billblake", 1)).thenReturn(feedItems);
+        when(feedProvider.retrieveFeedItems(Mockito.any(FeedItem.class), Mockito.anyInt())).thenReturn(feedItems);
         return feedProvider;
     }
 

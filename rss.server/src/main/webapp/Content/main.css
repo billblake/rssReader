@@ -5220,6 +5220,8 @@ button.close {
         display: inline-block; }
       #feeds #main-content #feed-list .feed-item .feedItemBtns {
         float: right; }
+        #feeds #main-content #feed-list .feed-item .feedItemBtns .saved {
+          color: green; }
       #feeds #main-content #feed-list .feed-item article {
         width: 80%;
         display: none; }

@@ -35,9 +35,12 @@ public class GetFeedsRoute extends BaseRoute {
 
         refreshFeedsIfSpecified(request);
 
-        String categoryId = request.params(CATEGORY_ID_PATH_VARIABLE);
-        String feedId = request.params(FEED_ID_PATH_VARIABLE);
-        List<FeedItem> feedItems = feedProvider.retrieveFeedItems(categoryId, feedId, getUsername(request), getPage(request));
+        FeedItem searchFeedItem = new FeedItem();
+        searchFeedItem.setCatId(request.params(CATEGORY_ID_PATH_VARIABLE));
+        searchFeedItem.setFeedId(request.params(FEED_ID_PATH_VARIABLE));
+        searchFeedItem.setSaved(Boolean.parseBoolean(request.queryParams("saved")));
+        searchFeedItem.setUsername(getUsername(request));
+        List<FeedItem> feedItems = feedProvider.retrieveFeedItems(searchFeedItem, getPage(request));
         return JsonUtils.convertObjectToJson(feedItems);
     }
 

@@ -213,33 +213,30 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
     $scope.loadMore = function() {
         $scope.page++;
         $scope.loading = true;
-        feedService.getFeeds($scope.categoryId, $scope.feedId, loadMoreFeedsSuccessful, fail, $scope.page);
+        feedService.getFeeds($scope.categoryId, $scope.feedId, loadMoreFeedsSuccessful, fail, $scope.page, $scope.displaySaved);
     };
 
     $scope.displayFeedsForCategory = function(category) {
-        $scope.page = 0;
-        $scope.loading = true;
-        $scope.categoryId = category.categoryId;
-        $scope.feedId = undefined;
+        initList(category.categoryId, undefined);
         $scope.feeds = feedService.getFeeds(category.categoryId, $scope.feedId, loadFeedsSuccessful, fail);
         $scope.title = category.name;
     };
 
     $scope.displayFeedsForAllCategory = function() {
-        $scope.page = 0;
-        $scope.loading = true;
-        $scope.feeds = {};
-        $scope.categoryId = undefined;
-        $scope.feedId = undefined;
+        initList(undefined, undefined);
         $scope.feeds = feedService.getFeeds(null, null, loadFeedsSuccessful, fail);
         $scope.title = "All Feeds";
     };
 
+    $scope.displaySavedFeeds = function() {
+        initList(undefined, undefined);
+        $scope.displaySaved = true;
+        $scope.feeds = feedService.getFeeds(null, null, loadFeedsSuccessful, fail, undefined, $scope.displaySaved);
+        $scope.title = "Saved Feeds";
+    };
+
     $scope.displayFeedsForFeed = function(feed) {
-        $scope.page = 0;
-        $scope.loading = true;
-        $scope.categoryId = undefined;
-        $scope.feedId = feed.feedId;
+        initList(undefined, feed.feedId);
         $scope.feeds = feedService.getFeeds($scope.categoryId, feed.feedId, loadFeedsSuccessful, fail);
         $scope.title = feed.name;
     };
@@ -275,6 +272,10 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
 
     $scope.readOrUnread = function(feed) {
         return (feed.read) ? "read" : "unread";
+    };
+
+    $scope.isSaved = function(feed) {
+        return (feed.saved) ? "saved" : "";
     };
 
 
@@ -313,6 +314,11 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
 
     $scope.deleteAllFeedItem = function() {
 
+    };
+
+
+    $scope.saveFeedItem = function(feedItem) {
+        feedItemService.saveFeedItem(feedItem);
     };
 
 
@@ -394,6 +400,15 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
         for (var i = 0; i < $scope.feeds.length; i++) {
             $scope.feeds[i].read = true;
         }
+    }
+
+    function initList(categoryId, feedId) {
+        $scope.page = 0;
+        $scope.loading = true;
+        $scope.feeds = {};
+        $scope.categoryId = categoryId;
+        $scope.feedId = feedId;
+        $scope.displaySaved = false;
     }
 });
 
@@ -487,8 +502,8 @@ function getErrorClass(isError) {
 
 app.service('feedService', function ($http, $resource) {
 
-    this.getFeeds = function (_categoryId, _feedId, suc, fail, _page) {
-        var feedResource = createFeedResource(_categoryId, _feedId, _page);
+    this.getFeeds = function (_categoryId, _feedId, suc, fail, _page, _saved) {
+        var feedResource = createFeedResource(_categoryId, _feedId, _page, _saved);
         return feedResource.query(suc, fail);
     };
 
@@ -535,7 +550,7 @@ app.service('feedService', function ($http, $resource) {
     };
 
 
-    function createFeedResource(_categoryId, _feedId, _page) {
+    function createFeedResource(_categoryId, _feedId, _page, _saved) {
         if (_feedId === null || typeof _feedId === "undefined") {
             _feedId = "@id";
         }
@@ -545,11 +560,15 @@ app.service('feedService', function ($http, $resource) {
         if (_page  === null || typeof _page === "undefined") {
             _page = "1";
         }
+        if (_saved  === null || typeof _saved === "undefined") {
+            _saved = "@saved";
+        }
         var feedResource = $resource(readerConstants.appContextPath + '/feeds/category/:categoryId/feed/:feedId',
             {
                 feedId : _feedId,
                 categoryId : _categoryId,
-                page : _page
+                page : _page,
+                saved : _saved
             },
             {
                 refresh : {method:'GET', isArray: true, params:{refresh:true}}
@@ -609,6 +628,17 @@ app.service('feedItemService', function ($http, $resource) {
     };
 
 
+    this.saveFeedItem = function(_feedItem) {
+        var FeedItem = createFeedItemResource(_feedItem.catId, _feedItem.feedId, _feedItem.feedItemId);
+        var feedItem = new FeedItem({
+            catId : _feedItem.catId,
+            feedId : _feedItem.feedId,
+            feedItemId : _feedItem.feedItemId
+        });
+        feedItem.$saveFeedItem();
+    };
+
+
     function createFeedItemResource(_categoryId, _feedId, _feedItemId) {
         if (_feedItemId === null || typeof _feedItemId === "undefined") {
             _feedItemId = "@id";
@@ -626,7 +656,8 @@ app.service('feedItemService', function ($http, $resource) {
                 feedItemId : _feedItemId
             },
             {
-                markAsRead : {method:'PUT', params:{markAsRead:true}}
+                markAsRead : {method:'PUT', params:{markAsRead:true}},
+                saveFeedItem : {method:'PUT', params:{save:true}}
             }
         );
         return feedItemResource;

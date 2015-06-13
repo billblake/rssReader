@@ -46,6 +46,17 @@ app.service('feedItemService', function ($http, $resource) {
     };
 
 
+    this.saveFeedItem = function(_feedItem) {
+        var FeedItem = createFeedItemResource(_feedItem.catId, _feedItem.feedId, _feedItem.feedItemId);
+        var feedItem = new FeedItem({
+            catId : _feedItem.catId,
+            feedId : _feedItem.feedId,
+            feedItemId : _feedItem.feedItemId
+        });
+        feedItem.$saveFeedItem();
+    };
+
+
     function createFeedItemResource(_categoryId, _feedId, _feedItemId) {
         if (_feedItemId === null || typeof _feedItemId === "undefined") {
             _feedItemId = "@id";
@@ -63,7 +74,8 @@ app.service('feedItemService', function ($http, $resource) {
                 feedItemId : _feedItemId
             },
             {
-                markAsRead : {method:'PUT', params:{markAsRead:true}}
+                markAsRead : {method:'PUT', params:{markAsRead:true}},
+                saveFeedItem : {method:'PUT', params:{save:true}}
             }
         );
         return feedItemResource;

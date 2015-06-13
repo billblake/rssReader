@@ -17,16 +17,25 @@ public class UpdateFeedItemRoute extends BaseFeedItemRoute {
         FeedItem feedItem = new FeedItem();
         if (isMarkAsReadRequest(request)) {
             feedItem = markFeedItemAsRead(getFeedItemId(request));
+        } else {
+            feedItem = saveFeedItem(getFeedItemId(request));
         }
         return JsonUtils.convertObjectToJson(feedItem);
     }
+
 
     private boolean isMarkAsReadRequest(Request request) {
         return Boolean.parseBoolean(request.queryParams("markAsRead"));
     }
 
+
     private FeedItem markFeedItemAsRead(String feedItemId) {
         return feedItemUpdater.markFeedItemAsRead(feedItemId);
+    }
+
+
+    private FeedItem saveFeedItem(String feedItemId) {
+        return feedItemUpdater.saveFeedItem(feedItemId);
     }
 
 }

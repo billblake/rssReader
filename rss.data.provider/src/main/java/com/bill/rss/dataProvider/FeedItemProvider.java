@@ -8,7 +8,7 @@ import com.bill.rss.domain.FeedItem;
 
 public interface FeedItemProvider {
 
-	List<FeedItem> retrieveFeedItems(String categoryId, String feedId, String username, int page);
+	List<FeedItem> retrieveFeedItems(FeedItem feedItem, int page);
 
     void enrichCategoryWithFeedItemCount(Category category);
 

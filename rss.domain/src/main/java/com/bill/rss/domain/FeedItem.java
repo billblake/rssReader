@@ -15,6 +15,7 @@ public class FeedItem {
 	private Date pubDate;
 	private String formattedDate;
 	private boolean read;
+	private boolean saved;
 
 
 	public String getFeedItemId() {
@@ -103,5 +104,13 @@ public class FeedItem {
 
     public void setRead(boolean read) {
         this.read = read;
+    }
+
+    public boolean isSaved() {
+        return saved;
+    }
+
+    public void setSaved(boolean saved) {
+        this.saved = saved;
     }
 }

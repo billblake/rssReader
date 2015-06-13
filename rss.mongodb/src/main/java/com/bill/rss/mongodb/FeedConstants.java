@@ -11,6 +11,7 @@ public class FeedConstants {
 	public static final String FEED_ITEM_DESCRIPTION = "description";
 	public static final String FEED_ITEM_OBJECT_ID = "_id";
 	public static final String FEED_ITEM_READ = "read";
+	public static final String FEED_ITEM_SAVED = "saved";
 	public static final String FEED_ITEM_DELETE = "delete";
 	public static final String CATEGORY_ID = "categoryId";
 	public static final String FEED_ITEMS = "feedItems";

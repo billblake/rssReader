@@ -19,7 +19,11 @@ public class FeedItemRetrieverTest {
         MockUtils.createFeedsItemsCollectionMock(db);
         FeedItemRetriever feedItemRetriever = new FeedItemRetriever();
 
-        List<FeedItem> feedItems = feedItemRetriever.retrieveFeedItems(ObjectId.get().toString(), ObjectId.get().toString(), "billblake", 1);
+        FeedItem searchFeedItem = new FeedItem();
+        searchFeedItem.setCatId(ObjectId.get().toString());
+        searchFeedItem.setFeedId(ObjectId.get().toString());
+        searchFeedItem.setUsername("billblake");
+        List<FeedItem> feedItems = feedItemRetriever.retrieveFeedItems(searchFeedItem, 1);
         FeedItem feedItem = feedItems.get(0);
         assertEquals("235", feedItem.getCatId());
         assertEquals("467", feedItem.getFeedId());
@@ -39,7 +43,9 @@ public class FeedItemRetrieverTest {
         MockUtils.createFeedsItemsCollectionMock(db);
         FeedItemRetriever feedItemRetriever = new FeedItemRetriever();
 
-        List<FeedItem> feedItems = feedItemRetriever.retrieveFeedItems(null, null, "billblake", 1);
+        FeedItem searchFeedItem = new FeedItem();
+        searchFeedItem.setUsername("billblake");
+        List<FeedItem> feedItems = feedItemRetriever.retrieveFeedItems(searchFeedItem, 1);
         FeedItem feedItem = feedItems.get(0);
         assertEquals("235", feedItem.getCatId());
         assertEquals("467", feedItem.getFeedId());

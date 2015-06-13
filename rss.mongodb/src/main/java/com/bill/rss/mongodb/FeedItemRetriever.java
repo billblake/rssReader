@@ -29,6 +29,7 @@ import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_LINK;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_OBJECT_ID;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_PUB_DATE;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_READ;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_SAVED;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_SOURCE;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_TITLE;
 import static com.bill.rss.mongodb.FeedConstants.MAX_PAGE_SIZE;
@@ -42,12 +43,10 @@ import static java.util.Calendar.YEAR;
 public class FeedItemRetriever implements FeedItemProvider, FeedItemUpdater {
 
 
-    public List<FeedItem> retrieveFeedItems(String categoryId, String feedId, String username, int page) {
+    public List<FeedItem> retrieveFeedItems(FeedItem feedItem, int page) {
         DBCollection coll = getFeedItemsCollection();
-        DBCursor feedItemsCursor;
-
-        BasicDBObject query = buildFeedItemQuery(categoryId, feedId, username);
-        feedItemsCursor = coll.find(query).sort(new BasicDBObject(FEED_ITEM_PUB_DATE, -1)).limit(MAX_PAGE_SIZE).skip((page - 1) * MAX_PAGE_SIZE);
+        BasicDBObject query = buildFeedItemQuery(feedItem);
+        DBCursor feedItemsCursor = coll.find(query).sort(new BasicDBObject(FEED_ITEM_PUB_DATE, -1)).limit(MAX_PAGE_SIZE).skip((page - 1) * MAX_PAGE_SIZE);
         return parseFeadItems(feedItemsCursor);
     }
 
@@ -102,7 +101,8 @@ public class FeedItemRetriever implements FeedItemProvider, FeedItemUpdater {
         feedItem.setSource(nextFeedItem.get(FEED_ITEM_SOURCE).toString());
         feedItem.setTitle(nextFeedItem.get(FEED_ITEM_TITLE).toString());
         feedItem.setUsername(nextFeedItem.get(USER_NAME).toString());
-        feedItem.setRead((Boolean) nextFeedItem.get(FeedConstants.FEED_ITEM_READ));
+        feedItem.setRead(getBooleanValue(nextFeedItem, FEED_ITEM_READ));
+        feedItem.setSaved(getBooleanValue(nextFeedItem, FEED_ITEM_SAVED));
         Date pubDate = (Date) nextFeedItem.get(FEED_ITEM_PUB_DATE);
         feedItem.setPubDate(pubDate);
         feedItem.setFormattedDate(formatDate(pubDate));
@@ -110,15 +110,29 @@ public class FeedItemRetriever implements FeedItemProvider, FeedItemUpdater {
     }
 
 
-    private BasicDBObject buildFeedItemQuery(String categoryId, String feedId, String username) {
+    private Boolean getBooleanValue(DBObject nextFeedItem, String fieldName) {
+        Object fieldValue = nextFeedItem.get(fieldName);
+        if (fieldValue == null) {
+            return false;
+        }
+        return (Boolean) fieldValue;
+    }
+
+
+    private BasicDBObject buildFeedItemQuery(FeedItem feedItem) {
         BasicDBObject query = new BasicDBObject();
-        query.append(USER_NAME, username);
-        if (categoryId != null) {
-            query.append(CATEGORY_ID, new ObjectId(categoryId));
+        query.append(USER_NAME, feedItem.getUsername());
+        if (feedItem.getCatId() != null) {
+            query.append(CATEGORY_ID, new ObjectId(feedItem.getCatId()));
         }
-        if (feedId != null) {
-            query.append(FEED_ID, new ObjectId(feedId));
+        if (feedItem.getFeedId() != null) {
+            query.append(FEED_ID, new ObjectId(feedItem.getFeedId()));
         }
+        if (feedItem.isSaved()) {
+            query.append(FEED_ITEM_SAVED, true);
+        }
+
+
         BasicDBObject deleteValue = new BasicDBObject();
         deleteValue.append("$ne", true);
         query.append(FEED_ITEM_DELETE, deleteValue);
@@ -227,10 +241,17 @@ public class FeedItemRetriever implements FeedItemProvider, FeedItemUpdater {
 
     private void markFeedsAsRead(BasicDBObject searchQuery) {
         DBCollection feedItemCollection = getFeedItemsCollection();
-
         BasicDBObject updateQuery = new BasicDBObject();
         updateQuery.append("$set", new BasicDBObject().append(FEED_ITEM_READ, TRUE));
-
         feedItemCollection.updateMulti(searchQuery, updateQuery);
+    }
+
+
+    public FeedItem saveFeedItem(String feedItemId) {
+        DBCollection feedItemCollection = getFeedItemsCollection();
+        DBObject feedItem = retrieveFeedItemById(feedItemId);
+        feedItem.put(FEED_ITEM_SAVED, true);
+        feedItemCollection.save(feedItem);
+        return buildFeedItem(feedItem);
     }
 }

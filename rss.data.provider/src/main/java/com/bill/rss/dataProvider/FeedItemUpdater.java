@@ -16,4 +16,6 @@ public interface FeedItemUpdater {
 
     List<FeedItem> markAllFeedItemsAsRead();
 
+    FeedItem saveFeedItem(String feedItemId);
+
 }
