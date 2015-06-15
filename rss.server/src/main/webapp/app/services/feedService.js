@@ -56,7 +56,7 @@ app.service('feedService', function ($http, $resource) {
             _categoryId = "@id";
         }
         if (_page  === null || typeof _page === "undefined") {
-            _page = "1";
+            _page = "@page";
         }
         if (_saved  === null || typeof _saved === "undefined") {
             _saved = "@saved";
