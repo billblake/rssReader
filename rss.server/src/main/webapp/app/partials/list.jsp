@@ -95,12 +95,15 @@
 	                    <h3 ng-bind-html="feedItem.title"></h3>
 	                    <span>{{feedItem.source}} {{feedItem.formattedDate}}</span>
 	                    <div id="contents">
-	                        <span ng-bind-html="feedItem.description"></span> <a href="{{feedItem.link}}" target="_blank">Read More >></a>
-                    		<span class="feedItemBtns">
-                    			<i class="icon-tag"></i>
-                    			<i ng-class="isSaved(feedItem)" ng-click="saveFeedItem(feedItem)"></i>
-                    			<i class="deleteFeed icon-trash-empty" ng-click="deleteFeedItem(feedItem)"></i>
-                    		</span>
+	                        <span ng-bind-html="feedItem.description"></span>
+	                        <div>
+	                        	<a href="{{feedItem.link}}" target="_blank">Read More >></a>
+	                    		<span class="feedItemBtns">
+	                    			<i class="icon-tag"></i>
+	                    			<i ng-class="isSaved(feedItem)" ng-click="saveFeedItem(feedItem)"></i>
+	                    			<i class="deleteFeed icon-trash-empty" ng-click="deleteFeedItem(feedItem)"></i>
+	                    		</span>
+	                        </div>
 	                    </div>
                     </article>
                 </li>
