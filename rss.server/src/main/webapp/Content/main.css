@@ -5214,15 +5214,15 @@ button.close {
         width: 88%;
         display: inline-block; }
       #feeds #main-content #feed-list .feed-item .feedSource, #feeds #main-content #feed-list .feed-item .feedTitle, #feeds #main-content #feed-list .feed-item .feedPubDate, #feeds #main-content #feed-list .feed-item .deleteFeed {
-        cursor: pointer; }
+        cursor: pointer;
+        vertical-align: top; }
       #feeds #main-content #feed-list .feed-item .feedSource {
         width: 20%;
         max-width: 200px;
         display: inline-block;
         white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis;
-        vertical-align: bottom; }
+        text-overflow: ellipsis; }
       #feeds #main-content #feed-list .feed-item .feedTitle {
         width: 65%;
         display: inline-block; }

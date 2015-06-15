@@ -100,6 +100,7 @@
 				
 				.feedSource, .feedTitle, .feedPubDate, .deleteFeed {
 					cursor: pointer;
+					vertical-align: top;
 				}
 
 				.feedSource {
@@ -109,7 +110,6 @@
 					white-space: nowrap;
 		  			overflow: hidden;
 		  			text-overflow: ellipsis;
-		  			vertical-align: bottom;
 				}
 
 				.feedTitle {
