@@ -115,15 +115,18 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
         });
     };
 
+    $scope.displayDeleteAllConfirmation = function() {
+        $scope.modalTitle = "Delete All";
+        $scope.modalMessage = "Do you want to delete all your feed items.";
+        $scope.onClickAction = "deleteAllFeedItem";
+        $scope.modalButtonLabel = "Delete";
+    };
 
-    $scope.deleteAllFeedItem = function() {
-        if ($scope.feedId) {
-            feedItemService.deleteAllFeedItemsInFeed($scope.feedId, deleteFeedItemsCallback);
-        } else if ($scope.categoryId) {
-            feedItemService.deleteAllFeedItemsInCategory($scope.categoryId, deleteFeedItemsCallback);
-        } else {
-            feedItemService.deleteAllFeedItems(deleteFeedItemsCallback);
+    $scope.confirm = function(action) {
+        if (action === "deleteAllFeedItem") {
+            deleteAllFeedItem();
         }
+        $('#confirmationModal').modal('hide');
     };
 
 
@@ -132,6 +135,16 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
             feedItemService.saveFeedItem(feedItem, function(feedResponse) {
                 feedItem.saved = feedResponse.saved;
             });
+        }
+    };
+
+    function deleteAllFeedItem() {
+        if ($scope.feedId) {
+            feedItemService.deleteAllFeedItemsInFeed($scope.feedId, deleteFeedItemsCallback);
+        } else if ($scope.categoryId) {
+            feedItemService.deleteAllFeedItemsInCategory($scope.categoryId, deleteFeedItemsCallback);
+        } else {
+            feedItemService.deleteAllFeedItems(deleteFeedItemsCallback);
         }
     };
 

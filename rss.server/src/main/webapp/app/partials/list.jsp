@@ -61,7 +61,9 @@
             <header>
             	<h2 class="ng-binding">{{title}}</h2>
             	<span id="actions">
-					<a id="deleteAll" ng-click="deleteAllFeedItem()"><i class="icon-trash-empty"></i>Delete All</a>
+					<a id="deleteAll" ng-click="displayDeleteAllConfirmation()" data-toggle="modal" data-target="#confirmationModal">
+						<i class="icon-trash-empty"></i>Delete All
+					</a>
 					<a id="markAllAsRead" ng-click="markAllAsRead()"><i class="icon-check"></i>Mark All As Read</a>
             		<a id="showFilter"><i class="icon-search"></i>Show Filter</a>
             	</span>
@@ -123,3 +125,22 @@
     </div>
 </div>
 
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form name="confirmationForm" role="form">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">{{modalTitle}}</h4>
+	      </div>
+	      <div class="modal-body">
+	        {{modalMessage}}
+	      </div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" ng-click="confirm(onClickAction)">{{modalButtonLabel}}</button>
+	      </div>
+      </form>
+    </div>
+  </div>
+</div>
