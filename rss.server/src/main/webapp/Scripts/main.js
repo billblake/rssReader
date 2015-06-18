@@ -763,7 +763,7 @@ app.service('categoryService', function ($http, $resource) {
 app.service('userService', function ($http, $resource, $cookies, $rootScope) {
 
 	this.createUser = function (user, successCallback, failureCallback) {
-        var userObject = $resource(readerConstants.appContextPath + '/users');
+        var userObject = $resource(readerConstants.appContextPath + '/user');
 
         var newUser = new userObject({
         	firstName : user.firstName,
