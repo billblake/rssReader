@@ -254,4 +254,41 @@ public class FeedItemRetriever implements FeedItemProvider, FeedItemUpdater {
         feedItemCollection.save(feedItem);
         return buildFeedItem(feedItem);
     }
+
+
+    public List<FeedItem> deleteFeedItemsForCategory(String categoryId) {
+        BasicDBObject searchQuery = new BasicDBObject();
+        searchQuery.append(FEED_ITEM_SAVED, new BasicDBObject("$ne", true));
+        searchQuery.append(CATEGORY_ID, new ObjectId(categoryId));
+        List<FeedItem> feedItems = getFeedItems(searchQuery);
+        deleteFeedItems(searchQuery);
+        return feedItems;
+    }
+
+
+    public List<FeedItem> deleteFeedItemsForFeed(String feedId) {
+        BasicDBObject searchQuery = new BasicDBObject();
+        searchQuery.append(FEED_ITEM_SAVED, new BasicDBObject("$ne", true));
+        searchQuery.append(FEED_ID, new ObjectId(feedId));
+        List<FeedItem> feedItems = getFeedItems(searchQuery);
+        deleteFeedItems(searchQuery);
+        return feedItems;
+    }
+
+
+    public List<FeedItem> deleteAllFeedItems() {
+        BasicDBObject searchQuery = new BasicDBObject();
+        searchQuery.append(FEED_ITEM_SAVED, new BasicDBObject("$ne", true));
+        List<FeedItem> feedItems = getFeedItems(searchQuery);
+        deleteFeedItems(searchQuery);
+        return feedItems;
+    }
+
+
+    private void deleteFeedItems(BasicDBObject searchQuery) {
+        DBCollection feedItemCollection = getFeedItemsCollection();
+        BasicDBObject updateQuery = new BasicDBObject();
+        updateQuery.append("$set", new BasicDBObject().append(FEED_ITEM_DELETE, TRUE));
+        feedItemCollection.updateMulti(searchQuery, updateQuery);
+    }
 }

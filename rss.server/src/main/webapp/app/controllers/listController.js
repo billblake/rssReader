@@ -117,7 +117,13 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
 
 
     $scope.deleteAllFeedItem = function() {
-
+        if ($scope.feedId) {
+            feedItemService.deleteAllFeedItemsInFeed($scope.feedId, deleteFeedItemsCallback);
+        } else if ($scope.categoryId) {
+            feedItemService.deleteAllFeedItemsInCategory($scope.categoryId, deleteFeedItemsCallback);
+        } else {
+            feedItemService.deleteAllFeedItems(deleteFeedItemsCallback);
+        }
     };
 
 
@@ -129,6 +135,14 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
         }
     };
 
+    function deleteFeedItemsCallback() {
+        $scope.feedCategories = categoryService.getCategories();
+        for (var i = 0; i < $scope.feeds.length; i++) {
+            if (!$scope.feeds[i].saved) {
+                $scope.feeds.splice(i, 1);
+            }
+        }
+    }
 
     function updateCategoryCounts(updatedFeedId, updateUnReadCount, updateTotalCount) {
         for (var i = 0; i < $scope.feedCategories.length; i++) {

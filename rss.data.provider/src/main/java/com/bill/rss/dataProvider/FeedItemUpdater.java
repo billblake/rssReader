@@ -18,4 +18,10 @@ public interface FeedItemUpdater {
 
     FeedItem saveFeedItem(String feedItemId);
 
+    List<FeedItem> deleteFeedItemsForCategory(String categoryId);
+
+    List<FeedItem> deleteFeedItemsForFeed(String feedId);
+
+    List<FeedItem> deleteAllFeedItems();
+
 }

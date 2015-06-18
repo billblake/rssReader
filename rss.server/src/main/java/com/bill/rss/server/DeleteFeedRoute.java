@@ -10,7 +10,7 @@ import com.bill.rss.mongodb.MongoFeedUpdater;
 import static com.bill.rss.server.ViewConstants.CATEGORY_ID_PATH_VARIABLE;
 import static com.bill.rss.server.ViewConstants.FEED_ID_PATH_VARIABLE;
 
-public class DeleteFeedRoute extends BaseRoute {
+public class DeleteFeedRoute extends BaseFeedItemRoute {
 
     private final FeedUpdater feedUpdater = new MongoFeedUpdater();
 

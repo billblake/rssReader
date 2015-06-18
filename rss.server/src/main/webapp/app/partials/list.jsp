@@ -78,6 +78,7 @@
 				</span>
            	</header>
             <div id="spinner"></div>
+            <div ng-show="!feeds.length && !loading">There are no feeds</div>
             <ul id="feed-list" infinite-scroll='loadMore()' infinite-scroll-distance='1'>
                 <li class="feed-item" ng-repeat="feedItem in feeds" ng-class-odd="'odd'" ng-class-even="'even'" ng-class="readOrUnread(feedItem)">
                     <span class="feedHeader" ng-click="toggleArticle($index);markAsRead(feedItem)">
