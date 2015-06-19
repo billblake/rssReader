@@ -1,28 +1,5 @@
-<!-- BEGIN: Sticky Header 2-->
-<div id="header_container">
-    <div id="header">
-    	<i class="icon-menu" ng-click="toggleSideBar()" />
-        <span id="mini-logo"><i class="icon-rss"></i>Old News</span>
-        <span id="header-nav">
-            <span class="dropdown">
-			    <span class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-			        {{name}}
-			        <span class="caret"></span>
-			    </span>
-			    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu1">
-				    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="refresh()"><i class="icon-arrows-cw"></i>Refresh</a></li>
-				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#/manage"><i class="icon-edit"></i>Manage Feeds</a></li>
-				    <li role="presentation"><a role="menuitem" tabindex="-1"><i class="icon-cog"></i>Settings</a></li>
-				    <li role="presentation" class="divider"></li>
-				    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="logout()"><i class="icon-logout"></i>Log out</a></li>
-				</ul>
-			</span>
-            <i id="settingsIcon" class="icon-cog"></i>
-        </span>
-    </div>
-</div>
-<!-- END: Sticky Header -->
- 
+<ng-include src="'app/partials/loggedInHeader.html'"></ng-include>
+<i class="icon-menu" ng-click="toggleSideBar()" /> 
 <div id="feeds" class="container-fluid">
     <div class="row-fluid">
         <div id="sideBar" class="{{sideBarClass}}">

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.http.impl.cookie.DateUtils;
 import org.bson.types.ObjectId;
 
 import com.bill.rss.domain.FeedItem;
+import com.bill.rss.mongodb.DateUtils;
 import com.bill.rss.mongodb.MongoDBConnection;
 import com.bill.rss.mongodb.MongoDbUtils;
 import com.mongodb.BasicDBObject;

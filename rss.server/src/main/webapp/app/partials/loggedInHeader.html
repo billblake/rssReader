@@ -1,0 +1,20 @@
+<div id="header_container" ng-controller="loggedInHeaderController">
+    <div id="header">
+        <span id="mini-logo"><a href="#/list"><i class="icon-rss"></i>Old News</a></span>
+        <span id="header-nav">
+            <span class="dropdown">
+			    <span class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+			        {{name}}
+			        <span class="caret"></span>
+			    </span>
+			    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu1">
+				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#/manage"><i class="icon-edit"></i>Manage Feeds</a></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1"><i class="icon-cog"></i>Settings</a></li>
+				    <li role="presentation" class="divider"></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="logout()"><i class="icon-logout"></i>Log out</a></li>
+				</ul>
+			</span>
+            <i id="settingsIcon" class="icon-cog"></i>
+        </span>
+    </div>
+</div>

@@ -10,6 +10,7 @@ module.exports = function(grunt) {
               "app/controllers/feedManagerController.js",
               "app/controllers/loginController.js",
               "app/controllers/listController.js",
+              "app/controllers/headerController.js",
               "app/controllers/signUpController.js",
               "app/services/feedService.js",
               "app/services/feedItemService.js",

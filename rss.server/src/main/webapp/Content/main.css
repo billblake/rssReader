@@ -5098,6 +5098,9 @@ button.close {
     margin-left: 25px;
     font-size: 1.5em;
     margin-top: 5px; }
+    #header #mini-logo a {
+      text-decoration: none;
+      color: WHITE; }
   #header #settingsIcon {
     height: 35px;
     padding: 0px 5px; }
@@ -5245,12 +5248,21 @@ button.close {
     #feeds #main-content #feed-list .feed-item.unread {
       font-weight: bold; }
 
+.icon-menu {
+  display: none; }
+
 @media all and (max-width: 800px) {
   body {
     padding: 0px; }
 
-  #header .icon-menu {
-    display: inline-block; }
+  .icon-menu {
+    display: inline-block;
+    position: fixed;
+    color: WHITE;
+    z-index: 2;
+    cursor: pointer;
+    top: 10px;
+    left: 5px; }
 
   #feeds #sideBar {
     display: none; }

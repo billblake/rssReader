@@ -207,7 +207,6 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
     $scope.loadingMessage = "Loading Feeds";
     $scope.feedCategories = categoryService.getCategories();
     $scope.feeds = [];
-    $scope.name = userService.getFullName();
     $scope.title = "All Feeds";
 
     $scope.loadMore = function() {
@@ -239,10 +238,6 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
         initList(undefined, feed.feedId);
         $scope.feeds = feedService.getFeeds($scope.categoryId, feed.feedId, loadFeedsSuccessful, fail, $scope.page);
         $scope.title = feed.name;
-    };
-
-    $scope.refresh = function() {
-        feedService.refreshFeeds(showRefreshedFeeds);
     };
 
     $scope.articleClass = function(index) {
@@ -444,7 +439,11 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
         $scope.displaySaved = false;
     }
 });
+app.controller('loggedInHeaderController', function($scope, userService) {
 
+    $scope.name = userService.getFullName();
+
+});
 app.controller('SignUpController', function ($scope, userService) {
     $scope.invalidForm = true;
 

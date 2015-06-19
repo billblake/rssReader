@@ -155,16 +155,24 @@
 	}
 }
 
+.icon-menu {
+	display: none;
+}
+
 
 @media all and (max-width: 800px) {
 	body {
 		padding: 0px;
 	}
 	
-	#header {
-		.icon-menu {
-			display: inline-block;
-		}
+	.icon-menu {
+		display: inline-block;
+		position: fixed;
+		color: WHITE;
+		z-index: 2;
+		cursor: pointer;
+		top: 10px;
+  		left: 5px;
 	}
 
 	#feeds {

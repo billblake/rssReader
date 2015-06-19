@@ -30,6 +30,7 @@ public class MongoFeedItemUpdater implements FeedItemUpdater {
         return FeedItemUtils.buildFeedItem(feedItem);
     }
 
+
     public FeedItem markFeedItemAsRead(String feedItemId, String userName) {
         DBCollection feedItemCollection = FeedItemUtils.getFeedItemsCollection();
         DBObject feedItem = FeedItemUtils.retrieveFeedItemById(feedItemId, userName);
@@ -37,6 +38,7 @@ public class MongoFeedItemUpdater implements FeedItemUpdater {
         feedItemCollection.save(feedItem);
         return FeedItemUtils.buildFeedItem(feedItem);
     }
+
 
     public List<FeedItem> markFeedItemsForCategoryAsRead(String categoryId, String userName) {
         BasicDBObject searchQuery = new BasicDBObject();
