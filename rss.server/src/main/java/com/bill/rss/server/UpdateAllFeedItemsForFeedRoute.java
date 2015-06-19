@@ -18,7 +18,7 @@ public class UpdateAllFeedItemsForFeedRoute extends BaseFeedItemRoute {
     public Object handle(Request request, Response response) {
         verifyUserLoggedIn(request, response);
         String feedId = getFeedId(request);
-        List<FeedItem> feedItems = feedItemUpdater.markFeedItemsForFeedAsRead(feedId);
+        List<FeedItem> feedItems = feedItemUpdater.markFeedItemsForFeedAsRead(feedId, getUsername(request));
         return "{\"numberUpdated\":\"" + feedItems.size() + "\",\"feedId\":\"" + feedId + "\"}";
     }
 

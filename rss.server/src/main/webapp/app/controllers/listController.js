@@ -150,11 +150,13 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
 
     function deleteFeedItemsCallback() {
         $scope.feedCategories = categoryService.getCategories();
+        var savedFeeds = [];
         for (var i = 0; i < $scope.feeds.length; i++) {
-            if (!$scope.feeds[i].saved) {
-                $scope.feeds.splice(i, 1);
+            if ($scope.feeds[i].saved) {
+                savedFeeds.push($scope.feeds[i]);
             }
         }
+        $scope.feeds = savedFeeds;
     }
 
     function updateCategoryCounts(updatedFeedId, updateUnReadCount, updateTotalCount) {

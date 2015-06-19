@@ -51,8 +51,8 @@ public class FeedItemRetriever implements FeedItemProvider, FeedItemUpdater {
     }
 
 
-    public FeedItem deleteFeedItem(String feedItemId) {
-        DBObject feedItem = retrieveFeedItemById(feedItemId);
+    public FeedItem deleteFeedItem(String feedItemId, String userName) {
+        DBObject feedItem = retrieveFeedItemById(feedItemId, userName);
         DBCollection feedItemCollection = getFeedItemsCollection();
         feedItem.put(FEED_ITEM_DELETE, true);
         feedItemCollection.save(feedItem);
@@ -67,10 +67,11 @@ public class FeedItemRetriever implements FeedItemProvider, FeedItemUpdater {
     }
 
 
-    private DBObject retrieveFeedItemById(String feedItemId) {
+    private DBObject retrieveFeedItemById(String feedItemId, String userName) {
         DBCollection feedItemCollection = getFeedItemsCollection();
         BasicDBObject query = new BasicDBObject();
-        query.append(FEED_ITEM_OBJECT_ID, new ObjectId(feedItemId));
+        query.append(FEED_ITEM_OBJECT_ID, new ObjectId(feedItemId))
+            .append(USER_NAME, userName);
         DBObject feedItem = feedItemCollection.findOne(query);
         return feedItem;
     }
@@ -162,72 +163,77 @@ public class FeedItemRetriever implements FeedItemProvider, FeedItemUpdater {
 
 
     public void enrichCategoryWithFeedItemCount(Category category) {
-        category.setTotalCount(getTotalCount(CATEGORY_ID, category.getCategoryId()));
-        category.setUnReadCount(getUnRead(CATEGORY_ID, category.getCategoryId()));
+        category.setTotalCount(getTotalCount(CATEGORY_ID, category.getCategoryId(), category.getUsername()));
+        category.setUnReadCount(getUnRead(CATEGORY_ID, category.getCategoryId(), category.getUsername()));
     }
 
 
     public void enrichFeedWithFeedItemCount(Feed feed) {
-        feed.setTotalCount(getTotalCount(FEED_ID, feed.getFeedId()));
-        feed.setUnReadCount(getUnRead(FEED_ID, feed.getFeedId()));
+        feed.setTotalCount(getTotalCount(FEED_ID, feed.getFeedId(), feed.getUserName()));
+        feed.setUnReadCount(getUnRead(FEED_ID, feed.getFeedId(), feed.getUserName()));
     }
 
 
-    private String getTotalCount(String field, String fieldValue) {
+    private String getTotalCount(String field, String fieldValue, String userName) {
         DBCollection feedItemCollection = getFeedItemsCollection();
-        BasicDBObject query = buildQueryForFeeds(field, fieldValue);
+        BasicDBObject query = buildQueryForFeeds(field, fieldValue, userName);
         Long countOfFeedItems = feedItemCollection.count(query);
         return countOfFeedItems.toString();
     }
 
 
-    private String getUnRead(String field, String fieldValue) {
+    private String getUnRead(String field, String fieldValue, String userName) {
         DBCollection feedItemCollection = getFeedItemsCollection();
-        BasicDBObject query = buildQueryForFeeds(field, fieldValue);
+        BasicDBObject query = buildQueryForFeeds(field, fieldValue, userName);
         query.append(FEED_ITEM_READ, false);
         Long countOfUnReadFeedItems = feedItemCollection.count(query);
         return countOfUnReadFeedItems.toString();
     }
 
 
-    private BasicDBObject buildQueryForFeeds(String field, String fieldValue) {
+    private BasicDBObject buildQueryForFeeds(String field, String fieldValue, String userName) {
         BasicDBObject query = new BasicDBObject();
         query.append(field, new ObjectId(fieldValue));
         BasicDBObject deleteValue = new BasicDBObject();
         deleteValue.append("$ne", true);
-        query.append(FEED_ITEM_DELETE, deleteValue);
+        query.append(FEED_ITEM_DELETE, deleteValue).append(USER_NAME, userName);
         return query;
     }
 
-    public FeedItem markFeedItemAsRead(String feedItemId) {
+    public FeedItem markFeedItemAsRead(String feedItemId, String userName) {
         DBCollection feedItemCollection = getFeedItemsCollection();
-        DBObject feedItem = retrieveFeedItemById(feedItemId);
+        DBObject feedItem = retrieveFeedItemById(feedItemId, userName);
         feedItem.put(FEED_ITEM_READ, true);
         feedItemCollection.save(feedItem);
         return buildFeedItem(feedItem);
     }
 
-    public List<FeedItem> markFeedItemsForCategoryAsRead(String categoryId) {
+    public List<FeedItem> markFeedItemsForCategoryAsRead(String categoryId, String userName) {
         BasicDBObject searchQuery = new BasicDBObject();
-        searchQuery.append(CATEGORY_ID, new ObjectId(categoryId)).append(FEED_ITEM_READ, FALSE);
+        searchQuery.append(CATEGORY_ID, new ObjectId(categoryId))
+            .append(FEED_ITEM_READ, FALSE)
+            .append(USER_NAME, userName);
         List<FeedItem> feedItems = getFeedItems(searchQuery);
         markFeedsAsRead(searchQuery);
         return feedItems;
     }
 
 
-    public List<FeedItem> markFeedItemsForFeedAsRead(String feedId) {
+    public List<FeedItem> markFeedItemsForFeedAsRead(String feedId, String userName) {
         BasicDBObject searchQuery = new BasicDBObject();
-        searchQuery.append(FEED_ID, new ObjectId(feedId)).append(FEED_ITEM_READ, FALSE);
+        searchQuery.append(FEED_ID, new ObjectId(feedId))
+            .append(FEED_ITEM_READ, FALSE)
+            .append(USER_NAME, userName);
         List<FeedItem> feedItems = getFeedItems(searchQuery);
         markFeedsAsRead(searchQuery);
         return feedItems;
     }
 
 
-    public List<FeedItem> markAllFeedItemsAsRead() {
+    public List<FeedItem> markAllFeedItemsAsRead(String userName) {
         BasicDBObject searchQuery = new BasicDBObject();
-        searchQuery.append(FEED_ITEM_READ, FALSE);
+        searchQuery.append(FEED_ITEM_READ, FALSE)
+            .append(USER_NAME, userName);
         List<FeedItem> feedItems = getFeedItems(searchQuery);
         markFeedsAsRead(searchQuery);
         return feedItems;
@@ -247,38 +253,44 @@ public class FeedItemRetriever implements FeedItemProvider, FeedItemUpdater {
     }
 
 
-    public FeedItem saveFeedItem(String feedItemId) {
+    public FeedItem saveFeedItem(String feedItemId, String userName) {
         DBCollection feedItemCollection = getFeedItemsCollection();
-        DBObject feedItem = retrieveFeedItemById(feedItemId);
+        DBObject feedItem = retrieveFeedItemById(feedItemId, userName);
         feedItem.put(FEED_ITEM_SAVED, true);
         feedItemCollection.save(feedItem);
         return buildFeedItem(feedItem);
     }
 
 
-    public List<FeedItem> deleteFeedItemsForCategory(String categoryId) {
+    public List<FeedItem> deleteFeedItemsForCategory(String categoryId, String userName) {
         BasicDBObject searchQuery = new BasicDBObject();
-        searchQuery.append(FEED_ITEM_SAVED, new BasicDBObject("$ne", true));
-        searchQuery.append(CATEGORY_ID, new ObjectId(categoryId));
+        searchQuery.append(FEED_ITEM_SAVED, new BasicDBObject("$ne", true))
+        .append(FEED_ITEM_DELETE, new BasicDBObject("$ne", true))
+            .append(CATEGORY_ID, new ObjectId(categoryId))
+            .append(USER_NAME, userName);
         List<FeedItem> feedItems = getFeedItems(searchQuery);
         deleteFeedItems(searchQuery);
         return feedItems;
     }
 
 
-    public List<FeedItem> deleteFeedItemsForFeed(String feedId) {
+    public List<FeedItem> deleteFeedItemsForFeed(String feedId, String userName) {
         BasicDBObject searchQuery = new BasicDBObject();
-        searchQuery.append(FEED_ITEM_SAVED, new BasicDBObject("$ne", true));
-        searchQuery.append(FEED_ID, new ObjectId(feedId));
+        searchQuery.append(FEED_ITEM_SAVED, new BasicDBObject("$ne", true))
+            .append(FEED_ITEM_DELETE, new BasicDBObject("$ne", true))
+            .append(FEED_ID, new ObjectId(feedId))
+            .append(USER_NAME, userName);
         List<FeedItem> feedItems = getFeedItems(searchQuery);
         deleteFeedItems(searchQuery);
         return feedItems;
     }
 
 
-    public List<FeedItem> deleteAllFeedItems() {
+    public List<FeedItem> deleteAllFeedItems(String userName) {
         BasicDBObject searchQuery = new BasicDBObject();
-        searchQuery.append(FEED_ITEM_SAVED, new BasicDBObject("$ne", true));
+        searchQuery.append(FEED_ITEM_SAVED, new BasicDBObject("$ne", true))
+            .append(FEED_ITEM_DELETE, new BasicDBObject("$ne", true))
+            .append(USER_NAME, userName);
         List<FeedItem> feedItems = getFeedItems(searchQuery);
         deleteFeedItems(searchQuery);
         return feedItems;

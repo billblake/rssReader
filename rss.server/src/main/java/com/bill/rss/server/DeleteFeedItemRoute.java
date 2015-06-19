@@ -17,7 +17,7 @@ public class DeleteFeedItemRoute extends BaseFeedItemRoute {
 
     @Override
     public Object handle(Request request, Response response) {
-        FeedItem feedItem = feedItemUpdater.deleteFeedItem(getFeedItemId(request));
+        FeedItem feedItem = feedItemUpdater.deleteFeedItem(getFeedItemId(request), getUsername(request));
         return JsonUtils.convertObjectToJson(feedItem);
     }
 

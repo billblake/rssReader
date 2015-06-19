@@ -6,22 +6,22 @@ import com.bill.rss.domain.FeedItem;
 
 public interface FeedItemUpdater {
 
-    FeedItem markFeedItemAsRead(String feedItemId);
+    FeedItem markFeedItemAsRead(String feedItemId, String userName);
 
-    FeedItem deleteFeedItem(String feedItemId);
+    FeedItem deleteFeedItem(String feedItemId, String userName);
 
-    List<FeedItem> markFeedItemsForCategoryAsRead(String categoryId);
+    List<FeedItem> markFeedItemsForCategoryAsRead(String categoryId, String userName);
 
-    List<FeedItem> markFeedItemsForFeedAsRead(String feedId);
+    List<FeedItem> markFeedItemsForFeedAsRead(String feedId, String userName);
 
-    List<FeedItem> markAllFeedItemsAsRead();
+    List<FeedItem> markAllFeedItemsAsRead(String userName);
 
-    FeedItem saveFeedItem(String feedItemId);
+    FeedItem saveFeedItem(String feedItemId, String userName);
 
-    List<FeedItem> deleteFeedItemsForCategory(String categoryId);
+    List<FeedItem> deleteFeedItemsForCategory(String categoryId, String userName);
 
-    List<FeedItem> deleteFeedItemsForFeed(String feedId);
+    List<FeedItem> deleteFeedItemsForFeed(String feedId, String userName);
 
-    List<FeedItem> deleteAllFeedItems();
+    List<FeedItem> deleteAllFeedItems(String userName);
 
 }

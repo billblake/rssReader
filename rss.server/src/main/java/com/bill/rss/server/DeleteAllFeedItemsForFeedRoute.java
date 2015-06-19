@@ -17,7 +17,7 @@ public class DeleteAllFeedItemsForFeedRoute extends BaseFeedItemRoute {
     public Object handle(Request request, Response response) {
         verifyUserLoggedIn(request, response);
         String feedId = getFeedId(request);
-        List<FeedItem> feedItems = feedItemUpdater.deleteFeedItemsForFeed(feedId);
+        List<FeedItem> feedItems = feedItemUpdater.deleteFeedItemsForFeed(feedId, getUsername(request));
         return "{\"numberUpdated\":\"" + feedItems.size() + "\",\"feedId\":\"" + feedId + "\"}";
     }
 
