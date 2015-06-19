@@ -73,7 +73,11 @@
 				        <span class="caret"></span>
 				    </span>
 				    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu1">
-					    <li role="presentation"><a role="menuitem" tabindex="-1" id="deleteAll" ng-click="deleteAllFeedItem()"><i class="icon-trash-empty"></i>Delete All</a></li>
+					    <li role="presentation">
+					    	<a role="menuitem" tabindex="-1" id="deleteAll" ng-click="displayDeleteAllConfirmation()" data-toggle="modal" data-target="#confirmationModal">
+					    		<i class="icon-trash-empty"></i>Delete All
+					    	</a>
+				    	</li>
 					    <li role="presentation"><a role="menuitem" tabindex="-1" id="markAllAsRead" ng-click="markAllAsRead()"><i class="icon-check"></i>Mark All As Read</a></li>
 					    <li role="presentation"><a role="menuitem" tabindex="-1" id="showFilter"><i class="icon-search"></i>Show Filter</a></li>
 					</ul>
