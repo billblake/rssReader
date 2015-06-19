@@ -5,11 +5,11 @@ import spark.Response;
 
 import com.bill.rss.dataProvider.FeedItemUpdater;
 import com.bill.rss.domain.FeedItem;
-import com.bill.rss.mongodb.FeedItemRetriever;
+import com.bill.rss.mongodb.FeedItem.MongoFeedItemUpdater;
 
 public class DeleteFeedItemRoute extends BaseFeedItemRoute {
 
-    private final FeedItemUpdater feedItemUpdater = new FeedItemRetriever();
+    private final FeedItemUpdater feedItemUpdater = new MongoFeedItemUpdater();
 
     protected DeleteFeedItemRoute(String path) {
         super(path);

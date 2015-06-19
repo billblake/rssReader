@@ -20,8 +20,8 @@ import com.bill.rss.domain.Category;
 import com.bill.rss.domain.Feed;
 import com.bill.rss.domain.FeedItem;
 import com.bill.rss.domain.User;
-import com.bill.rss.mongodb.FeedItemRetriever;
 import com.bill.rss.mongodb.UserRetriever;
+import com.bill.rss.mongodb.FeedItem.FeedItemRetriever;
 
 import static com.bill.rss.server.ViewConstants.LOGGED_IN_COOKIE_NAME;
 import static org.mockito.Matchers.any;

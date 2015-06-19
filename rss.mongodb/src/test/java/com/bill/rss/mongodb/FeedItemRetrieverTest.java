@@ -7,6 +7,7 @@ import org.bson.types.ObjectId;
 import org.junit.Test;
 
 import com.bill.rss.domain.FeedItem;
+import com.bill.rss.mongodb.FeedItem.FeedItemRetriever;
 import com.mongodb.DB;
 
 import static org.junit.Assert.assertEquals;

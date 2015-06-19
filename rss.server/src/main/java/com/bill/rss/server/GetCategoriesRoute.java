@@ -12,7 +12,7 @@ import com.bill.rss.dataProvider.FeedItemProvider;
 import com.bill.rss.domain.Category;
 import com.bill.rss.domain.Feed;
 import com.bill.rss.mongodb.CategoriesRetriever;
-import com.bill.rss.mongodb.FeedItemRetriever;
+import com.bill.rss.mongodb.FeedItem.FeedItemRetriever;
 
 import static com.bill.rss.server.ViewConstants.JSON_RESPONSE_TYPE;
 

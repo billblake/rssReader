@@ -8,8 +8,8 @@ import spark.Response;
 import com.bill.rss.dataProvider.FeedItemProvider;
 import com.bill.rss.dataProvider.FeedUpdater;
 import com.bill.rss.domain.FeedItem;
-import com.bill.rss.mongodb.FeedItemRetriever;
 import com.bill.rss.mongodb.MongoFeedUpdater;
+import com.bill.rss.mongodb.FeedItem.FeedItemRetriever;
 
 import static com.bill.rss.server.ViewConstants.CATEGORY_ID_PATH_VARIABLE;
 import static com.bill.rss.server.ViewConstants.FEED_ID_PATH_VARIABLE;
