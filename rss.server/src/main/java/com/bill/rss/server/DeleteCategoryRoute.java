@@ -24,7 +24,7 @@ public class DeleteCategoryRoute extends BaseRoute {
         category.setCategoryId(request.params(CATEGORY_ID_PATH_VARIABLE));
         category.setUsername(getUsername(request));
         categoryUpdater.deleteCategory(category);
-        return category;
+        return JsonUtils.convertObjectToJson(category);
     }
 
 }

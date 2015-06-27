@@ -52,17 +52,6 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
         $(".article-" + index + ":first").toggle();
     };
 
-    $scope.logout = function() {
-        var responsePromise = $http.get(readerConstants.appContextPath + "/logout");
-
-        responsePromise.success(function(user, status, headers, config) {
-            $location.path('/logout');
-            $cookies.loggedIn = "logged-out";
-            $rootScope.loggedIn = false;
-            $cookieStore.remove("user");
-        });
-    };
-
 
     $scope.toggleSideBar = function() {
         $scope.sideBarClass = ($scope.sideBarClass !== "display") ? "display" : "";

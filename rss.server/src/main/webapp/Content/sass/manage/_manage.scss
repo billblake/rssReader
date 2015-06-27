@@ -2,72 +2,46 @@
   	margin-top: 40px;
   	position: absolute;
   	top: 25px;
+	width: 90%;
+	max-width: 1200px;
 	
-
-	.nav-tabs {
-		a {
-			width: 120px;
-			text-align: center;
-		}
-	}
-	
-	.tab-pane {
-		padding: 100px;
-		
-		ul {
-			list-style: none;
-			padding : 0px;
-			margin : 0px;
-			
-			li {
-				margin-bottom: 10px;
-			}
-		}
-		
-		.category-name, .feed-name {
-			display: inline-block;
-			margin-right: 15px
-		}
-		
-		.category-name {
-			width: 200px;
-		}
-		
-		.feed-name {
-			width: 300px;
-		}
-	}
-	
-	#manageFeeds {
-		margin-left: 25px;
-	
-		th, td {
-			border: 1px solid grey;
-			padding: 10px;
-		}
-		
-		
-		#addFeed {
-			margin-top: 20px;
-			float: right;
-  			cursor: pointer;
-		}
-		
-		.category {
-			background: rgb(143, 203, 252);
-			display: inline-block;
-		    width: 200px;
-			padding: 2px 5px;
-  			margin: 10px;
-  
-			.btns {
-				float: right;
-			}
-		}
-	
+	.editCategory, .deleteCategory, .editFeed, .deleteFeed, #addFeed {
+		cursor: pointer;
 	}
 	
 	.editFeed, .deleteFeed {
-		cursor: pointer;
+		padding: 0px 5px;
+	}
+	
+	#addFeed {
+		font-size: 12px;
+		margin-left: 10px;
+	}
+
+	.categoryActions {
+		float: right;
+		
+		.deleteCategory {
+			margin-left: 10px;
+		}
+	}
+
+	ol.feeds {
+		list-style: none;
+		margin-top: 20px;
+		  
+		li {
+			border-bottom: solid 1px lightgrey;
+  			margin-bottom: 10px;
+  			padding-bottom: 5px;
+		
+			.feedName {
+				display: inline-block;
+			}
+			
+			.feedBtns {
+				float: right;
+			}
+		}
 	}
 }

@@ -5082,6 +5082,63 @@ button.close {
     -o-transform: rotate(359deg);
     -webkit-transform: rotate(359deg);
     transform: rotate(359deg); } }
+.collapsible-item {
+  margin-bottom: 10px; }
+
+.collapsible-item .title {
+  padding: 10px;
+  background-color: #f5f5f5;
+  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+  border: 1px solid #ccc;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  cursor: pointer; }
+
+.collapsible-item .title .icon {
+  float: right;
+  height: 20px;
+  width: 20px;
+  font-size: 19px !important;
+  padding-right: 1px; }
+
+.collapsible-item .title .iconleft {
+  float: left !important; }
+
+.collapsible-item .title.disabled {
+  background: #eee;
+  color: #999;
+  cursor: text; }
+
+.collapsible-item .body {
+  position: relative;
+  top: -4px;
+  max-height: 0;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  border-top: 0;
+  z-index: -1;
+  -webkit-transition: max-height 0.5s ease;
+  -moz-transition: max-height 0.5s ease;
+  -o-transition: max-height 0.5s ease;
+  transition: max-height 0.5s ease; }
+
+.collapsible-item .body .content {
+  padding: 20px 15px 5px 15px; }
+
+.collapsible-item.open .body {
+  max-height: 1000px;
+  z-index: 1; }
+
+.collapsible-item.open .title {
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0; }
+
 #header {
   z-index: 2;
   height: 35px;
@@ -5115,7 +5172,8 @@ button.close {
   background: whitesmoke;
   bottom: 0;
   position: fixed;
-  width: 100%; }
+  width: 100%;
+  z-index: 1; }
 
 #logo {
   margin-bottom: 10px;
@@ -5308,43 +5366,30 @@ button.close {
 #settings {
   margin-top: 40px;
   position: absolute;
-  top: 25px; }
-  #settings .nav-tabs a {
-    width: 120px;
-    text-align: center; }
-  #settings .tab-pane {
-    padding: 100px; }
-    #settings .tab-pane ul {
-      list-style: none;
-      padding: 0px;
-      margin: 0px; }
-      #settings .tab-pane ul li {
-        margin-bottom: 10px; }
-    #settings .tab-pane .category-name, #settings .tab-pane .feed-name {
-      display: inline-block;
-      margin-right: 15px; }
-    #settings .tab-pane .category-name {
-      width: 200px; }
-    #settings .tab-pane .feed-name {
-      width: 300px; }
-  #settings #manageFeeds {
-    margin-left: 25px; }
-    #settings #manageFeeds th, #settings #manageFeeds td {
-      border: 1px solid grey;
-      padding: 10px; }
-    #settings #manageFeeds #addFeed {
-      margin-top: 20px;
-      float: right;
-      cursor: pointer; }
-    #settings #manageFeeds .category {
-      background: #8fcbfc;
-      display: inline-block;
-      width: 200px;
-      padding: 2px 5px;
-      margin: 10px; }
-      #settings #manageFeeds .category .btns {
-        float: right; }
-  #settings .editFeed, #settings .deleteFeed {
+  top: 25px;
+  width: 90%;
+  max-width: 1200px; }
+  #settings .editCategory, #settings .deleteCategory, #settings .editFeed, #settings .deleteFeed, #settings #addFeed {
     cursor: pointer; }
+  #settings .editFeed, #settings .deleteFeed {
+    padding: 0px 5px; }
+  #settings #addFeed {
+    font-size: 12px;
+    margin-left: 10px; }
+  #settings .categoryActions {
+    float: right; }
+    #settings .categoryActions .deleteCategory {
+      margin-left: 10px; }
+  #settings ol.feeds {
+    list-style: none;
+    margin-top: 20px; }
+    #settings ol.feeds li {
+      border-bottom: solid 1px lightgrey;
+      margin-bottom: 10px;
+      padding-bottom: 5px; }
+      #settings ol.feeds li .feedName {
+        display: inline-block; }
+      #settings ol.feeds li .feedBtns {
+        float: right; }
 
 /*# sourceMappingURL=main.css.map */

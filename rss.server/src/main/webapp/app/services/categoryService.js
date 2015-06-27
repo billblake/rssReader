@@ -25,7 +25,7 @@ app.service('categoryService', function ($http, $resource) {
     };
 
 
-    this.deleteCategory = function(_category) {
+    this.deleteCategory = function(_category, callback) {
         if (typeof _category === "undefined") {
             return;
         }

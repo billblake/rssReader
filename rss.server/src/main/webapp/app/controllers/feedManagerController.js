@@ -15,7 +15,7 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
         $($event.target).tab('show');
     };
 
-    getFlatListOfFeeds();
+    loadFeedsAndCategories();
 
     $scope.editFeed = function(feed, category) {
         $scope.currentFeed = angular.copy(feed);
@@ -23,7 +23,7 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
     };
 
     $scope.deleteFeed = function(feed) {
-        feedService.deleteFeed(feed, getFlatListOfFeeds);
+        feedService.deleteFeed(feed, removeFeedFromModel);
     };
 
 
@@ -32,7 +32,7 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
     };
 
     $scope.deleteCategory = function(category) {
-        categoryService.deleteCategory(category);
+        categoryService.deleteCategory(category, removeCategoryFromModel);
     };
 
 
@@ -82,37 +82,53 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
     }
 
 
-    function getFlatListOfFeeds() {
-        categoryService.getCategories().$then(function(response){
-            var feedCategories = response.data;
-            $scope.feedCategories = feedCategories;
-            var feed = {}, feeds = [], cat;
-            feedCategories.forEach(function(category) {
-              cat = category;
-              $scope.username = category.username;
-              category.feeds.forEach(function(feedItem) {
-                  feed.categoryId = cat.categoryId;
-                  feed.category = cat.name;
-                  feed.feedId = feedItem.feedId;
-                  feed.name = feedItem.name;
-                  feed.url = feedItem.url;
-                  feeds.push(feed);
-                  feed = {};
-              });
-          });
-          $scope.feeds = feeds;
-        });
+    function loadFeedsAndCategories() {
+        $scope.feedCategories = categoryService.getCategories();
     }
 
 
-    function feedSaved(response) {
-        getFlatListOfFeeds();
+    function feedSaved(updatedFeed) {
         $('#feedModal').modal('hide');
+        for (var i = 0; i < $scope.feedCategories.length; i++) {
+            for (var j = 0; j < $scope.feedCategories[i].feeds.length; j++) {
+                if ($scope.feedCategories[i].feeds[j].feedId === updatedFeed.feedId) {
+                    $scope.feedCategories[i].feeds[j].name = updatedFeed.name;
+                    return;
+                }
+            }
+        }
     }
 
 
-    function categorySaved(response) {
-        getFlatListOfFeeds();
+    function categorySaved(updatedCategory) {
         $('#categoryModal').modal('hide');
+        for (var i = 0; i < $scope.feedCategories.length; i++) {
+            if ($scope.feedCategories[i].categoryId === updatedCategory.categoryId) {
+                $scope.feedCategories[i].name = updatedCategory.name;
+                break;
+            }
+        }
+    }
+
+
+    function removeFeedFromModel(removedFeed) {
+        for (var i = 0; i < $scope.feedCategories.length; i++) {
+            for (var j = 0; j < $scope.feedCategories[i].feeds.length; j++) {
+                if ($scope.feedCategories[i].feeds[j].feedId === removedFeed.feedId) {
+                    $scope.feedCategories[i].feeds.splice(j, 1);
+                    return;
+                }
+            }
+        }
+    }
+
+
+    function removeCategoryFromModel(removedCategory) {
+        for (var i = 0; i < $scope.feedCategories.length; i++) {
+            if ($scope.feedCategories[i].categoryId === removedCategory.categoryId) {
+                $scope.feedCategories.splice(i, 1);
+                return;
+            }
+        }
     }
 });
