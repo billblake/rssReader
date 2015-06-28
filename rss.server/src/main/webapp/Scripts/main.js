@@ -115,13 +115,26 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
     $scope.saveFeed = function(feed) {
         if (feed.categoryId === "new") {
             var category = {name : feed.newCategoryName};
-            category.userName = $scope.username
+            category.userName = $scope.username;
             categoryService.saveCategory(category, function(createdCategory, putResponseHeaders) {
                 feed.categoryId = createdCategory.categoryId;
-                feedService.saveFeed(feed, feedSaved);
+                $scope.feedCategories.push(createdCategory);
+                feedService.saveFeed(feed, function(savedFeed) {
+                    if (typeof feed.feedId === "undefined") {
+                        feedAdded(savedFeed);
+                    } else {
+                        feedSaved(savedFeed);
+                    }
+                });
             });
         } else {
-            feedService.saveFeed(feed, feedSaved);
+            feedService.saveFeed(feed, function(savedFeed) {
+                if (typeof feed.feedId === "undefined") {
+                    feedAdded(savedFeed);
+                } else {
+                    feedSaved(savedFeed);
+                }
+            });
         }
     };
 
@@ -152,6 +165,20 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
                     $scope.feedCategories[i].feeds[j].name = updatedFeed.name;
                     return;
                 }
+            }
+        }
+    }
+
+
+    function feedAdded(addedFeed) {
+        $('#feedModal').modal('hide');
+        for (var i = 0; i < $scope.feedCategories.length; i++) {
+            if ($scope.feedCategories[i].categoryId === addedFeed.categoryId) {
+                if ( $scope.feedCategories[i].feeds === null) {
+                    $scope.feedCategories[i].feeds = [];
+                }
+                $scope.feedCategories[i].feeds.push(addedFeed);
+                return;
             }
         }
     }
