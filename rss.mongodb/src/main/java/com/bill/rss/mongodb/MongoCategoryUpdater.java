@@ -4,6 +4,7 @@ import org.bson.types.ObjectId;
 
 import com.bill.rss.dataProvider.CategoryUpdater;
 import com.bill.rss.domain.Category;
+import com.bill.rss.domain.Feed;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -17,6 +18,8 @@ import static com.bill.rss.mongodb.FeedConstants.FEED_IDS;
 import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
 
 public class MongoCategoryUpdater implements CategoryUpdater {
+
+    MongoFeedUpdater feedUpdater = new MongoFeedUpdater();
 
     public Category addCategory(Category category) {
         DB dbConnection = MongoDBConnection.getDbConnection();
@@ -46,9 +49,22 @@ public class MongoCategoryUpdater implements CategoryUpdater {
         categoryQuery.put(USER_NAME, category.getUsername());
         categoryQuery.put(CATEGORY_OBJECT_ID, new ObjectId(category.getCategoryId()));
         DBObject categoryDocument = categoriesCollection.findOne(categoryQuery);
-        categoriesCollection.remove(categoryDocument);
+        deleteAssociatedFeeds(category, categoryDocument);
+        categoriesCollection.remove(categoryQuery);
         return category;
     }
+
+    private void deleteAssociatedFeeds(Category category, DBObject categoryDocument) {
+        BasicDBList feedIds = (BasicDBList) categoryDocument.get(FEED_IDS);
+        for (Object feedId : feedIds) {
+            Feed feed = new Feed();
+            feed.setFeedId(((ObjectId) feedId).toString());
+            feed.setCategoryId(category.getCategoryId());
+            feed.setUserName(category.getUsername());
+            feedUpdater.deleteFeed(feed);
+        }
+    }
+
 
 
     private DBObject getCategoryDocument(Category category) {
