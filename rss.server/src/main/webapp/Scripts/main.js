@@ -19,10 +19,11 @@
 
   #######################################################################*/
 
-var app = angular.module('viewApp', ['ngResource', 'ngRoute', 'ngCookies', 'infinite-scroll', 'ngSanitize', 'angAccordion']);
+var app = angular.module('viewApp', ['ngResource', 'ngRoute', 'ngCookies', 'infinite-scroll', 'ngSanitize',
+                                     'angAccordion', 'angularytics']);
 
 //This configures the routes and associates each route with a view and a controller
-app.config(function ($routeProvider) {
+app.config(function ($routeProvider, AngularyticsProvider) {
     $routeProvider
         .when('/list',
             {
@@ -49,13 +50,18 @@ app.config(function ($routeProvider) {
                 templateUrl: 'app/partials/logout.html'
             })
         .otherwise({ redirectTo: '/list' });
+
+    AngularyticsProvider.setEventHandlers(['Console', 'GoogleUniversal']);
+
+}).run(function(Angularytics) {
+    Angularytics.init();
 });
 
 
 
 
 
-app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $location, feedService, categoryService, userService) {
+app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $location, feedService, categoryService, userService, Angularytics) {
 
     var loggedInValue = $cookies.loggedIn;
     if (loggedInValue !== "logged-in" && !$rootScope.loggedIn) {
@@ -114,6 +120,7 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
 
     $scope.saveFeed = function(feed) {
         if (feed.categoryId === "new") {
+            Angularytics.trackEvent("Manage Feeds", "Add Category");
             var category = {name : feed.newCategoryName};
             category.userName = $scope.username;
             categoryService.saveCategory(category, function(createdCategory, putResponseHeaders) {
@@ -237,7 +244,8 @@ app.controller('LoginController', function($scope, $http, $location, $rootScope)
         });
     };
 });
-app.controller('ListController', function($scope, feedService, feedItemService, categoryService, $cookies, $cookieStore, $location, $rootScope, $http, userService) {
+app.controller('ListController', function($scope, feedService, feedItemService, categoryService, $cookies, $cookieStore,
+        $location, $rootScope, $http, userService, Angularytics) {
 
     var loggedInValue = $cookies.loggedIn;
     if (loggedInValue !== "logged-in" && !$rootScope.loggedIn) {
@@ -308,6 +316,7 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
 
     $scope.markAsRead = function(feedItem) {
         if (!feedItem.read) {
+            Angularytics.trackEvent("List Feeds", "Mark As Read", "FeedItem");
             feedItemService.markAsRead(feedItem, function(updatedFeedItem) {
                 feedItem.read = true;
                 updateCategoryCounts(updatedFeedItem.feedId, true, false);
@@ -318,10 +327,13 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
 
     $scope.markAllAsRead = function() {
         if ($scope.feedId) {
+            Angularytics.trackEvent("List Feeds", "Mark As Read", "Feed");
             feedItemService.markFeedFeedItemsAsRead($scope.feedId, updateCountsAfterMarkFeedFeedItemsAsRead);
         } else if ($scope.categoryId) {
+            Angularytics.trackEvent("List Feeds", "Mark As Read", "Category");
             feedItemService.markCategoryFeedItemsAsRead($scope.categoryId, updateCountsAfterMarkCategoryFeedItemsAsRead);
         } else {
+            Angularytics.trackEvent("List Feeds", "Mark As Read", "All");
             feedItemService.markAllAsRead(updateCountsAfterMarkAllFeedItemsAsRead);
         }
     };
@@ -336,6 +348,7 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
             }
             updateCategoryCounts(updatedFeedItem.feedId, !updatedFeedItem.read, true);
         });
+        Angularytics.trackEvent("List Feeds", "Delete", "FeedItem");
     };
 
     $scope.displayDeleteAllConfirmation = function() {
@@ -355,18 +368,26 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
 
     $scope.saveFeedItem = function(feedItem) {
         if (!feedItem.saved) {
+            Angularytics.trackEvent("List Feeds", "Save FeedItem");
             feedItemService.saveFeedItem(feedItem, function(feedResponse) {
                 feedItem.saved = feedResponse.saved;
             });
         }
     };
 
+    $scope.readMore = function() {
+        Angularytics.trackEvent("List Feeds", "Read More");
+    };
+
     function deleteAllFeedItem() {
         if ($scope.feedId) {
+            Angularytics.trackEvent("List Feeds", "Delete", "Feed");
             feedItemService.deleteAllFeedItemsInFeed($scope.feedId, deleteFeedItemsCallback);
         } else if ($scope.categoryId) {
+            Angularytics.trackEvent("List Feeds", "Delete", "Category");
             feedItemService.deleteAllFeedItemsInCategory($scope.categoryId, deleteFeedItemsCallback);
         } else {
+            Angularytics.trackEvent("List Feeds", "Delete", "All");
             feedItemService.deleteAllFeedItems(deleteFeedItemsCallback);
         }
     };

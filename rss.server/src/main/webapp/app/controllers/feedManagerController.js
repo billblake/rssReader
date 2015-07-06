@@ -1,4 +1,4 @@
-app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $location, feedService, categoryService, userService) {
+app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $location, feedService, categoryService, userService, Angularytics) {
 
     var loggedInValue = $cookies.loggedIn;
     if (loggedInValue !== "logged-in" && !$rootScope.loggedIn) {
@@ -57,6 +57,7 @@ app.controller('FeedManagerController', function($scope, $cookies, $rootScope, $
 
     $scope.saveFeed = function(feed) {
         if (feed.categoryId === "new") {
+            Angularytics.trackEvent("Manage Feeds", "Add Category");
             var category = {name : feed.newCategoryName};
             category.userName = $scope.username;
             categoryService.saveCategory(category, function(createdCategory, putResponseHeaders) {

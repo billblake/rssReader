@@ -19,10 +19,11 @@
 
   #######################################################################*/
 
-var app = angular.module('viewApp', ['ngResource', 'ngRoute', 'ngCookies', 'infinite-scroll', 'ngSanitize', 'angAccordion']);
+var app = angular.module('viewApp', ['ngResource', 'ngRoute', 'ngCookies', 'infinite-scroll', 'ngSanitize',
+                                     'angAccordion', 'angularytics']);
 
 //This configures the routes and associates each route with a view and a controller
-app.config(function ($routeProvider) {
+app.config(function ($routeProvider, AngularyticsProvider) {
     $routeProvider
         .when('/list',
             {
@@ -49,6 +50,11 @@ app.config(function ($routeProvider) {
                 templateUrl: 'app/partials/logout.html'
             })
         .otherwise({ redirectTo: '/list' });
+
+    AngularyticsProvider.setEventHandlers(['Console', 'GoogleUniversal']);
+
+}).run(function(Angularytics) {
+    Angularytics.init();
 });
 
 

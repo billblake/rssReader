@@ -5,13 +5,13 @@
         <div id="sideBar" class="{{sideBarClass}}">
             <!--Sidebar content-->
             <ul id="categories">
-                <li id="allFeeds" ng-click="displayFeedsForAllCategory()">
+                <li id="allFeeds" ng-click="displayFeedsForAllCategory() | trackEvent:'Filter Feeds':'All'">
                 	<span>
                 		<i class="icon-rss"></i>
                 	</span>
                		<span>All</span>
                 </li>
-                <li id="savedFeeds" ng-click="displaySavedFeeds()">
+                <li id="savedFeeds" ng-click="displaySavedFeeds() | trackEvent:'Filter Feeds':'Saved'">
                 	<span>
                 		<i class="icon-floppy"></i>
                 	</span>
@@ -22,11 +22,11 @@
                         <i class="icon-right-open" ng-show="! show_$index"></i>
                         <i class="icon-down-open" ng-show="show_$index"></i>
                     </span>
-                    <span ng-click="displayFeedsForCategory(feedCategory)" title="{{ feedCategory.name }} ({{ feedCategory.unReadCount }}/{{ feedCategory.totalCount }})">
+                    <span ng-click="displayFeedsForCategory(feedCategory) | trackEvent:'Filter Feeds':'Category'" title="{{ feedCategory.name }} ({{ feedCategory.unReadCount }}/{{ feedCategory.totalCount }})">
                         {{ feedCategory.name }} ({{ feedCategory.unReadCount }}/{{ feedCategory.totalCount }})
                     </span>
                     <ul id="feedContents_$index" class="feeds" ng-show="show_$index">
-                        <li class="feed" ng-repeat="feed in feedCategory.feeds"  ng-click="displayFeedsForFeed(feed)" title="{{feed.name}} ({{ feed.unReadCount }}/{{ feed.totalCount }})">
+                        <li class="feed" ng-repeat="feed in feedCategory.feeds"  ng-click="displayFeedsForFeed(feed) | trackEvent:'Filter Feeds':'Feed'" title="{{feed.name}} ({{ feed.unReadCount }}/{{ feed.totalCount }})">
                             {{feed.name}} ({{ feed.unReadCount }}/{{ feed.totalCount }})
                         </li>
                     </ul>
@@ -64,7 +64,7 @@
             <div ng-show="!feeds.length && !loading">There are no feeds</div>
             <ul id="feed-list" infinite-scroll='loadMore()' infinite-scroll-distance='1'>
                 <li class="feed-item" ng-repeat="feedItem in feeds" ng-class-odd="'odd'" ng-class-even="'even'" ng-class="readOrUnread(feedItem)">
-                    <span class="feedHeader" ng-click="toggleArticle($index);markAsRead(feedItem)">
+                    <span class="feedHeader" ng-click="toggleArticle($index);markAsRead(feedItem) | trackEvent:'List Feeds':'Expand'">
                         <span class="feedTitle" ng-bind-html="feedItem.title"></span>
                         <span class="feedSource" title="{{feedItem.source}}">{{feedItem.source}}</span>
                         <span class="feedPubDate">{{feedItem.formattedDate}}</span>
@@ -81,7 +81,7 @@
 	                    <div id="contents">
 	                        <span ng-bind-html="feedItem.description"></span>
 	                        <div>
-	                        	<a href="{{feedItem.link}}" target="_blank">Read More >></a>
+	                        	<a href="{{feedItem.link}}" target="_blank" ng-click="readMore()">Read More >></a>
 	                    		<span class="feedItemBtns">
 	                    			<i class="icon-tag"></i>
 	                    			<i ng-class="isSaved(feedItem)" ng-click="saveFeedItem(feedItem)"></i>

@@ -2,13 +2,13 @@
  
 <div id="settings" class="container-fluid">
 <h2>Manage Feeds</h2>
-<span id="addFeed" ng-click="addFeed()" data-toggle="modal" data-target="#feedModal"><i class="icon-rss"></i>Add New Feed</span>
+<span id="addFeed" ng-click="addFeed() | trackEvent:'Manage Feeds':'Add Feed'" data-toggle="modal" data-target="#feedModal"><i class="icon-rss"></i>Add New Feed</span>
 <ang-accordion icon-position="left" close-icon-url="Content/images/right-icon.png" open-icon-url="Content/images/down-icon.png">
     <collapsible-item ng-repeat="category in feedCategories" item-title="{{category.name}}" close-icon-class="glyphicon-edit" open-icon-class="glyphicon-trash">
         <div>
         	<div class="categoryActions">
-        		<span class="editCategory" ng-click="editCategory(category)" data-toggle="modal" data-target="#categoryModal"><span class="glyphicon glyphicon-edit"></span> Edit Category</span>
-        		<span class="deleteCategory" ng-click="deleteCategory(category)"><span class="glyphicon glyphicon-trash"></span> Delete Category</span>
+        		<span class="editCategory" ng-click="editCategory(category) | trackEvent:'Manage Feeds':'Edit Category'" data-toggle="modal" data-target="#categoryModal"><span class="glyphicon glyphicon-edit"></span> Edit Category</span>
+        		<span class="deleteCategory" ng-click="deleteCategory(category) | trackEvent:'Manage Feeds':'Delete Category'"><span class="glyphicon glyphicon-trash"></span> Delete Category</span>
         		
         		
         	</div>
@@ -17,8 +17,8 @@
         		<li ng-repeat="feed in category.feeds">
 					<span class="feedName">{{feed.name}}</span>
 					<span class="feedBtns">
-						<span class="editFeed glyphicon glyphicon-edit" ng-click="editFeed(feed, feedCategory)" data-toggle="modal" data-target="#feedModal"></span>
-						<span class="deleteFeed glyphicon glyphicon-trash" ng-click="deleteFeed(feed)"></span>
+						<span class="editFeed glyphicon glyphicon-edit" ng-click="editFeed(feed, feedCategory) | trackEvent:'Manage Feeds':'Edit Feed'" data-toggle="modal" data-target="#feedModal"></span>
+						<span class="deleteFeed glyphicon glyphicon-trash" ng-click="deleteFeed(feed) | trackEvent:'Manage Feeds':'Edit Feed'"></span>
 					</span>
 				</li>
 			</ol>
