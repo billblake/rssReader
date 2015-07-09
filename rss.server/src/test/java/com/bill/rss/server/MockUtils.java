@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -45,7 +47,10 @@ public class MockUtils {
     }
 
     public static Response createResponseMock() {
-        return mock(Response.class);
+        Response response = mock(Response.class);
+        HttpServletResponse mockHttpRequest = mock(HttpServletResponse.class);
+        when(response.raw()).thenReturn(mockHttpRequest);
+        return response;
     }
 
     public static CategoryProvider createCategoryProviderMock() {

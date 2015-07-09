@@ -1,5 +1,7 @@
 package com.bill.rss.server;
 
+import javax.servlet.http.Cookie;
+
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -75,9 +77,15 @@ public class LoginRoute extends BaseRoute {
 
     private void createCookies(Response response, User user) {
         String fullName = user.getFirstName() + " " + user.getLastName();
-        response.cookie(LOGGED_IN_COOKIE_NAME, LOGGED_IN_COOKIE_VALUE, 10800);
-        response.cookie(USER_COOKIE_NAME, fullName, 10800);
-        response.cookie(USERNAME_COOKIE_NAME, user.getUserName(), 10800);
+        addCookie(response, USER_COOKIE_NAME, fullName);
+        addCookie(response, LOGGED_IN_COOKIE_NAME, LOGGED_IN_COOKIE_VALUE);
+        addCookie(response, USERNAME_COOKIE_NAME, user.getUserName());
+    }
+
+    private void addCookie(Response response, String cookieName, String cookieValue) {
+        Cookie cookie = new Cookie(cookieName, cookieValue);
+        cookie.setMaxAge(10800);
+        response.raw().addCookie(cookie);
     }
 
 
