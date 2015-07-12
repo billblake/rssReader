@@ -6,6 +6,7 @@ import org.bson.types.ObjectId;
 
 import com.bill.rss.dataProvider.FeedItemUpdater;
 import com.bill.rss.domain.FeedItem;
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -16,6 +17,7 @@ import static com.bill.rss.mongodb.FeedConstants.FEED_ID;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_DELETE;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_READ;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_SAVED;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_TAGS;
 import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
@@ -134,5 +136,18 @@ public class MongoFeedItemUpdater implements FeedItemUpdater {
         BasicDBObject updateQuery = new BasicDBObject();
         updateQuery.append("$set", new BasicDBObject().append(FEED_ITEM_DELETE, TRUE));
         feedItemCollection.updateMulti(searchQuery, updateQuery);
+    }
+
+
+    public FeedItem saveFeedItemNew(FeedItem feedItem) {
+        DBCollection feedItemCollection = FeedItemUtils.getFeedItemsCollection();
+        DBObject feedItemDB = FeedItemUtils.retrieveFeedItemById(feedItem.getFeedItemId(), feedItem.getUsername());
+        BasicDBList tags = new BasicDBList();
+        tags.addAll(feedItem.getTags());
+        feedItemDB.put(FEED_ITEM_READ, feedItem.isRead());
+        feedItemDB.put(FEED_ITEM_SAVED, feedItem.isSaved());
+        feedItemDB.put(FEED_ITEM_TAGS, feedItem.getTags());
+        feedItemCollection.save(feedItemDB);
+        return FeedItemUtils.buildFeedItem(feedItemDB);
     }
 }

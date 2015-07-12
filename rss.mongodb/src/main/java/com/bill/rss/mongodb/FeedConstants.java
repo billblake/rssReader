@@ -23,6 +23,7 @@ public class FeedConstants {
 	public static final String FEEDS_COLLECTION = "feeds";
 	public static final String FEED_USERNAME = "username";
 	public static final String FEED_NAME = "name";
+	public static final String FEED_ITEM_TAGS = "tags";
 
 
 	public static final int MAX_PAGE_SIZE = 100;

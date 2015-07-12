@@ -91,6 +91,18 @@
       "src": "entypo"
     },
     {
+      "uid": "517522647a556192fbc78aa391b7b0c2",
+      "css": "cancel-circled-outline",
+      "code": 59412,
+      "src": "typicons"
+    },
+    {
+      "uid": "3327862df439988139b61814143b7a42",
+      "css": "cancel-circled",
+      "code": 59413,
+      "src": "typicons"
+    },
+    {
       "uid": "jqzwo6i8oicjbn049sh2856d8anrqoli",
       "css": "edit",
       "code": 59410,

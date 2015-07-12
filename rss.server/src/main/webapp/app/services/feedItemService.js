@@ -82,6 +82,37 @@ app.service('feedItemService', function ($http, $resource) {
     };
 
 
+    this.addTag = function(feedItem, tag, callback) {
+        if (!feedItem.tags) {
+            feedItem.tags = [];
+        }
+        if (feedItem.tags.indexOf(tag) == -1) {
+            feedItem.tags.push(tag);
+        }
+        saveFeedItem(feedItem, callback);
+    };
+
+
+    function saveFeedItem(_feedItem, callback) {
+        var FeedItem = createFeedItemResource(_feedItem.catId, _feedItem.feedId, _feedItem.feedItemId);
+        var feedItem = new FeedItem();
+        feedItem.catId = _feedItem.catId;
+        feedItem.feedId = _feedItem.feedId;
+        feedItem.feedItemId = _feedItem.feedItemId;
+        feedItem.description = _feedItem.description;
+        feedItem.title = _feedItem.title;
+        feedItem.tags = _feedItem.tags;
+        feedItem.username = _feedItem.username;
+        feedItem.source = _feedItem.source;
+        feedItem.link = _feedItem.link;
+        feedItem.pubDate = _feedItem.pubDate;
+        feedItem.formattedDate = _feedItem.formattedDate;
+        feedItem.read = _feedItem.read;
+        feedItem.saved = _feedItem.saved;
+        feedItem.$save(callback);
+    }
+
+
     function createFeedItemResource(_categoryId, _feedId, _feedItemId) {
         if (_feedItemId === null || typeof _feedItemId === "undefined") {
             _feedItemId = "@id";

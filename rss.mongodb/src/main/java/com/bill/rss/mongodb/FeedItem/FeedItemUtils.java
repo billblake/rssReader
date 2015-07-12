@@ -1,8 +1,12 @@
 package com.bill.rss.mongodb.FeedItem;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.bson.types.ObjectId;
 
@@ -26,6 +30,7 @@ import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_PUB_DATE;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_READ;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_SAVED;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_SOURCE;
+import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_TAGS;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_TITLE;
 import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
 
@@ -64,6 +69,13 @@ public class FeedItemUtils {
         Date pubDate = (Date) nextFeedItem.get(FEED_ITEM_PUB_DATE);
         feedItem.setPubDate(pubDate);
         feedItem.setFormattedDate(DateUtils.formatDate(pubDate));
+
+        Collection<String> tagsDB = (Collection<String>) nextFeedItem.get(FEED_ITEM_TAGS);
+        if (tagsDB != null) {
+            Set<String> tags = new HashSet(Arrays.asList(tagsDB.toArray()));
+            feedItem.setTags(tags);
+        }
+
         return feedItem;
     }
 

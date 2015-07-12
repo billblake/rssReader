@@ -137,6 +137,20 @@
 						color: $MAIN_TEXT;
 						display: none;
 					}
+					
+					.tags {
+						display: block;
+  						margin-top: 5px;
+					
+						.tag {
+							display: inline-block;
+							background-color: #5a87ab;
+							padding: 2px 5px;
+							margin: 10px;
+							color: white;
+							font-size: 12px;
+						}
+					}
 				}
 			}
 			

@@ -1,6 +1,7 @@
 package com.bill.rss.domain;
 
 import java.util.Date;
+import java.util.Set;
 
 public class FeedItem {
 
@@ -16,6 +17,7 @@ public class FeedItem {
 	private String formattedDate;
 	private boolean read;
 	private boolean saved;
+	private Set<String> tags;
 
 
 	public String getFeedItemId() {
@@ -112,5 +114,13 @@ public class FeedItem {
 
     public void setSaved(boolean saved) {
         this.saved = saved;
+    }
+
+    public Set<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<String> tags) {
+        this.tags = tags;
     }
 }

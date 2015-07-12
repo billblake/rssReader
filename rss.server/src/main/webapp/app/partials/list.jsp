@@ -70,7 +70,7 @@
                         <span class="feedPubDate">{{feedItem.formattedDate}}</span>
                     </span>
                     <span class="feedItemBtns">
-                    	<i class="icon-tag"></i>
+                    	<i class="icon-tag" ng-click="showTagPopup(feedItem)" data-toggle="modal" data-target="#addTagModal"></i>
                     	<i ng-class="isSaved(feedItem)" ng-click="saveFeedItem(feedItem)"></i>
                     	<i class="deleteFeed icon-trash-empty" ng-click="deleteFeedItem(feedItem)"></i>
                     </span>
@@ -80,10 +80,17 @@
 	                    <span>{{feedItem.source}} {{feedItem.formattedDate}}</span>
 	                    <div id="contents">
 	                        <span ng-bind-html="feedItem.description"></span>
+                        	<div class="tags" ng-show="feedItem.tags">
+	                        		Tags:
+	                        		<span class="tag" ng-repeat="tag in feedItem.tags">
+	                        			{{tag}}
+	                        			<i class="deleteTag icon-cancel-circled-outline" ng-click="deleteTag(feedItem, tag)"></i>
+	                        		</span>
+	                        	</div>
 	                        <div>
 	                        	<a href="{{feedItem.link}}" target="_blank" ng-click="readMore()">Read More >></a>
 	                    		<span class="feedItemBtns">
-	                    			<i class="icon-tag"></i>
+	                    			<i class="icon-tag" ng-click="showTagPopup(feedItem)" data-toggle="modal" data-target="#addTagModal"></i>
 	                    			<i ng-class="isSaved(feedItem)" ng-click="saveFeedItem(feedItem)"></i>
 	                    			<i class="deleteFeed icon-trash-empty" ng-click="deleteFeedItem(feedItem)"></i>
 	                    		</span>
@@ -120,6 +127,28 @@
 	      <div class="modal-footer">
 	      	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        <button type="button" class="btn btn-primary" ng-click="confirm(onClickAction)">{{modalButtonLabel}}</button>
+	      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="addTagModal" tabindex="-1" role="dialog" aria-labelledby="addTagModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form name="tagForm" role="form">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Add Tag</h4>
+	      </div>
+	      <div class="modal-body">
+	        <label for="firstName">Tag *</label>
+		    <input type="text" class="form-control" id="tag" placeholder="Enter tag" ng-model="tag" autocomplete="off" required>
+	      </div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" ng-click="addTag(currentFeedItem, tag)">Add Tag</button>
 	      </div>
       </form>
     </div>

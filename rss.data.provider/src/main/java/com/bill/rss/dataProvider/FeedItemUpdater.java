@@ -24,4 +24,6 @@ public interface FeedItemUpdater {
 
     List<FeedItem> deleteAllFeedItems(String userName);
 
+    FeedItem saveFeedItemNew(FeedItem feedItem);
+
 }

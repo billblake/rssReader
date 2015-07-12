@@ -129,6 +129,20 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
         }
     };
 
+
+    $scope.showTagPopup = function(feedItem) {
+        $scope.currentFeedItem = $.extend({}, feedItem);
+        $scope.tag = "";
+    };
+
+
+    $scope.addTag = function(feedItem, tag) {
+        feedItemService.addTag(feedItem, tag, function(feedResponse) {
+
+        });
+    };
+
+
     $scope.readMore = function() {
         Angularytics.trackEvent("List Feeds", "Read More");
     };
