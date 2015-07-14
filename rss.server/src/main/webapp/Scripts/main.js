@@ -390,6 +390,13 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
     };
 
 
+    $scope.deleteTag = function(feedItem, tag) {
+        feedItemService.deleteTag(feedItem, tag, function(feedItemResponse) {
+            feedItem.tags = feedItemResponse.tags;
+        });
+    };
+
+
     $scope.readMore = function() {
         Angularytics.trackEvent("List Feeds", "Read More");
     };
@@ -769,12 +776,23 @@ app.service('feedItemService', function ($http, $resource) {
     };
 
 
-    this.addTag = function(feedItem, tag, callback) {
+    this.addTag = function(_feedItem, tag, callback) {
+        var feedItem = $.extend({}, _feedItem);
         if (!feedItem.tags) {
             feedItem.tags = [];
         }
         if (feedItem.tags.indexOf(tag) == -1) {
             feedItem.tags.push(tag);
+        }
+        saveFeedItem(feedItem, callback);
+    };
+
+
+    this.deleteTag = function(_feedItem, tag, callback) {
+        var feedItem = $.extend({}, _feedItem);
+        var index = feedItem.tags.indexOf(tag);
+        if (index > -1) {
+            feedItem.tags.splice(index, 1);
         }
         saveFeedItem(feedItem, callback);
     };

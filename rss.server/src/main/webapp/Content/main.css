@@ -5327,6 +5327,8 @@ button.close {
             margin: 10px;
             color: white;
             font-size: 12px; }
+            #feeds #main-content #feed-list .feed-item article .tags .tag .deleteTag {
+              cursor: pointer; }
     #feeds #main-content #feed-list .feed-item.even {
       background-color: #fbfbfb; }
     #feeds #main-content #feed-list .feed-item:hover {

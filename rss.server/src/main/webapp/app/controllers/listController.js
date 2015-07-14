@@ -144,6 +144,13 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
     };
 
 
+    $scope.deleteTag = function(feedItem, tag) {
+        feedItemService.deleteTag(feedItem, tag, function(feedItemResponse) {
+            feedItem.tags = feedItemResponse.tags;
+        });
+    };
+
+
     $scope.readMore = function() {
         Angularytics.trackEvent("List Feeds", "Read More");
     };
