@@ -1,13 +1,9 @@
 app.service('feedItemService', function ($http, $resource) {
 
-    this.markAsRead = function(_feedItem, callback) {
-        var FeedItem = createFeedItemResource(_feedItem.catId, _feedItem.feedId, _feedItem.feedItemId);
-        var feedItem = new FeedItem({
-            catId : _feedItem.catId,
-            feedId : _feedItem.feedId,
-            feedItemId : _feedItem.feedItemId
-        });
-        feedItem.$markAsRead(callback);
+    this.markAsRead = function(feedItem, callback) {
+        _feedItem = $.extend({}, feedItem);
+        _feedItem.read = true;
+        saveFeedItem(_feedItem, callback);
     };
 
     this.deleteFeedItem = function(_feedItem, callback) {
@@ -71,14 +67,10 @@ app.service('feedItemService', function ($http, $resource) {
     };
 
 
-    this.saveFeedItem = function(_feedItem, callback) {
-        var FeedItem = createFeedItemResource(_feedItem.catId, _feedItem.feedId, _feedItem.feedItemId);
-        var feedItem = new FeedItem({
-            catId : _feedItem.catId,
-            feedId : _feedItem.feedId,
-            feedItemId : _feedItem.feedItemId
-        });
-        feedItem.$saveFeedItem(callback);
+    this.saveFeedItem = function(feedItem, callback) {
+        _feedItem = $.extend({}, feedItem);
+        _feedItem.saved = true;
+        saveFeedItem(_feedItem, callback);
     };
 
 
@@ -131,7 +123,6 @@ app.service('feedItemService', function ($http, $resource) {
             },
             {
                 markAsRead : {method:'PUT', params:{markAsRead:true}},
-                saveFeedItem : {method:'PUT', params:{save:true}},
                 deleteFeeds : {method:'DELETE', params:{deleteAll:true}}
             }
         );

@@ -6,7 +6,6 @@ import org.bson.types.ObjectId;
 
 import com.bill.rss.dataProvider.FeedItemUpdater;
 import com.bill.rss.domain.FeedItem;
-import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -23,15 +22,6 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 public class MongoFeedItemUpdater implements FeedItemUpdater {
-
-    public FeedItem saveFeedItem(String feedItemId, String userName) {
-        DBCollection feedItemCollection = FeedItemUtils.getFeedItemsCollection();
-        DBObject feedItem = FeedItemUtils.retrieveFeedItemById(feedItemId, userName);
-        feedItem.put(FEED_ITEM_SAVED, true);
-        feedItemCollection.save(feedItem);
-        return FeedItemUtils.buildFeedItem(feedItem);
-    }
-
 
     public FeedItem markFeedItemAsRead(String feedItemId, String userName) {
         DBCollection feedItemCollection = FeedItemUtils.getFeedItemsCollection();
@@ -139,11 +129,9 @@ public class MongoFeedItemUpdater implements FeedItemUpdater {
     }
 
 
-    public FeedItem saveFeedItemNew(FeedItem feedItem) {
+    public FeedItem saveFeedItem(FeedItem feedItem) {
         DBCollection feedItemCollection = FeedItemUtils.getFeedItemsCollection();
         DBObject feedItemDB = FeedItemUtils.retrieveFeedItemById(feedItem.getFeedItemId(), feedItem.getUsername());
-        BasicDBList tags = new BasicDBList();
-        tags.addAll(feedItem.getTags());
         feedItemDB.put(FEED_ITEM_READ, feedItem.isRead());
         feedItemDB.put(FEED_ITEM_SAVED, feedItem.isSaved());
         feedItemDB.put(FEED_ITEM_TAGS, feedItem.getTags());

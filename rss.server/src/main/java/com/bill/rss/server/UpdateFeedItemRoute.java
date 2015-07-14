@@ -18,8 +18,6 @@ public class UpdateFeedItemRoute extends BaseFeedItemRoute {
         String userName = getUsername(request);
         if (isMarkAsReadRequest(request)) {
             feedItem = markFeedItemAsRead(getFeedItemId(request), userName);
-        } else {
-            feedItem = saveFeedItem(getFeedItemId(request), userName);
         }
         return JsonUtils.convertObjectToJson(feedItem);
     }
@@ -33,10 +31,4 @@ public class UpdateFeedItemRoute extends BaseFeedItemRoute {
     private FeedItem markFeedItemAsRead(String feedItemId, String userName) {
         return feedItemUpdater.markFeedItemAsRead(feedItemId, userName);
     }
-
-
-    private FeedItem saveFeedItem(String feedItemId, String userName) {
-        return feedItemUpdater.saveFeedItem(feedItemId, userName);
-    }
-
 }

@@ -18,7 +18,7 @@ public class SaveFeedItemRoute extends BaseFeedItemRoute {
     @Override
     public Object handle(Request request, Response response) {
         FeedItem feedItem = buildFeedItemFromRequest(request);
-        feedItem = feedItemUpdater.saveFeedItemNew(feedItem);
+        feedItem = feedItemUpdater.saveFeedItem(feedItem);
         return JsonUtils.convertObjectToJson(feedItem);
     }
 
