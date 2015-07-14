@@ -131,14 +131,15 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
 
 
     $scope.showTagPopup = function(feedItem) {
-        $scope.currentFeedItem = $.extend({}, feedItem);
+        $scope.currentFeedItem = feedItem;
         $scope.tag = "";
     };
 
 
     $scope.addTag = function(feedItem, tag) {
-        feedItemService.addTag(feedItem, tag, function(feedResponse) {
-
+        feedItemService.addTag(feedItem, tag, function(feedItemResponse) {
+            $('#addTagModal').modal('hide');
+            feedItem.tags = feedItemResponse.tags;
         });
     };
 
