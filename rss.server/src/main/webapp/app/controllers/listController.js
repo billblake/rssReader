@@ -11,37 +11,38 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
     $scope.loading = true;
     $scope.loadingMessage = "Loading Feeds";
     $scope.feedCategories = categoryService.getCategories();
+    $scope.feedItemTags = feedItemService.getTags();
     $scope.feeds = [];
     $scope.title = "All Feeds";
 
     $scope.loadMore = function() {
         $scope.page++;
         $scope.loading = true;
-        feedService.getFeeds($scope.categoryId, $scope.feedId, loadMoreFeedsSuccessful, fail, $scope.page, $scope.displaySaved);
+        feedItemService.getFeedItems($scope.categoryId, $scope.feedId, loadMoreFeedsSuccessful, fail, $scope.page, $scope.displaySaved);
     };
 
     $scope.displayFeedsForCategory = function(category) {
         initList(category.categoryId, undefined);
-        $scope.feeds = feedService.getFeeds(category.categoryId, $scope.feedId, loadFeedsSuccessful, fail, $scope.page);
+        $scope.feeds = feedItemService.getFeedItems(category.categoryId, $scope.feedId, loadFeedsSuccessful, fail, $scope.page);
         $scope.title = category.name;
     };
 
     $scope.displayFeedsForAllCategory = function() {
         initList(undefined, undefined);
-        $scope.feeds = feedService.getFeeds(null, null, loadFeedsSuccessful, fail, $scope.page);
+        $scope.feeds = feedItemService.getFeedItems(null, null, loadFeedsSuccessful, fail, $scope.page);
         $scope.title = "All Feeds";
     };
 
     $scope.displaySavedFeeds = function() {
         initList(undefined, undefined);
         $scope.displaySaved = true;
-        $scope.feeds = feedService.getFeeds(null, null, loadFeedsSuccessful, fail, $scope.page, $scope.displaySaved);
+        $scope.feeds = feedItemService.getFeedItems(null, null, loadFeedsSuccessful, fail, $scope.page, $scope.displaySaved);
         $scope.title = "Saved Feeds";
     };
 
     $scope.displayFeedsForFeed = function(feed) {
         initList(undefined, feed.feedId);
-        $scope.feeds = feedService.getFeeds($scope.categoryId, feed.feedId, loadFeedsSuccessful, fail, $scope.page);
+        $scope.feeds = feedItemService.getFeedItems($scope.categoryId, feed.feedId, loadFeedsSuccessful, fail, $scope.page);
         $scope.title = feed.name;
     };
 
@@ -194,10 +195,6 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
                 }
             }
         }
-    }
-
-    function showRefreshedFeeds() {
-        $scope.feeds = feedService.getFeeds();
     }
 
 

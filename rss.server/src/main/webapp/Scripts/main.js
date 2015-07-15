@@ -257,37 +257,38 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
     $scope.loading = true;
     $scope.loadingMessage = "Loading Feeds";
     $scope.feedCategories = categoryService.getCategories();
+    $scope.feedItemTags = feedItemService.getTags();
     $scope.feeds = [];
     $scope.title = "All Feeds";
 
     $scope.loadMore = function() {
         $scope.page++;
         $scope.loading = true;
-        feedService.getFeeds($scope.categoryId, $scope.feedId, loadMoreFeedsSuccessful, fail, $scope.page, $scope.displaySaved);
+        feedItemService.getFeedItems($scope.categoryId, $scope.feedId, loadMoreFeedsSuccessful, fail, $scope.page, $scope.displaySaved);
     };
 
     $scope.displayFeedsForCategory = function(category) {
         initList(category.categoryId, undefined);
-        $scope.feeds = feedService.getFeeds(category.categoryId, $scope.feedId, loadFeedsSuccessful, fail, $scope.page);
+        $scope.feeds = feedItemService.getFeedItems(category.categoryId, $scope.feedId, loadFeedsSuccessful, fail, $scope.page);
         $scope.title = category.name;
     };
 
     $scope.displayFeedsForAllCategory = function() {
         initList(undefined, undefined);
-        $scope.feeds = feedService.getFeeds(null, null, loadFeedsSuccessful, fail, $scope.page);
+        $scope.feeds = feedItemService.getFeedItems(null, null, loadFeedsSuccessful, fail, $scope.page);
         $scope.title = "All Feeds";
     };
 
     $scope.displaySavedFeeds = function() {
         initList(undefined, undefined);
         $scope.displaySaved = true;
-        $scope.feeds = feedService.getFeeds(null, null, loadFeedsSuccessful, fail, $scope.page, $scope.displaySaved);
+        $scope.feeds = feedItemService.getFeedItems(null, null, loadFeedsSuccessful, fail, $scope.page, $scope.displaySaved);
         $scope.title = "Saved Feeds";
     };
 
     $scope.displayFeedsForFeed = function(feed) {
         initList(undefined, feed.feedId);
-        $scope.feeds = feedService.getFeeds($scope.categoryId, feed.feedId, loadFeedsSuccessful, fail, $scope.page);
+        $scope.feeds = feedItemService.getFeedItems($scope.categoryId, feed.feedId, loadFeedsSuccessful, fail, $scope.page);
         $scope.title = feed.name;
     };
 
@@ -440,10 +441,6 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
                 }
             }
         }
-    }
-
-    function showRefreshedFeeds() {
-        $scope.feeds = feedService.getFeeds();
     }
 
 
@@ -622,11 +619,6 @@ function getErrorClass(isError) {
 
 app.service('feedService', function ($http, $resource) {
 
-    this.getFeeds = function (_categoryId, _feedId, suc, fail, _page, _saved) {
-        var feedResource = createFeedResource(_categoryId, _feedId, _page, _saved);
-        return feedResource.query(suc, fail);
-    };
-
 
     this.saveFeed = function(_feed, callback) {
         if (typeof _feed === "undefined") {
@@ -664,34 +656,18 @@ app.service('feedService', function ($http, $resource) {
     };
 
 
-    this.refreshFeeds = function (callback) {
-        var feedResource = createFeedResource();
-        return feedResource.refresh(callback);
-    };
 
-
-    function createFeedResource(_categoryId, _feedId, _page, _saved) {
+    function createFeedResource(_categoryId, _feedId) {
         if (_feedId === null || typeof _feedId === "undefined") {
             _feedId = "@id";
         }
         if (_categoryId  === null || typeof _categoryId === "undefined") {
             _categoryId = "@id";
         }
-        if (_page  === null || typeof _page === "undefined") {
-            _page = "@page";
-        }
-        if (_saved  === null || typeof _saved === "undefined") {
-            _saved = "@saved";
-        }
         var feedResource = $resource(readerConstants.appContextPath + '/feeds/category/:categoryId/feed/:feedId',
             {
                 feedId : _feedId,
-                categoryId : _categoryId,
-                page : _page,
-                saved : _saved
-            },
-            {
-                refresh : {method:'GET', isArray: true, params:{refresh:true}}
+                categoryId : _categoryId
             }
         );
         return feedResource;
@@ -701,6 +677,12 @@ app.service('feedService', function ($http, $resource) {
 
 
 app.service('feedItemService', function ($http, $resource) {
+
+    this.getFeedItems = function (_categoryId, _feedId, suc, fail, _page, _saved) {
+        var feedResource = createFeedItemResource(_categoryId, _feedId, null, _page, _saved);
+        return feedResource.query(suc, fail);
+    };
+
 
     this.markAsRead = function(feedItem, callback) {
         _feedItem = $.extend({}, feedItem);
@@ -798,6 +780,11 @@ app.service('feedItemService', function ($http, $resource) {
     };
 
 
+    this.getTags = function() {
+
+    }
+
+
     function saveFeedItem(_feedItem, callback) {
         var FeedItem = createFeedItemResource(_feedItem.catId, _feedItem.feedId, _feedItem.feedItemId);
         var feedItem = new FeedItem();
@@ -818,7 +805,7 @@ app.service('feedItemService', function ($http, $resource) {
     }
 
 
-    function createFeedItemResource(_categoryId, _feedId, _feedItemId) {
+    function createFeedItemResource(_categoryId, _feedId, _feedItemId,  _page, _saved) {
         if (_feedItemId === null || typeof _feedItemId === "undefined") {
             _feedItemId = "@id";
         }
@@ -828,11 +815,19 @@ app.service('feedItemService', function ($http, $resource) {
         if (_categoryId  === null || typeof _categoryId === "undefined") {
             _categoryId = "@id";
         }
+        if (_page  === null || typeof _page === "undefined") {
+            _page = "@page";
+        }
+        if (_saved  === null || typeof _saved === "undefined") {
+            _saved = "@saved";
+        }
         var feedItemResource = $resource(readerConstants.appContextPath + '/feeds/category/:categoryId/feed/:feedId/feedItem/:feedItemId',
             {
                 feedId : _feedId,
                 categoryId : _categoryId,
-                feedItemId : _feedItemId
+                feedItemId : _feedItemId,
+                page : _page,
+                saved : _saved
             },
             {
                 markAsRead : {method:'PUT', params:{markAsRead:true}},
@@ -841,6 +836,7 @@ app.service('feedItemService', function ($http, $resource) {
         );
         return feedItemResource;
     }
+
 });
 app.service('categoryService', function ($http, $resource) {
 

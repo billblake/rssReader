@@ -1,5 +1,11 @@
 app.service('feedItemService', function ($http, $resource) {
 
+    this.getFeedItems = function (_categoryId, _feedId, suc, fail, _page, _saved) {
+        var feedResource = createFeedItemResource(_categoryId, _feedId, null, _page, _saved);
+        return feedResource.query(suc, fail);
+    };
+
+
     this.markAsRead = function(feedItem, callback) {
         _feedItem = $.extend({}, feedItem);
         _feedItem.read = true;
@@ -96,6 +102,11 @@ app.service('feedItemService', function ($http, $resource) {
     };
 
 
+    this.getTags = function() {
+
+    }
+
+
     function saveFeedItem(_feedItem, callback) {
         var FeedItem = createFeedItemResource(_feedItem.catId, _feedItem.feedId, _feedItem.feedItemId);
         var feedItem = new FeedItem();
@@ -116,7 +127,7 @@ app.service('feedItemService', function ($http, $resource) {
     }
 
 
-    function createFeedItemResource(_categoryId, _feedId, _feedItemId) {
+    function createFeedItemResource(_categoryId, _feedId, _feedItemId,  _page, _saved) {
         if (_feedItemId === null || typeof _feedItemId === "undefined") {
             _feedItemId = "@id";
         }
@@ -126,11 +137,19 @@ app.service('feedItemService', function ($http, $resource) {
         if (_categoryId  === null || typeof _categoryId === "undefined") {
             _categoryId = "@id";
         }
+        if (_page  === null || typeof _page === "undefined") {
+            _page = "@page";
+        }
+        if (_saved  === null || typeof _saved === "undefined") {
+            _saved = "@saved";
+        }
         var feedItemResource = $resource(readerConstants.appContextPath + '/feeds/category/:categoryId/feed/:feedId/feedItem/:feedItemId',
             {
                 feedId : _feedId,
                 categoryId : _categoryId,
-                feedItemId : _feedItemId
+                feedItemId : _feedItemId,
+                page : _page,
+                saved : _saved
             },
             {
                 markAsRead : {method:'PUT', params:{markAsRead:true}},
@@ -139,4 +158,5 @@ app.service('feedItemService', function ($http, $resource) {
         );
         return feedItemResource;
     }
+
 });

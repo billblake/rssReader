@@ -1,10 +1,5 @@
 app.service('feedService', function ($http, $resource) {
 
-    this.getFeeds = function (_categoryId, _feedId, suc, fail, _page, _saved) {
-        var feedResource = createFeedResource(_categoryId, _feedId, _page, _saved);
-        return feedResource.query(suc, fail);
-    };
-
 
     this.saveFeed = function(_feed, callback) {
         if (typeof _feed === "undefined") {
@@ -42,34 +37,18 @@ app.service('feedService', function ($http, $resource) {
     };
 
 
-    this.refreshFeeds = function (callback) {
-        var feedResource = createFeedResource();
-        return feedResource.refresh(callback);
-    };
 
-
-    function createFeedResource(_categoryId, _feedId, _page, _saved) {
+    function createFeedResource(_categoryId, _feedId) {
         if (_feedId === null || typeof _feedId === "undefined") {
             _feedId = "@id";
         }
         if (_categoryId  === null || typeof _categoryId === "undefined") {
             _categoryId = "@id";
         }
-        if (_page  === null || typeof _page === "undefined") {
-            _page = "@page";
-        }
-        if (_saved  === null || typeof _saved === "undefined") {
-            _saved = "@saved";
-        }
         var feedResource = $resource(readerConstants.appContextPath + '/feeds/category/:categoryId/feed/:feedId',
             {
                 feedId : _feedId,
-                categoryId : _categoryId,
-                page : _page,
-                saved : _saved
-            },
-            {
-                refresh : {method:'GET', isArray: true, params:{refresh:true}}
+                categoryId : _categoryId
             }
         );
         return feedResource;
