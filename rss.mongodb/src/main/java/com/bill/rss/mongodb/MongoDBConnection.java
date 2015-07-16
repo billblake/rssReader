@@ -19,13 +19,7 @@ public class MongoDBConnection {
 	}
 
 
-	static void setDbConnection(DB db) {
-	    dbConnection = db;
-    }
-
-	private static DB createNewDbConnection() {
-		Mongo conn;
-		String uriString = "mongodb://billblake:bill6551@kahana.mongohq.com:10060/reader";
+	static void setDbCo
 		MongoURI uri = new MongoURI(uriString);
 	    try {
 	    	conn = uri.connect();
