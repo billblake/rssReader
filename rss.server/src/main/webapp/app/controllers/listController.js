@@ -141,6 +141,7 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
         feedItemService.addTag(feedItem, tag, function(feedItemResponse) {
             $('#addTagModal').modal('hide');
             feedItem.tags = feedItemResponse.tags;
+            feedItemService.getTags(handleGetTagsResponse, fail);
         });
     };
 
@@ -148,6 +149,7 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
     $scope.deleteTag = function(feedItem, tag) {
         feedItemService.deleteTag(feedItem, tag, function(feedItemResponse) {
             feedItem.tags = feedItemResponse.tags;
+            feedItemService.getTags(handleGetTagsResponse, fail);
         });
     };
 
