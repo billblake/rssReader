@@ -5373,6 +5373,11 @@ div.jqcloud span.w1 {
         text-overflow: ellipsis; }
     #feeds #sideBar #categories li {
       margin: 5px 0; }
+  #feeds #sideBar h3 {
+    font-size: 16px;
+    margin-top: 30px; }
+  #feeds #sideBar #tagCloud span {
+    cursor: pointer; }
 #feeds #main-content {
   float: left;
   width: 80%;
@@ -5425,6 +5430,8 @@ div.jqcloud span.w1 {
             margin: 10px;
             color: white;
             font-size: 12px; }
+            #feeds #main-content #feed-list .feed-item article .tags .tag span {
+              cursor: pointer; }
             #feeds #main-content #feed-list .feed-item article .tags .tag .deleteTag {
               cursor: pointer; }
     #feeds #main-content #feed-list .feed-item.even {

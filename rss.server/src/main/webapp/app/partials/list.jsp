@@ -32,7 +32,7 @@
                     </ul>
                 </li>
             </ul>
-            
+            <h3>Feed Item Tags</h3>
             <div id="tagCloud">
 	            <jqcloud words="tags" width="170" height="170" steps="10" shape="rectangular"></jqcloud>
             </div>
