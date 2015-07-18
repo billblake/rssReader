@@ -20,7 +20,7 @@
   #######################################################################*/
 
 var app = angular.module('viewApp', ['ngResource', 'ngRoute', 'ngCookies', 'infinite-scroll', 'ngSanitize',
-                                     'angAccordion', 'angularytics']);
+                                     'angAccordion', 'angularytics', 'angular-jqcloud']);
 
 //This configures the routes and associates each route with a view and a controller
 app.config(function ($routeProvider, AngularyticsProvider) {
@@ -257,14 +257,14 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
     $scope.loading = true;
     $scope.loadingMessage = "Loading Feeds";
     $scope.feedCategories = categoryService.getCategories();
-    $scope.feedItemTags = feedItemService.getTags();
     $scope.feeds = [];
     $scope.title = "All Feeds";
+    feedItemService.getTags(handleGetTagsResponse, fail);
 
     $scope.loadMore = function() {
         $scope.page++;
         $scope.loading = true;
-        feedItemService.getFeedItems($scope.categoryId, $scope.feedId, loadMoreFeedsSuccessful, fail, $scope.page, $scope.displaySaved);
+        feedItemService.getFeedItems($scope.categoryId, $scope.feedId, loadMoreFeedsSuccessful, fail, $scope.page, $scope.displaySaved, $scope.tag);
     };
 
     $scope.displayFeedsForCategory = function(category) {
@@ -402,6 +402,14 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
         Angularytics.trackEvent("List Feeds", "Read More");
     };
 
+
+    $scope.getFeedsByTag = function(tag) {
+        initList(undefined, undefined, tag);
+        $scope.feeds = feedItemService.getFeedItems(null, null, loadFeedsSuccessful, fail, $scope.page, null, tag);
+        $scope.title = tag;
+    };
+
+
     function deleteAllFeedItem() {
         if ($scope.feedId) {
             Angularytics.trackEvent("List Feeds", "Delete", "Feed");
@@ -502,13 +510,28 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
         }
     }
 
-    function initList(categoryId, feedId) {
+    function initList(categoryId, feedId, tag) {
         $scope.page = 1;
         $scope.loading = true;
         $scope.feeds = {};
         $scope.categoryId = categoryId;
         $scope.feedId = feedId;
+        $scope.tag = tag;
         $scope.displaySaved = false;
+    }
+
+    function handleGetTagsResponse(data, status, headers, config) {
+        var handlers = {
+            click: function(e) {
+                $scope.getFeedsByTag(e.target.innerHTML);
+            }
+        };
+
+        for (var i = 0; i < data.length; i++) {
+            data[i]["handlers"] = handlers;
+        }
+
+        $scope.tags = data;
     }
 });
 app.controller('loggedInHeaderController', function($scope, $cookies, $http, $location, $rootScope, $cookieStore, userService) {
@@ -678,9 +701,15 @@ app.service('feedService', function ($http, $resource) {
 
 app.service('feedItemService', function ($http, $resource) {
 
-    this.getFeedItems = function (_categoryId, _feedId, suc, fail, _page, _saved) {
-        var feedResource = createFeedItemResource(_categoryId, _feedId, null, _page, _saved);
+    this.getFeedItems = function (_categoryId, _feedId, suc, fail, _page, _saved, tag) {
+        var feedResource = createFeedItemResource(_categoryId, _feedId, null, _page, _saved, tag);
         return feedResource.query(suc, fail);
+    };
+
+
+
+    this.getTags = function(successCallback, errorCallback) {
+        $http.get('getFeedItemTags').success(successCallback).error(errorCallback);
     };
 
 
@@ -780,11 +809,6 @@ app.service('feedItemService', function ($http, $resource) {
     };
 
 
-    this.getTags = function() {
-
-    }
-
-
     function saveFeedItem(_feedItem, callback) {
         var FeedItem = createFeedItemResource(_feedItem.catId, _feedItem.feedId, _feedItem.feedItemId);
         var feedItem = new FeedItem();
@@ -805,7 +829,7 @@ app.service('feedItemService', function ($http, $resource) {
     }
 
 
-    function createFeedItemResource(_categoryId, _feedId, _feedItemId,  _page, _saved) {
+    function createFeedItemResource(_categoryId, _feedId, _feedItemId,  _page, _saved, _tag) {
         if (_feedItemId === null || typeof _feedItemId === "undefined") {
             _feedItemId = "@id";
         }
@@ -821,13 +845,17 @@ app.service('feedItemService', function ($http, $resource) {
         if (_saved  === null || typeof _saved === "undefined") {
             _saved = "@saved";
         }
+        if (_tag  === null || typeof _tag === "undefined") {
+            _tag = "@tag";
+        }
         var feedItemResource = $resource(readerConstants.appContextPath + '/feeds/category/:categoryId/feed/:feedId/feedItem/:feedItemId',
             {
                 feedId : _feedId,
                 categoryId : _categoryId,
                 feedItemId : _feedItemId,
                 page : _page,
-                saved : _saved
+                saved : _saved,
+                tag : _tag
             },
             {
                 markAsRead : {method:'PUT', params:{markAsRead:true}},

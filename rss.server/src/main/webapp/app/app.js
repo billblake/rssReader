@@ -20,7 +20,7 @@
   #######################################################################*/
 
 var app = angular.module('viewApp', ['ngResource', 'ngRoute', 'ngCookies', 'infinite-scroll', 'ngSanitize',
-                                     'angAccordion', 'angularytics']);
+                                     'angAccordion', 'angularytics', 'angular-jqcloud']);
 
 //This configures the routes and associates each route with a view and a controller
 app.config(function ($routeProvider, AngularyticsProvider) {

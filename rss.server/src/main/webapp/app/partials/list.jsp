@@ -32,6 +32,10 @@
                     </ul>
                 </li>
             </ul>
+            
+            <div id="tagCloud">
+	            <jqcloud words="tags" width="170" height="170" steps="10" shape="rectangular"></jqcloud>
+            </div>
         </div>
         <div id="main-content" class="span11">
             <!--Body content-->
@@ -83,7 +87,7 @@
                         	<div class="tags" ng-show="feedItem.tags">
 	                        		Tags:
 	                        		<span class="tag" ng-repeat="tag in feedItem.tags">
-	                        			{{tag}}
+	                        			<span ng-click="getFeedsByTag(tag)">{{tag}}</span>
 	                        			<i class="deleteTag icon-cancel-circled-outline" ng-click="deleteTag(feedItem, tag)"></i>
 	                        		</span>
 	                        	</div>

@@ -15,9 +15,9 @@ public class RssController implements SparkApplication {
 		post(new SaveCategoryRoute("/category/:categoryId"));
 		delete(new DeleteCategoryRoute("/category/:categoryId"));
 
-		get(new GetFeedsRoute("/feeds/category/feed/feedItem"));
-		get(new GetFeedsRoute("/feeds/category/:categoryId/feed/feedItem"));
-		get(new GetFeedsRoute("/feeds/category/feed/:feedId/feedItem"));
+		get(new GetFeedItemsRoute("/feeds/category/feed/feedItem"));
+		get(new GetFeedItemsRoute("/feeds/category/:categoryId/feed/feedItem"));
+		get(new GetFeedItemsRoute("/feeds/category/feed/:feedId/feedItem"));
 		post(new SaveFeedRoute("/feeds/category/:categoryId/feed"));
 
 		get(new LogoutRoute("/logout"));
@@ -39,5 +39,7 @@ public class RssController implements SparkApplication {
 		delete(new DeleteAllFeedItemsRoute("/feeds/category/feed/feedItem"));
 
         delete(new DeleteFeedRoute("/feeds/category/:categoryId/feed/:feedId"));
+
+        get(new GetFeedItemTags("/getFeedItemTags"));
 	}
 }

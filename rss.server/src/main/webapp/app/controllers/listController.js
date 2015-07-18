@@ -11,14 +11,14 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
     $scope.loading = true;
     $scope.loadingMessage = "Loading Feeds";
     $scope.feedCategories = categoryService.getCategories();
-    $scope.feedItemTags = feedItemService.getTags();
     $scope.feeds = [];
     $scope.title = "All Feeds";
+    feedItemService.getTags(handleGetTagsResponse, fail);
 
     $scope.loadMore = function() {
         $scope.page++;
         $scope.loading = true;
-        feedItemService.getFeedItems($scope.categoryId, $scope.feedId, loadMoreFeedsSuccessful, fail, $scope.page, $scope.displaySaved);
+        feedItemService.getFeedItems($scope.categoryId, $scope.feedId, loadMoreFeedsSuccessful, fail, $scope.page, $scope.displaySaved, $scope.tag);
     };
 
     $scope.displayFeedsForCategory = function(category) {
@@ -156,6 +156,14 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
         Angularytics.trackEvent("List Feeds", "Read More");
     };
 
+
+    $scope.getFeedsByTag = function(tag) {
+        initList(undefined, undefined, tag);
+        $scope.feeds = feedItemService.getFeedItems(null, null, loadFeedsSuccessful, fail, $scope.page, null, tag);
+        $scope.title = tag;
+    };
+
+
     function deleteAllFeedItem() {
         if ($scope.feedId) {
             Angularytics.trackEvent("List Feeds", "Delete", "Feed");
@@ -256,12 +264,27 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
         }
     }
 
-    function initList(categoryId, feedId) {
+    function initList(categoryId, feedId, tag) {
         $scope.page = 1;
         $scope.loading = true;
         $scope.feeds = {};
         $scope.categoryId = categoryId;
         $scope.feedId = feedId;
+        $scope.tag = tag;
         $scope.displaySaved = false;
+    }
+
+    function handleGetTagsResponse(data, status, headers, config) {
+        var handlers = {
+            click: function(e) {
+                $scope.getFeedsByTag(e.target.innerHTML);
+            }
+        };
+
+        for (var i = 0; i < data.length; i++) {
+            data[i]["handlers"] = handlers;
+        }
+
+        $scope.tags = data;
     }
 });

@@ -13,6 +13,8 @@ public class ViewConstants {
 	public static String USER_SESSION_KEY = "user";
 
 	public static String REFRESH_QUERY_PARAM = "refresh";
+	public static String TAG_QUERY_PARAM = "tag";
+	public static String SAVED_QUERY_PARAM = "saved";
 
 	public static final String FEED_ID_PATH_VARIABLE = ":feedId";
 	public static final String CATEGORY_ID_PATH_VARIABLE = ":categoryId";

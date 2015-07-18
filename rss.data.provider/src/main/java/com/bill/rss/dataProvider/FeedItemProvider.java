@@ -1,5 +1,6 @@
 package com.bill.rss.dataProvider;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.bill.rss.domain.Category;
@@ -13,4 +14,8 @@ public interface FeedItemProvider {
     void enrichCategoryWithFeedItemCount(Category category);
 
     void enrichFeedWithFeedItemCount(Feed feed);
+
+    LinkedHashMap<String, Integer> getTags(String username);
+
+    LinkedHashMap<String, Integer> getTags(String username, int numberOfTags);
 }

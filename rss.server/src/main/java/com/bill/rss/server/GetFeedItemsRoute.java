@@ -1,5 +1,6 @@
 package com.bill.rss.server;
 
+import java.util.HashSet;
 import java.util.List;
 
 import spark.Request;
@@ -15,13 +16,15 @@ import static com.bill.rss.server.ViewConstants.CATEGORY_ID_PATH_VARIABLE;
 import static com.bill.rss.server.ViewConstants.FEED_ID_PATH_VARIABLE;
 import static com.bill.rss.server.ViewConstants.JSON_RESPONSE_TYPE;
 import static com.bill.rss.server.ViewConstants.REFRESH_QUERY_PARAM;
+import static com.bill.rss.server.ViewConstants.SAVED_QUERY_PARAM;
+import static com.bill.rss.server.ViewConstants.TAG_QUERY_PARAM;
 
-public class GetFeedsRoute extends BaseRoute {
+public class GetFeedItemsRoute extends BaseRoute {
 
     private FeedItemProvider feedProvider;
     private FeedUpdater feedUpdater;
 
-    protected GetFeedsRoute(String path) {
+    protected GetFeedItemsRoute(String path) {
         super(path);
         feedProvider = new FeedItemRetriever();
         feedUpdater = new MongoFeedUpdater();
@@ -38,10 +41,20 @@ public class GetFeedsRoute extends BaseRoute {
         FeedItem searchFeedItem = new FeedItem();
         searchFeedItem.setCatId(request.params(CATEGORY_ID_PATH_VARIABLE));
         searchFeedItem.setFeedId(request.params(FEED_ID_PATH_VARIABLE));
-        searchFeedItem.setSaved(Boolean.parseBoolean(request.queryParams("saved")));
+        searchFeedItem.setSaved(Boolean.parseBoolean(request.queryParams(SAVED_QUERY_PARAM)));
         searchFeedItem.setUsername(getUsername(request));
+        searchFeedItem.setTags(getTags(request));
         List<FeedItem> feedItems = feedProvider.retrieveFeedItems(searchFeedItem, getPage(request));
         return JsonUtils.convertObjectToJson(feedItems);
+    }
+
+
+    private HashSet<String> getTags(Request request) {
+        HashSet<String> tags = new HashSet<String>();
+        if (request.queryParams(TAG_QUERY_PARAM) != null) {
+            tags.add(request.queryParams(TAG_QUERY_PARAM));
+        }
+        return tags;
     }
 
 

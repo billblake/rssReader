@@ -1,8 +1,14 @@
 app.service('feedItemService', function ($http, $resource) {
 
-    this.getFeedItems = function (_categoryId, _feedId, suc, fail, _page, _saved) {
-        var feedResource = createFeedItemResource(_categoryId, _feedId, null, _page, _saved);
+    this.getFeedItems = function (_categoryId, _feedId, suc, fail, _page, _saved, tag) {
+        var feedResource = createFeedItemResource(_categoryId, _feedId, null, _page, _saved, tag);
         return feedResource.query(suc, fail);
+    };
+
+
+
+    this.getTags = function(successCallback, errorCallback) {
+        $http.get('getFeedItemTags').success(successCallback).error(errorCallback);
     };
 
 
@@ -102,11 +108,6 @@ app.service('feedItemService', function ($http, $resource) {
     };
 
 
-    this.getTags = function() {
-
-    }
-
-
     function saveFeedItem(_feedItem, callback) {
         var FeedItem = createFeedItemResource(_feedItem.catId, _feedItem.feedId, _feedItem.feedItemId);
         var feedItem = new FeedItem();
@@ -127,7 +128,7 @@ app.service('feedItemService', function ($http, $resource) {
     }
 
 
-    function createFeedItemResource(_categoryId, _feedId, _feedItemId,  _page, _saved) {
+    function createFeedItemResource(_categoryId, _feedId, _feedItemId,  _page, _saved, _tag) {
         if (_feedItemId === null || typeof _feedItemId === "undefined") {
             _feedItemId = "@id";
         }
@@ -143,13 +144,17 @@ app.service('feedItemService', function ($http, $resource) {
         if (_saved  === null || typeof _saved === "undefined") {
             _saved = "@saved";
         }
+        if (_tag  === null || typeof _tag === "undefined") {
+            _tag = "@tag";
+        }
         var feedItemResource = $resource(readerConstants.appContextPath + '/feeds/category/:categoryId/feed/:feedId/feedItem/:feedItemId',
             {
                 feedId : _feedId,
                 categoryId : _categoryId,
                 feedItemId : _feedItemId,
                 page : _page,
-                saved : _saved
+                saved : _saved,
+                tag : _tag
             },
             {
                 markAsRead : {method:'PUT', params:{markAsRead:true}},

@@ -31,7 +31,7 @@ public class FeedsRouteTest {
     public void testGetFeedItems() {
         Request request = createRequestMock("logged-in");
         Response response = createResponseMock();
-        GetFeedsRoute feedsRoute = new GetFeedsRoute("/feeds");
+        GetFeedItemsRoute feedsRoute = new GetFeedItemsRoute("/feeds");
         feedsRoute.setFeedProvider(createFeedProviderMock());
         feedsRoute.setFeedUpdater(createFeedUpdaterMock());
 
@@ -49,7 +49,7 @@ public class FeedsRouteTest {
     public void testGetFeedItemsRefresh() {
         Request request = createRequestMock("logged-in");
         Response response = createResponseMock();
-        GetFeedsRoute feedsRoute = new GetFeedsRoute("/feeds");
+        GetFeedItemsRoute feedsRoute = new GetFeedItemsRoute("/feeds");
         feedsRoute.setFeedProvider(createFeedProviderMock());
         feedsRoute.setFeedUpdater(createFeedUpdaterMock());
 
@@ -68,7 +68,7 @@ public class FeedsRouteTest {
     public void testGetFeedItemsAndRefresh() {
         Request request = createRequestMock("logged-in");
         Response response = createResponseMock();
-        GetFeedsRoute feedsRoute = new GetFeedsRoute("/feeds");
+        GetFeedItemsRoute feedsRoute = new GetFeedItemsRoute("/feeds");
         feedsRoute.setFeedProvider(createFeedProviderMock());
         feedsRoute.setFeedUpdater(createFeedUpdaterMock());
 
