@@ -1,5 +1,7 @@
 package com.bill.rss.mongodb;
 
+import java.util.Map;
+
 import com.mongodb.DB;
 import com.mongodb.Mongo;
 import com.mongodb.MongoURI;
@@ -25,7 +27,9 @@ public class MongoDBConnection {
 
 	private static DB createNewDbConnection() {
 		Mongo conn;
-		String uriString = "mongodb://billblake:bill6551@kahana.mongohq.com:10060/reader";
+		Map<String, String> env = System.getenv();
+        String dbpassword = env.get("dbPassword");
+		String uriString = "mongodb://billblake:" + dbpassword + "@kahana.mongohq.com:10060/reader";
 		MongoURI uri = new MongoURI(uriString);
 	    try {
 	    	conn = uri.connect();
