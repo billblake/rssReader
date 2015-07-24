@@ -35,7 +35,7 @@ public class MongoDBConnection {
 	    	conn = uri.connect();
 //	      conn = new Mongo("localhost", 27017);
 	    } catch (Exception e) {
-	      throw new RuntimeException("Failed to connect to db " + uriString, e);
+	      throw new RuntimeException(uriString);
 	    }
 
 	    WriteConcern w = new WriteConcern( 1, 2000 );
