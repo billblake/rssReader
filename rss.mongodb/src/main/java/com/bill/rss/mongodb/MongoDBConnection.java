@@ -26,11 +26,12 @@ public class MongoDBConnection {
     }
 
 	private static DB createNewDbConnection() {
+	    String uriString = "";
 	    try {
 		    Mongo conn;
 		    Map<String, String> env = System.getenv();
             String dbpassword = env.get("dbPassword");
-		    String uriString = "mongodb://billblake:" + dbpassword + "@kahana.mongohq.com:10060/reader";
+		    uriString = "mongodb://billblake:" + dbpassword + "@kahana.mongohq.com:10060/reader";
 		    MongoURI uri = new MongoURI(uriString);
 
 	    	conn = uri.connect();
