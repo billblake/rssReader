@@ -1,10 +1,14 @@
 package com.bill.rss.mongodb;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import org.bson.types.ObjectId;
+import org.mockito.Mockito;
 
+import com.mongodb.AggregationOutput;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -13,7 +17,6 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
 import static org.mockito.Matchers.any;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -59,19 +62,52 @@ public class MockUtils {
 
 
     public static DBCollection createFeedsItemsCollectionMock(DB db) {
-        DBCollection feedsItemsCollection = mock(DBCollection.class);
-        when(db.getCollection("feedItems")).thenReturn(feedsItemsCollection );
+        DBCollection feedItemsCollection = mock(DBCollection.class);
+        when(db.getCollection("feedItems")).thenReturn(feedItemsCollection );
 
         DBCursor feedsItemsCursor = createCursorMock(createFeedsItemDbObjectMock());
         when(feedsItemsCursor.sort(any(DBObject.class))).thenReturn(feedsItemsCursor);
         when(feedsItemsCursor.limit(any(Integer.class))).thenReturn(feedsItemsCursor);
         when(feedsItemsCursor.skip(any(Integer.class))).thenReturn(feedsItemsCursor);
-        when(feedsItemsCollection.find(any(BasicDBObject.class))).thenReturn(feedsItemsCursor);
+        when(feedItemsCollection.find(any(BasicDBObject.class))).thenReturn(feedsItemsCursor);
+        
+        
+        AggregationOutput aggregationOutput = Mockito.mock(AggregationOutput.class);
+        List<DBObject> results = new ArrayList<DBObject>();
+        DBObject result1 = new BasicDBObject();
+        result1.put("_id", "tag1");
+        result1.put("count", 5);
+        results.add(result1);
+        DBObject result2 = new BasicDBObject();
+        result2.put("_id", "tag2");
+        result2.put("count", 8);
+        results.add(result2);
+        
+		when(aggregationOutput.results()).thenReturn(results );
+		when(feedItemsCollection.aggregate(any(DBObject.class), any(DBObject.class), any(DBObject.class), any(DBObject.class)))
+        	.thenReturn(aggregationOutput);
+		
+		
+		DBObject feedItem = new BasicDBObject();
+		feedItem.put("_id", "52ffe096e81f7a9bb906b6f9");
+		feedItem.put("categoryId", "5581e900d4c6cda2d04d0a98");
+		feedItem.put("feedId", "55893938e4b0c822dc99fa2f");
+		feedItem.put("delete", true);
+		feedItem.put("description", "description");
+		feedItem.put("link", "http://thedailyedge.thejournal.ie/irish-supermarket-fails-2176781-Jun2015/");
+		feedItem.put("read", true);
+		feedItem.put("source", "The Daily Edge");
+		feedItem.put("title", "title");
+		feedItem.put("username", "bob");
+		feedItem.put("pubDate", new Date());
+		
+		
+		when(feedItemsCollection.findOne(any(DBObject.class))).thenReturn(feedItem );
 
-        return feedsItemsCollection;
+        return feedItemsCollection;
     }
 
-
+    
     public static DBObject createFeedsItemDbObjectMock() {
         DBObject feedDbObject = mock(DBObject.class);
         when(feedDbObject.get("_id")).thenReturn("654");
@@ -87,7 +123,6 @@ public class MockUtils {
         when(feedDbObject.get("pubDate")).thenReturn(date);
         return feedDbObject;
     }
-
 
 
     public static DBObject createFeedsDbObjectMock() {
