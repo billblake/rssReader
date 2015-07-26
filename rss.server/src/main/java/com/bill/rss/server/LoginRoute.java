@@ -69,7 +69,7 @@ public class LoginRoute extends BaseRoute {
         try {
             user = userProvider.validateUser(user);
         } catch (Exception e) {
-            halt(401, "Invalid username/password " + e.getMessage());
+            halt(401, "Invalid username/password");
         }
         return user;
     }
