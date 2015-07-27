@@ -17,6 +17,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
 import static org.mockito.Matchers.any;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -70,8 +71,8 @@ public class MockUtils {
         when(feedsItemsCursor.limit(any(Integer.class))).thenReturn(feedsItemsCursor);
         when(feedsItemsCursor.skip(any(Integer.class))).thenReturn(feedsItemsCursor);
         when(feedItemsCollection.find(any(BasicDBObject.class))).thenReturn(feedsItemsCursor);
-        
-        
+
+
         AggregationOutput aggregationOutput = Mockito.mock(AggregationOutput.class);
         List<DBObject> results = new ArrayList<DBObject>();
         DBObject result1 = new BasicDBObject();
@@ -82,12 +83,12 @@ public class MockUtils {
         result2.put("_id", "tag2");
         result2.put("count", 8);
         results.add(result2);
-        
+
 		when(aggregationOutput.results()).thenReturn(results );
 		when(feedItemsCollection.aggregate(any(DBObject.class), any(DBObject.class), any(DBObject.class), any(DBObject.class)))
         	.thenReturn(aggregationOutput);
-		
-		
+
+
 		DBObject feedItem = new BasicDBObject();
 		feedItem.put("_id", "52ffe096e81f7a9bb906b6f9");
 		feedItem.put("categoryId", "5581e900d4c6cda2d04d0a98");
@@ -100,14 +101,14 @@ public class MockUtils {
 		feedItem.put("title", "title");
 		feedItem.put("username", "bob");
 		feedItem.put("pubDate", new Date());
-		
-		
+
+
 		when(feedItemsCollection.findOne(any(DBObject.class))).thenReturn(feedItem );
 
         return feedItemsCollection;
     }
 
-    
+
     public static DBObject createFeedsItemDbObjectMock() {
         DBObject feedDbObject = mock(DBObject.class);
         when(feedDbObject.get("_id")).thenReturn("654");
@@ -147,6 +148,7 @@ public class MockUtils {
 
     public static DB createDbMock() {
         DB db = mock(DB.class);
+        when(db.isAuthenticated()).thenReturn(true);
         MongoDBConnection.setDbConnection(db);
         return db;
     }
