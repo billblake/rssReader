@@ -6,7 +6,7 @@ import com.bill.rss.mongodb.FeedItem.MongoFeedItemUpdater;
 
 public abstract class BaseFeedItemRoute extends BaseRoute {
 
-    protected final FeedItemUpdater feedItemUpdater = new MongoFeedItemUpdater();
+    protected FeedItemUpdater feedItemUpdater = new MongoFeedItemUpdater();
 
     protected BaseFeedItemRoute(String path) {
         super(path);

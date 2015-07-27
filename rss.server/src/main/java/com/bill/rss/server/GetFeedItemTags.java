@@ -12,18 +12,19 @@ import static com.bill.rss.server.ViewConstants.JSON_RESPONSE_TYPE;
 
 public class GetFeedItemTags extends BaseFeedItemRoute {
 
-    private final FeedItemProvider feedProvider;
+    private FeedItemProvider feedItemProvider;
 
     private final String tagCountAsJson = "{\"text\": \"%s\", \"weight\": %s}";
 
     protected GetFeedItemTags(String path) {
         super(path);
-        feedProvider = new FeedItemRetriever();
+        feedItemProvider = new FeedItemRetriever();
     }
+
 
     @Override
     public Object handle(Request request, Response response) {
-        Map<String, Integer> tags = feedProvider.getTags(getUsername(request));
+        Map<String, Integer> tags = feedItemProvider.getTags(getUsername(request));
         StringBuilder tagCountListAsJson = new StringBuilder();
         tagCountListAsJson.append("[");
         for (String key : tags.keySet()) {
@@ -34,4 +35,8 @@ public class GetFeedItemTags extends BaseFeedItemRoute {
         return tagCountListAsJson.toString();
     }
 
+
+    void setFeedProvider(FeedItemProvider feedItemProvider) {
+        this.feedItemProvider = feedItemProvider;
+    }
 }

@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import spark.Request;
 import spark.Response;
 
+import com.bill.rss.dataProvider.FeedItemUpdater;
 import com.bill.rss.domain.FeedItem;
 
 public class SaveFeedItemRoute extends BaseFeedItemRoute {
@@ -33,4 +34,8 @@ public class SaveFeedItemRoute extends BaseFeedItemRoute {
         return feedItem;
     }
 
+
+    void setFeedItemUpdater(FeedItemUpdater feedItemUpdater) {
+        this.feedItemUpdater = feedItemUpdater;
+    }
 }

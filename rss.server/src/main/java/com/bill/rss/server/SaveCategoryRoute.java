@@ -13,7 +13,7 @@ import com.bill.rss.mongodb.MongoCategoryUpdater;
 public class SaveCategoryRoute extends BaseRoute {
 
     private final ObjectMapper mapper = new ObjectMapper();
-    private final CategoryUpdater categoryUpdater;
+    private CategoryUpdater categoryUpdater;
 
     protected SaveCategoryRoute(String path) {
         super(path);
@@ -45,4 +45,8 @@ public class SaveCategoryRoute extends BaseRoute {
         return category;
     }
 
+
+    void setCategoryUpdater(CategoryUpdater categoryUpdater) {
+        this.categoryUpdater = categoryUpdater;
+    }
 }

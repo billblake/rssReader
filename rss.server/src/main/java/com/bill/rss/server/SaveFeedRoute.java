@@ -13,7 +13,7 @@ import com.bill.rss.mongodb.MongoFeedUpdater;
 public class SaveFeedRoute extends BaseRoute {
 
     private final ObjectMapper mapper = new ObjectMapper();
-    private final FeedUpdater feedUpdater = new MongoFeedUpdater();
+    private FeedUpdater feedUpdater = new MongoFeedUpdater();
 
     protected SaveFeedRoute(String path) {
         super(path);
@@ -42,5 +42,10 @@ public class SaveFeedRoute extends BaseRoute {
             halt(401, "Invalid Input");
         }
         return feed;
+    }
+
+
+    void setFeedUpdater(FeedUpdater feedUpdater) {
+        this.feedUpdater = feedUpdater;
     }
 }
