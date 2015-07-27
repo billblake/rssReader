@@ -148,7 +148,6 @@ public class MockUtils {
 
     public static DB createDbMock() {
         DB db = mock(DB.class);
-        when(db.isAuthenticated()).thenReturn(true);
         MongoDBConnection.setDbConnection(db);
         return db;
     }

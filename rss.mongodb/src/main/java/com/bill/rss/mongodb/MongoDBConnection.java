@@ -22,7 +22,7 @@ public class MongoDBConnection {
 
 
 	public static DB getDbConnection() {
-		if (dbConnection != null && dbConnection.isAuthenticated()) {
+		if (dbConnection != null) {
 			return dbConnection;
 		}
 		return createNewDbConnection();
@@ -39,9 +39,10 @@ public class MongoDBConnection {
     	try {
     	    Mongo conn = uri.connect();
 //  	          conn = new Mongo("localhost", 27017);
-            WriteConcern w = new WriteConcern( 1, 2000 );
-            conn.setWriteConcern( w );
-            return conn.getDB(readEnvironmentVariable(MONGODB_DB_NAME));
+            WriteConcern writeConcern = new WriteConcern( 1, 2000 );
+            conn.setWriteConcern(writeConcern);
+            dbConnection = conn.getDB(readEnvironmentVariable(MONGODB_DB_NAME));
+            return dbConnection;
         } catch (UnknownHostException e) {
             throw new RuntimeException(e);
         }
