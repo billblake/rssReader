@@ -34,24 +34,29 @@ public class MongoDBConnection {
     }
 
 	private static DB createNewDbConnection() {
-	    String dbUser = readEnvironmentVariable(MONGODB_USERNAME);
-        String dbpassword = readEnvironmentVariable(MONGODB_PASSWORD);
-        String dbHostname = readEnvironmentVariable(MONGODB_HOSTNAME);
-        String dbPort = readEnvironmentVariable(MONGODB_PORT);
-        String dbName = readEnvironmentVariable(MONGODB_DB_NAME);
-
-        String uriString = String.format(MONGODB_CONNECTION_STRING, dbUser, dbpassword, dbHostname, dbPort, dbName);
+	    String uriString = buildConnectionUri();
 	    MongoURI uri = new MongoURI(uriString);
     	try {
     	    Mongo conn = uri.connect();
 //  	          conn = new Mongo("localhost", 27017);
             WriteConcern w = new WriteConcern( 1, 2000 );
             conn.setWriteConcern( w );
-            return conn.getDB(dbName);
+            return conn.getDB(readEnvironmentVariable(MONGODB_DB_NAME));
         } catch (UnknownHostException e) {
             throw new RuntimeException(e);
         }
 	}
+
+
+    public static String buildConnectionUri() {
+        String dbUser = readEnvironmentVariable(MONGODB_USERNAME);
+        String dbpassword = readEnvironmentVariable(MONGODB_PASSWORD);
+        String dbHostname = readEnvironmentVariable(MONGODB_HOSTNAME);
+        String dbPort = readEnvironmentVariable(MONGODB_PORT);
+        String dbName = readEnvironmentVariable(MONGODB_DB_NAME);
+
+        return String.format(MONGODB_CONNECTION_STRING, dbUser, dbpassword, dbHostname, dbPort, dbName);
+    }
 
 
     private static String readEnvironmentVariable(String environmentVariableName) {

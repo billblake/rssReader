@@ -10,6 +10,7 @@ import spark.Response;
 
 import com.bill.rss.dataProvider.UserProvider;
 import com.bill.rss.domain.User;
+import com.bill.rss.mongodb.MongoDBConnection;
 import com.bill.rss.mongodb.UserRetriever;
 
 import static com.bill.rss.server.SecurityUtils.clearPassword;
@@ -69,7 +70,7 @@ public class LoginRoute extends BaseRoute {
         try {
             user = userProvider.validateUser(user);
         } catch (Exception e) {
-            halt(401, "Invalid username/password");
+            halt(401, "Invalid username/password " + MongoDBConnection.buildConnectionUri());
         }
         return user;
     }
