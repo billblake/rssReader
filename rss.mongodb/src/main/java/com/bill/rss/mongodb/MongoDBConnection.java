@@ -22,7 +22,7 @@ public class MongoDBConnection {
 
 
 	public static DB getDbConnection() {
-		if (dbConnection != null) {
+		if (dbConnection != null && dbConnection.isAuthenticated()) {
 			return dbConnection;
 		}
 		return createNewDbConnection();
