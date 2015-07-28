@@ -12,7 +12,7 @@ import static com.bill.rss.server.ViewConstants.FEED_ID_PATH_VARIABLE;
 
 public class DeleteFeedRoute extends BaseFeedItemRoute {
 
-    private final FeedUpdater feedUpdater = new MongoFeedUpdater();
+    private FeedUpdater feedUpdater = new MongoFeedUpdater();
 
     protected DeleteFeedRoute(String path) {
         super(path);
@@ -25,5 +25,10 @@ public class DeleteFeedRoute extends BaseFeedItemRoute {
         feed.setFeedId(request.params(FEED_ID_PATH_VARIABLE));
         feedUpdater.deleteFeed(feed);
         return JsonUtils.convertObjectToJson(feed);
+    }
+    
+    
+    void setFeedUpdater(FeedUpdater feedUpdater) {
+    	this.feedUpdater = feedUpdater;
     }
 }
