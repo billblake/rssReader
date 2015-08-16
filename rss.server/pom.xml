@@ -112,7 +112,7 @@
          </build>
       </profile>
       <profile>
-         <id>local</id>
+         <id>jasmine</id>
          <build>
             <finalName>rss.server</finalName>
             <plugins>
@@ -147,6 +147,16 @@
                      <jsTestSrcDir>src/test/webapp/js/specs</jsTestSrcDir>
                      <preloadSources>
                         <source>src/main/webapp/Scripts/angular.js</source>
+                        <source>src/main/webapp/Scripts/angular-mocks.js</source>
+                        <source>src/main/webapp/Scripts/angular-resource.min.js</source>
+                        <source>src/main/webapp/Scripts/angular-route.js</source>
+                        <source>src/main/webapp/Scripts/angular-cookies.min.js</source>
+                        <source>src/main/webapp/Scripts/ng-infinite-scroll.min.js</source>
+                        <source>src/main/webapp/Scripts/angular-sanitize.js</source>
+                        <source>src/main/webapp/Scripts/ang-accordion.js</source>
+                        <source>src/main/webapp/Scripts/angularytics.min.js</source>
+                        <source>src/main/webapp/Scripts/angular-jqcloud.js</source>
+                        <source>src/test/webapp/js/scripts/constants.js</source>
                      </preloadSources>
                      <webDriverClassName>org.openqa.selenium.phantomjs.PhantomJSDriver</webDriverClassName>
                      <webDriverCapabilities>

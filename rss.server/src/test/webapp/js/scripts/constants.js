@@ -1,0 +1,3 @@
+var readerConstants = {
+    appContextPath : "reader"
+};
