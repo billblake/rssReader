@@ -20,7 +20,12 @@ describe("RssReader", function() {
             });
 
             mockUserService.createUser = function(user, userCreatedSuccessfully, userCreationFailure) {
-                userCreatedSuccessfully();
+                if (user.createdSuccessfully) {
+                    userCreatedSuccessfully();
+                } else {
+                    var response = {data : "Error"};
+                    userCreationFailure(response);
+                }
             };
 
           });
@@ -168,6 +173,25 @@ describe("RssReader", function() {
             scope.validateConfirmPassword(user);
             expect(scope.showConfirmPasswordError).toBe(true);
             expect(scope.confirmPasswordErrorClass).toBe("has-error");
+        });
+
+
+        it("verify user creation is handled successfully", function() {
+            var user = {createdSuccessfully : true};
+            scope.signUp(user);
+            expect(scope.userCreated).toBe(true);
+            expect(scope.userCreatedError).toBe(false);
+            expect(scope.errorMessage).toBe("");
+            expect(scope.user).toEqual({});
+        });
+
+
+        it("verify a failed user creation handled successfully", function() {
+            var user = {createdSuccessfully : false};
+            scope.signUp(user);
+            expect(scope.userCreated).toBe(false);
+            expect(scope.userCreatedError).toBe(true);
+            expect(scope.errorMessage).toBe("Error");
         });
     });
 });

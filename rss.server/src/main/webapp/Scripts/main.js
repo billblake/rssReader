@@ -20,7 +20,7 @@
   #######################################################################*/
 
 var app = angular.module('viewApp', ['ngResource', 'ngRoute', 'ngCookies', 'infinite-scroll', 'ngSanitize',
-                                     'angAccordion', 'angularytics', 'angular-jqcloud']);
+                                     'angularytics', 'angular-jqcloud']);
 
 //This configures the routes and associates each route with a view and a controller
 app.config(function ($routeProvider, AngularyticsProvider) {
@@ -579,7 +579,7 @@ app.controller('SignUpController', function ($scope, userService) {
 
 
     $scope.signUp = function(user) {
-        var createdUserPromise = userService.createUser(user, userCreatedSuccessfully, userCreationFailure);
+        userService.createUser(user, userCreatedSuccessfully, userCreationFailure);
 
     };
 
@@ -954,7 +954,7 @@ app.service('userService', function ($http, $resource, $cookies, $rootScope) {
 });
 
 //This directive adds custom animations to views as they enter or leave a screen
-//Note that AngularJS 1.1.4 now has an ng-animate directive but this one can be used when you
+//Note that AngularJS 1.1.4 now has an ng-animate directive but this one can be used when you 
 //want complete control or when you can't use that version of AngularJS yet
 app.directive('animatedView', ['$route', '$anchorScroll', '$compile', '$controller', function ($route, $anchorScroll, $compile, $controller) {
     return {
@@ -1018,7 +1018,7 @@ app.directive('animatedView', ['$route', '$anchorScroll', '$compile', '$controll
                 switch (animationType) {
                     case 'fadeOut':
                         $(element.children()).animate({
-                            //opacity: 0.0,
+                            //opacity: 0.0, 
                         }, defaults.duration, function () {
                             animateEnterView('slideLeft');
                         });
@@ -1092,7 +1092,7 @@ app.filter('formatDate', function() {
       } else {
         out = inputDate.format("MMM DD");
       }
-
+      
       return out;
     };
   });
