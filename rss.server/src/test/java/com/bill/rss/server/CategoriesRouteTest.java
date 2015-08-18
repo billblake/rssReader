@@ -24,7 +24,6 @@ public class CategoriesRouteTest {
 
         GetCategoriesRoute categoriesRoute = new GetCategoriesRoute("/categories");
         categoriesRoute.setCategoryProvider(MockUtils.createCategoryProviderMock());
-        categoriesRoute.setFeedItemRetriever(MockUtils.createFeedItemRetrieverMock());
 
         String jsonResponse = (String) categoriesRoute.handle(request, response);
         String expectedJson = "[{\"categoryId\":\"1\",\"username\":\"myusername\",\"name\":\"Sport\",\"totalCount\":\"5\",\"unReadCount\":\"2\",\"feeds\":[{\"feedId\":\"2\",\"categoryId\":\"1\",\"userName\":\"myusername\",\"name\":\"BBC\",\"url\":\"http://www.bbc.co.uk\",\"totalCount\":\"5\",\"unReadCount\":\"2\"}]}]";

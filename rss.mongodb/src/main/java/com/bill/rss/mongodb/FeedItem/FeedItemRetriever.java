@@ -74,7 +74,7 @@ public class FeedItemRetriever implements FeedItemProvider {
     }
 
 
-    private BasicDBObject buildGetUsersFeedItemsQuery(String username) {
+    public BasicDBObject buildGetUsersFeedItemsQuery(String username) {
         BasicDBObject getUsersFeedItems = new BasicDBObject();
         BasicDBObject query = new BasicDBObject(USER_NAME, username);
 

@@ -68,6 +68,8 @@ public class MockUtils {
         category.setCategoryId("1");
         category.setName("Sport");
         category.setUsername("myusername");
+        category.setTotalCount("5");
+        category.setUnReadCount("2");
         return category;
     }
 
@@ -78,6 +80,8 @@ public class MockUtils {
         feed.setName("BBC");
         feed.setUrl("http://www.bbc.co.uk");
         feed.setUserName("myusername");
+        feed.setTotalCount("5");
+        feed.setUnReadCount("2");
         return feed;
     }
 

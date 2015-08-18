@@ -20,6 +20,7 @@ public class CategoriesRetrieverTest {
         DB db = MockUtils.createDbMock();
         MockUtils.createCategoriesCollectionMock(db);
         MockUtils.createFeedsCollectionMock(db);
+        MockUtils.createFeedsItemsCollectionMock(db);
 
         List<Category> retrieveCategories = categoriesRetriever.retrieveCategories("billblake");
         assertEquals(1, retrieveCategories.size());
@@ -28,12 +29,16 @@ public class CategoriesRetrieverTest {
         assertEquals("12345", category.getCategoryId());
         assertEquals("Sport", category.getName());
         assertEquals("billblake", category.getUsername());
+        assertEquals("5", category.getTotalCount());
+        assertEquals("5", category.getUnReadCount());
         Feed feed = category.getFeeds().get(0);
         assertEquals("521", feed.getCategoryId());
         assertEquals("12345", feed.getFeedId());
         assertEquals("BBC Sport", feed.getName());
         assertEquals("http://www.bbc.co.uk", feed.getUrl());
         assertEquals("billblake", feed.getUserName());
+        assertEquals("5", feed.getTotalCount());
+        assertEquals("5", feed.getUnReadCount());
     }
 
 }

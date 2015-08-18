@@ -89,6 +89,18 @@ public class MockUtils {
         	.thenReturn(aggregationOutput);
 
 
+
+		AggregationOutput countAggregate = Mockito.mock(AggregationOutput.class);
+        List<DBObject> countResults = new ArrayList<DBObject>();
+        DBObject countResult1 = new BasicDBObject();
+        countResult1.put("_id", "12345");
+        countResult1.put("count", 5);
+        countResults.add(countResult1);
+        when(countAggregate.results()).thenReturn(countResults);
+
+        when(feedItemsCollection.aggregate(any(DBObject.class), any(DBObject.class))).thenReturn(countAggregate);
+
+
 		DBObject feedItem = new BasicDBObject();
 		feedItem.put("_id", "52ffe096e81f7a9bb906b6f9");
 		feedItem.put("categoryId", "5581e900d4c6cda2d04d0a98");

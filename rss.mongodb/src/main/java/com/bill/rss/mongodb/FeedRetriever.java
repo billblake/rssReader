@@ -69,6 +69,8 @@ public class FeedRetriever implements FeedProvider {
 		feed.setUrl((String) nextFeed.get(FeedConstants.FEED_URL));
 		feed.setUserName((String) nextFeed.get(FeedConstants.FEED_USERNAME));
 		feed.setCategoryId(nextFeed.get(FeedConstants.CATEGORY_ID).toString());
+		feed.setTotalCount("0");
+		feed.setUnReadCount("0");
 		return feed;
 	}
 }
