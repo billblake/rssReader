@@ -254,7 +254,7 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
     }
 
     $scope.page = 0;
-    $scope.loading = true;
+    $scope.loading = false;
     $scope.loadingMessage = "Loading Feeds";
     $scope.feedCategories = categoryService.getCategories();
     $scope.feeds = [];
@@ -262,9 +262,11 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
     feedItemService.getTags(handleGetTagsResponse, fail);
 
     $scope.loadMore = function() {
-        $scope.page++;
-        $scope.loading = true;
-        feedItemService.getFeedItems($scope.categoryId, $scope.feedId, loadMoreFeedsSuccessful, fail, $scope.page, $scope.displaySaved, $scope.tag);
+        if (!$scope.loading) {
+            $scope.page++;
+            $scope.loading = true;
+            feedItemService.getFeedItems($scope.categoryId, $scope.feedId, loadMoreFeedsSuccessful, fail, $scope.page, $scope.displaySaved, $scope.tag);
+        }
     };
 
     $scope.displayFeedsForCategory = function(category) {
