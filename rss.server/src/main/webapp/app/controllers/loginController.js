@@ -2,6 +2,7 @@ app.controller('LoginController', function($scope, $http, $location, $rootScope)
 
     $scope.errorMessage = "";
 
+
     $scope.login = function() {
         var data = {
             userName : $scope.email,
@@ -17,5 +18,10 @@ app.controller('LoginController', function($scope, $http, $location, $rootScope)
         responsePromise.error(function(errorMessageResponse, status, headers, config) {
             $scope.errorMessage = errorMessageResponse;
         });
+    };
+
+
+    $scope.oauthLogin = function() {
+
     };
 });
