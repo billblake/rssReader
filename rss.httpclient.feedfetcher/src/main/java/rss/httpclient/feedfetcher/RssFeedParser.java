@@ -57,7 +57,12 @@ public class RssFeedParser {
 		feedItem.setDescription(getTagValue(feedItemNode, RSS_DESCRIPTION));
 		String pubDateStr = getTagValue(feedItemNode, RSS_PUB_DATE);
 		Date pubDate = parseDate(pubDateStr);
-		feedItem.setPubDate(pubDate);
+		Date now = new Date();
+		if (pubDate.after(now)) {
+		    feedItem.setPubDate(now);
+		} else {
+		    feedItem.setPubDate(pubDate);
+		}
 		feedItem.setLink(getTagValue(feedItemNode, RSS_LINK));
 		return feedItem;
 	}
