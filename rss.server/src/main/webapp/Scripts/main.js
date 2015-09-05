@@ -299,7 +299,7 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
     };
 
     $scope.toggleArticle = function(index) {
-        $(".article-" + index + ":first").toggle();
+        $(".article-" + index + ":first").toggleClass("hidden");
     };
 
 

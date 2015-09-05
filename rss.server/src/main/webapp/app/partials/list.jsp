@@ -78,7 +78,7 @@
                     	<i ng-class="isSaved(feedItem)" ng-click="saveFeedItem(feedItem)"></i>
                     	<i class="deleteFeed icon-trash-empty" ng-click="deleteFeedItem(feedItem)"></i>
                     </span>
-                    <article ng-class="articleClass($index)">
+                    <article ng-class="articleClass($index)" class="hidden">
 	                    <!-- contrived reverse example--> 
 	                    <h3 ng-bind-html="feedItem.title"></h3>
 	                    <span>{{feedItem.source}} {{feedItem.formattedDate}}</span>

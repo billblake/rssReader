@@ -5286,6 +5286,9 @@ div.jqcloud span.w1 {
   width: 100%;
   z-index: 1; }
 
+.hidden {
+  display: none; }
+
 #logo {
   margin-bottom: 10px;
   background-color: #5a87ab;
@@ -5411,8 +5414,7 @@ div.jqcloud span.w1 {
       #feeds #main-content #feed-list .feed-item .feedItemBtns {
         float: right; }
       #feeds #main-content #feed-list .feed-item article {
-        width: 80%;
-        display: none; }
+        width: 80%; }
         #feeds #main-content #feed-list .feed-item article h3 {
           font-size: 22px; }
         #feeds #main-content #feed-list .feed-item article span {
@@ -5488,8 +5490,7 @@ div.jqcloud span.w1 {
         display: block; }
       #feeds #main-content #feed-list .feed-item article {
         margin-left: 0px;
-        width: 100%;
-        display: none; }
+        width: 100%; }
         #feeds #main-content #feed-list .feed-item article .feedItemBtns {
           display: inline; } }
 #main-content {
