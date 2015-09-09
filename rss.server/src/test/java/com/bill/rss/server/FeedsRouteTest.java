@@ -40,7 +40,7 @@ public class FeedsRouteTest {
 
 
         String jsonResponse = (String) feedsRoute.handle(request, response);
-        String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"pubDate\":10000000,\"formattedDate\":\"Jul 28\",\"read\":false,\"saved\":false,\"tags\":null}]";
+        String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"imageLink\":null,\"pubDate\":10000000,\"formattedDate\":\"Jul 28\",\"read\":false,\"saved\":false,\"tags\":null}]";
         assertEquals(expectedJson , jsonResponse);
     }
 
@@ -59,7 +59,7 @@ public class FeedsRouteTest {
 
 
         String jsonResponse = (String) feedsRoute.handle(request, response);
-        String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"pubDate\":10000000,\"formattedDate\":\"Jul 28\",\"read\":false,\"saved\":false,\"tags\":null}]";
+        String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"imageLink\":null,\"pubDate\":10000000,\"formattedDate\":\"Jul 28\",\"read\":false,\"saved\":false,\"tags\":null}]";
         assertEquals(expectedJson , jsonResponse);
     }
 
@@ -77,7 +77,7 @@ public class FeedsRouteTest {
         when(request.queryParams("refresh")).thenReturn("true");
 
         String jsonResponse = (String) feedsRoute.handle(request, response);
-        String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"pubDate\":10000000,\"formattedDate\":\"Jul 28\",\"read\":false,\"saved\":false,\"tags\":null}]";
+        String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"imageLink\":null,\"pubDate\":10000000,\"formattedDate\":\"Jul 28\",\"read\":false,\"saved\":false,\"tags\":null}]";
         assertEquals(expectedJson , jsonResponse);
     }
 
