@@ -14,6 +14,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -26,6 +27,7 @@ public class RssFeedParser {
 	private static final String RSS_DESCRIPTION = "description";
 	private static final String RSS_TITLE = "title";
 	private static final String RSS_ITEM = "item";
+    private static final String RSS_ENCLOSURE = "enclosure";
 
 
 	public List<FeedItem> parse(InputStream inputStream) {
@@ -55,6 +57,7 @@ public class RssFeedParser {
 		FeedItem feedItem = new FeedItem();
 		feedItem.setTitle(getTagValue(feedItemNode, RSS_TITLE));
 		feedItem.setDescription(getTagValue(feedItemNode, RSS_DESCRIPTION));
+		feedItem.setImageLink(getImage(feedItemNode));
 		String pubDateStr = getTagValue(feedItemNode, RSS_PUB_DATE);
 		Date pubDate = parseDate(pubDateStr);
 		Date now = new Date();
@@ -85,4 +88,20 @@ public class RssFeedParser {
 		    return "";
 		}
 	}
+
+
+    private String getImage(Element feedItemNode) {
+        if (feedItemNode.getElementsByTagName(RSS_ENCLOSURE) != null) {
+            Node enclosure = feedItemNode.getElementsByTagName(RSS_ENCLOSURE).item(0);
+            if (enclosure != null) {
+                Node url = enclosure.getAttributes().getNamedItem("url");
+                if (url != null) {
+                    if (url.getTextContent() != null) {
+                        return url.getTextContent();
+                    }
+                }
+            }
+        }
+        return "";
+    }
 }
