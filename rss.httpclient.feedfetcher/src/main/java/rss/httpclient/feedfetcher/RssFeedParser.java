@@ -91,14 +91,21 @@ public class RssFeedParser {
 
 
     private String getImage(Element feedItemNode) {
-        if (feedItemNode.getElementsByTagName(RSS_ENCLOSURE) != null) {
-            Node enclosure = feedItemNode.getElementsByTagName(RSS_ENCLOSURE).item(0);
-            if (enclosure != null) {
-                Node url = enclosure.getAttributes().getNamedItem("url");
-                if (url != null) {
-                    if (url.getTextContent() != null) {
-                        return url.getTextContent();
-                    }
+        if (feedItemNode.getElementsByTagName(RSS_ENCLOSURE).item(0) != null) {
+            return getAttributeOfTag(feedItemNode, RSS_ENCLOSURE, "url");
+        } else if (feedItemNode.getElementsByTagName("media:thumbnail").item(0) != null) {
+            return getAttributeOfTag(feedItemNode, "media:thumbnail", "url");
+        }
+        return "";
+    }
+
+    private String getAttributeOfTag(Element feedItemNode, String tag, String attribute) {
+        Node node = feedItemNode.getElementsByTagName(tag).item(0);
+        if (node != null) {
+            Node attributeNode = node.getAttributes().getNamedItem(attribute);
+            if (attributeNode != null) {
+                if (attributeNode.getTextContent() != null) {
+                    return attributeNode.getTextContent();
                 }
             }
         }
