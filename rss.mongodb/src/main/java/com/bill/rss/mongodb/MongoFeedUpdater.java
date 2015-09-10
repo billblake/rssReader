@@ -57,14 +57,14 @@ public class MongoFeedUpdater implements FeedUpdater {
 	}
 
 	private void updateFeed(Feed feed, List<FeedItem> fetchedFeeds) {
-		DB rssDb = MongoDBConnection.getDbConnection();
+	    DB rssDb = MongoDBConnection.getDbConnection();
 	    DBCollection feedItemsCollection = rssDb.getCollection(FEED_ITEMS);
 
 	    for (FeedItem fetchedFeed : fetchedFeeds) {
 	    	BasicDBObject query = new BasicDBObject();
 	    	query.append(FEED_ITEM_SOURCE, feed.getName());
 	    	query.append(FEED_ITEM_LINK, fetchedFeed.getLink());
-    	    query.append(USER_NAME, feed.getUserName());
+	    	query.append(USER_NAME, feed.getUserName());
 
 	    	DBCursor queryResults = feedItemsCollection.find(query);
 	    	if (!queryResults.hasNext()) {
@@ -78,6 +78,7 @@ public class MongoFeedUpdater implements FeedUpdater {
 		    	feedItemDocument.put(FEED_ITEM_PUB_DATE, fetchedFeed.getPubDate());
 		    	feedItemDocument.put(FEED_ITEM_LINK, fetchedFeed.getLink());
 		    	feedItemDocument.put(FEED_ITEM_READ, false);
+		    	feedItemDocument.put("imageLink", fetchedFeed.getImageLink());
 
 		    	feedItemsCollection.insert(feedItemDocument);
 	    	}
