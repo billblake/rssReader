@@ -61,6 +61,7 @@ public class FeedItemUtils {
         feedItem.setDescription(nextFeedItem.get(FEED_ITEM_DESCRIPTION).toString());
         feedItem.setFeedId(nextFeedItem.get(FEED_ID).toString());
         feedItem.setLink(nextFeedItem.get(FEED_ITEM_LINK).toString());
+        feedItem.setImageLink(nextFeedItem.get("imageLink").toString());
         feedItem.setSource(nextFeedItem.get(FEED_ITEM_SOURCE).toString());
         feedItem.setTitle(nextFeedItem.get(FEED_ITEM_TITLE).toString());
         feedItem.setUsername(nextFeedItem.get(USER_NAME).toString());
