@@ -129,6 +129,7 @@ public class MockUtils {
         when(feedDbObject.get("description")).thenReturn("The Description");
         when(feedDbObject.get("feedId")).thenReturn("467");
         when(feedDbObject.get("link")).thenReturn("http://www.bbc.co.uk/sport/1234");
+        when(feedDbObject.get("imageLink")).thenReturn("http://www.bbc.co.uk/sport/1234.jpg");
         when(feedDbObject.get("source")).thenReturn("BBC Sport");
         when(feedDbObject.get("title")).thenReturn("My Title");
         when(feedDbObject.get("username")).thenReturn("billblake");
