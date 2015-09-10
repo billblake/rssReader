@@ -108,6 +108,7 @@ public class MockUtils {
 		feedItem.put("delete", true);
 		feedItem.put("description", "description");
 		feedItem.put("link", "http://thedailyedge.thejournal.ie/irish-supermarket-fails-2176781-Jun2015/");
+		feedItem.put("imageLink", "http://thedailyedge.thejournal.ie/image.jpg");
 		feedItem.put("read", true);
 		feedItem.put("source", "The Daily Edge");
 		feedItem.put("title", "title");
