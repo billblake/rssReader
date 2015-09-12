@@ -1,14 +1,19 @@
 package com.bill.rss.server;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import spark.Request;
 import spark.Response;
 
 import com.bill.rss.dataProvider.FeedItemProvider;
+import com.bill.rss.dataProvider.FeedProvider;
 import com.bill.rss.dataProvider.FeedUpdater;
+import com.bill.rss.domain.Feed;
 import com.bill.rss.domain.FeedItem;
+import com.bill.rss.mongodb.FeedRetriever;
 import com.bill.rss.mongodb.MongoFeedUpdater;
 import com.bill.rss.mongodb.FeedItem.FeedItemRetriever;
 
@@ -21,13 +26,15 @@ import static com.bill.rss.server.ViewConstants.TAG_QUERY_PARAM;
 
 public class GetFeedItemsRoute extends BaseRoute {
 
-    private FeedItemProvider feedProvider;
+    private FeedItemProvider feedItemProvider;
     private FeedUpdater feedUpdater;
+    private FeedProvider feedProvider;
 
     protected GetFeedItemsRoute(String path) {
         super(path);
-        feedProvider = new FeedItemRetriever();
+        feedItemProvider = new FeedItemRetriever();
         feedUpdater = new MongoFeedUpdater();
+        feedProvider = new FeedRetriever();
     }
 
 
@@ -44,7 +51,8 @@ public class GetFeedItemsRoute extends BaseRoute {
         searchFeedItem.setSaved(Boolean.parseBoolean(request.queryParams(SAVED_QUERY_PARAM)));
         searchFeedItem.setUsername(getUsername(request));
         searchFeedItem.setTags(getTags(request));
-        List<FeedItem> feedItems = feedProvider.retrieveFeedItems(searchFeedItem, getPage(request));
+        List<FeedItem> feedItems = feedItemProvider.retrieveFeedItems(searchFeedItem, getPage(request));
+        enrichFeedItemsWithFeedImage(feedItems);
         return JsonUtils.convertObjectToJson(feedItems);
     }
 
@@ -75,12 +83,34 @@ public class GetFeedItemsRoute extends BaseRoute {
     }
 
 
-    public void setFeedProvider(FeedItemProvider feedProvider) {
-        this.feedProvider = feedProvider;
+    public void setFeedItemProvider(FeedItemProvider feedItemProvider) {
+        this.feedItemProvider = feedItemProvider;
     }
 
     public void setFeedUpdater(FeedUpdater feedUpdater) {
         this.feedUpdater = feedUpdater;
+    }
+
+    public void setFeedProvider(FeedProvider feedProvider) {
+        this.feedProvider = feedProvider;
+    }
+
+
+    private void enrichFeedItemsWithFeedImage(List<FeedItem> feedItems) {
+        List<Feed> feeds = feedProvider.retrieveAllFeeds();
+        Map<String, String> feedIdFeedImages = new HashMap<String, String>();
+        for (Feed feed : feeds) {
+            if (feed.getImageUrl() != null && !feed.getImageUrl().equals("")) {
+                feedIdFeedImages.put(feed.getFeedId(), feed.getImageUrl());
+            }
+        }
+
+        for (FeedItem feedItem : feedItems) {
+            if (feedItem.getImageUrl() == null || feedItem.getImageUrl().equals("")) {
+                feedItem.setImageUrl(feedIdFeedImages.get(feedItem.getFeedId()));
+            }
+        }
+
     }
 
 }

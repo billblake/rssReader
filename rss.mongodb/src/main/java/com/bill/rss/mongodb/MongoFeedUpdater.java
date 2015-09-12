@@ -30,6 +30,7 @@ import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_SOURCE;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_TITLE;
 import static com.bill.rss.mongodb.FeedConstants.FEED_NAME;
 import static com.bill.rss.mongodb.FeedConstants.FEED_URL;
+import static com.bill.rss.mongodb.FeedConstants.IMAGE_URL;
 import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
 
 public class MongoFeedUpdater implements FeedUpdater {
@@ -78,7 +79,7 @@ public class MongoFeedUpdater implements FeedUpdater {
 		    	feedItemDocument.put(FEED_ITEM_PUB_DATE, fetchedFeed.getPubDate());
 		    	feedItemDocument.put(FEED_ITEM_LINK, fetchedFeed.getLink());
 		    	feedItemDocument.put(FEED_ITEM_READ, false);
-		    	feedItemDocument.put("imageLink", fetchedFeed.getImageLink());
+		    	feedItemDocument.put(IMAGE_URL, fetchedFeed.getImageUrl());
 
 		    	feedItemsCollection.insert(feedItemDocument);
 	    	}
@@ -100,6 +101,7 @@ public class MongoFeedUpdater implements FeedUpdater {
 
         feedDocument.put(FEED_NAME, feed.getName());
         feedDocument.put(FEED_URL, feed.getUrl());
+        feedDocument.put(IMAGE_URL, feed.getImageUrl());
         feedDocument.put(CATEGORY_ID, new ObjectId(feed.getCategoryId()));
         feedCollection.save(feedDocument);
 

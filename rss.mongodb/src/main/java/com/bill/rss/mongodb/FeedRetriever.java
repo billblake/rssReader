@@ -14,6 +14,11 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.QueryBuilder;
 
+import static com.bill.rss.mongodb.FeedConstants.CATEGORY_ID;
+import static com.bill.rss.mongodb.FeedConstants.FEED_NAME;
+import static com.bill.rss.mongodb.FeedConstants.FEED_URL;
+import static com.bill.rss.mongodb.FeedConstants.FEED_USERNAME;
+import static com.bill.rss.mongodb.FeedConstants.IMAGE_URL;
 import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
 
 public class FeedRetriever implements FeedProvider {
@@ -65,10 +70,11 @@ public class FeedRetriever implements FeedProvider {
 	private Feed createFeed(DBObject nextFeed) {
 		Feed feed = new Feed();
 		feed.setFeedId(nextFeed.get(FEED_ID).toString());
-		feed.setName((String) nextFeed.get(FeedConstants.FEED_NAME));
-		feed.setUrl((String) nextFeed.get(FeedConstants.FEED_URL));
-		feed.setUserName((String) nextFeed.get(FeedConstants.FEED_USERNAME));
-		feed.setCategoryId(nextFeed.get(FeedConstants.CATEGORY_ID).toString());
+		feed.setName((String) nextFeed.get(FEED_NAME));
+		feed.setUrl((String) nextFeed.get(FEED_URL));
+		feed.setImageUrl((String) nextFeed.get(IMAGE_URL));
+		feed.setUserName((String) nextFeed.get(FEED_USERNAME));
+		feed.setCategoryId(nextFeed.get(CATEGORY_ID).toString());
 		feed.setTotalCount("0");
 		feed.setUnReadCount("0");
 		return feed;

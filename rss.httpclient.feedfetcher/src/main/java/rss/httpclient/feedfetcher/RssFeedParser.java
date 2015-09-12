@@ -57,7 +57,7 @@ public class RssFeedParser {
 		FeedItem feedItem = new FeedItem();
 		feedItem.setTitle(getTagValue(feedItemNode, RSS_TITLE));
 		feedItem.setDescription(getTagValue(feedItemNode, RSS_DESCRIPTION));
-		feedItem.setImageLink(getImage(feedItemNode));
+		feedItem.setImageUrl(getImage(feedItemNode));
 		String pubDateStr = getTagValue(feedItemNode, RSS_PUB_DATE);
 		Date pubDate = parseDate(pubDateStr);
 		Date now = new Date();

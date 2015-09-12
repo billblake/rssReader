@@ -20,6 +20,7 @@ public class FeedConstants {
 	public static final String CATEGORY_NAME = "name";
 	public static final String CATEGORIES_COLLECTION = "categories";
 	public static final String FEED_URL = "url";
+	public static final String IMAGE_URL = "imageUrl";
 	public static final String FEEDS_COLLECTION = "feeds";
 	public static final String FEED_USERNAME = "username";
 	public static final String FEED_NAME = "name";

@@ -11,6 +11,7 @@ import spark.Request;
 import spark.Response;
 
 import com.bill.rss.dataProvider.FeedItemProvider;
+import com.bill.rss.dataProvider.FeedProvider;
 import com.bill.rss.dataProvider.FeedUpdater;
 import com.bill.rss.domain.FeedItem;
 
@@ -32,15 +33,17 @@ public class FeedsRouteTest {
         Request request = createRequestMock("logged-in");
         Response response = createResponseMock();
         GetFeedItemsRoute feedsRoute = new GetFeedItemsRoute("/feeds");
-        feedsRoute.setFeedProvider(createFeedProviderMock());
+        feedsRoute.setFeedItemProvider(createFeedItemProviderMock());
         feedsRoute.setFeedUpdater(createFeedUpdaterMock());
+        feedsRoute.setFeedProvider(createFeedProviderMock());
+
 
         when(request.params(":categoryId")).thenReturn("1");
         when(request.params(":feedId")).thenReturn("2");
 
 
         String jsonResponse = (String) feedsRoute.handle(request, response);
-        String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"imageLink\":null,\"pubDate\":10000000,\"formattedDate\":\"Jul 28\",\"read\":false,\"saved\":false,\"tags\":null}]";
+        String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"imageUrl\":null,\"pubDate\":10000000,\"formattedDate\":\"Jul 28\",\"read\":false,\"saved\":false,\"tags\":null}]";
         assertEquals(expectedJson , jsonResponse);
     }
 
@@ -50,8 +53,9 @@ public class FeedsRouteTest {
         Request request = createRequestMock("logged-in");
         Response response = createResponseMock();
         GetFeedItemsRoute feedsRoute = new GetFeedItemsRoute("/feeds");
-        feedsRoute.setFeedProvider(createFeedProviderMock());
+        feedsRoute.setFeedItemProvider(createFeedItemProviderMock());
         feedsRoute.setFeedUpdater(createFeedUpdaterMock());
+        feedsRoute.setFeedProvider(createFeedProviderMock());
 
         when(request.params(":categoryId")).thenReturn("1");
         when(request.params(":feedId")).thenReturn("2");
@@ -59,7 +63,7 @@ public class FeedsRouteTest {
 
 
         String jsonResponse = (String) feedsRoute.handle(request, response);
-        String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"imageLink\":null,\"pubDate\":10000000,\"formattedDate\":\"Jul 28\",\"read\":false,\"saved\":false,\"tags\":null}]";
+        String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"imageUrl\":null,\"pubDate\":10000000,\"formattedDate\":\"Jul 28\",\"read\":false,\"saved\":false,\"tags\":null}]";
         assertEquals(expectedJson , jsonResponse);
     }
 
@@ -69,25 +73,33 @@ public class FeedsRouteTest {
         Request request = createRequestMock("logged-in");
         Response response = createResponseMock();
         GetFeedItemsRoute feedsRoute = new GetFeedItemsRoute("/feeds");
-        feedsRoute.setFeedProvider(createFeedProviderMock());
+        feedsRoute.setFeedItemProvider(createFeedItemProviderMock());
         feedsRoute.setFeedUpdater(createFeedUpdaterMock());
+        feedsRoute.setFeedProvider(createFeedProviderMock());
 
         when(request.params(":categoryId")).thenReturn("1");
         when(request.params(":feedId")).thenReturn("2");
         when(request.queryParams("refresh")).thenReturn("true");
 
         String jsonResponse = (String) feedsRoute.handle(request, response);
-        String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"imageLink\":null,\"pubDate\":10000000,\"formattedDate\":\"Jul 28\",\"read\":false,\"saved\":false,\"tags\":null}]";
+        String expectedJson = "[{\"feedItemId\":\"3\",\"username\":\"billblake\",\"catId\":\"1\",\"feedId\":\"2\",\"source\":\"source\",\"title\":\"title\",\"description\":\"description\",\"link\":\"link\",\"imageUrl\":null,\"pubDate\":10000000,\"formattedDate\":\"Jul 28\",\"read\":false,\"saved\":false,\"tags\":null}]";
         assertEquals(expectedJson , jsonResponse);
     }
 
 
-    private FeedItemProvider createFeedProviderMock() {
-        FeedItemProvider feedProvider = mock(FeedItemProvider.class);
+    private FeedItemProvider createFeedItemProviderMock() {
+        FeedItemProvider feedItemProvider = mock(FeedItemProvider.class);
         List<FeedItem> feedItems = new ArrayList<FeedItem>();
         FeedItem feedItem = MockUtils.createFeedItemMock("1", "description", "2", "3", "link", new Date(10000000), "source", "title", "billblake");
         feedItems.add(feedItem);
-        when(feedProvider.retrieveFeedItems(Mockito.any(FeedItem.class), Mockito.anyInt())).thenReturn(feedItems);
+        when(feedItemProvider.retrieveFeedItems(Mockito.any(FeedItem.class), Mockito.anyInt())).thenReturn(feedItems);
+        return feedItemProvider;
+    }
+
+
+    private FeedProvider createFeedProviderMock() {
+        FeedProvider feedProvider = mock(FeedProvider.class);
+
         return feedProvider;
     }
 

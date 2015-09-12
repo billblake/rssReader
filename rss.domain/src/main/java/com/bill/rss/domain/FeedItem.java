@@ -13,7 +13,7 @@ public class FeedItem {
 	private String title;
 	private String description;
 	private String link;
-	private String imageLink;
+	private String imageUrl;
 	private Date pubDate;
 	private String formattedDate;
 	private boolean read;
@@ -85,12 +85,12 @@ public class FeedItem {
 		this.link = link;
 	}
 
-	public String getImageLink() {
-        return imageLink;
+	public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImageLink(String imageLink) {
-        this.imageLink = imageLink;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Date getPubDate() {

@@ -9,6 +9,7 @@ public class Feed {
 	private String url;
     private String totalCount;
     private String unReadCount;
+    private String imageUrl;
 
 	public String getFeedId() {
 		return feedId;
@@ -64,5 +65,13 @@ public class Feed {
 
     public void setUnReadCount(String unReadCount) {
         this.unReadCount = unReadCount;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

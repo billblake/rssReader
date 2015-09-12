@@ -32,6 +32,7 @@ import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_SAVED;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_SOURCE;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_TAGS;
 import static com.bill.rss.mongodb.FeedConstants.FEED_ITEM_TITLE;
+import static com.bill.rss.mongodb.FeedConstants.IMAGE_URL;
 import static com.bill.rss.mongodb.FeedConstants.USER_NAME;
 
 public class FeedItemUtils {
@@ -61,9 +62,9 @@ public class FeedItemUtils {
         feedItem.setDescription(nextFeedItem.get(FEED_ITEM_DESCRIPTION).toString());
         feedItem.setFeedId(nextFeedItem.get(FEED_ID).toString());
         feedItem.setLink(nextFeedItem.get(FEED_ITEM_LINK).toString());
-        Object imageLink = nextFeedItem.get("imageLink");
-        if (imageLink != null) {
-            feedItem.setImageLink(imageLink.toString());
+        Object imageUrl = nextFeedItem.get(IMAGE_URL);
+        if (imageUrl != null) {
+            feedItem.setImageUrl(imageUrl.toString());
         }
         feedItem.setSource(nextFeedItem.get(FEED_ITEM_SOURCE).toString());
         feedItem.setTitle(nextFeedItem.get(FEED_ITEM_TITLE).toString());

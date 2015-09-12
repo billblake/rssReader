@@ -99,8 +99,8 @@
 	                    <!-- contrived reverse example--> 
 	                    <h3 ng-bind-html="feedItem.title"></h3>
 	                    <span class="publishInfo">{{feedItem.source}} {{feedItem.formattedDate}}</span>
-	                    <img class="articleImage" src="{{feedItem.imageLink}}" ng-show="feedItem.imageLink">
-	                    <img class="articleImage fallbackImage" src="Content/images/default-thumbnail.png" ng-hide="feedItem.imageLink">
+	                    <img class="articleImage" src="{{feedItem.imageUrl}}" ng-show="feedItem.imageUrl">
+	                    <img class="articleImage fallbackImage" src="Content/images/default-thumbnail.png" ng-hide="feedItem.imageUrl">
 	                    <div id="contents">
 	                        <span class="description" ng-bind-html="feedItem.description"></span>
                         	<div class="tags" ng-show="feedItem.tags">
