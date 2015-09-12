@@ -5451,18 +5451,13 @@ div.jqcloud span.w1 {
       #feeds #main-content #feed-list .feed-item .feedItemBtns {
         float: right; }
       #feeds #main-content #feed-list .feed-item article {
-        width: 80%;
         display: none; }
         #feeds #main-content #feed-list .feed-item article h3 {
           font-size: 22px; }
         #feeds #main-content #feed-list .feed-item article span {
           color: #b1bcc5; }
         #feeds #main-content #feed-list .feed-item article .articleImage {
-          display: block;
-          max-width: 400px;
-          min-width: 250px;
-          margin: 25px auto;
-          width: 50%; }
+          display: none; }
         #feeds #main-content #feed-list .feed-item article .feedItemBtns {
           color: black;
           display: none; }
@@ -5486,8 +5481,10 @@ div.jqcloud span.w1 {
       background-color: #f0f0f0; }
     #feeds #main-content #feed-list .feed-item.unread {
       font-weight: bold; }
-    #feeds #main-content #feed-list.magazine li.even {
+    #feeds #main-content #feed-list.magazine .feed-item.even {
       background-color: white; }
+      #feeds #main-content #feed-list.magazine .feed-item.even:hover {
+        background-color: #f0f0f0; }
     #feeds #main-content #feed-list.magazine .feedHeader {
       display: none; }
     #feeds #main-content #feed-list.magazine article {
@@ -5496,7 +5493,8 @@ div.jqcloud span.w1 {
         margin-left: 95px;
         margin-bottom: 0; }
       #feeds #main-content #feed-list.magazine article span.publishInfo {
-        float: right; }
+        margin-left: 95px;
+        display: block; }
       #feeds #main-content #feed-list.magazine article span.description {
         margin-left: 95px;
         display: block;
@@ -5505,12 +5503,13 @@ div.jqcloud span.w1 {
         #feeds #main-content #feed-list.magazine article span.description img {
           display: none; }
       #feeds #main-content #feed-list.magazine article .articleImage {
+        display: block;
         float: left;
         width: 70px;
         margin: 0 25px 0 0;
         min-width: 0;
         position: relative;
-        top: -20px; }
+        top: -40px; }
       #feeds #main-content #feed-list.magazine article .readMore {
         margin-left: 95px;
         display: block; }

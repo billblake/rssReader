@@ -149,7 +149,6 @@
 				}
 				
 				article {
-					width: 80%;
 					display: none;
 					
 					h3 {
@@ -161,11 +160,7 @@
 					}
 					
 					.articleImage  {
-					    display: block;
-					    max-width: 400px;
-				        min-width: 250px;
-					    margin: 25px auto;
-					    width: 50%;
+					    display: none;
 					}
 					
 					.feedItemBtns {
@@ -211,8 +206,12 @@
 			
 			&.magazine {
 			
-				li.even {
+				.feed-item.even {
 					background-color: white;
+					
+					&:hover {
+					    background-color: rgb(240, 240, 240);
+					}
 				}
 			
 				.feedHeader {
@@ -228,7 +227,8 @@
 					}
 					
 					span.publishInfo {
-						float: right;
+					    margin-left: 95px;
+    					display: block;
 					}
 					
 					span.description {
@@ -243,12 +243,13 @@
 					}
 					
 					.articleImage {
+						display: block;
 						float: left;
 					    width: 70px;
 					    margin: 0 25px 0 0;
 					    min-width: 0;
 					    position: relative;
-    					top: -20px;
+    					top: -40px;
 					}
 					
 					.readMore {
