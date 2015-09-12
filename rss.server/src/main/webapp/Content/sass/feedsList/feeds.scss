@@ -6,6 +6,8 @@
 	    width: 80%;   
 	    padding-top: 10px;   
 	    padding-bottom: 10px;
+	    adding-bottom: 10px;
+    	z-index: 2;
     
 		h2 {
 			font-size: 20px;
@@ -39,7 +41,7 @@
 
 	#sideBar {
 		float: left;
-  		width: 150px;
+  		width: 170px;
   		position: fixed;
 
 		#categories {
@@ -89,11 +91,24 @@
 	#main-content {
 		float: left;
 		width: 80%;
-		margin-left: 150px;
+		margin-left: 170px;
 		padding-top: 35px;
 		
 		#spinner {
 			margin-top: 40px;
+		}
+		
+		#layout {
+		    cursor: pointer;
+		
+			ul.dropdown-menu {
+			    min-width: 100px;
+			    
+			    a {
+		    	    margin-left: 5px;
+		    	    padding-left: 5px;
+			    }
+			}
 		}
 
 		#feed-list {
@@ -135,6 +150,7 @@
 				
 				article {
 					width: 80%;
+					display: none;
 					
 					h3 {
 						font-size: 22px;
@@ -142,6 +158,14 @@
 					
 					span {
 						color: rgb(177, 188, 197);
+					}
+					
+					.articleImage  {
+					    display: block;
+					    max-width: 400px;
+				        min-width: 250px;
+					    margin: 25px auto;
+					    width: 50%;
 					}
 					
 					.feedItemBtns {
@@ -183,6 +207,55 @@
 			
 			.feed-item.unread {
 				font-weight: bold;
+			}
+			
+			&.magazine {
+			
+				li.even {
+					background-color: white;
+				}
+			
+				.feedHeader {
+					display: none;
+				}
+				
+				article {
+					display: block;
+					
+					h3 {
+					    margin-left: 95px;
+    					margin-bottom: 0;
+					}
+					
+					span.publishInfo {
+						float: right;
+					}
+					
+					span.description {
+						margin-left: 95px;
+						display: block;
+					    max-height: 150px;
+					    overflow-y: hidden;
+					    
+					    img {
+					    	display: none;
+					    }
+					}
+					
+					.articleImage {
+						float: left;
+					    width: 70px;
+					    margin: 0 25px 0 0;
+					    min-width: 0;
+					    position: relative;
+    					top: -20px;
+					}
+					
+					.readMore {
+						margin-left: 95px;
+					    display: block;
+					}
+				}
 			}
 		}
 	}
@@ -230,6 +303,7 @@
 		    
 		    header {
 		    	width: 95%;
+	    	    z-index: 1;
 		    	
 		    	#actions {
 					display: none;
@@ -263,6 +337,10 @@
 					article {
 						margin-left: 0px;
 						width: 100%;
+						
+						img  {
+							width: 100%;
+						}
 						
 						.feedItemBtns {
 							display: inline;

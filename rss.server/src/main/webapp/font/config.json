@@ -7,6 +7,12 @@
   "ascent": 850,
   "glyphs": [
     {
+      "uid": "b1887b423d2fd15c345e090320c91ca0",
+      "css": "th-1",
+      "code": 59426,
+      "src": "fontawesome"
+    },
+    {
       "uid": "3db5347bd219f3bce6025780f5d9ef45",
       "css": "tag",
       "code": 59407,
@@ -79,9 +85,21 @@
       "src": "fontawesome"
     },
     {
+      "uid": "032bd8bbd70adf90ead98b6813bfe446",
+      "css": "newspaper",
+      "code": 59415,
+      "src": "fontawesome"
+    },
+    {
       "uid": "c9b928dc82d7d77033644fcf59dca3b3",
       "css": "flashlight",
       "code": 59402,
+      "src": "entypo"
+    },
+    {
+      "uid": "1189604bf305b6b03a74685ce60e6632",
+      "css": "doc-text",
+      "code": 59417,
       "src": "entypo"
     },
     {
@@ -89,6 +107,12 @@
       "css": "floppy",
       "code": 59411,
       "src": "entypo"
+    },
+    {
+      "uid": "43855c51ebf847e8d581b794e4126dfe",
+      "css": "th-list-outline",
+      "code": 59419,
+      "src": "typicons"
     },
     {
       "uid": "517522647a556192fbc78aa391b7b0c2",
@@ -107,6 +131,24 @@
       "css": "edit",
       "code": 59410,
       "src": "typicons"
+    },
+    {
+      "uid": "6a06892e76b81e023da6ddfb38a26b37",
+      "css": "doc-text-1",
+      "code": 59420,
+      "src": "typicons"
+    },
+    {
+      "uid": "56da5324fc5a04f131ab65668c36b931",
+      "css": "news",
+      "code": 59421,
+      "src": "typicons"
+    },
+    {
+      "uid": "pzy4lq1ak4datbxpdfj3ya74vjfhwxg1",
+      "css": "article-alt",
+      "code": 59422,
+      "src": "modernpics"
     },
     {
       "uid": "2a3192d0f8fe0c7cf959168e68eb16d8",

@@ -42,6 +42,23 @@
             <header>
             	<h2 class="ng-binding">{{title}}</h2>
             	<span id="actions">
+            		<span id="layout" class="dropdown">
+					    <span class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+					        <i class="icon-newspaper"></i>Layout
+					        <span class="caret"></span>
+					    </span>
+					    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu1">
+						    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="showTitleOnlyLayout()">
+						    	<i class="icon-doc-text-1"></i>Title Only</a>
+						    </li>
+						    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="showMagazineLayout()">
+						    	<i class="icon-th-list-outline"></i>Magazine</a>
+						    </li>
+						    <!-- <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="showCardsLayout()">
+						    	<i class="icon-th-1"></i>Cards</a>
+						    </li> -->
+						</ul>
+					</span>
 					<a id="deleteAll" ng-click="displayDeleteAllConfirmation()" data-toggle="modal" data-target="#confirmationModal">
 						<i class="icon-trash-empty"></i>Delete All
 					</a>
@@ -66,7 +83,7 @@
            	</header>
             <div id="spinner"></div>
             <div ng-show="!feeds.length && !loading">There are no feeds</div>
-            <ul id="feed-list" infinite-scroll='loadMore()' infinite-scroll-distance='1'>
+            <ul id="feed-list" ng-class="getLayoutClass()" infinite-scroll='loadMore()' infinite-scroll-distance='1'>
                 <li class="feed-item" ng-repeat="feedItem in feeds" ng-class-odd="'odd'" ng-class-even="'even'" ng-class="readOrUnread(feedItem)">
                     <span class="feedHeader" ng-click="toggleArticle($index);markAsRead(feedItem) | trackEvent:'List Feeds':'Expand'">
                         <span class="feedTitle" ng-bind-html="feedItem.title"></span>
@@ -78,12 +95,14 @@
                     	<i ng-class="isSaved(feedItem)" ng-click="saveFeedItem(feedItem)"></i>
                     	<i class="deleteFeed icon-trash-empty" ng-click="deleteFeedItem(feedItem)"></i>
                     </span>
-                    <article ng-class="articleClass($index)" class="hidden">
+                    <article ng-class="articleClass($index)">
 	                    <!-- contrived reverse example--> 
 	                    <h3 ng-bind-html="feedItem.title"></h3>
-	                    <span>{{feedItem.source}} {{feedItem.formattedDate}}</span>
+	                    <span class="publishInfo">{{feedItem.source}} {{feedItem.formattedDate}}</span>
+	                    <img class="articleImage" src="{{feedItem.imageLink}}" ng-show="feedItem.imageLink">
+	                    <img class="articleImage fallbackImage" src="Content/images/default-thumbnail.png" ng-hide="feedItem.imageLink">
 	                    <div id="contents">
-	                        <span ng-bind-html="feedItem.description"></span>
+	                        <span class="description" ng-bind-html="feedItem.description"></span>
                         	<div class="tags" ng-show="feedItem.tags">
 	                        		Tags:
 	                        		<span class="tag" ng-repeat="tag in feedItem.tags">
@@ -92,7 +111,7 @@
 	                        		</span>
 	                        	</div>
 	                        <div>
-	                        	<a href="{{feedItem.link}}" target="_blank" ng-click="readMore()">Read More >></a>
+	                        	<a class="readMore" href="{{feedItem.link}}" target="_blank" ng-click="readMore()">Read More >></a>
 	                    		<span class="feedItemBtns">
 	                    			<i class="icon-tag" ng-click="showTagPopup(feedItem)" data-toggle="modal" data-target="#addTagModal"></i>
 	                    			<i ng-class="isSaved(feedItem)" ng-click="saveFeedItem(feedItem)"></i>

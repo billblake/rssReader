@@ -4896,8 +4896,8 @@ button.close {
 
 @font-face {
   font-family: 'fontello';
-  src: url("../font/fontello.eot?90692400");
-  src: url("../font/fontello.eot?90692400#iefix") format("embedded-opentype"), url("../font/fontello.woff?90692400") format("woff"), url("../font/fontello.ttf?90692400") format("truetype"), url("../font/fontello.svg?90692400#fontello") format("svg");
+  src: url("../font/fontello.eot?48960559");
+  src: url("../font/fontello.eot?48960559#iefix") format("embedded-opentype"), url("../font/fontello.woff?48960559") format("woff"), url("../font/fontello.ttf?48960559") format("truetype"), url("../font/fontello.svg?48960559#fontello") format("svg");
   font-weight: normal;
   font-style: normal; }
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
@@ -4906,7 +4906,7 @@ button.close {
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: url('../font/fontello.svg?90692400#fontello') format('svg');
+    src: url('../font/fontello.svg?48960559#fontello') format('svg');
   }
 }
 */
@@ -5025,6 +5025,34 @@ button.close {
   content: '\e815'; }
 
 /* '' */
+.icon-newspaper:before {
+  content: '\e817'; }
+
+/* '' */
+.icon-doc-text:before {
+  content: '\e819'; }
+
+/* '' */
+.icon-th-list-outline:before {
+  content: '\e81b'; }
+
+/* '' */
+.icon-doc-text-1:before {
+  content: '\e81c'; }
+
+/* '' */
+.icon-news:before {
+  content: '\e81d'; }
+
+/* '' */
+.icon-article-alt:before {
+  content: '\e81e'; }
+
+/* '' */
+.icon-th-1:before {
+  content: '\e822'; }
+
+/* '' */
 /*
    Animation example, for spinners
 */
@@ -5335,7 +5363,9 @@ div.jqcloud span.w1 {
   position: fixed;
   width: 80%;
   padding-top: 10px;
-  padding-bottom: 10px; }
+  padding-bottom: 10px;
+  adding-bottom: 10px;
+  z-index: 2; }
   #feeds header h2 {
     font-size: 20px;
     padding-left: 20px;
@@ -5357,7 +5387,7 @@ div.jqcloud span.w1 {
     cursor: pointer; }
 #feeds #sideBar {
   float: left;
-  width: 150px;
+  width: 170px;
   position: fixed; }
   #feeds #sideBar #categories {
     list-style-type: none;
@@ -5384,10 +5414,17 @@ div.jqcloud span.w1 {
 #feeds #main-content {
   float: left;
   width: 80%;
-  margin-left: 150px;
+  margin-left: 170px;
   padding-top: 35px; }
   #feeds #main-content #spinner {
     margin-top: 40px; }
+  #feeds #main-content #layout {
+    cursor: pointer; }
+    #feeds #main-content #layout ul.dropdown-menu {
+      min-width: 100px; }
+      #feeds #main-content #layout ul.dropdown-menu a {
+        margin-left: 5px;
+        padding-left: 5px; }
   #feeds #main-content #feed-list {
     list-style-type: none;
     padding-left: 0px;
@@ -5414,11 +5451,18 @@ div.jqcloud span.w1 {
       #feeds #main-content #feed-list .feed-item .feedItemBtns {
         float: right; }
       #feeds #main-content #feed-list .feed-item article {
-        width: 80%; }
+        width: 80%;
+        display: none; }
         #feeds #main-content #feed-list .feed-item article h3 {
           font-size: 22px; }
         #feeds #main-content #feed-list .feed-item article span {
           color: #b1bcc5; }
+        #feeds #main-content #feed-list .feed-item article .articleImage {
+          display: block;
+          max-width: 400px;
+          min-width: 250px;
+          margin: 25px auto;
+          width: 50%; }
         #feeds #main-content #feed-list .feed-item article .feedItemBtns {
           color: black;
           display: none; }
@@ -5442,6 +5486,34 @@ div.jqcloud span.w1 {
       background-color: #f0f0f0; }
     #feeds #main-content #feed-list .feed-item.unread {
       font-weight: bold; }
+    #feeds #main-content #feed-list.magazine li.even {
+      background-color: white; }
+    #feeds #main-content #feed-list.magazine .feedHeader {
+      display: none; }
+    #feeds #main-content #feed-list.magazine article {
+      display: block; }
+      #feeds #main-content #feed-list.magazine article h3 {
+        margin-left: 95px;
+        margin-bottom: 0; }
+      #feeds #main-content #feed-list.magazine article span.publishInfo {
+        float: right; }
+      #feeds #main-content #feed-list.magazine article span.description {
+        margin-left: 95px;
+        display: block;
+        max-height: 150px;
+        overflow-y: hidden; }
+        #feeds #main-content #feed-list.magazine article span.description img {
+          display: none; }
+      #feeds #main-content #feed-list.magazine article .articleImage {
+        float: left;
+        width: 70px;
+        margin: 0 25px 0 0;
+        min-width: 0;
+        position: relative;
+        top: -20px; }
+      #feeds #main-content #feed-list.magazine article .readMore {
+        margin-left: 95px;
+        display: block; }
 
 .icon-menu {
   display: none; }
@@ -5472,7 +5544,8 @@ div.jqcloud span.w1 {
     width: 100%;
     margin-left: 0px; }
     #feeds #main-content header {
-      width: 95%; }
+      width: 95%;
+      z-index: 1; }
       #feeds #main-content header #actions {
         display: none; }
       #feeds #main-content header #actionsDropdown {
@@ -5491,6 +5564,8 @@ div.jqcloud span.w1 {
       #feeds #main-content #feed-list .feed-item article {
         margin-left: 0px;
         width: 100%; }
+        #feeds #main-content #feed-list .feed-item article img {
+          width: 100%; }
         #feeds #main-content #feed-list .feed-item article .feedItemBtns {
           display: inline; } }
 #main-content {

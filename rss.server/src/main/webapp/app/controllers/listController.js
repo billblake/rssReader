@@ -53,7 +53,7 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
     };
 
     $scope.toggleArticle = function(index) {
-        $(".article-" + index + ":first").toggleClass("hidden");
+        $(".article-" + index + ":first").toggle();
     };
 
 
@@ -165,6 +165,24 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
         initList(undefined, undefined, tag);
         $scope.feeds = feedItemService.getFeedItems(null, null, loadFeedsSuccessful, fail, $scope.page, null, tag);
         $scope.title = tag;
+    };
+
+     $scope.getLayoutClass = function() {
+         return $scope.feedLayout;
+     };
+
+    $scope.showTitleOnlyLayout = function() {
+        $scope.feedLayout = "";
+    };
+
+
+    $scope.showMagazineLayout = function() {
+        $scope.feedLayout = "magazine";
+    };
+
+
+    $scope.showCardsLayout = function() {
+        $scope.feedLayout = "cards";
     };
 
 
