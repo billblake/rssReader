@@ -54,9 +54,9 @@
 						    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="showMagazineLayout()">
 						    	<i class="icon-th-list-outline"></i>Magazine</a>
 						    </li>
-						    <!-- <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="showCardsLayout()">
+						    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="showCardsLayout()">
 						    	<i class="icon-th-1"></i>Cards</a>
-						    </li> -->
+						    </li>
 						</ul>
 					</span>
 					<a id="deleteAll" ng-click="displayDeleteAllConfirmation()" data-toggle="modal" data-target="#confirmationModal">
@@ -101,7 +101,7 @@
 	                    <span class="publishInfo">{{feedItem.source}} {{feedItem.formattedDate}}</span>
 	                    <img class="articleImage" src="{{feedItem.imageUrl}}" ng-show="feedItem.imageUrl">
 	                    <img class="articleImage fallbackImage" src="Content/images/default-thumbnail.png" ng-hide="feedItem.imageUrl">
-	                    <div id="contents">
+	                    <div class="contents">
 	                        <span class="description" ng-bind-html="feedItem.description"></span>
                         	<div class="tags" ng-show="feedItem.tags">
 	                        		Tags:
@@ -110,7 +110,7 @@
 	                        			<i class="deleteTag icon-cancel-circled-outline" ng-click="deleteTag(feedItem, tag)"></i>
 	                        		</span>
 	                        	</div>
-	                        <div>
+	                        <div class="articleActions">
 	                        	<a class="readMore" href="{{feedItem.link}}" target="_blank" ng-click="readMore()">Read More >></a>
 	                    		<span class="feedItemBtns">
 	                    			<i class="icon-tag" ng-click="showTagPopup(feedItem)" data-toggle="modal" data-target="#addTagModal"></i>

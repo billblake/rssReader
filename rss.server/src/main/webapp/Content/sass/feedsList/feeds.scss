@@ -258,6 +258,67 @@
 					}
 				}
 			}
+			
+			&.cards {
+			
+				.feedHeader, .feedItemBtns {
+					display: none;
+				}
+				
+				.feed-item {
+					display: inline-block;
+    				vertical-align: top;
+    			    width: 250px;
+    				height: 300px;
+    				margin: 10px;
+    				border: 1px solid;
+    				padding: 0 25px;
+				}
+				
+				article {
+					display: inline-block;
+				    position: relative;
+				    font-size: 14px;
+    				
+    				h3 {
+    					margin-top: 110px;
+					    font-size: 14px;
+					    height: 31px;
+    					overflow: hidden;
+					}
+					
+					.publishInfo {
+						height: 18px;
+					    overflow: hidden;
+					    display: inline-block;
+					}
+					
+					img {
+						display: none;
+					}
+    				
+    				.articleImage {
+    					display: block;
+					    width: 200px;
+					    height: 100px;
+					    position: absolute;
+    					top: 5px;
+    				}
+    				
+    				.description {
+    				    font-size: 12px;
+					    height: 105px;
+					    display: block;
+					    overflow: hidden;
+    				}
+    				
+    				.articleActions {
+    				    position: absolute;
+					    top: 275px;
+					    left: 100px;
+    				}
+				}
+			}
 		}
 	}
 }

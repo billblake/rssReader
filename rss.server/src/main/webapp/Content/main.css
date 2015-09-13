@@ -5513,6 +5513,46 @@ div.jqcloud span.w1 {
       #feeds #main-content #feed-list.magazine article .readMore {
         margin-left: 95px;
         display: block; }
+    #feeds #main-content #feed-list.cards .feedHeader, #feeds #main-content #feed-list.cards .feedItemBtns {
+      display: none; }
+    #feeds #main-content #feed-list.cards .feed-item {
+      display: inline-block;
+      vertical-align: top;
+      width: 250px;
+      height: 300px;
+      margin: 10px;
+      border: 1px solid;
+      padding: 0 25px; }
+    #feeds #main-content #feed-list.cards article {
+      display: inline-block;
+      position: relative;
+      font-size: 14px; }
+      #feeds #main-content #feed-list.cards article h3 {
+        margin-top: 110px;
+        font-size: 14px;
+        height: 31px;
+        overflow: hidden; }
+      #feeds #main-content #feed-list.cards article .publishInfo {
+        height: 18px;
+        overflow: hidden;
+        display: inline-block; }
+      #feeds #main-content #feed-list.cards article img {
+        display: none; }
+      #feeds #main-content #feed-list.cards article .articleImage {
+        display: block;
+        width: 200px;
+        height: 100px;
+        position: absolute;
+        top: 5px; }
+      #feeds #main-content #feed-list.cards article .description {
+        font-size: 12px;
+        height: 105px;
+        display: block;
+        overflow: hidden; }
+      #feeds #main-content #feed-list.cards article .articleActions {
+        position: absolute;
+        top: 275px;
+        left: 100px; }
 
 .icon-menu {
   display: none; }
