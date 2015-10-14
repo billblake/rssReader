@@ -1,0 +1,219 @@
+#outlook365SearchBar, #outlook365Header {
+	display: none;
+} 
+
+.outlook365 {
+
+    color: #333;
+    font-family: "wf_segoe-ui_semilight", "Segoe UI Semilight", "Segoe WP Semilight", "Segoe UI", "Segoe WP", Tahoma, Arial, sans-serif;
+
+	#header {
+		display: none;
+	}
+	
+	#feeds {
+	 	header {
+	 		display: none;
+	 	}
+ 	}
+
+	#header_container { 
+	
+		#outlook365Header {
+			display: block;
+			color : $BACKGROUND;
+			background : $MAIN_TEXT;
+			font-family: "SegoeUI-SemiLight-final","Segoe UI SemiLight","Segoe UI WPC Semilight","Segoe UI",Segoe,Tahoma,Helvetica,Arial,sans-serif;
+			height: 50px;
+		    z-index: 2;
+	    	position: fixed;
+	    	width: 100%;
+			
+			span {
+			    display: inline-block;
+			}
+			
+			#apps {
+				background-color : $OUTLOOK365_APPS_BACKGROUND_COLOUR;
+			    padding: 11px;
+			}
+			
+			#officeLogo {
+				padding : 8px 10px;
+				font-size: 22px;
+			}
+			
+			#appTitle {
+				padding-left: 10px;
+				font-size: 22px;
+			}
+			
+			#user {
+				background-color : $OUTLOOK365_STATUS_BACKGROUND;
+			
+				#status {
+					width: 5px;
+	    			background-color: $OUTLOOK365_ACTIVE_STATUS;
+	    			height: 22px;
+				}
+			}
+			
+			.rightMenu {
+				float: right;
+			    display: inline-flex;
+				
+				span {
+					border-left: 1px solid gray;
+					padding: 11px;
+				}
+				
+				#user {
+					padding: 0;
+				    height: 50px;
+				    border: none;
+				
+					#status {
+						padding: 0;
+					    height: 50px;
+				    	border: none;
+					}
+					
+					.icon-user {
+					    font-size: 43px;
+					    height: 50px;
+					    display: inline-block;
+					}
+				}
+				
+			}
+			
+			i {
+				font-size: 20px;
+			}
+		}
+	}
+	
+	#outlook365Toolbar {
+		display: block;
+	    background-color: $OUTLOOK365_TOOLBAR_BACKGROUND_COLOUR;
+	    margin-top: 15px;
+	    height: 40px;
+	    position: fixed;
+	    width: 100%;
+    	z-index: 2;
+	    
+	    span {
+		    margin-top: 5px;
+		    margin-left: 25px;
+		    display: inline-block;
+		}
+		
+		#outlook365New, #outlook365Junk, #outlook365MoveTo, #outlook365Categories {
+			i {
+			    font-size: smaller;
+			}
+		}
+		
+		#outlook365Delete {
+			i {
+				color : $OUTLOOK365_TOOLBAR_ICON_COLOUR;
+				font-size : 15px;
+			}
+		}
+		
+		#outlook365More {
+		    font-weight: bold;
+			font-size: 15px;
+		}
+		
+		#outlook365Undo {
+		    margin-left: 350px;
+			
+			i {
+				color : $OUTLOOK365_TOOLBAR_ICON_COLOUR;
+			}
+		}
+		
+		#outlook365Plus {
+			color : $OUTLOOK365_TOOLBAR_ICON_COLOUR;
+		    transform: rotate(45deg);
+			
+			i {
+				font-size: 15px;
+			}
+		}
+	}
+	
+	#outlook365SearchBar {
+		display: block;
+	    background-color: $OUTLOOK365_TOOLBAR_BACKGROUND_COLOUR;
+	    margin-top: 50px;
+	    height: 40px;
+	    position: fixed;
+	    width: 185px;
+	    left: 0px;
+	    
+	    span {
+		    margin-top: 6px;
+		    display: inline-block;
+		    
+		    &:first-child {
+		    	margin-left: 1px;
+		    }
+		    
+		    &:last-child {
+		    	margin-left: 4px;
+    			font-size: 19px;
+		    }
+		}
+		
+		i {
+			color: $OUTLOOK365_TOOLBAR_ICON_COLOUR;
+		}
+	}
+	
+	#feeds {
+		#sideBar {
+			#categories {
+				padding-top: 100px;
+				
+				&:before {
+					content: "Folders";
+					font-size: 17px;
+					    
+				}
+				
+				i {
+					display: none;
+				}
+				
+				li {
+					line-height: 1.5;
+				}
+			}
+			
+			h3, #tagCloud {
+				display: none;
+			}
+		}
+		
+		#main-content {
+			border-left: 1px solid gray;
+		
+			#feed-list {
+				margin-top: 100px;
+				
+				&:before {
+					content: "Inbox";
+					font-size: 24px;
+					margin:	20px;
+				}
+				
+				li.feed-item.unread {
+				    border-left: 3px solid $OUTLOOK365_TOOLBAR_ICON_COLOUR;
+			    }
+			}
+		}
+	}
+	
+}

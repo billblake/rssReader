@@ -53,7 +53,7 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
     };
 
     $scope.toggleArticle = function(index) {
-        $(".article-" + index + ":first").toggleClass("hidden");
+        $(".article-" + index + ":first").toggle();
     };
 
 
@@ -183,6 +183,11 @@ app.controller('ListController', function($scope, feedService, feedItemService, 
 
     $scope.showCardsLayout = function() {
         $scope.feedLayout = "cards";
+    };
+
+
+    $scope.toggleBossMode = function() {
+        $("body").toggleClass("outlook365");
     };
 
 
