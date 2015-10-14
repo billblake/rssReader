@@ -4896,8 +4896,8 @@ button.close {
 
 @font-face {
   font-family: 'fontello';
-  src: url("../font/fontello.eot?48960559");
-  src: url("../font/fontello.eot?48960559#iefix") format("embedded-opentype"), url("../font/fontello.woff?48960559") format("woff"), url("../font/fontello.ttf?48960559") format("truetype"), url("../font/fontello.svg?48960559#fontello") format("svg");
+  src: url("../font/fontello.eot?72085017");
+  src: url("../font/fontello.eot?72085017#iefix") format("embedded-opentype"), url("../font/fontello.woff?72085017") format("woff"), url("../font/fontello.ttf?72085017") format("truetype"), url("../font/fontello.svg?72085017#fontello") format("svg");
   font-weight: normal;
   font-style: normal; }
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
@@ -4906,7 +4906,7 @@ button.close {
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: url('../font/fontello.svg?48960559#fontello') format('svg');
+    src: url('../font/fontello.svg?72085017#fontello') format('svg');
   }
 }
 */
@@ -5025,14 +5025,26 @@ button.close {
   content: '\e815'; }
 
 /* '' */
+.icon-bell-alt:before {
+  content: '\e816'; }
+
+/* '' */
 .icon-newspaper:before {
   content: '\e817'; }
 
 /* '' */
+.icon-help:before {
+  content: '\e818'; }
+
+/* '' */
 .icon-doc-text:before {
   content: '\e819'; }
 
 /* '' */
+.icon-user:before {
+  content: '\e81a'; }
+
+/* '' */
 .icon-th-list-outline:before {
   content: '\e81b'; }
 
@@ -5049,10 +5061,26 @@ button.close {
   content: '\e81e'; }
 
 /* '' */
+.icon-cancel-circled2:before {
+  content: '\e81f'; }
+
+/* '' */
+.icon-search-1:before {
+  content: '\e820'; }
+
+/* '' */
+.icon-ccw:before {
+  content: '\e821'; }
+
+/* '' */
 .icon-th-1:before {
   content: '\e822'; }
 
 /* '' */
+.icon-user-secret:before {
+  content: '\e823'; }
+
+/* '' */
 /*
    Animation example, for spinners
 */
@@ -5273,7 +5301,7 @@ div.jqcloud span.w2 {
 div.jqcloud span.w1 {
   color: #aab5f0; }
 
-#header {
+#header_container #header {
   z-index: 2;
   height: 35px;
   background-color: #5a87ab;
@@ -5287,22 +5315,22 @@ div.jqcloud span.w1 {
   position: fixed;
   width: 100%;
   color: WHITE; }
-  #header .icon-menu {
+  #header_container #header .icon-menu {
     display: none;
     cursor: pointer; }
-  #header #mini-logo {
+  #header_container #header #mini-logo {
     margin-left: 25px;
     font-size: 1.5em;
     margin-top: 5px; }
-    #header #mini-logo a {
+    #header_container #header #mini-logo a {
       text-decoration: none;
       color: WHITE; }
-  #header #settingsIcon {
+  #header_container #header #settingsIcon {
     height: 35px;
     padding: 0px 5px; }
-  #header #name, #header #refresh {
+  #header_container #header #name, #header_container #header #refresh {
     padding: 0px 5px; }
-  #header #header-nav {
+  #header_container #header #header-nav {
     float: right;
     cursor: pointer;
     margin: 7px; }
@@ -5357,6 +5385,9 @@ div.jqcloud span.w1 {
   #loggedOutPanel #logo {
     wwidth: 220px;
     margin-bottom: 10px; }
+
+#outlook365Toolbar {
+  display: none; }
 
 #feeds header {
   background-color: white;
@@ -5642,5 +5673,130 @@ div.jqcloud span.w1 {
         display: inline-block; }
       #settings ol.feeds li .feedBtns {
         float: right; }
+
+#outlook365SearchBar, #outlook365Header {
+  display: none; }
+
+.outlook365 {
+  color: #333;
+  font-family: "wf_segoe-ui_semilight", "Segoe UI Semilight", "Segoe WP Semilight", "Segoe UI", "Segoe WP", Tahoma, Arial, sans-serif; }
+  .outlook365 #header {
+    display: none; }
+  .outlook365 #feeds header {
+    display: none; }
+  .outlook365 #header_container #outlook365Header {
+    display: block;
+    color: white;
+    background: black;
+    font-family: "SegoeUI-SemiLight-final","Segoe UI SemiLight","Segoe UI WPC Semilight","Segoe UI",Segoe,Tahoma,Helvetica,Arial,sans-serif;
+    height: 50px;
+    z-index: 2;
+    position: fixed;
+    width: 100%; }
+    .outlook365 #header_container #outlook365Header span {
+      display: inline-block; }
+    .outlook365 #header_container #outlook365Header #apps {
+      background-color: #0072c6;
+      padding: 11px; }
+    .outlook365 #header_container #outlook365Header #officeLogo {
+      padding: 8px 10px;
+      font-size: 22px; }
+    .outlook365 #header_container #outlook365Header #appTitle {
+      padding-left: 10px;
+      font-size: 22px; }
+    .outlook365 #header_container #outlook365Header #user {
+      background-color: #a6a6a6; }
+      .outlook365 #header_container #outlook365Header #user #status {
+        width: 5px;
+        background-color: #5dd255;
+        height: 22px; }
+    .outlook365 #header_container #outlook365Header .rightMenu {
+      float: right;
+      display: inline-flex; }
+      .outlook365 #header_container #outlook365Header .rightMenu span {
+        border-left: 1px solid gray;
+        padding: 11px; }
+      .outlook365 #header_container #outlook365Header .rightMenu #user {
+        padding: 0;
+        height: 50px;
+        border: none; }
+        .outlook365 #header_container #outlook365Header .rightMenu #user #status {
+          padding: 0;
+          height: 50px;
+          border: none; }
+        .outlook365 #header_container #outlook365Header .rightMenu #user .icon-user {
+          font-size: 43px;
+          height: 50px;
+          display: inline-block; }
+    .outlook365 #header_container #outlook365Header i {
+      font-size: 20px; }
+  .outlook365 #outlook365Toolbar {
+    display: block;
+    background-color: #e6f2fa;
+    margin-top: 15px;
+    height: 40px;
+    position: fixed;
+    width: 100%;
+    z-index: 2; }
+    .outlook365 #outlook365Toolbar span {
+      margin-top: 5px;
+      margin-left: 25px;
+      display: inline-block; }
+    .outlook365 #outlook365Toolbar #outlook365New i, .outlook365 #outlook365Toolbar #outlook365Junk i, .outlook365 #outlook365Toolbar #outlook365MoveTo i, .outlook365 #outlook365Toolbar #outlook365Categories i {
+      font-size: smaller; }
+    .outlook365 #outlook365Toolbar #outlook365Delete i {
+      color: #2c94de;
+      font-size: 15px; }
+    .outlook365 #outlook365Toolbar #outlook365More {
+      font-weight: bold;
+      font-size: 15px; }
+    .outlook365 #outlook365Toolbar #outlook365Undo {
+      margin-left: 350px; }
+      .outlook365 #outlook365Toolbar #outlook365Undo i {
+        color: #2c94de; }
+    .outlook365 #outlook365Toolbar #outlook365Plus {
+      color: #2c94de;
+      transform: rotate(45deg); }
+      .outlook365 #outlook365Toolbar #outlook365Plus i {
+        font-size: 15px; }
+  .outlook365 #outlook365SearchBar {
+    display: block;
+    background-color: #e6f2fa;
+    margin-top: 50px;
+    height: 40px;
+    position: fixed;
+    width: 185px;
+    left: 0px; }
+    .outlook365 #outlook365SearchBar span {
+      margin-top: 6px;
+      display: inline-block; }
+      .outlook365 #outlook365SearchBar span:first-child {
+        margin-left: 1px; }
+      .outlook365 #outlook365SearchBar span:last-child {
+        margin-left: 4px;
+        font-size: 19px; }
+    .outlook365 #outlook365SearchBar i {
+      color: #2c94de; }
+  .outlook365 #feeds #sideBar #categories {
+    padding-top: 100px; }
+    .outlook365 #feeds #sideBar #categories:before {
+      content: "Folders";
+      font-size: 17px; }
+    .outlook365 #feeds #sideBar #categories i {
+      display: none; }
+    .outlook365 #feeds #sideBar #categories li {
+      line-height: 1.5; }
+  .outlook365 #feeds #sideBar h3, .outlook365 #feeds #sideBar #tagCloud {
+    display: none; }
+  .outlook365 #feeds #main-content {
+    border-left: 1px solid gray; }
+    .outlook365 #feeds #main-content #feed-list {
+      margin-top: 100px; }
+      .outlook365 #feeds #main-content #feed-list:before {
+        content: "Inbox";
+        font-size: 24px;
+        margin: 20px; }
+      .outlook365 #feeds #main-content #feed-list li.feed-item.unread {
+        border-left: 3px solid #2c94de; }
 
 /*# sourceMappingURL=main.css.map */

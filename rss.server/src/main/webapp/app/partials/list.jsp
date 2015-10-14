@@ -4,6 +4,10 @@
     <div class="row-fluid">
         <div id="sideBar" class="{{sideBarClass}}">
             <!--Sidebar content-->
+             <div id="outlook365SearchBar">
+            	<span>Search Mail and People</span>
+            	<span> <i class="icon-search-1"></i></span>
+            </div>
             <ul id="categories">
                 <li id="allFeeds" ng-click="displayFeedsForAllCategory() | trackEvent:'Filter Feeds':'All'">
                 	<span>
@@ -64,6 +68,7 @@
 					</a>
 					<a id="markAllAsRead" ng-click="markAllAsRead()"><i class="icon-check"></i>Mark All As Read</a>
             		<a id="showFilter"><i class="icon-search"></i>Show Filter</a>
+            		<a ng-click="toggleBossMode()"><i class="icon-user-secret"></i>Boss Mode</a>
             	</span>
             	<span id="actionsDropdown" class="dropdown">
 				    <span class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
@@ -81,6 +86,17 @@
 					</ul>
 				</span>
            	</header>
+            <div id="outlook365Toolbar">
+            	<span id="outlook365New"><span id="outlook365Plus"><i class="icon-cancel-circled2"></i></span>New | <i class="icon-down-open"></i></span>
+            	<span id="outlook365Delete"><i class="icon-cancel-trash"></i>Delete</span>
+            	<span>Archive</span>
+            	<span id="outlook365Junk">Junk | <i class="icon-down-open"></i></span>
+            	<span>Sweep</span>
+            	<span id="outlook365MoveTo">Move to <i class="icon-down-open"></i></span>
+            	<span id="outlook365Categories">Categories <i class="icon-down-open"></i></span>
+            	<span id="outlook365More">...</span>
+            	<span id="outlook365Undo" ng-click="toggleBossMode()"><i class="icon-ccw"></i>Undo</span>
+            </div>
             <div id="spinner"></div>
             <div ng-show="!feeds.length && !loading">There are no feeds</div>
             <ul id="feed-list" ng-class="getLayoutClass()" infinite-scroll='loadMore()' infinite-scroll-distance='1'>
