@@ -35,8 +35,6 @@ public class HttpClientFeedFetcher implements FeedFetcher {
         List<FeedItem> feedItems = new ArrayList<FeedItem>();
 		try {
 			HttpGet request = new HttpGet(feedUrl);
-			request.addHeader(ACEEPT_HEADER_NAME, REQUEST_TYPE_JSON);
-
 			HttpResponse response = httpClient.execute(request);
 			if (response.getStatusLine().getStatusCode() != OK_RESPONSE_TYPE) {
 				throw new RuntimeException("Failed : HTTP error code : "
