@@ -18,7 +18,11 @@ public class FeedRefreshRoute extends BaseRoute {
     @Override
     public Object handle(Request request, Response response) {
         Runnable worker = new FeedRefresherThread("Feed Refresher");
-        executor.execute(worker);
+        try {
+            executor.execute(worker);
+        } catch (Exception e) {
+            return e;
+        }
         return "ok";
     }
 }
