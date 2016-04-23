@@ -24,6 +24,7 @@ public class RssController implements SparkApplication {
 		post(new LoginRoute("/login"));
 
 		get(new FeedRefreshRoute("/refresh"));
+		get(new FeedRefreshAndWaitRoute("/refreshAndWait"));
 
 		post(new UserRegistrationRoute("/user"));
 
