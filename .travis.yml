@@ -1,4 +1,4 @@
 language: java
-script: mvn clean install -Plocal
+script: mvn clean install -Pjasmine
 # uncomment and edit the following line if your project needs to run something other than `rake`:
 # script: bundle exec rspec spec
