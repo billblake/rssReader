@@ -20,7 +20,7 @@
   #######################################################################*/
 
 var app = angular.module('viewApp', ['ngResource', 'ngRoute', 'ngCookies', 'infinite-scroll', 'ngSanitize',
-                                     'angAccordion', 'angularytics', 'angular-jqcloud']);
+                                     'angularytics', 'angular-jqcloud']);
 
 //This configures the routes and associates each route with a view and a controller
 app.config(function ($routeProvider, AngularyticsProvider) {
@@ -604,7 +604,7 @@ app.controller('SignUpController', function ($scope, userService) {
 
 
     $scope.signUp = function(user) {
-        var createdUserPromise = userService.createUser(user, userCreatedSuccessfully, userCreationFailure);
+        userService.createUser(user, userCreatedSuccessfully, userCreationFailure);
 
     };
 
