@@ -1,6 +1,5 @@
 package com.bill.rss.mongodb;
 
-import java.net.UnknownHostException;
 import java.util.Map;
 
 import com.mongodb.DB;
@@ -36,16 +35,11 @@ public class MongoDBConnection {
 	private static DB createNewDbConnection() {
 	    String uriString = buildConnectionUri();
 	    MongoURI uri = new MongoURI(uriString);
-    	try {
-    	    Mongo conn = uri.connect();
-//  	          conn = new Mongo("localhost", 27017);
-            WriteConcern writeConcern = new WriteConcern( 1, 2000 );
-            conn.setWriteConcern(writeConcern);
-            dbConnection = conn.getDB(readEnvironmentVariable(MONGODB_DB_NAME));
-            return dbConnection;
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
-        }
+	    Mongo conn = uri.connect();
+        WriteConcern writeConcern = new WriteConcern( 1, 2000 );
+        conn.setWriteConcern(writeConcern);
+        return conn.getDB(readEnvironmentVariable(MONGODB_DB_NAME));
+
 	}
 
 
