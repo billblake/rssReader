@@ -8,6 +8,11 @@
   <artifactId>rss.server.container</artifactId> 
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
+  
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
 
   <modules>
     <module>rss.data.provider</module>
