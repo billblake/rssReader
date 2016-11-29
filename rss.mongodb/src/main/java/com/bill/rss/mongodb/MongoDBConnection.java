@@ -43,11 +43,10 @@ public class MongoDBConnection {
         MongoCredential credential = MongoCredential.createCredential(dbUser, dbName, dbpassword);
         ServerAddress serverAddress = new ServerAddress(dbHostname, dbPort);
 
-        try (MongoClient mongoClient = new MongoClient(serverAddress, asList(credential))) {
+        MongoClient mongoClient = new MongoClient(serverAddress, asList(credential));
             WriteConcern writeConcern = new WriteConcern( 1, 2000 );
             mongoClient.setWriteConcern(writeConcern);
             return mongoClient.getDB(dbName);
-        }
 
 	}
 
