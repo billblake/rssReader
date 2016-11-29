@@ -3,9 +3,12 @@ package com.bill.rss.mongodb;
 import java.util.Map;
 
 import com.mongodb.DB;
-import com.mongodb.Mongo;
-import com.mongodb.MongoURI;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 import com.mongodb.WriteConcern;
+
+import static java.util.Arrays.asList;
 
 
 public class MongoDBConnection {
@@ -15,7 +18,6 @@ public class MongoDBConnection {
     private static final String MONGODB_HOSTNAME = "MONGODB_HOSTNAME";
     private static final String MONGODB_PORT = "MONGODB_PORT";
     private static final String MONGODB_DB_NAME = "MONGODB_DB_NAME";
-    private static final String MONGODB_CONNECTION_STRING = "mongodb://%s:%s@%s:%s/%s";
 
 	private static DB dbConnection;
 
@@ -33,25 +35,21 @@ public class MongoDBConnection {
     }
 
 	private static DB createNewDbConnection() {
-	    String uriString = buildConnectionUri();
-	    MongoURI uri = new MongoURI(uriString);
-	    Mongo conn = uri.connect();
-        WriteConcern writeConcern = new WriteConcern( 1, 2000 );
-        conn.setWriteConcern(writeConcern);
-        return conn.getDB(readEnvironmentVariable(MONGODB_DB_NAME));
+	    String dbUser = readEnvironmentVariable(MONGODB_USERNAME);
+        char[] dbpassword = readEnvironmentVariable(MONGODB_PASSWORD).toCharArray();
+        String dbHostname = readEnvironmentVariable(MONGODB_HOSTNAME);
+        int dbPort = Integer.parseInt(readEnvironmentVariable(MONGODB_PORT));
+        String dbName = readEnvironmentVariable(MONGODB_DB_NAME);
+        MongoCredential credential = MongoCredential.createCredential(dbUser, dbName, dbpassword);
+        ServerAddress serverAddress = new ServerAddress(dbHostname, dbPort);
+
+        try (MongoClient mongoClient = new MongoClient(serverAddress, asList(credential))) {
+            WriteConcern writeConcern = new WriteConcern( 1, 2000 );
+            mongoClient.setWriteConcern(writeConcern);
+            return mongoClient.getDB(dbName);
+        }
 
 	}
-
-
-    public static String buildConnectionUri() {
-        String dbUser = readEnvironmentVariable(MONGODB_USERNAME);
-        String dbpassword = readEnvironmentVariable(MONGODB_PASSWORD);
-        String dbHostname = readEnvironmentVariable(MONGODB_HOSTNAME);
-        String dbPort = readEnvironmentVariable(MONGODB_PORT);
-        String dbName = readEnvironmentVariable(MONGODB_DB_NAME);
-
-        return String.format(MONGODB_CONNECTION_STRING, dbUser, dbpassword, dbHostname, dbPort, dbName);
-    }
 
 
     private static String readEnvironmentVariable(String environmentVariableName) {
