@@ -19,36 +19,34 @@ public class MongoDBConnection {
     private static final String MONGODB_PORT = "MONGODB_PORT";
     private static final String MONGODB_DB_NAME = "MONGODB_DB_NAME";
 
-	private static DB dbConnection;
+    private static DB dbConnection;
 
-
-	public static DB getDbConnection() {
-		if (dbConnection != null) {
-			return dbConnection;
-		}
-		return createNewDbConnection();
-	}
-
-
-	static void setDbConnection(DB db) {
-	    dbConnection = db;
+    public static DB getDbConnection() {
+        if (dbConnection != null) {
+	    return dbConnection;
+        }
+        return createNewDbConnection();
     }
 
-	private static DB createNewDbConnection() {
-	    String dbUser = readEnvironmentVariable(MONGODB_USERNAME);
+
+    static void setDbConnection(DB db) {
+       dbConnection = db;
+    }
+
+
+    private static DB createNewDbConnection() {
+	String dbUser = readEnvironmentVariable(MONGODB_USERNAME);
         char[] dbpassword = readEnvironmentVariable(MONGODB_PASSWORD).toCharArray();
         String dbHostname = readEnvironmentVariable(MONGODB_HOSTNAME);
         int dbPort = Integer.parseInt(readEnvironmentVariable(MONGODB_PORT));
         String dbName = readEnvironmentVariable(MONGODB_DB_NAME);
         MongoCredential credential = MongoCredential.createCredential(dbUser, dbName, dbpassword);
         ServerAddress serverAddress = new ServerAddress(dbHostname, dbPort);
-
         MongoClient mongoClient = new MongoClient(serverAddress, asList(credential));
-            WriteConcern writeConcern = new WriteConcern( 1, 2000 );
-            mongoClient.setWriteConcern(writeConcern);
-            return mongoClient.getDB(dbName);
-
-	}
+        WriteConcern writeConcern = new WriteConcern( 1, 2000 );
+        mongoClient.setWriteConcern(writeConcern);
+        return mongoClient.getDB(dbName);
+    }
 
 
     private static String readEnvironmentVariable(String environmentVariableName) {
