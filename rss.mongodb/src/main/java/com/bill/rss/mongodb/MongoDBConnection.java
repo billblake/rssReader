@@ -21,11 +21,10 @@ public class MongoDBConnection {
 
     private static DB dbConnection;
 
+    private static MongoClient mongoClient;
+
     public static DB getDbConnection() {
-        if (dbConnection != null) {
-	    return dbConnection;
-        }
-        return createNewDbConnection();
+        return getMongoClient().getDB(readEnvironmentVariable(MONGODB_DB_NAME));
     }
 
 
@@ -34,8 +33,11 @@ public class MongoDBConnection {
     }
 
 
-    private static DB createNewDbConnection() {
-	String dbUser = readEnvironmentVariable(MONGODB_USERNAME);
+    private static MongoClient getMongoClient() {
+        if (mongoClient != null) {
+            return mongoClient;
+        }
+        String dbUser = readEnvironmentVariable(MONGODB_USERNAME);
         char[] dbpassword = readEnvironmentVariable(MONGODB_PASSWORD).toCharArray();
         String dbHostname = readEnvironmentVariable(MONGODB_HOSTNAME);
         int dbPort = Integer.parseInt(readEnvironmentVariable(MONGODB_PORT));
@@ -45,7 +47,7 @@ public class MongoDBConnection {
         MongoClient mongoClient = new MongoClient(serverAddress, asList(credential));
         WriteConcern writeConcern = new WriteConcern( 1, 2000 );
         mongoClient.setWriteConcern(writeConcern);
-        return mongoClient.getDB(dbName);
+        return mongoClient;
     }
 
 

@@ -40,7 +40,8 @@ public class MongoFeedUpdater implements FeedUpdater {
 	private FeedProvider feedRetriever = new FeedRetriever();
 
 
-	public void updateWithLatestFeeds() {
+	@Override
+    public void updateWithLatestFeeds() {
         List<Feed> feeds = feedRetriever.retrieveAllFeeds();
         for (Feed feed : feeds) {
             List<FeedItem> fetchedFeeds = feedFetcher.fetchFeed(feed.getUrl());
@@ -49,7 +50,8 @@ public class MongoFeedUpdater implements FeedUpdater {
     }
 
 
-	public void updateWithLatestFeeds(String username) {
+	@Override
+    public void updateWithLatestFeeds(String username) {
 		List<Feed> feeds = feedRetriever.retrieveFeeds(username);
 		for (Feed feed : feeds) {
 			List<FeedItem> fetchedFeeds = feedFetcher.fetchFeed(feed.getUrl());
@@ -63,7 +65,6 @@ public class MongoFeedUpdater implements FeedUpdater {
 
 	    for (FeedItem fetchedFeed : fetchedFeeds) {
 	    	BasicDBObject query = new BasicDBObject();
-	    	query.append(FEED_ITEM_SOURCE, feed.getName());
 	    	query.append(FEED_ITEM_LINK, fetchedFeed.getLink());
 	    	query.append(USER_NAME, feed.getUserName());
 
@@ -87,6 +88,7 @@ public class MongoFeedUpdater implements FeedUpdater {
 	}
 
 
+    @Override
     public Feed saveFeed(Feed feed) {
         DB dbConnection = MongoDBConnection.getDbConnection();
         DBCollection feedCollection = dbConnection.getCollection("feeds");
@@ -115,6 +117,7 @@ public class MongoFeedUpdater implements FeedUpdater {
     }
 
 
+    @Override
     public Feed addFeed(Feed feed) {
         DB dbConnection = MongoDBConnection.getDbConnection();
         DBCollection feedCollection = dbConnection.getCollection("feeds");
@@ -135,6 +138,7 @@ public class MongoFeedUpdater implements FeedUpdater {
     }
 
 
+    @Override
     public boolean deleteFeed(Feed feed) {
         DB dbConnection = MongoDBConnection.getDbConnection();
         DBCollection feedCollection = dbConnection.getCollection("feeds");
