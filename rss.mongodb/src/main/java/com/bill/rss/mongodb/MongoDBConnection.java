@@ -19,7 +19,6 @@ public class MongoDBConnection {
     private static final String MONGODB_PORT = "MONGODB_PORT";
     private static final String MONGODB_DB_NAME = "MONGODB_DB_NAME";
 
-    private static DB dbConnection;
 
     private static MongoClient mongoClient;
 
@@ -28,8 +27,8 @@ public class MongoDBConnection {
     }
 
 
-    static void setDbConnection(DB db) {
-       dbConnection = db;
+    static void setMongoClient(MongoClient _mongoClient) {
+        mongoClient = _mongoClient;
     }
 
 

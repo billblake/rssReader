@@ -15,6 +15,7 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
 
 import static org.mockito.Matchers.any;
 
@@ -162,7 +163,9 @@ public class MockUtils {
 
     public static DB createDbMock() {
         DB db = mock(DB.class);
-        MongoDBConnection.setDbConnection(db);
+        MongoClient mongoClient = mock(MongoClient.class);
+        when(mongoClient.getDB(Mockito.anyString())).thenReturn(db);
+        MongoDBConnection.setMongoClient(mongoClient);
         return db;
     }
 
