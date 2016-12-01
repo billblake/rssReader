@@ -33,9 +33,6 @@ public class MongoDBConnection {
 
 
     private static MongoClient getMongoClient() {
-        if (mongoClient != null) {
-            return mongoClient;
-        }
         String dbUser = readEnvironmentVariable(MONGODB_USERNAME);
         char[] dbpassword = readEnvironmentVariable(MONGODB_PASSWORD).toCharArray();
         String dbHostname = readEnvironmentVariable(MONGODB_HOSTNAME);
